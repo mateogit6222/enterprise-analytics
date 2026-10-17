@@ -1,0 +1,271 @@
+<ion-content class="register-content" [fullscreen]="true">
+  <div class="register-container" role="main" aria-label="Formulario de creación de cuenta">
+
+    <!-- Header con logo -->
+    <header class="register-header">
+      <div class="logo-container" aria-hidden="true">
+        <ion-icon name="person-add-outline" class="logo-icon"></ion-icon>
+      </div>
+      <h1 class="register-title" id="register-heading">Crear Cuenta</h1>
+      <p class="register-subtitle">Únete a Enterprise Analytics</p>
+    </header>
+
+    <!-- Alerta de error global -->
+    @if (error$ | async; as errorMsg) {
+      <ion-card class="alert-card error" role="alert" aria-live="assertive">
+        <ion-card-content>
+          <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
+          <span>{{ errorMsg }}</span>
+        </ion-card-content>
+      </ion-card>
+    }
+
+    <!-- Formulario de Registro -->
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="register-form"
+      aria-labelledby="register-heading"
+      novalidate
+    >
+      <!-- Nombre y Apellidos en fila responsiva -->
+      <div class="name-row">
+        <!-- Campo Nombre -->
+        <div class="form-field flex-1">
+          <ion-item
+            [class.ion-invalid]="getControl('firstName')?.invalid && getControl('firstName')?.touched"
+            [class.ion-touched]="getControl('firstName')?.touched"
+            lines="none"
+            class="form-item"
+          >
+            <ion-icon name="person-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
+            <ion-input
+              formControlName="firstName"
+              type="text"
+              label="Nombre"
+              labelPlacement="floating"
+              placeholder="Elena"
+              autocomplete="given-name"
+              aria-required="true"
+              [attr.aria-invalid]="getControl('firstName')?.invalid && getControl('firstName')?.touched"
+              aria-describedby="first-name-error"
+              id="register-firstname"
+            ></ion-input>
+          </ion-item>
+          @if (getControl('firstName')?.touched && getControl('firstName')?.errors) {
+            <div class="error-messages" id="first-name-error" role="alert" aria-live="polite">
+              @if (getControl('firstName')?.errors?.['required']) {
+                <span class="error-text">El nombre es obligatorio.</span>
+              }
+              @if (getControl('firstName')?.errors?.['minlength']) {
+                <span class="error-text">Mínimo 2 caracteres.</span>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Campo Apellidos -->
+        <div class="form-field flex-1">
+          <ion-item
+            [class.ion-invalid]="getControl('lastName')?.invalid && getControl('lastName')?.touched"
+            [class.ion-touched]="getControl('lastName')?.touched"
+            lines="none"
+            class="form-item"
+          >
+            <ion-input
+              formControlName="lastName"
+              type="text"
+              label="Apellidos"
+              labelPlacement="floating"
+              placeholder="Martínez"
+              autocomplete="family-name"
+              aria-required="true"
+              [attr.aria-invalid]="getControl('lastName')?.invalid && getControl('lastName')?.touched"
+              aria-describedby="last-name-error"
+              id="register-lastname"
+            ></ion-input>
+          </ion-item>
+          @if (getControl('lastName')?.touched && getControl('lastName')?.errors) {
+            <div class="error-messages" id="last-name-error" role="alert" aria-live="polite">
+              @if (getControl('lastName')?.errors?.['required']) {
+                <span class="error-text">Los apellidos son obligatorios.</span>
+              }
+              @if (getControl('lastName')?.errors?.['minlength']) {
+                <span class="error-text">Mínimo 2 caracteres.</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Campo Email con validación asíncrona -->
+      <div class="form-field">
+        <ion-item
+          [class.ion-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
+          [class.ion-touched]="getControl('email')?.touched"
+          lines="none"
+          class="form-item"
+        >
+          <ion-icon name="mail-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
+          <ion-input
+            formControlName="email"
+            type="email"
+            label="Correo electrónico"
+            labelPlacement="floating"
+            placeholder="elena@enterprise.com"
+            autocomplete="email"
+            inputmode="email"
+            aria-required="true"
+            [attr.aria-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
+            aria-describedby="register-email-error"
+            id="register-email"
+          ></ion-input>
+          @if (getControl('email')?.pending) {
+            <ion-spinner name="dots" slot="end" aria-label="Comprobando disponibilidad..."></ion-spinner>
+          }
+        </ion-item>
+
+        @if (getControl('email')?.touched && getControl('email')?.errors) {
+          <div class="error-messages" id="register-email-error" role="alert" aria-live="polite">
+            @if (getControl('email')?.errors?.['required']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                El correo es obligatorio.
+              </span>
+            }
+            @if (getControl('email')?.errors?.['email']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                Introduce un correo electrónico válido.
+              </span>
+            }
+            @if (getControl('email')?.errors?.['emailTaken']) {
+              <span class="error-text">
+                <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
+                Este correo ya está registrado en el sistema.
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="form-field">
+        <ion-item
+          [class.ion-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
+          [class.ion-touched]="getControl('password')?.touched"
+          lines="none"
+          class="form-item"
+        >
+          <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
+          <ion-input
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            label="Contraseña segura"
+            labelPlacement="floating"
+            placeholder="Min. 8 caracteres"
+            autocomplete="new-password"
+            aria-required="true"
+            [attr.aria-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
+            aria-describedby="password-rules"
+            id="register-password"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            class="toggle-password-btn"
+          >
+            <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <!-- Indicador de requisitos de contraseña -->
+        <div class="password-hints" id="password-rules">
+          <small class="hints-title">Requisitos:</small>
+          <span [class.valid]="getControl('password')?.value?.length >= 8">8+ car.</span>
+          <span [class.valid]="getControl('password')?.hasError('strongPassword') ? !getControl('password')?.errors?.['strongPassword']?.hasUpperCase : (getControl('password')?.value?.length > 0)">Mayús.</span>
+          <span [class.valid]="getControl('password')?.hasError('strongPassword') ? !getControl('password')?.errors?.['strongPassword']?.hasNumeric : (getControl('password')?.value?.length > 0)">Número</span>
+          <span [class.valid]="getControl('password')?.hasError('strongPassword') ? !getControl('password')?.errors?.['strongPassword']?.hasSpecialChar : (getControl('password')?.value?.length > 0)">Especial (@$!%*?#)</span>
+        </div>
+      </div>
+
+      <!-- Campo Confirmar Contraseña -->
+      <div class="form-field">
+        <ion-item
+          [class.ion-invalid]="getControl('confirmPassword')?.invalid && getControl('confirmPassword')?.touched"
+          [class.ion-touched]="getControl('confirmPassword')?.touched"
+          lines="none"
+          class="form-item"
+        >
+          <ion-icon name="checkmark-done-circle-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
+          <ion-input
+            formControlName="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            label="Confirmar contraseña"
+            labelPlacement="floating"
+            placeholder="Repite la contraseña"
+            autocomplete="new-password"
+            aria-required="true"
+            [attr.aria-invalid]="getControl('confirmPassword')?.invalid && getControl('confirmPassword')?.touched"
+            aria-describedby="confirm-password-error"
+            id="register-confirm-password"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            type="button"
+            (click)="toggleConfirmPasswordVisibility()"
+            [attr.aria-label]="showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            class="toggle-password-btn"
+          >
+            <ion-icon [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        @if (getControl('confirmPassword')?.touched && getControl('confirmPassword')?.errors) {
+          <div class="error-messages" id="confirm-password-error" role="alert" aria-live="polite">
+            @if (getControl('confirmPassword')?.errors?.['required']) {
+              <span class="error-text">Confirmar la contraseña es obligatorio.</span>
+            }
+            @if (getControl('confirmPassword')?.errors?.['passwordMismatch']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                Las contraseñas no coinciden.
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Botón de Registro -->
+      <ion-button
+        type="submit"
+        expand="block"
+        class="register-btn"
+        [disabled]="(isLoading$ | async) || registerForm.pending"
+        aria-label="Registrar nueva cuenta"
+        id="register-submit-btn"
+      >
+        @if (isLoading$ | async) {
+          <ion-spinner name="crescent" aria-label="Creando cuenta..."></ion-spinner>
+          <span>Creando cuenta...</span>
+        } @else {
+          <ion-icon name="rocket-outline" slot="start" aria-hidden="true"></ion-icon>
+          <span>Registrarme</span>
+        }
+      </ion-button>
+
+      <!-- Enlace a Login -->
+      <div class="login-link" aria-label="Enlace a iniciar sesión">
+        <p>¿Ya tienes una cuenta?
+          <a [routerLink]="['/auth/login']" tabindex="0" id="go-to-login-link">
+            Inicia sesión
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
+</ion-content>
