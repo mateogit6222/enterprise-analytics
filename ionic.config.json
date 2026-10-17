@@ -1,0 +1,7 @@
+{
+  "name": "enterprise-analytics",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
