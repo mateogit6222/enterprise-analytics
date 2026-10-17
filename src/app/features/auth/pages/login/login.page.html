@@ -1,0 +1,200 @@
+<ion-content class="login-content" [fullscreen]="true">
+  <div class="login-container" role="main" aria-label="Formulario de inicio de sesión">
+
+    <!-- Header con logo -->
+    <header class="login-header">
+      <div class="logo-container" aria-hidden="true">
+        <ion-icon name="analytics-outline" class="logo-icon"></ion-icon>
+      </div>
+      <h1 class="login-title" id="login-heading">Enterprise Analytics</h1>
+      <p class="login-subtitle">Sistema de Gestión y Analítica de Datos</p>
+    </header>
+
+    <!-- Alerta de sesión expirada -->
+    @if (sessionExpired) {
+      <ion-card class="alert-card warning" role="alert" aria-live="polite">
+        <ion-card-content>
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+          <span>Tu sesión ha expirado. Por favor, inicia sesión de nuevo.</span>
+        </ion-card-content>
+      </ion-card>
+    }
+
+    <!-- Alerta de error -->
+    @if (error$ | async; as errorMsg) {
+      <ion-card class="alert-card error" role="alert" aria-live="assertive">
+        <ion-card-content>
+          <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
+          <span>{{ errorMsg }}</span>
+        </ion-card-content>
+      </ion-card>
+    }
+
+    <!-- Formulario de Login -->
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="login-form"
+      aria-labelledby="login-heading"
+      novalidate
+    >
+      <!-- Campo Email -->
+      <div class="form-field">
+        <ion-item
+          [class.ion-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
+          [class.ion-touched]="getControl('email')?.touched"
+          lines="none"
+          class="form-item"
+        >
+          <ion-icon name="mail-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
+          <ion-input
+            formControlName="email"
+            type="email"
+            label="Correo electrónico"
+            labelPlacement="floating"
+            placeholder="tu@email.com"
+            autocomplete="email"
+            inputmode="email"
+            [clearInput]="true"
+            aria-required="true"
+            [attr.aria-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
+            aria-describedby="email-error"
+            id="login-email"
+          ></ion-input>
+        </ion-item>
+
+        @if (getControl('email')?.touched && getControl('email')?.errors) {
+          <div class="error-messages" id="email-error" role="alert" aria-live="polite">
+            @if (getControl('email')?.errors?.['required']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                El correo electrónico es obligatorio.
+              </span>
+            }
+            @if (getControl('email')?.errors?.['email']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                Introduce un correo electrónico válido.
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="form-field">
+        <ion-item
+          [class.ion-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
+          [class.ion-touched]="getControl('password')?.touched"
+          lines="none"
+          class="form-item"
+        >
+          <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
+          <ion-input
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            label="Contraseña"
+            labelPlacement="floating"
+            placeholder="Tu contraseña"
+            autocomplete="current-password"
+            aria-required="true"
+            [attr.aria-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
+            aria-describedby="password-error"
+            id="login-password"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            class="toggle-password-btn"
+            tabindex="0"
+          >
+            <ion-icon
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+              aria-hidden="true"
+            ></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        @if (getControl('password')?.touched && getControl('password')?.errors) {
+          <div class="error-messages" id="password-error" role="alert" aria-live="polite">
+            @if (getControl('password')?.errors?.['required']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                La contraseña es obligatoria.
+              </span>
+            }
+            @if (getControl('password')?.errors?.['minlength']) {
+              <span class="error-text">
+                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
+                La contraseña debe tener al menos 6 caracteres.
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Botón de Login -->
+      <ion-button
+        type="submit"
+        expand="block"
+        class="login-btn"
+        [disabled]="(isLoading$ | async)"
+        aria-label="Iniciar sesión"
+        id="login-submit-btn"
+      >
+        @if (isLoading$ | async) {
+          <ion-spinner name="crescent" aria-label="Cargando"></ion-spinner>
+          <span>Iniciando sesión...</span>
+        } @else {
+          <ion-icon name="log-in-outline" slot="start" aria-hidden="true"></ion-icon>
+          <span>Iniciar sesión</span>
+        }
+      </ion-button>
+
+      <!-- Link al registro -->
+      <div class="register-link" aria-label="Enlace al registro">
+        <p>¿No tienes cuenta?
+          <a [routerLink]="['/auth/register']" tabindex="0" id="register-link">
+            Crear cuenta
+          </a>
+        </p>
+      </div>
+    </form>
+
+    <!-- Botones de Demo -->
+    <div class="demo-section" aria-label="Acceso rápido con credenciales de demostración">
+      <p class="demo-title">
+        <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
+        Acceso rápido (Demo)
+      </p>
+      <div class="demo-buttons">
+        <ion-button
+          fill="outline"
+          size="small"
+          (click)="fillDemoCredentials('admin')"
+          aria-label="Rellenar credenciales de administrador"
+          id="demo-admin-btn"
+          class="demo-btn admin"
+        >
+          <ion-icon name="shield-checkmark-outline" slot="start" aria-hidden="true"></ion-icon>
+          Admin
+        </ion-button>
+        <ion-button
+          fill="outline"
+          size="small"
+          (click)="fillDemoCredentials('user')"
+          aria-label="Rellenar credenciales de usuario estándar"
+          id="demo-user-btn"
+          class="demo-btn user"
+        >
+          <ion-icon name="person-outline" slot="start" aria-hidden="true"></ion-icon>
+          Usuario
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
