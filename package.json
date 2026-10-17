@@ -7,9 +7,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "docs:generate": "npx compodoc -p tsconfig.doc.json -d documentation --theme material",
+    "docs:serve": "npx compodoc -p tsconfig.doc.json -d documentation --theme material -s"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +29,15 @@
     "@capacitor/keyboard": "8.0.6",
     "@capacitor/status-bar": "8.0.4",
     "@ionic/angular": "^9.0.0",
+    "@ionic/storage-angular": "^4.0.0",
+    "@ngrx/effects": "^22.0.1",
+    "@ngrx/store": "^22.0.1",
+    "@ngrx/store-devtools": "^22.0.1",
+    "chart.js": "^4.5.1",
     "ionicons": "^8.1.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.9",
+    "ng2-charts": "^11.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -36,6 +47,7 @@
     "@angular/compiler-cli": "22.1.7",
     "@angular/language-service": "22.1.7",
     "@capacitor/cli": "8.5.3",
+    "@compodoc/compodoc": "^2.0.0",
     "@ionic/angular-toolkit": "^13.0.0",
     "angular-eslint": "22.5.0",
     "eslint": "^10.10.0",
