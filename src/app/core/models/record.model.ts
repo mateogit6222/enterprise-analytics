@@ -65,6 +65,7 @@ export interface Record {
   clientName: string;
   clientEmail: string;
   region: string;
+  sku: string;
   tags: string[];
   createdAt: string;
   updatedAt: string;

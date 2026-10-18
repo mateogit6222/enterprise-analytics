@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
+import { dataReducer } from './state/data/data.reducer';
+import { DataEffects } from './state/data/data.effects';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 
@@ -21,9 +23,10 @@ import { errorInterceptor } from './core/interceptors/error.interceptor';
     IonicModule.forRoot(),
     AppRoutingModule,
     StoreModule.forRoot({
-      auth: authReducer
+      auth: authReducer,
+      data: dataReducer
     }),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, DataEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: !isDevMode(),
