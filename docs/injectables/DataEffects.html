@@ -286,8 +286,8 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/state/data/data.effects.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/state/data/data.effects.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -448,7 +448,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/state/data/data.effects.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/state/data/data.effects.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -501,7 +501,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/state/data/data.effects.ts:111</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/state/data/data.effects.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -561,7 +561,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/state/data/data.effects.ts:132</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/state/data/data.effects.ts:134</a></div>
                         </td>
                     </tr>
 
@@ -664,8 +664,8 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
       ofType(DataActions.loadAllData),
       switchMap(() &#x3D;&gt;
         forkJoin({
-          sqlRecords: this.apiRest.getRecords(),
-          nosqlRecords: this.firestoreMock.getRecordsSnapshot()
+          sqlRecords: this.apiRest.getRecords().pipe(take(1)),
+          nosqlRecords: this.firestoreMock.getRecordsSnapshot().pipe(take(1))
         }).pipe(
           map(({ sqlRecords, nosqlRecords }) &#x3D;&gt; {
             const combinedRecords: Record[] &#x3D; [...sqlRecords, ...nosqlRecords];
@@ -690,7 +690,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/state/data/data.effects.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/state/data/data.effects.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -698,7 +698,9 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 <td class="col-md-4">
                     <div class="io-description"><p>Carga concurrente dual de datos usando RxJS forkJoin (RA 5 - Criterio Sobresaliente).
 Orquesta la obtención en paralelo de registros de la API REST (SQL) y la colección
-de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.</p>
+de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.
+Se añade take(1) explícito a ambos observables para garantizar que se completen
+inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin).</p>
 </div>
                 </td>
             </tr>
@@ -778,7 +780,7 @@ de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/state/data/data.effects.ts:90</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/state/data/data.effects.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -801,7 +803,7 @@ de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.</p>
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { forkJoin, of, from } from &#x27;rxjs&#x27;;
-import { map, catchError, switchMap, mergeMap, withLatestFrom } from &#x27;rxjs/operators&#x27;;
+import { map, catchError, switchMap, mergeMap, withLatestFrom, take } from &#x27;rxjs/operators&#x27;;
 import * as DataActions from &#x27;./data.actions&#x27;;
 import { selectAllRecords } from &#x27;./data.selectors&#x27;;
 import { ApiRestService } from &#x27;../../core/services/api-rest.service&#x27;;
@@ -833,14 +835,16 @@ export class DataEffects {
    * Carga concurrente dual de datos usando RxJS forkJoin (RA 5 - Criterio Sobresaliente).
    * Orquesta la obtención en paralelo de registros de la API REST (SQL) y la colección
    * de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.
+   * Se añade take(1) explícito a ambos observables para garantizar que se completen
+   * inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin).
    */
   loadAllData$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(DataActions.loadAllData),
       switchMap(() &#x3D;&gt;
         forkJoin({
-          sqlRecords: this.apiRest.getRecords(),
-          nosqlRecords: this.firestoreMock.getRecordsSnapshot()
+          sqlRecords: this.apiRest.getRecords().pipe(take(1)),
+          nosqlRecords: this.firestoreMock.getRecordsSnapshot().pipe(take(1))
         }).pipe(
           map(({ sqlRecords, nosqlRecords }) &#x3D;&gt; {
             const combinedRecords: Record[] &#x3D; [...sqlRecords, ...nosqlRecords];

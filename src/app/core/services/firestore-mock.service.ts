@@ -51,45 +51,69 @@ export class FirestoreMockService {
   /** @private Flag de carga inicial completada */
   private initialized = false;
 
+  /** @private Observable de inicialización en curso para evitar llamadas HTTP duplicadas */
+  private initObservable$: Observable<Record[]> | null = null;
+
   /**
    * Inicializa la conexión simulada con Firestore.
-   * Carga datos del JSON mock y arranca el stream de actualizaciones periódicas.
+   * Carga datos del JSON mock con fallback de ruta (/assets/...) y arranca el stream en tiempo real.
    *
-   * @returns {Observable<Record[]>} Observable que emite al completar la carga inicial.
+   * @returns {Observable<Record[]>} Observable que emite y se completa (take(1)).
    */
   initialize(): Observable<Record[]> {
     if (this.initialized) {
-      return of(this.recordsSubject.getValue());
+      return of(this.recordsSubject.getValue()).pipe(take(1));
     }
 
-    return this.http.get<Record[]>('assets/mock-data/records-nosql.mock.json').pipe(
-      delay(800 + Math.random() * 700),
+    if (this.initObservable$) {
+      return this.initObservable$;
+    }
+
+    this.initObservable$ = this.http.get<Record[]>('assets/mock-data/records-nosql.mock.json').pipe(
+      catchError(() => this.http.get<Record[]>('/assets/mock-data/records-nosql.mock.json')),
+      delay(100),
       tap(records => {
-        this.recordsSubject.next(records);
+        this.recordsSubject.next(records || []);
         this.initialized = true;
+        this.initObservable$ = null;
         this.startRealtimeSimulation();
       }),
       catchError(err => {
         console.error('[FirestoreMockService] Error al inicializar datos NoSQL:', err);
         this.initialized = true;
+        this.initObservable$ = null;
         return of([]);
-      })
+      }),
+      take(1)
     );
+
+    return this.initObservable$;
   }
 
   /**
    * Obtiene una instantánea de los registros NoSQL actuales.
-   * Si no se ha inicializado, dispara la carga automáticamente.
+   * Garantiza la emisión única y el cierre de la suscripción (take(1)) para uso en forkJoin.
    *
-   * @returns {Observable<Record[]>} Snapshot de registros NoSQL.
+   * @returns {Observable<Record[]>} Snapshot de registros NoSQL garantizado a completar.
    */
   getRecordsSnapshot(): Observable<Record[]> {
     if (!this.initialized) {
-      return this.initialize();
+      return this.initialize().pipe(take(1));
     }
     return of(this.recordsSubject.getValue()).pipe(
-      delay(150 + Math.random() * 200)
+      delay(50),
+      take(1)
     );
+  }
+
+  /**
+   * Alias de getRecordsSnapshot para alineación con ApiRestService.
+   * Emite y completa garantizadamente (take(1)).
+   *
+   * @returns {Observable<Record[]>} Registros NoSQL con complete().
+   */
+  getRecords(): Observable<Record[]> {
+    return this.getRecordsSnapshot().pipe(take(1));
   }
 
   /**
@@ -108,7 +132,8 @@ export class FirestoreMockService {
     };
 
     return of(newRecord).pipe(
-      delay(300 + Math.random() * 300),
+      delay(100),
+      take(1),
       tap(r => {
         const current = this.recordsSubject.getValue();
         this.recordsSubject.next([...current, r]);
@@ -125,7 +150,8 @@ export class FirestoreMockService {
    */
   updateRecord(id: string, changes: Partial<Record>): Observable<Record> {
     return of(null).pipe(
-      delay(250 + Math.random() * 250),
+      delay(100),
+      take(1),
       map(() => {
         const current = this.recordsSubject.getValue();
         const index = current.findIndex(r => r.id === id);
@@ -153,7 +179,8 @@ export class FirestoreMockService {
    */
   deleteRecord(id: string): Observable<string> {
     return of(id).pipe(
-      delay(200 + Math.random() * 200),
+      delay(100),
+      take(1),
       tap(() => {
         const current = this.recordsSubject.getValue();
         this.recordsSubject.next(current.filter(r => r.id !== id));

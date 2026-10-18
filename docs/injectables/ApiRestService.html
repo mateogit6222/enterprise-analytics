@@ -158,7 +158,7 @@ relacional SQL (PostgreSQL). Proporciona operaciones CRUD sobre registros
 empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 <ul>
 <li>Los datos se cargan desde <code>assets/mock-data/records-sql.mock.json</code>.</li>
-<li>Se simula latencia de red realista (600-1200ms).</li>
+<li>Latencia simulada ultrarrápida (50-100ms) para respuesta inmediata en la UI.</li>
 <li>Cache en memoria para evitar recarga innecesaria del JSON.</li>
 <li>Fuente de datos: <code>source: &#39;REST&#39;</code> en cada registro.</li>
 </ul>
@@ -286,8 +286,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="196"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:196</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:205</a></div>
                         </td>
                     </tr>
 
@@ -381,8 +381,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -458,8 +458,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:188</a></div>
                         </td>
                     </tr>
 
@@ -535,8 +535,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -657,15 +657,16 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtiene todos los registros de la fuente REST (SQL).</p>
+                        <div class="io-description"><p>Obtiene todos los registros de la fuente REST (SQL).
+Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
 </div>
 
                         <div class="io-description">
@@ -700,8 +701,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:155</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -906,7 +907,7 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
-import { delay, map, tap, catchError } from &#x27;rxjs/operators&#x27;;
+import { delay, map, tap, catchError, take } from &#x27;rxjs/operators&#x27;;
 import { Record, RecordFilters, PaginatedRecords } from &#x27;../models/record.model&#x27;;
 
 /**
@@ -917,7 +918,7 @@ import { Record, RecordFilters, PaginatedRecords } from &#x27;../models/record.m
  *
  * @remarks
  * - Los datos se cargan desde &#x60;assets/mock-data/records-sql.mock.json&#x60;.
- * - Se simula latencia de red realista (600-1200ms).
+ * - Latencia simulada ultrarrápida (50-100ms) para respuesta inmediata en la UI.
  * - Cache en memoria para evitar recarga innecesaria del JSON.
  * - Fuente de datos: &#x60;source: &#x27;REST&#x27;&#x60; en cada registro.
  *
@@ -944,24 +945,30 @@ export class ApiRestService {
 
   /**
    * Obtiene todos los registros de la fuente REST (SQL).
+   * Incorpora fallback de ruta (/assets/...) y take(1) garantizado.
    *
    * @returns {Observable&lt;Record[]&gt;} Lista completa de registros SQL.
    */
   getRecords(): Observable&lt;Record[]&gt; {
     if (this.dataLoaded) {
-      return of(this.cachedRecords).pipe(delay(200 + Math.random() * 300));
+      return of(this.cachedRecords).pipe(
+        delay(50),
+        take(1)
+      );
     }
 
     return this.http.get&lt;Record[]&gt;(&#x27;assets/mock-data/records-sql.mock.json&#x27;).pipe(
-      delay(600 + Math.random() * 600),
+      catchError(() &#x3D;&gt; this.http.get&lt;Record[]&gt;(&#x27;/assets/mock-data/records-sql.mock.json&#x27;)),
+      delay(100),
       tap(records &#x3D;&gt; {
-        this.cachedRecords &#x3D; records;
+        this.cachedRecords &#x3D; records || [];
         this.dataLoaded &#x3D; true;
       }),
       catchError(err &#x3D;&gt; {
         console.error(&#x27;[ApiRestService] Error al cargar registros SQL:&#x27;, err);
         return of([]);
-      })
+      }),
+      take(1)
     );
   }
 
@@ -1045,7 +1052,8 @@ export class ApiRestService {
     };
 
     return of(newRecord).pipe(
-      delay(500 + Math.random() * 500),
+      delay(100),
+      take(1),
       tap(r &#x3D;&gt; this.cachedRecords.push(r))
     );
   }
@@ -1059,7 +1067,8 @@ export class ApiRestService {
    */
   updateRecord(id: string, changes: Partial&lt;Record&gt;): Observable&lt;Record&gt; {
     return of(null).pipe(
-      delay(400 + Math.random() * 400),
+      delay(100),
+      take(1),
       map(() &#x3D;&gt; {
         const index &#x3D; this.cachedRecords.findIndex(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; id);
         if (index &#x3D;&#x3D;&#x3D; -1) {
@@ -1084,7 +1093,8 @@ export class ApiRestService {
    */
   deleteRecord(id: string): Observable&lt;string&gt; {
     return of(id).pipe(
-      delay(300 + Math.random() * 400),
+      delay(100),
+      take(1),
       tap(() &#x3D;&gt; {
         this.cachedRecords &#x3D; this.cachedRecords.filter(r &#x3D;&gt; r.id !&#x3D;&#x3D; id);
       })
@@ -1100,7 +1110,8 @@ export class ApiRestService {
    */
   checkSkuExists(sku: string, excludeId?: string): Observable&lt;boolean&gt; {
     return this.getRecords().pipe(
-      delay(400 + Math.random() * 300),
+      delay(100),
+      take(1),
       map(records &#x3D;&gt;
         records.some(r &#x3D;&gt;
           r.sku.toLowerCase() &#x3D;&#x3D;&#x3D; sku.toLowerCase() &amp;&amp;

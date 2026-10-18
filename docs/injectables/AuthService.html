@@ -348,8 +348,8 @@ constructor(private authService: AuthService) {
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="334"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:334</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="335"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:335</a></div>
                         </td>
                     </tr>
 
@@ -433,8 +433,8 @@ emailControl = new FormControl(&#39;&#39;, [], [
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="150"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:150</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -528,8 +528,8 @@ emailControl = new FormControl(&#39;&#39;, [], [
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="360"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:360</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="361"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:361</a></div>
                         </td>
                     </tr>
 
@@ -571,8 +571,8 @@ emailControl = new FormControl(&#39;&#39;, [], [
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="369"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:369</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="370"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:370</a></div>
                         </td>
                     </tr>
 
@@ -616,8 +616,8 @@ emailControl = new FormControl(&#39;&#39;, [], [
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="402"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:402</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="403"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:403</a></div>
                         </td>
                     </tr>
 
@@ -659,8 +659,8 @@ emailControl = new FormControl(&#39;&#39;, [], [
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="379"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:379</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="380"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:380</a></div>
                         </td>
                     </tr>
 
@@ -782,8 +782,8 @@ Solo carga una vez (lazy loading con cache).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="181"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:181</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:182</a></div>
                         </td>
                     </tr>
 
@@ -870,8 +870,8 @@ Solo carga una vez (lazy loading con cache).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="348"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:348</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="349"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:349</a></div>
                         </td>
                     </tr>
 
@@ -912,8 +912,8 @@ Solo carga una vez (lazy loading con cache).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="261"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:261</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="262"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:262</a></div>
                         </td>
                     </tr>
 
@@ -1007,8 +1007,8 @@ Solo carga una vez (lazy loading con cache).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="390"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:390</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="391"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:391</a></div>
                         </td>
                     </tr>
 
@@ -1558,8 +1558,9 @@ export class AuthService {
     }
 
     return this.http.get&lt;MockUserData[]&gt;(&#x27;assets/mock-data/users.mock.json&#x27;).pipe(
+      catchError(() &#x3D;&gt; this.http.get&lt;MockUserData[]&gt;(&#x27;/assets/mock-data/users.mock.json&#x27;)),
       tap(users &#x3D;&gt; {
-        this.mockUsers &#x3D; users;
+        this.mockUsers &#x3D; users || [];
         this.mockDataLoaded &#x3D; true;
       }),
       catchError(() &#x3D;&gt; {
@@ -1612,8 +1613,8 @@ export class AuthService {
     this.isLoadingSubject.next(true);
 
     return this.loadMockUsers().pipe(
-      /** Simula latencia de red de 800-1500ms */
-      delay(800 + Math.random() * 700),
+      /** Simula latencia de red ultrarrápida */
+      delay(100),
       switchMap(users &#x3D;&gt; {
         const user &#x3D; users.find(
           u &#x3D;&gt; u.email.toLowerCase() &#x3D;&#x3D;&#x3D; credentials.email.toLowerCase()
