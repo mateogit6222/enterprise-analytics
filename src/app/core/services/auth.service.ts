@@ -128,8 +128,9 @@ export class AuthService {
     }
 
     return this.http.get<MockUserData[]>('assets/mock-data/users.mock.json').pipe(
+      catchError(() => this.http.get<MockUserData[]>('/assets/mock-data/users.mock.json')),
       tap(users => {
-        this.mockUsers = users;
+        this.mockUsers = users || [];
         this.mockDataLoaded = true;
       }),
       catchError(() => {
@@ -182,8 +183,8 @@ export class AuthService {
     this.isLoadingSubject.next(true);
 
     return this.loadMockUsers().pipe(
-      /** Simula latencia de red de 800-1500ms */
-      delay(800 + Math.random() * 700),
+      /** Simula latencia de red ultrarrápida */
+      delay(100),
       switchMap(users => {
         const user = users.find(
           u => u.email.toLowerCase() === credentials.email.toLowerCase()

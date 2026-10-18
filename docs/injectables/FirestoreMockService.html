@@ -209,6 +209,11 @@ actualizan automáticamente al cambiar.</p>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#initObservable$" >initObservable$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#records$" >records$</a>
                             </li>
@@ -239,6 +244,10 @@ actualizan automáticamente al cambiar.</p>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#deleteRecord" >deleteRecord</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getRecords" >getRecords</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -295,8 +304,8 @@ actualizan automáticamente al cambiar.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -372,8 +381,8 @@ actualizan automáticamente al cambiar.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="154"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:154</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:180</a></div>
                         </td>
                     </tr>
 
@@ -433,6 +442,50 @@ actualizan automáticamente al cambiar.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getRecords"></a>
+                    <span class="name">
+                        <span ><b>getRecords</b></span>
+                        <a href="#getRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getRecords()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Alias de getRecordsSnapshot para alineación con ApiRestService.
+Emite y completa garantizadamente (take(1)).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Record.html" target="_self" >Observable&lt;Record[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Registros NoSQL con complete().</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getRecordsSnapshot"></a>
                     <span class="name">
                         <span ><b>getRecordsSnapshot</b></span>
@@ -449,8 +502,8 @@ actualizan automáticamente al cambiar.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -458,7 +511,7 @@ actualizan automáticamente al cambiar.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Obtiene una instantánea de los registros NoSQL actuales.
-Si no se ha inicializado, dispara la carga automáticamente.</p>
+Garantiza la emisión única y el cierre de la suscripción (take(1)) para uso en forkJoin.</p>
 </div>
 
                         <div class="io-description">
@@ -466,7 +519,7 @@ Si no se ha inicializado, dispara la carga automáticamente.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>Snapshot de registros NoSQL.</p>
+                                <p>Snapshot de registros NoSQL garantizado a completar.</p>
 
                             </div>
                 </td>
@@ -493,8 +546,8 @@ Si no se ha inicializado, dispara la carga automáticamente.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -502,7 +555,7 @@ Si no se ha inicializado, dispara la carga automáticamente.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Inicializa la conexión simulada con Firestore.
-Carga datos del JSON mock y arranca el stream de actualizaciones periódicas.</p>
+Carga datos del JSON mock con fallback de ruta (/assets/...) y arranca el stream en tiempo real.</p>
 </div>
 
                         <div class="io-description">
@@ -510,7 +563,7 @@ Carga datos del JSON mock y arranca el stream de actualizaciones periódicas.</p
 
                         </div>
                             <div class="io-description">
-                                <p>Observable que emite al completar la carga inicial.</p>
+                                <p>Observable que emite y se completa (take(1)).</p>
 
                             </div>
                 </td>
@@ -539,8 +592,8 @@ Carga datos del JSON mock y arranca el stream de actualizaciones periódicas.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="171"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:171</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:198</a></div>
                         </td>
                     </tr>
 
@@ -583,8 +636,8 @@ un flujo de datos en vivo, como haría una suscripción real a Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -746,6 +799,44 @@ un flujo de datos en vivo, como haría una suscripción real a Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="initObservable$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initObservable$</b></span>
+                        <a href="#initObservable$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Record.html" target="_self" >Observable&lt;Record[]&gt; | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/core/services/firestore-mock.service.ts:55</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Observable de inicialización en curso para evitar llamadas HTTP duplicadas</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="records$"></a>
                     <span class="name">
                             <span class="modifier">Readonly</span>
@@ -880,45 +971,69 @@ export class FirestoreMockService {
   /** @private Flag de carga inicial completada */
   private initialized &#x3D; false;
 
+  /** @private Observable de inicialización en curso para evitar llamadas HTTP duplicadas */
+  private initObservable$: Observable&lt;Record[]&gt; | null &#x3D; null;
+
   /**
    * Inicializa la conexión simulada con Firestore.
-   * Carga datos del JSON mock y arranca el stream de actualizaciones periódicas.
+   * Carga datos del JSON mock con fallback de ruta (/assets/...) y arranca el stream en tiempo real.
    *
-   * @returns {Observable&lt;Record[]&gt;} Observable que emite al completar la carga inicial.
+   * @returns {Observable&lt;Record[]&gt;} Observable que emite y se completa (take(1)).
    */
   initialize(): Observable&lt;Record[]&gt; {
     if (this.initialized) {
-      return of(this.recordsSubject.getValue());
+      return of(this.recordsSubject.getValue()).pipe(take(1));
     }
 
-    return this.http.get&lt;Record[]&gt;(&#x27;assets/mock-data/records-nosql.mock.json&#x27;).pipe(
-      delay(800 + Math.random() * 700),
+    if (this.initObservable$) {
+      return this.initObservable$;
+    }
+
+    this.initObservable$ &#x3D; this.http.get&lt;Record[]&gt;(&#x27;assets/mock-data/records-nosql.mock.json&#x27;).pipe(
+      catchError(() &#x3D;&gt; this.http.get&lt;Record[]&gt;(&#x27;/assets/mock-data/records-nosql.mock.json&#x27;)),
+      delay(100),
       tap(records &#x3D;&gt; {
-        this.recordsSubject.next(records);
+        this.recordsSubject.next(records || []);
         this.initialized &#x3D; true;
+        this.initObservable$ &#x3D; null;
         this.startRealtimeSimulation();
       }),
       catchError(err &#x3D;&gt; {
         console.error(&#x27;[FirestoreMockService] Error al inicializar datos NoSQL:&#x27;, err);
         this.initialized &#x3D; true;
+        this.initObservable$ &#x3D; null;
         return of([]);
-      })
+      }),
+      take(1)
     );
+
+    return this.initObservable$;
   }
 
   /**
    * Obtiene una instantánea de los registros NoSQL actuales.
-   * Si no se ha inicializado, dispara la carga automáticamente.
+   * Garantiza la emisión única y el cierre de la suscripción (take(1)) para uso en forkJoin.
    *
-   * @returns {Observable&lt;Record[]&gt;} Snapshot de registros NoSQL.
+   * @returns {Observable&lt;Record[]&gt;} Snapshot de registros NoSQL garantizado a completar.
    */
   getRecordsSnapshot(): Observable&lt;Record[]&gt; {
     if (!this.initialized) {
-      return this.initialize();
+      return this.initialize().pipe(take(1));
     }
     return of(this.recordsSubject.getValue()).pipe(
-      delay(150 + Math.random() * 200)
+      delay(50),
+      take(1)
     );
+  }
+
+  /**
+   * Alias de getRecordsSnapshot para alineación con ApiRestService.
+   * Emite y completa garantizadamente (take(1)).
+   *
+   * @returns {Observable&lt;Record[]&gt;} Registros NoSQL con complete().
+   */
+  getRecords(): Observable&lt;Record[]&gt; {
+    return this.getRecordsSnapshot().pipe(take(1));
   }
 
   /**
@@ -937,7 +1052,8 @@ export class FirestoreMockService {
     };
 
     return of(newRecord).pipe(
-      delay(300 + Math.random() * 300),
+      delay(100),
+      take(1),
       tap(r &#x3D;&gt; {
         const current &#x3D; this.recordsSubject.getValue();
         this.recordsSubject.next([...current, r]);
@@ -954,7 +1070,8 @@ export class FirestoreMockService {
    */
   updateRecord(id: string, changes: Partial&lt;Record&gt;): Observable&lt;Record&gt; {
     return of(null).pipe(
-      delay(250 + Math.random() * 250),
+      delay(100),
+      take(1),
       map(() &#x3D;&gt; {
         const current &#x3D; this.recordsSubject.getValue();
         const index &#x3D; current.findIndex(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; id);
@@ -982,7 +1099,8 @@ export class FirestoreMockService {
    */
   deleteRecord(id: string): Observable&lt;string&gt; {
     return of(id).pipe(
-      delay(200 + Math.random() * 200),
+      delay(100),
+      take(1),
       tap(() &#x3D;&gt; {
         const current &#x3D; this.recordsSubject.getValue();
         this.recordsSubject.next(current.filter(r &#x3D;&gt; r.id !&#x3D;&#x3D; id));

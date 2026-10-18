@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { forkJoin, of, from } from 'rxjs';
-import { map, catchError, switchMap, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { map, catchError, switchMap, mergeMap, withLatestFrom, take } from 'rxjs/operators';
 import * as DataActions from './data.actions';
 import { selectAllRecords } from './data.selectors';
 import { ApiRestService } from '../../core/services/api-rest.service';
@@ -34,14 +34,16 @@ export class DataEffects {
    * Carga concurrente dual de datos usando RxJS forkJoin (RA 5 - Criterio Sobresaliente).
    * Orquesta la obtención en paralelo de registros de la API REST (SQL) y la colección
    * de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.
+   * Se añade take(1) explícito a ambos observables para garantizar que se completen
+   * inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin).
    */
   loadAllData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DataActions.loadAllData),
       switchMap(() =>
         forkJoin({
-          sqlRecords: this.apiRest.getRecords(),
-          nosqlRecords: this.firestoreMock.getRecordsSnapshot()
+          sqlRecords: this.apiRest.getRecords().pipe(take(1)),
+          nosqlRecords: this.firestoreMock.getRecordsSnapshot().pipe(take(1))
         }).pipe(
           map(({ sqlRecords, nosqlRecords }) => {
             const combinedRecords: Record[] = [...sqlRecords, ...nosqlRecords];

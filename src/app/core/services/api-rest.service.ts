@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { delay, map, tap, catchError } from 'rxjs/operators';
+import { delay, map, tap, catchError, take } from 'rxjs/operators';
 import { Record, RecordFilters, PaginatedRecords } from '../models/record.model';
 
 /**
@@ -12,7 +12,7 @@ import { Record, RecordFilters, PaginatedRecords } from '../models/record.model'
  *
  * @remarks
  * - Los datos se cargan desde `assets/mock-data/records-sql.mock.json`.
- * - Se simula latencia de red realista (600-1200ms).
+ * - Latencia simulada ultrarrápida (50-100ms) para respuesta inmediata en la UI.
  * - Cache en memoria para evitar recarga innecesaria del JSON.
  * - Fuente de datos: `source: 'REST'` en cada registro.
  *
@@ -39,24 +39,30 @@ export class ApiRestService {
 
   /**
    * Obtiene todos los registros de la fuente REST (SQL).
+   * Incorpora fallback de ruta (/assets/...) y take(1) garantizado.
    *
    * @returns {Observable<Record[]>} Lista completa de registros SQL.
    */
   getRecords(): Observable<Record[]> {
     if (this.dataLoaded) {
-      return of(this.cachedRecords).pipe(delay(200 + Math.random() * 300));
+      return of(this.cachedRecords).pipe(
+        delay(50),
+        take(1)
+      );
     }
 
     return this.http.get<Record[]>('assets/mock-data/records-sql.mock.json').pipe(
-      delay(600 + Math.random() * 600),
+      catchError(() => this.http.get<Record[]>('/assets/mock-data/records-sql.mock.json')),
+      delay(100),
       tap(records => {
-        this.cachedRecords = records;
+        this.cachedRecords = records || [];
         this.dataLoaded = true;
       }),
       catchError(err => {
         console.error('[ApiRestService] Error al cargar registros SQL:', err);
         return of([]);
-      })
+      }),
+      take(1)
     );
   }
 
@@ -140,7 +146,8 @@ export class ApiRestService {
     };
 
     return of(newRecord).pipe(
-      delay(500 + Math.random() * 500),
+      delay(100),
+      take(1),
       tap(r => this.cachedRecords.push(r))
     );
   }
@@ -154,7 +161,8 @@ export class ApiRestService {
    */
   updateRecord(id: string, changes: Partial<Record>): Observable<Record> {
     return of(null).pipe(
-      delay(400 + Math.random() * 400),
+      delay(100),
+      take(1),
       map(() => {
         const index = this.cachedRecords.findIndex(r => r.id === id);
         if (index === -1) {
@@ -179,7 +187,8 @@ export class ApiRestService {
    */
   deleteRecord(id: string): Observable<string> {
     return of(id).pipe(
-      delay(300 + Math.random() * 400),
+      delay(100),
+      take(1),
       tap(() => {
         this.cachedRecords = this.cachedRecords.filter(r => r.id !== id);
       })
@@ -195,7 +204,8 @@ export class ApiRestService {
    */
   checkSkuExists(sku: string, excludeId?: string): Observable<boolean> {
     return this.getRecords().pipe(
-      delay(400 + Math.random() * 300),
+      delay(100),
+      take(1),
       map(records =>
         records.some(r =>
           r.sku.toLowerCase() === sku.toLowerCase() &&
