@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostListener, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from './state/app.state';
@@ -11,6 +11,7 @@ import {
   selectUserRoleLabel
 } from './state/auth/auth.selectors';
 import { AuthService } from './core/services/auth.service';
+import { AccessibilityService } from './core/services/accessibility.service';
 
 /**
  * @interface NavigationItem
@@ -25,7 +26,8 @@ interface NavigationItem {
 
 /**
  * @component AppComponent
- * @description Shell principal de la aplicación con Split Pane y Side Menu adaptativo por roles.
+ * @description Shell principal de la aplicación con Split Pane, Side Menu adaptativo por roles,
+ * soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
  */
 @Component({
   selector: 'app-root',
@@ -37,6 +39,7 @@ interface NavigationItem {
 export class AppComponent implements OnInit {
   private readonly store = inject(Store<AppState>);
   private readonly authService = inject(AuthService);
+  private readonly accessibilityService = inject(AccessibilityService);
   private readonly router = inject(Router);
 
   /** Observables de estado de autenticación desde NgRx */
@@ -68,5 +71,43 @@ export class AppComponent implements OnInit {
    */
   onLogout(): void {
     this.store.dispatch(AuthActions.logout());
+  }
+
+  /**
+   * Atajos de teclado globales para navegación accesible sin ratón (WCAG 2.1 - RA 4).
+   * - Alt + D: Dashboard
+   * - Alt + R: Registros
+   * - Alt + I: Informes
+   * - Alt + H: Centro de Ayuda
+   * - Alt + P: Mi Perfil
+   *
+   * @param {KeyboardEvent} event - Evento nativo de teclado.
+   */
+  @HostListener('window:keydown', ['$event'])
+  handleGlobalShortcuts(event: KeyboardEvent): void {
+    if (!event.altKey) return;
+
+    switch (event.key.toLowerCase()) {
+      case 'd':
+        event.preventDefault();
+        this.router.navigate(['/dashboard']);
+        break;
+      case 'r':
+        event.preventDefault();
+        this.router.navigate(['/records']);
+        break;
+      case 'i':
+        event.preventDefault();
+        this.router.navigate(['/reports']);
+        break;
+      case 'h':
+        event.preventDefault();
+        this.router.navigate(['/help']);
+        break;
+      case 'p':
+        event.preventDefault();
+        this.router.navigate(['/profile']);
+        break;
+    }
   }
 }

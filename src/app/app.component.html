@@ -1,4 +1,7 @@
 <ion-app>
+  <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
   <ion-split-pane contentId="main-content" [disabled]="!(isAuthenticated$ | async)">
     <!-- Side Menu (Solo visible si hay sesión autenticada) -->
     @if (isAuthenticated$ | async) {
