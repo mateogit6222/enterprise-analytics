@@ -6,6 +6,7 @@ import {
   ElementRef,
   ViewChild,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -58,6 +59,7 @@ Chart.register(...registerables);
 })
 export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
   private readonly store = inject(Store<AppState>);
+  private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroy$ = new Subject<void>();
 
   /** Referencias a los elementos canvas en el DOM */
@@ -93,6 +95,14 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     // Disparar orquestación dual asíncrona mediante el store de NgRx
     this.store.dispatch(DataActions.loadAllData());
+
+    this.loading$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cdr.markForCheck();
+    });
+
+    this.kpis$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cdr.markForCheck();
+    });
   }
 
   ngAfterViewInit(): void {

@@ -7,7 +7,9 @@ import {
   OnDestroy,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -91,6 +93,8 @@ export type SortDirection = 'asc' | 'desc' | 'none';
 })
 export class DataTableComponent<T extends Record<string, any> = any>
   implements OnInit, OnDestroy, OnChanges {
+
+  private readonly cdr = inject(ChangeDetectorRef);
 
   /** Colección completa de datos a renderizar */
   @Input() data: T[] = [];
@@ -268,6 +272,7 @@ export class DataTableComponent<T extends Record<string, any> = any>
 
     const startIndex = (this.currentPage - 1) * this.pageSize;
     this.pagedData = this.filteredData.slice(startIndex, startIndex + this.pageSize);
+    this.cdr.markForCheck();
   }
 
   /**

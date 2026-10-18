@@ -147,7 +147,7 @@
           </div>
           <div class="metric-info">
             <span class="metric-label">Facturación Filtrada</span>
-            <span class="metric-value">{{ m.totalAmount | currency:'EUR':'symbol':'1.2-2':'es' }}</span>
+            <span class="metric-value">{{ m.totalAmount | currencyFormat }}</span>
           </div>
         </div>
 
@@ -167,7 +167,7 @@
           </div>
           <div class="metric-info">
             <span class="metric-label">Ticket Medio</span>
-            <span class="metric-value">{{ m.avgAmount | currency:'EUR':'symbol':'1.0-0':'es' }}</span>
+            <span class="metric-value">{{ m.avgAmount | currencyFormat:'EUR':'es-ES':0 }}</span>
           </div>
         </div>
 
@@ -214,10 +214,10 @@
                   </span>
                 </td>
                 <td class="text-center font-bold">{{ item.count }}</td>
-                <td class="text-right font-bold text-highlight">{{ item.totalAmount | currency:'EUR':'symbol':'1.2-2':'es' }}</td>
+                <td class="text-right font-bold text-highlight">{{ item.totalAmount | currencyFormat }}</td>
                 <td class="text-center">{{ item.volumePercent }}%</td>
                 <td class="text-center">{{ item.revenuePercent }}%</td>
-                <td class="text-right">{{ item.avgAmount | currency:'EUR':'symbol':'1.0-0':'es' }}</td>
+                <td class="text-right">{{ item.avgAmount | currencyFormat:'EUR':'es-ES':0 }}</td>
               </tr>
             } @empty {
               <tr>
@@ -261,7 +261,7 @@
                 <td><span class="category-chip" [attr.data-cat]="record.category">{{ record.category }}</span></td>
                 <td><span class="status-badge" [attr.data-status]="record.status">{{ record.status }}</span></td>
                 <td><span class="source-badge" [attr.data-source]="record.source">{{ record.source }}</span></td>
-                <td class="text-right font-bold text-highlight">{{ record.amount | currency:'EUR':'symbol':'1.2-2':'es' }}</td>
+                <td class="text-right font-bold text-highlight">{{ record.amount | currencyFormat }}</td>
               </tr>
             } @empty {
               <tr>

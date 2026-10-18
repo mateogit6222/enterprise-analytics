@@ -1,13 +1,16 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController, ToastController } from '@ionic/angular/lazy';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AppState } from '../../../../state/app.state';
 import * as DataActions from '../../../../state/data/data.actions';
@@ -46,10 +49,12 @@ import { RecordFormModalComponent } from '../../components/record-form-modal/rec
   styleUrls: ['./record-list.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecordListPage implements OnInit {
+export class RecordListPage implements OnInit, OnDestroy {
   private readonly store = inject(Store<AppState>);
   private readonly modalCtrl = inject(ModalController);
   private readonly toastCtrl = inject(ToastController);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroy$ = new Subject<void>();
 
   /** Flujo reactivo de registros corporativos desde el Store de NgRx */
   readonly records$: Observable<Record[]> = this.store.select(selectAllRecords);
@@ -123,6 +128,19 @@ export class RecordListPage implements OnInit {
   ngOnInit(): void {
     // Inicializar datos en el store si no se han cargado previamente
     this.store.dispatch(DataActions.loadAllData());
+
+    this.loading$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cdr.markForCheck();
+    });
+
+    this.records$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**

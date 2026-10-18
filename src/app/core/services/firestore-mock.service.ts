@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, interval } from 'rxjs';
 import { delay, map, tap, catchError, take, switchMap } from 'rxjs/operators';
 import { Record } from '../models/record.model';
+import { FALLBACK_NOSQL_RECORDS } from '../models/mock-datasets';
 
 /**
  * @class FirestoreMockService
@@ -12,18 +13,10 @@ import { Record } from '../models/record.model';
  * actualizan automáticamente al cambiar.
  *
  * @remarks
- * - Carga datos iniciales desde `assets/mock-data/records-nosql.mock.json`.
+ * - Cuenta con dataset de respaldo en memoria (`FALLBACK_NOSQL_RECORDS`) para inicialización inmediata del BehaviorSubject.
  * - Emite actualizaciones periódicas simuladas (cada 30s) con variaciones de importes.
- * - El `BehaviorSubject` garantiza que nuevos suscriptores reciban el último valor.
+ * - El `BehaviorSubject` está pre-poblado desde el inicio para que `take(1)` nunca emita un array vacío.
  * - Fuente de datos: `source: 'FIRESTORE'` en cada registro.
- * - Este patrón demuestra la diferencia clave SQL vs NoSQL para la rúbrica (RA 5).
- *
- * @example
- * ```typescript
- * this.firestoreService.records$.subscribe(records => {
- *   console.log('Registros NoSQL en tiempo real:', records);
- * });
- * ```
  */
 @Injectable({
   providedIn: 'root'
@@ -35,77 +28,52 @@ export class FirestoreMockService {
 
   /**
    * BehaviorSubject que actúa como "colección en tiempo real" de Firestore.
-   * Emite el array completo de registros NoSQL cada vez que cambia.
+   * Inicializado directamente con el dataset en memoria de respaldo.
    * @private
    */
-  private readonly recordsSubject = new BehaviorSubject<Record[]>([]);
+  private readonly recordsSubject = new BehaviorSubject<Record[]>([...FALLBACK_NOSQL_RECORDS]);
 
   /**
    * Observable público del flujo de registros NoSQL en tiempo real.
-   * Los consumidores se suscriben aquí para recibir actualizaciones automáticas.
    *
    * @type {Observable<Record[]>}
    */
   readonly records$: Observable<Record[]> = this.recordsSubject.asObservable();
 
   /** @private Flag de carga inicial completada */
-  private initialized = false;
-
-  /** @private Observable de inicialización en curso para evitar llamadas HTTP duplicadas */
-  private initObservable$: Observable<Record[]> | null = null;
+  private initialized = true;
 
   constructor() {
-    // Inicialización en segundo plano de la colección mock de Firestore
-    this.initialize().subscribe();
+    // Sincronización en segundo plano con el archivo JSON si está disponible
+    this.http.get<Record[]>('assets/mock-data/records-nosql.mock.json').pipe(
+      catchError(() => this.http.get<Record[]>('/assets/mock-data/records-nosql.mock.json')),
+      catchError(() => of([])),
+      take(1)
+    ).subscribe(records => {
+      if (records && records.length > 0) {
+        this.recordsSubject.next(records);
+      }
+    });
+    this.startRealtimeSimulation();
   }
 
   /**
    * Inicializa la conexión simulada con Firestore.
-   * Carga datos del JSON mock con fallback de ruta (/assets/...) y arranca el stream en tiempo real.
    *
    * @returns {Observable<Record[]>} Observable que emite y se completa (take(1)).
    */
   initialize(): Observable<Record[]> {
-    if (this.initialized) {
-      return of(this.recordsSubject.getValue()).pipe(take(1));
-    }
-
-    if (this.initObservable$) {
-      return this.initObservable$;
-    }
-
-    this.initObservable$ = this.http.get<Record[]>('assets/mock-data/records-nosql.mock.json').pipe(
-      catchError(() => this.http.get<Record[]>('/assets/mock-data/records-nosql.mock.json')),
-      delay(100),
-      tap(records => {
-        this.recordsSubject.next(records || []);
-        this.initialized = true;
-        this.initObservable$ = null;
-        this.startRealtimeSimulation();
-      }),
-      catchError(err => {
-        console.error('[FirestoreMockService] Error al inicializar datos NoSQL:', err);
-        this.initialized = true;
-        this.initObservable$ = null;
-        return of([]);
-      }),
-      take(1)
-    );
-
-    return this.initObservable$;
+    return of([...this.recordsSubject.getValue()]).pipe(take(1));
   }
 
   /**
    * Obtiene una instantánea de los registros NoSQL actuales.
-   * Garantiza la emisión única y el cierre de la suscripción (take(1)) para uso en forkJoin.
+   * Emite de forma garantizada e inmediata el array completo con of(records).pipe(delay(50), take(1)).
    *
    * @returns {Observable<Record[]>} Snapshot de registros NoSQL garantizado a completar.
    */
   getRecordsSnapshot(): Observable<Record[]> {
-    if (!this.initialized) {
-      return this.initialize().pipe(take(1));
-    }
-    return of(this.recordsSubject.getValue()).pipe(
+    return of([...this.recordsSubject.getValue()]).pipe(
       delay(50),
       take(1)
     );
@@ -118,7 +86,7 @@ export class FirestoreMockService {
    * @returns {Observable<Record[]>} Registros NoSQL con complete().
    */
   getRecords(): Observable<Record[]> {
-    return this.getRecordsSnapshot().pipe(take(1));
+    return this.getRecordsSnapshot();
   }
 
   /**

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay, map, tap, catchError, take } from 'rxjs/operators';
 import { Record, RecordFilters, PaginatedRecords } from '../models/record.model';
+import { FALLBACK_SQL_RECORDS } from '../models/mock-datasets';
 
 /**
  * @class ApiRestService
@@ -11,17 +12,10 @@ import { Record, RecordFilters, PaginatedRecords } from '../models/record.model'
  * empresariales con paginación, filtrado y ordenación server-side simulada.
  *
  * @remarks
- * - Los datos se cargan desde `assets/mock-data/records-sql.mock.json`.
- * - Latencia simulada ultrarrápida (50-100ms) para respuesta inmediata en la UI.
- * - Cache en memoria para evitar recarga innecesaria del JSON.
+ * - Cuenta con dataset de respaldo en memoria (`FALLBACK_SQL_RECORDS`) para emisión inmediata sin bloqueo.
+ * - Latencia simulada ultrarrápida (50ms).
+ * - Cache en memoria pre-poblada para garantizar que nunca emita un array vacío.
  * - Fuente de datos: `source: 'REST'` en cada registro.
- *
- * @example
- * ```typescript
- * this.apiRestService.getRecords().subscribe(records => {
- *   console.log('Registros SQL:', records);
- * });
- * ```
  */
 @Injectable({
   providedIn: 'root'
@@ -31,42 +25,34 @@ export class ApiRestService {
   /** @private Inyección de HttpClient para cargar datos mock */
   private readonly http = inject(HttpClient);
 
-  /** @private Cache de registros en memoria */
-  private cachedRecords: Record[] = [];
+  /** @private Cache de registros en memoria inicializada con el dataset de respaldo */
+  private cachedRecords: Record[] = [...FALLBACK_SQL_RECORDS];
 
   /** @private Flag de carga completada */
-  private dataLoaded = false;
+  private dataLoaded = true;
 
   constructor() {
-    // Precarga en segundo plano de registros SQL mock
-    this.getRecords().subscribe();
+    // Sincronización en segundo plano con el archivo JSON si está disponible
+    this.http.get<Record[]>('assets/mock-data/records-sql.mock.json').pipe(
+      catchError(() => this.http.get<Record[]>('/assets/mock-data/records-sql.mock.json')),
+      catchError(() => of([])),
+      take(1)
+    ).subscribe(records => {
+      if (records && records.length > 0) {
+        this.cachedRecords = records;
+      }
+    });
   }
 
   /**
    * Obtiene todos los registros de la fuente REST (SQL).
-   * Incorpora fallback de ruta (/assets/...) y take(1) garantizado.
+   * Emite de forma garantizada e inmediata el array completo con of(records).pipe(delay(50), take(1)).
    *
    * @returns {Observable<Record[]>} Lista completa de registros SQL.
    */
   getRecords(): Observable<Record[]> {
-    if (this.dataLoaded) {
-      return of(this.cachedRecords).pipe(
-        delay(50),
-        take(1)
-      );
-    }
-
-    return this.http.get<Record[]>('assets/mock-data/records-sql.mock.json').pipe(
-      catchError(() => this.http.get<Record[]>('/assets/mock-data/records-sql.mock.json')),
-      delay(100),
-      tap(records => {
-        this.cachedRecords = records || [];
-        this.dataLoaded = true;
-      }),
-      catchError(err => {
-        console.error('[ApiRestService] Error al cargar registros SQL:', err);
-        return of([]);
-      }),
+    return of([...this.cachedRecords]).pipe(
+      delay(50),
       take(1)
     );
   }
