@@ -37,6 +37,11 @@ export class ApiRestService {
   /** @private Flag de carga completada */
   private dataLoaded = false;
 
+  constructor() {
+    // Precarga en segundo plano de registros SQL mock
+    this.getRecords().subscribe();
+  }
+
   /**
    * Obtiene todos los registros de la fuente REST (SQL).
    * Incorpora fallback de ruta (/assets/...) y take(1) garantizado.

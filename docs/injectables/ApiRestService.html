@@ -260,6 +260,24 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/core/services/api-rest.service.ts:38</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -286,8 +304,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="205"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:205</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:210</a></div>
                         </td>
                     </tr>
 
@@ -381,8 +399,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:144</a></div>
                         </td>
                     </tr>
 
@@ -458,8 +476,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="188"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:188</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:193</a></div>
                         </td>
                     </tr>
 
@@ -535,8 +553,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -657,8 +675,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -701,8 +719,8 @@ Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:167</a></div>
                         </td>
                     </tr>
 
@@ -942,6 +960,11 @@ export class ApiRestService {
 
   /** @private Flag de carga completada */
   private dataLoaded &#x3D; false;
+
+  constructor() {
+    // Precarga en segundo plano de registros SQL mock
+    this.getRecords().subscribe();
+  }
 
   /**
    * Obtiene todos los registros de la fuente REST (SQL).

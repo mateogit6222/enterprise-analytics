@@ -853,8 +853,8 @@ por hardware, filtrado en tiempo real y ciclo de vida seguro para prevenir fugas
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="276"
-                                    class="link-to-prism">src/app/features/dashboard/pages/dashboard/dashboard.page.ts:276</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/features/dashboard/pages/dashboard/dashboard.page.ts:281</a></div>
                         </td>
                     </tr>
 
@@ -1445,8 +1445,8 @@ por hardware, filtrado en tiempo real y ciclo de vida seguro para prevenir fugas
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { Subject, Observable } from &#x27;rxjs&#x27;;
-import { takeUntil, map } from &#x27;rxjs/operators&#x27;;
+import { Subject, Observable, combineLatest } from &#x27;rxjs&#x27;;
+import { takeUntil, map, filter } from &#x27;rxjs/operators&#x27;;
 import { Chart, registerables, ChartConfiguration } from &#x27;chart.js&#x27;;
 
 import { AppState } from &#x27;../../../../state/app.state&#x27;;
@@ -1589,11 +1589,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
    * @private
    */
   private setupEvolutionChartSubscription(): void {
-    this.timelineData$.pipe(takeUntil(this.destroy$)).subscribe(timeline &#x3D;&gt; {
-      if (!this.evolutionCanvas?.nativeElement) return;
+    combineLatest([this.timelineData$, this.loading$])
+      .pipe(
+        filter(([_, loading]) &#x3D;&gt; !loading),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(([timeline]) &#x3D;&gt; {
+        if (!this.evolutionCanvas?.nativeElement) return;
 
-      const ctx &#x3D; this.evolutionCanvas.nativeElement.getContext(&#x27;2d&#x27;);
-      if (!ctx) return;
+        const ctx &#x3D; this.evolutionCanvas.nativeElement.getContext(&#x27;2d&#x27;);
+        if (!ctx) return;
 
       if (this.evolutionChart) {
         this.evolutionChart.data.labels &#x3D; timeline.labels;
@@ -1708,11 +1713,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
    * @private
    */
   private setupCategoryChartSubscription(): void {
-    this.categoryData$.pipe(takeUntil(this.destroy$)).subscribe(catData &#x3D;&gt; {
-      if (!this.categoryCanvas?.nativeElement) return;
+    combineLatest([this.categoryData$, this.loading$])
+      .pipe(
+        filter(([_, loading]) &#x3D;&gt; !loading),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(([catData]) &#x3D;&gt; {
+        if (!this.categoryCanvas?.nativeElement) return;
 
-      const ctx &#x3D; this.categoryCanvas.nativeElement.getContext(&#x27;2d&#x27;);
-      if (!ctx) return;
+        const ctx &#x3D; this.categoryCanvas.nativeElement.getContext(&#x27;2d&#x27;);
+        if (!ctx) return;
 
       if (this.categoryChart) {
         this.categoryChart.data.labels &#x3D; catData.labels;

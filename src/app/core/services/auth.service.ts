@@ -68,6 +68,11 @@ export class AuthService {
   /** @private Indica si los datos mock ya fueron cargados */
   private mockDataLoaded = false;
 
+  constructor() {
+    // Precarga inmediata de usuarios en memoria
+    this.loadMockUsers().subscribe();
+  }
+
   /**
    * BehaviorSubject que emite el usuario actual o null si no hay sesión.
    * @private
