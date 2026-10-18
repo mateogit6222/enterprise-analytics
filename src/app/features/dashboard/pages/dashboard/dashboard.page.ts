@@ -11,8 +11,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular/lazy';
 import { Store } from '@ngrx/store';
-import { Subject, Observable } from 'rxjs';
-import { takeUntil, map } from 'rxjs/operators';
+import { Subject, Observable, combineLatest } from 'rxjs';
+import { takeUntil, map, filter } from 'rxjs/operators';
 import { Chart, registerables, ChartConfiguration } from 'chart.js';
 
 import { AppState } from '../../../../state/app.state';
@@ -155,11 +155,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
    * @private
    */
   private setupEvolutionChartSubscription(): void {
-    this.timelineData$.pipe(takeUntil(this.destroy$)).subscribe(timeline => {
-      if (!this.evolutionCanvas?.nativeElement) return;
+    combineLatest([this.timelineData$, this.loading$])
+      .pipe(
+        filter(([_, loading]) => !loading),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(([timeline]) => {
+        if (!this.evolutionCanvas?.nativeElement) return;
 
-      const ctx = this.evolutionCanvas.nativeElement.getContext('2d');
-      if (!ctx) return;
+        const ctx = this.evolutionCanvas.nativeElement.getContext('2d');
+        if (!ctx) return;
 
       if (this.evolutionChart) {
         this.evolutionChart.data.labels = timeline.labels;
@@ -274,11 +279,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
    * @private
    */
   private setupCategoryChartSubscription(): void {
-    this.categoryData$.pipe(takeUntil(this.destroy$)).subscribe(catData => {
-      if (!this.categoryCanvas?.nativeElement) return;
+    combineLatest([this.categoryData$, this.loading$])
+      .pipe(
+        filter(([_, loading]) => !loading),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(([catData]) => {
+        if (!this.categoryCanvas?.nativeElement) return;
 
-      const ctx = this.categoryCanvas.nativeElement.getContext('2d');
-      if (!ctx) return;
+        const ctx = this.categoryCanvas.nativeElement.getContext('2d');
+        if (!ctx) return;
 
       if (this.categoryChart) {
         this.categoryChart.data.labels = catData.labels;

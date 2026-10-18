@@ -63,6 +63,7 @@
     <div class="table-card">
       <app-data-table
         [data]="(records$ | async) ?? []"
+        [loading]="(loading$ | async) ?? false"
         [columns]="columns"
         [actions]="actions"
         [pageSize]="10"

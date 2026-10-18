@@ -278,6 +278,24 @@ actualizan automáticamente al cambiar.</p>
 
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/core/services/firestore-mock.service.ts:55</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -304,8 +322,8 @@ actualizan automáticamente al cambiar.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -381,8 +399,8 @@ actualizan automáticamente al cambiar.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:185</a></div>
                         </td>
                     </tr>
 
@@ -458,8 +476,8 @@ actualizan automáticamente al cambiar.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -502,8 +520,8 @@ Emite y completa garantizadamente (take(1)).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -546,8 +564,8 @@ Garantiza la emisión única y el cierre de la suscripción (take(1)) para uso e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -592,8 +610,8 @@ Carga datos del JSON mock con fallback de ruta (/assets/...) y arranca el stream
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="198"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:198</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:203</a></div>
                         </td>
                     </tr>
 
@@ -636,8 +654,8 @@ un flujo de datos en vivo, como haría una suscripción real a Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="151"
-                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:151</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/core/services/firestore-mock.service.ts:156</a></div>
                         </td>
                     </tr>
 
@@ -973,6 +991,11 @@ export class FirestoreMockService {
 
   /** @private Observable de inicialización en curso para evitar llamadas HTTP duplicadas */
   private initObservable$: Observable&lt;Record[]&gt; | null &#x3D; null;
+
+  constructor() {
+    // Inicialización en segundo plano de la colección mock de Firestore
+    this.initialize().subscribe();
+  }
 
   /**
    * Inicializa la conexión simulada con Firestore.

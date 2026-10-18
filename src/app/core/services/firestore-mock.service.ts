@@ -54,6 +54,11 @@ export class FirestoreMockService {
   /** @private Observable de inicialización en curso para evitar llamadas HTTP duplicadas */
   private initObservable$: Observable<Record[]> | null = null;
 
+  constructor() {
+    // Inicialización en segundo plano de la colección mock de Firestore
+    this.initialize().subscribe();
+  }
+
   /**
    * Inicializa la conexión simulada con Firestore.
    * Carga datos del JSON mock con fallback de ruta (/assets/...) y arranca el stream en tiempo real.

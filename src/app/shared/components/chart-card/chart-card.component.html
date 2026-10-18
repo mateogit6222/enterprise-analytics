@@ -46,10 +46,9 @@
   <div class="chart-body" [class.is-loading]="loading">
     @if (loading) {
       <app-loading-skeleton type="chart" ariaLabel="Cargando gráfico..."></app-loading-skeleton>
-    } @else {
-      <div class="chart-content">
-        <ng-content></ng-content>
-      </div>
     }
+    <div class="chart-content" [class.ion-hide]="loading">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>
