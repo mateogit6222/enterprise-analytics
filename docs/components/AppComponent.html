@@ -1,0 +1,1509 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  AppComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/app.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>AppComponent
+Shell principal de la aplicación con Split Pane, Side Menu adaptativo por roles,
+soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-root</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>app.component.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>app.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../modules/AppModule.html" target="_self" >AppModule</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#accessibilityService" >accessibilityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#appPages" >appPages</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentUser$" >currentUser$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isAdmin$" >isAdmin$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isAuthenticated$" >isAuthenticated$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#store" >store</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userFullName$" >userFullName$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userRoleLabel$" >userRoleLabel$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier"></span>
+                                <a href="#handleGlobalShortcuts" >handleGlobalShortcuts</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onLogout" >onLogout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">HL</span><a href="#window:keydown" >window:keydown</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="window:keydown"></a>
+                    <span class="name">
+                        <span ><b>window:keydown</b></span>
+                        <a href="#window:keydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>window:keydown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/app.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Atajos de teclado globales para navegación accesible sin ratón (WCAG 2.1 - RA 4).</p>
+<ul>
+<li>Alt + D: Dashboard</li>
+<li>Alt + R: Registros</li>
+<li>Alt + I: Informes</li>
+<li>Alt + H: Centro de Ayuda</li>
+<li>Alt + P: Mi Perfil</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Evento nativo de teclado.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleGlobalShortcuts"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>handleGlobalShortcuts</b></span>
+                        <a href="#handleGlobalShortcuts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleGlobalShortcuts(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;window:keydown&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/app.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Atajos de teclado globales para navegación accesible sin ratón (WCAG 2.1 - RA 4).</p>
+<ul>
+<li>Alt + D: Dashboard</li>
+<li>Alt + R: Registros</li>
+<li>Alt + I: Informes</li>
+<li>Alt + H: Centro de Ayuda</li>
+<li>Alt + P: Mi Perfil</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Evento nativo de teclado.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/app.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onLogout"></a>
+                    <span class="name">
+                        <span ><b>onLogout</b></span>
+                        <a href="#onLogout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onLogout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/app.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cierra la sesión del usuario actual despachando la acción de NgRx.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accessibilityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>accessibilityService</b></span>
+                        <a href="#accessibilityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AccessibilityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/app.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appPages"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>appPages</b></span>
+                        <a href="#appPages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/NavigationItem.html" target="_self" >NavigationItem[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { title: &#x27;Dashboard Analítico&#x27;, url: &#x27;/dashboard&#x27;, icon: &#x27;bar-chart-outline&#x27;, adminOnly: true },
+    { title: &#x27;Gestión de Registros&#x27;, url: &#x27;/records&#x27;, icon: &#x27;grid-outline&#x27; },
+    { title: &#x27;Informes y Exportación&#x27;, url: &#x27;/reports&#x27;, icon: &#x27;document-text-outline&#x27;, adminOnly: true },
+    { title: &#x27;Centro de Ayuda&#x27;, url: &#x27;/help&#x27;, icon: &#x27;help-circle-outline&#x27; },
+    { title: &#x27;Mi Perfil&#x27;, url: &#x27;/profile&#x27;, icon: &#x27;person-circle-outline&#x27; }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/app.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Elementos del menú de navegación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/app.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentUser$</b></span>
+                        <a href="#currentUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectCurrentUser)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/app.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Observables de estado de autenticación desde NgRx</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAdmin$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isAdmin$</b></span>
+                        <a href="#isAdmin$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectIsAdmin)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/app.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAuthenticated$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isAuthenticated$</b></span>
+                        <a href="#isAuthenticated$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectIsAuthenticated)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/app.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/app.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store&lt;AppState&gt;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/app.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userFullName$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userFullName$</b></span>
+                        <a href="#userFullName$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectUserFullName)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/app.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userRoleLabel$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userRoleLabel$</b></span>
+                        <a href="#userRoleLabel$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectUserRoleLabel)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/app.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ChangeDetectionStrategy, HostListener, inject } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { AppState } from &#x27;./state/app.state&#x27;;
+import { AuthActions } from &#x27;./state/auth/auth.actions&#x27;;
+import {
+  selectCurrentUser,
+  selectIsAuthenticated,
+  selectIsAdmin,
+  selectUserFullName,
+  selectUserRoleLabel
+} from &#x27;./state/auth/auth.selectors&#x27;;
+import { AuthService } from &#x27;./core/services/auth.service&#x27;;
+import { AccessibilityService } from &#x27;./core/services/accessibility.service&#x27;;
+
+/**
+ * @interface NavigationItem
+ * @description Estructura de elementos del menú lateral.
+ */
+interface NavigationItem {
+  title: string;
+  url: string;
+  icon: string;
+  adminOnly?: boolean;
+}
+
+/**
+ * @component AppComponent
+ * @description Shell principal de la aplicación con Split Pane, Side Menu adaptativo por roles,
+ * soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
+ */
+@Component({
+  selector: &#x27;app-root&#x27;,
+  templateUrl: &#x27;app.component.html&#x27;,
+  styleUrls: [&#x27;app.component.scss&#x27;],
+  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class AppComponent implements OnInit {
+  private readonly store &#x3D; inject(Store&lt;AppState&gt;);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly accessibilityService &#x3D; inject(AccessibilityService);
+  private readonly router &#x3D; inject(Router);
+
+  /** Observables de estado de autenticación desde NgRx */
+  readonly currentUser$ &#x3D; this.store.select(selectCurrentUser);
+  readonly isAuthenticated$ &#x3D; this.store.select(selectIsAuthenticated);
+  readonly isAdmin$ &#x3D; this.store.select(selectIsAdmin);
+  readonly userFullName$ &#x3D; this.store.select(selectUserFullName);
+  readonly userRoleLabel$ &#x3D; this.store.select(selectUserRoleLabel);
+
+  /** Elementos del menú de navegación */
+  readonly appPages: NavigationItem[] &#x3D; [
+    { title: &#x27;Dashboard Analítico&#x27;, url: &#x27;/dashboard&#x27;, icon: &#x27;bar-chart-outline&#x27;, adminOnly: true },
+    { title: &#x27;Gestión de Registros&#x27;, url: &#x27;/records&#x27;, icon: &#x27;grid-outline&#x27; },
+    { title: &#x27;Informes y Exportación&#x27;, url: &#x27;/reports&#x27;, icon: &#x27;document-text-outline&#x27;, adminOnly: true },
+    { title: &#x27;Centro de Ayuda&#x27;, url: &#x27;/help&#x27;, icon: &#x27;help-circle-outline&#x27; },
+    { title: &#x27;Mi Perfil&#x27;, url: &#x27;/profile&#x27;, icon: &#x27;person-circle-outline&#x27; }
+  ];
+
+  ngOnInit(): void {
+    /** Restaurar sesión previa si existe en almacenamiento local */
+    const storedUser &#x3D; this.authService.getCurrentUser();
+    if (storedUser) {
+      this.store.dispatch(AuthActions.restoreSession({ user: storedUser }));
+    }
+  }
+
+  /**
+   * Cierra la sesión del usuario actual despachando la acción de NgRx.
+   */
+  onLogout(): void {
+    this.store.dispatch(AuthActions.logout());
+  }
+
+  /**
+   * Atajos de teclado globales para navegación accesible sin ratón (WCAG 2.1 - RA 4).
+   * - Alt + D: Dashboard
+   * - Alt + R: Registros
+   * - Alt + I: Informes
+   * - Alt + H: Centro de Ayuda
+   * - Alt + P: Mi Perfil
+   *
+   * @param {KeyboardEvent} event - Evento nativo de teclado.
+   */
+  @HostListener(&#x27;window:keydown&#x27;, [&#x27;$event&#x27;])
+  handleGlobalShortcuts(event: KeyboardEvent): void {
+    if (!event.altKey) return;
+
+    switch (event.key.toLowerCase()) {
+      case &#x27;d&#x27;:
+        event.preventDefault();
+        this.router.navigate([&#x27;/dashboard&#x27;]);
+        break;
+      case &#x27;r&#x27;:
+        event.preventDefault();
+        this.router.navigate([&#x27;/records&#x27;]);
+        break;
+      case &#x27;i&#x27;:
+        event.preventDefault();
+        this.router.navigate([&#x27;/reports&#x27;]);
+        break;
+      case &#x27;h&#x27;:
+        event.preventDefault();
+        this.router.navigate([&#x27;/help&#x27;]);
+        break;
+      case &#x27;p&#x27;:
+        event.preventDefault();
+        this.router.navigate([&#x27;/profile&#x27;]);
+        break;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-app&gt;
+  &lt;!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) --&gt;
+  &lt;a href&#x3D;&quot;#main-content&quot; class&#x3D;&quot;skip-link&quot;&gt;Saltar al contenido principal&lt;/a&gt;
+
+  &lt;ion-split-pane contentId&#x3D;&quot;main-content&quot; [disabled]&#x3D;&quot;!(isAuthenticated$ | async)&quot;&gt;
+    &lt;!-- Side Menu (Solo visible si hay sesión autenticada) --&gt;
+    @if (isAuthenticated$ | async) {
+      &lt;ion-menu contentId&#x3D;&quot;main-content&quot; type&#x3D;&quot;overlay&quot; menuId&#x3D;&quot;main-menu&quot;&gt;
+        &lt;ion-header class&#x3D;&quot;ion-no-border&quot;&gt;
+          &lt;ion-toolbar class&#x3D;&quot;menu-header-toolbar&quot;&gt;
+            &lt;div class&#x3D;&quot;menu-brand&quot;&gt;
+              &lt;div class&#x3D;&quot;brand-icon&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;analytics-outline&quot;&gt;&lt;/ion-icon&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;brand-text&quot;&gt;
+                &lt;h2&gt;Enterprise&lt;/h2&gt;
+                &lt;span&gt;Analytics Platform&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/ion-toolbar&gt;
+
+          &lt;!-- Perfil del usuario activo en el menú --&gt;
+          @if (currentUser$ | async; as user) {
+            &lt;div class&#x3D;&quot;user-profile-badge&quot;&gt;
+              &lt;ion-avatar class&#x3D;&quot;user-avatar&quot;&gt;
+                &lt;img [src]&#x3D;&quot;user.avatarUrl&quot; [alt]&#x3D;&quot;&#x27;Avatar de &#x27; + (userFullName$ | async)&quot; /&gt;
+              &lt;/ion-avatar&gt;
+              &lt;div class&#x3D;&quot;user-info&quot;&gt;
+                &lt;p class&#x3D;&quot;user-name&quot;&gt;{{ userFullName$ | async }}&lt;/p&gt;
+                &lt;div class&#x3D;&quot;role-pill&quot; [class.admin]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+                  &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;shield-checkmark-outline&#x27; : &#x27;person-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;span&gt;{{ userRoleLabel$ | async }}&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+        &lt;/ion-header&gt;
+
+        &lt;ion-content class&#x3D;&quot;menu-content&quot;&gt;
+          &lt;ion-list id&#x3D;&quot;inbox-list&quot; lines&#x3D;&quot;none&quot;&gt;
+            &lt;ion-list-header class&#x3D;&quot;menu-list-title&quot;&gt;Navegación&lt;/ion-list-header&gt;
+
+            @for (p of appPages; track p.url) {
+              &lt;!-- Ocultar items de Admin si el usuario no tiene rol ADMIN --&gt;
+              @if (!p.adminOnly || (isAdmin$ | async)) {
+                &lt;ion-menu-toggle auto-hide&#x3D;&quot;false&quot;&gt;
+                  &lt;ion-item
+                    routerDirection&#x3D;&quot;root&quot;
+                    [routerLink]&#x3D;&quot;[p.url]&quot;
+                    routerLinkActive&#x3D;&quot;selected&quot;
+                    detail&#x3D;&quot;false&quot;
+                    class&#x3D;&quot;nav-item&quot;
+                  &gt;
+                    &lt;ion-icon aria-hidden&#x3D;&quot;true&quot; slot&#x3D;&quot;start&quot; [name]&#x3D;&quot;p.icon&quot;&gt;&lt;/ion-icon&gt;
+                    &lt;ion-label&gt;{{ p.title }}&lt;/ion-label&gt;
+                  &lt;/ion-item&gt;
+                &lt;/ion-menu-toggle&gt;
+              }
+            }
+          &lt;/ion-list&gt;
+        &lt;/ion-content&gt;
+
+        &lt;ion-footer class&#x3D;&quot;ion-no-border menu-footer&quot;&gt;
+          &lt;ion-menu-toggle auto-hide&#x3D;&quot;false&quot;&gt;
+            &lt;ion-button
+              expand&#x3D;&quot;block&quot;
+              fill&#x3D;&quot;clear&quot;
+              color&#x3D;&quot;danger&quot;
+              class&#x3D;&quot;logout-btn&quot;
+              (click)&#x3D;&quot;onLogout()&quot;
+              aria-label&#x3D;&quot;Cerrar sesión&quot;
+            &gt;
+              &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;log-out-outline&quot;&gt;&lt;/ion-icon&gt;
+              &lt;span&gt;Cerrar Sesión&lt;/span&gt;
+            &lt;/ion-button&gt;
+          &lt;/ion-menu-toggle&gt;
+        &lt;/ion-footer&gt;
+      &lt;/ion-menu&gt;
+    }
+
+    &lt;!-- Main Content Area --&gt;
+    &lt;ion-router-outlet id&#x3D;&quot;main-content&quot;&gt;&lt;/ion-router-outlet&gt;
+  &lt;/ion-split-pane&gt;
+&lt;/ion-app&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>app.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/**
+ * Shell styles for Enterprise Analytics
+ */
+
+ion-menu {
+  --background: #0f172a;
+  --width: 290px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  .menu-header-toolbar {
+    --background: #0f172a;
+    --padding-top: 1.25rem;
+    --padding-bottom: 0.5rem;
+    --padding-start: 1.25rem;
+    --padding-end: 1.25rem;
+  }
+
+  .menu-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+
+    .brand-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      color: #ffffff;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .brand-text {
+      h2 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+      }
+
+      span {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .user-profile-badge {
+    margin: 1rem 1.25rem 0.5rem 1.25rem;
+    padding: 0.85rem;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .user-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #6366f1;
+    }
+
+    .user-info {
+      overflow: hidden;
+
+      .user-name {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #f8fafc;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .role-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.15rem 0.5rem;
+        border-radius: 1rem;
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+
+        &amp;.admin {
+          background: rgba(129, 140, 248, 0.15);
+          color: #a5b4fc;
+          border-color: rgba(129, 140, 248, 0.3);
+        }
+
+        ion-icon {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .menu-content {
+    --background: #0f172a;
+
+    .menu-list-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      font-weight: 700;
+      padding-left: 1.5rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-item {
+      --background: transparent;
+      --color: #94a3b8;
+      --border-radius: 0.65rem;
+      --padding-start: 1rem;
+      margin: 0.25rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+
+      ion-icon {
+        color: #94a3b8;
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+        transition: color 0.2s ease;
+      }
+
+      &amp;:hover {
+        --background: rgba(255, 255, 255, 0.04);
+        --color: #ffffff;
+
+        ion-icon {
+          color: #ffffff;
+        }
+      }
+
+      &amp;.selected {
+        --background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.05) 100%);
+        --color: #818cf8;
+        border-left: 3px solid #6366f1;
+
+        ion-icon {
+          color: #818cf8;
+        }
+      }
+    }
+  }
+
+  .menu-footer {
+    --background: #0f172a;
+    padding: 0.75rem 1rem 1.25rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    .logout-btn {
+      --color: #f87171;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: none;
+
+      &amp;:hover {
+        --background: rgba(239, 68, 68, 0.1);
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-app>  <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>  <ion-split-pane contentId="main-content" [disabled]="!(isAuthenticated$ | async)">    <!-- Side Menu (Solo visible si hay sesión autenticada) -->    @if (isAuthenticated$ | async) {      <ion-menu contentId="main-content" type="overlay" menuId="main-menu">        <ion-header class="ion-no-border">          <ion-toolbar class="menu-header-toolbar">            <div class="menu-brand">              <div class="brand-icon">                <ion-icon name="analytics-outline"></ion-icon>              </div>              <div class="brand-text">                <h2>Enterprise</h2>                <span>Analytics Platform</span>              </div>            </div>          </ion-toolbar>          <!-- Perfil del usuario activo en el menú -->          @if (currentUser$ | async; as user) {            <div class="user-profile-badge">              <ion-avatar class="user-avatar">                <img [src]="user.avatarUrl" [alt]="\'Avatar de \' + (userFullName$ | async)" />              </ion-avatar>              <div class="user-info">                <p class="user-name">{{ userFullName$ | async }}</p>                <div class="role-pill" [class.admin]="user.role === \'ADMIN\'">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'"></ion-icon>                  <span>{{ userRoleLabel$ | async }}</span>                </div>              </div>            </div>          }        </ion-header>        <ion-content class="menu-content">          <ion-list id="inbox-list" lines="none">            <ion-list-header class="menu-list-title">Navegación</ion-list-header>            @for (p of appPages; track p.url) {              <!-- Ocultar items de Admin si el usuario no tiene rol ADMIN -->              @if (!p.adminOnly || (isAdmin$ | async)) {                <ion-menu-toggle auto-hide="false">                  <ion-item                    routerDirection="root"                    [routerLink]="[p.url]"                    routerLinkActive="selected"                    detail="false"                    class="nav-item"                  >                    <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>                    <ion-label>{{ p.title }}</ion-label>                  </ion-item>                </ion-menu-toggle>              }            }          </ion-list>        </ion-content>        <ion-footer class="ion-no-border menu-footer">          <ion-menu-toggle auto-hide="false">            <ion-button              expand="block"              fill="clear"              color="danger"              class="logout-btn"              (click)="onLogout()"              aria-label="Cerrar sesión"            >              <ion-icon slot="start" name="log-out-outline"></ion-icon>              <span>Cerrar Sesión</span>            </ion-button>          </ion-menu-toggle>        </ion-footer>      </ion-menu>    }    <!-- Main Content Area -->    <ion-router-outlet id="main-content"></ion-router-outlet>  </ion-split-pane></ion-app></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
+    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'AppComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

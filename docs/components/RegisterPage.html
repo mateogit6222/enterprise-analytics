@@ -1,0 +1,1813 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RegisterPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/auth/pages/register/register.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>RegisterPage
+Página de registro de nuevo usuario con validación compleja y asíncrona.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.dev/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-register</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+</div>
+                        <div>    <code>IonicModule</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./register.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./register.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonicModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#error$" >error$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#isLoading$" >isLoading$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#registerForm" >registerForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#showConfirmPassword" >showConfirmPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#showPassword" >showPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#store" >store</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getControl" >getControl</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#toggleConfirmPasswordVisibility" >toggleConfirmPasswordVisibility</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#togglePasswordVisibility" >togglePasswordVisibility</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getControl"></a>
+                    <span class="name">
+                        <span ><b>getControl</b></span>
+                        <a href="#getControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getControl(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>AbstractControl | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleConfirmPasswordVisibility"></a>
+                    <span class="name">
+                        <span ><b>toggleConfirmPasswordVisibility</b></span>
+                        <a href="#toggleConfirmPasswordVisibility"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleConfirmPasswordVisibility()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="togglePasswordVisibility"></a>
+                    <span class="name">
+                        <span ><b>togglePasswordVisibility</b></span>
+                        <a href="#togglePasswordVisibility"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>togglePasswordVisibility()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error$"></a>
+                    <span class="name">
+                        <span ><b>error$</b></span>
+                        <a href="#error$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectAuthError)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading$"></a>
+                    <span class="name">
+                        <span ><b>isLoading$</b></span>
+                        <a href="#isLoading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectIsLoading)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:114</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Observables NgRx</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerForm"></a>
+                    <span class="name">
+                        <span ><b>registerForm</b></span>
+                        <a href="#registerForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:111</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo de registro</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showConfirmPassword"></a>
+                    <span class="name">
+                        <span ><b>showConfirmPassword</b></span>
+                        <a href="#showConfirmPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPassword"></a>
+                    <span class="name">
+                        <span ><b>showPassword</b></span>
+                        <a href="#showPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:118</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Visibilidad de contraseñas</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store&lt;AppState&gt;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/features/auth/pages/register/register.page.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+  AsyncValidatorFn
+} from &#x27;@angular/forms&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Observable, Subject, of } from &#x27;rxjs&#x27;;
+import { takeUntil, map, catchError, first } from &#x27;rxjs/operators&#x27;;
+import { AppState } from &#x27;../../../../state/app.state&#x27;;
+import { AuthActions } from &#x27;../../../../state/auth/auth.actions&#x27;;
+import { AuthService } from &#x27;../../../../core/services/auth.service&#x27;;
+import { selectAuthError, selectIsLoading } from &#x27;../../../../state/auth/auth.selectors&#x27;;
+
+/**
+ * Validador para contraseñas complejas:
+ * - Mínimo 8 caracteres
+ * - Al menos 1 letra mayúscula
+ * - Al menos 1 letra minúscula
+ * - Al menos 1 número
+ * - Al menos 1 carácter especial (@$!%*?&amp;#)
+ */
+export function strongPasswordValidator(): (control: AbstractControl) &#x3D;&gt; ValidationErrors | null {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    const value &#x3D; control.value;
+    if (!value) return null;
+
+    const hasUpperCase &#x3D; /[A-Z]/.test(value);
+    const hasLowerCase &#x3D; /[a-z]/.test(value);
+    const hasNumeric &#x3D; /[0-9]/.test(value);
+    const hasSpecialChar &#x3D; /[@$!%*?&amp;#]/.test(value);
+
+    const passwordValid &#x3D; hasUpperCase &amp;&amp; hasLowerCase &amp;&amp; hasNumeric &amp;&amp; hasSpecialChar;
+    return passwordValid
+      ? null
+      : {
+          strongPassword: {
+            hasUpperCase,
+            hasLowerCase,
+            hasNumeric,
+            hasSpecialChar
+          }
+        };
+  };
+}
+
+/**
+ * Validador cruzado (cross-field) para verificar coincidencia de contraseñas.
+ */
+export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password &#x3D; control.get(&#x27;password&#x27;);
+  const confirmPassword &#x3D; control.get(&#x27;confirmPassword&#x27;);
+
+  if (!password || !confirmPassword) return null;
+
+  if (confirmPassword.errors &amp;&amp; !confirmPassword.errors[&#x27;passwordMismatch&#x27;]) {
+    return null;
+  }
+
+  if (password.value !&#x3D;&#x3D; confirmPassword.value) {
+    confirmPassword.setErrors({ passwordMismatch: true });
+    return { passwordMismatch: true };
+  } else {
+    confirmPassword.setErrors(null);
+    return null;
+  }
+}
+
+/**
+ * Validador asíncrono para verificar si el email ya existe en el sistema.
+ */
+export function emailAvailableValidator(authService: AuthService): AsyncValidatorFn {
+  return (control: AbstractControl): Observable&lt;ValidationErrors | null&gt; &#x3D;&gt; {
+    if (!control.value) {
+      return of(null);
+    }
+    return authService.checkEmailExists(control.value).pipe(
+      first(),
+      map(isTaken &#x3D;&gt; (isTaken ? { emailTaken: true } : null)),
+      catchError(() &#x3D;&gt; of(null))
+    );
+  };
+}
+
+/**
+ * @component RegisterPage
+ * @description Página de registro de nuevo usuario con validación compleja y asíncrona.
+ */
+@Component({
+  selector: &#x27;app-register&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonicModule],
+  templateUrl: &#x27;./register.page.html&#x27;,
+  styleUrls: [&#x27;./register.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class RegisterPage implements OnInit, OnDestroy {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly store &#x3D; inject(Store&lt;AppState&gt;);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  /** Formulario reactivo de registro */
+  registerForm!: FormGroup;
+
+  /** Observables NgRx */
+  isLoading$ &#x3D; this.store.select(selectIsLoading);
+  error$ &#x3D; this.store.select(selectAuthError);
+
+  /** Visibilidad de contraseñas */
+  showPassword &#x3D; false;
+  showConfirmPassword &#x3D; false;
+
+  ngOnInit(): void {
+    this.registerForm &#x3D; this.fb.group(
+      {
+        firstName: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+        lastName: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+        email: [
+          &#x27;&#x27;,
+          [Validators.required, Validators.email],
+          [emailAvailableValidator(this.authService)]
+        ],
+        password: [
+          &#x27;&#x27;,
+          [Validators.required, Validators.minLength(8), strongPasswordValidator()]
+        ],
+        confirmPassword: [&#x27;&#x27;, [Validators.required]]
+      },
+      {
+        validators: [passwordMatchValidator]
+      }
+    );
+
+    this.store.dispatch(AuthActions.clearError());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    const { firstName, lastName, email, password, confirmPassword } &#x3D; this.registerForm.value;
+
+    this.store.dispatch(
+      AuthActions.register({
+        data: { firstName, lastName, email, password, confirmPassword }
+      })
+    );
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword &#x3D; !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword &#x3D; !this.showConfirmPassword;
+  }
+
+  getControl(field: string): AbstractControl | null {
+    return this.registerForm.get(field);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-content class&#x3D;&quot;register-content&quot; [fullscreen]&#x3D;&quot;true&quot;&gt;
+  &lt;div class&#x3D;&quot;register-container&quot; role&#x3D;&quot;main&quot; aria-label&#x3D;&quot;Formulario de creación de cuenta&quot;&gt;
+
+    &lt;!-- Header con logo --&gt;
+    &lt;header class&#x3D;&quot;register-header&quot;&gt;
+      &lt;div class&#x3D;&quot;logo-container&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+        &lt;ion-icon name&#x3D;&quot;person-add-outline&quot; class&#x3D;&quot;logo-icon&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/div&gt;
+      &lt;h1 class&#x3D;&quot;register-title&quot; id&#x3D;&quot;register-heading&quot;&gt;Crear Cuenta&lt;/h1&gt;
+      &lt;p class&#x3D;&quot;register-subtitle&quot;&gt;Únete a Enterprise Analytics&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Alerta de error global --&gt;
+    @if (error$ | async; as errorMsg) {
+      &lt;ion-card class&#x3D;&quot;alert-card error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;assertive&quot;&gt;
+        &lt;ion-card-content&gt;
+          &lt;ion-icon name&#x3D;&quot;alert-circle-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+          &lt;span&gt;{{ errorMsg }}&lt;/span&gt;
+        &lt;/ion-card-content&gt;
+      &lt;/ion-card&gt;
+    }
+
+    &lt;!-- Formulario de Registro --&gt;
+    &lt;form
+      [formGroup]&#x3D;&quot;registerForm&quot;
+      (ngSubmit)&#x3D;&quot;onSubmit()&quot;
+      class&#x3D;&quot;register-form&quot;
+      aria-labelledby&#x3D;&quot;register-heading&quot;
+      novalidate
+    &gt;
+      &lt;!-- Nombre y Apellidos en fila responsiva --&gt;
+      &lt;div class&#x3D;&quot;name-row&quot;&gt;
+        &lt;!-- Campo Nombre --&gt;
+        &lt;div class&#x3D;&quot;form-field flex-1&quot;&gt;
+          &lt;ion-item
+            [class.ion-invalid]&#x3D;&quot;getControl(&#x27;firstName&#x27;)?.invalid &amp;&amp; getControl(&#x27;firstName&#x27;)?.touched&quot;
+            [class.ion-touched]&#x3D;&quot;getControl(&#x27;firstName&#x27;)?.touched&quot;
+            lines&#x3D;&quot;none&quot;
+            class&#x3D;&quot;form-item&quot;
+          &gt;
+            &lt;ion-icon name&#x3D;&quot;person-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;field-icon&quot;&gt;&lt;/ion-icon&gt;
+            &lt;ion-input
+              formControlName&#x3D;&quot;firstName&quot;
+              type&#x3D;&quot;text&quot;
+              label&#x3D;&quot;Nombre&quot;
+              labelPlacement&#x3D;&quot;floating&quot;
+              placeholder&#x3D;&quot;Elena&quot;
+              autocomplete&#x3D;&quot;given-name&quot;
+              aria-required&#x3D;&quot;true&quot;
+              [attr.aria-invalid]&#x3D;&quot;getControl(&#x27;firstName&#x27;)?.invalid &amp;&amp; getControl(&#x27;firstName&#x27;)?.touched&quot;
+              aria-describedby&#x3D;&quot;first-name-error&quot;
+              id&#x3D;&quot;register-firstname&quot;
+            &gt;&lt;/ion-input&gt;
+          &lt;/ion-item&gt;
+          @if (getControl(&#x27;firstName&#x27;)?.touched &amp;&amp; getControl(&#x27;firstName&#x27;)?.errors) {
+            &lt;div class&#x3D;&quot;error-messages&quot; id&#x3D;&quot;first-name-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+              @if (getControl(&#x27;firstName&#x27;)?.errors?.[&#x27;required&#x27;]) {
+                &lt;span class&#x3D;&quot;error-text&quot;&gt;El nombre es obligatorio.&lt;/span&gt;
+              }
+              @if (getControl(&#x27;firstName&#x27;)?.errors?.[&#x27;minlength&#x27;]) {
+                &lt;span class&#x3D;&quot;error-text&quot;&gt;Mínimo 2 caracteres.&lt;/span&gt;
+              }
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Campo Apellidos --&gt;
+        &lt;div class&#x3D;&quot;form-field flex-1&quot;&gt;
+          &lt;ion-item
+            [class.ion-invalid]&#x3D;&quot;getControl(&#x27;lastName&#x27;)?.invalid &amp;&amp; getControl(&#x27;lastName&#x27;)?.touched&quot;
+            [class.ion-touched]&#x3D;&quot;getControl(&#x27;lastName&#x27;)?.touched&quot;
+            lines&#x3D;&quot;none&quot;
+            class&#x3D;&quot;form-item&quot;
+          &gt;
+            &lt;ion-input
+              formControlName&#x3D;&quot;lastName&quot;
+              type&#x3D;&quot;text&quot;
+              label&#x3D;&quot;Apellidos&quot;
+              labelPlacement&#x3D;&quot;floating&quot;
+              placeholder&#x3D;&quot;Martínez&quot;
+              autocomplete&#x3D;&quot;family-name&quot;
+              aria-required&#x3D;&quot;true&quot;
+              [attr.aria-invalid]&#x3D;&quot;getControl(&#x27;lastName&#x27;)?.invalid &amp;&amp; getControl(&#x27;lastName&#x27;)?.touched&quot;
+              aria-describedby&#x3D;&quot;last-name-error&quot;
+              id&#x3D;&quot;register-lastname&quot;
+            &gt;&lt;/ion-input&gt;
+          &lt;/ion-item&gt;
+          @if (getControl(&#x27;lastName&#x27;)?.touched &amp;&amp; getControl(&#x27;lastName&#x27;)?.errors) {
+            &lt;div class&#x3D;&quot;error-messages&quot; id&#x3D;&quot;last-name-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+              @if (getControl(&#x27;lastName&#x27;)?.errors?.[&#x27;required&#x27;]) {
+                &lt;span class&#x3D;&quot;error-text&quot;&gt;Los apellidos son obligatorios.&lt;/span&gt;
+              }
+              @if (getControl(&#x27;lastName&#x27;)?.errors?.[&#x27;minlength&#x27;]) {
+                &lt;span class&#x3D;&quot;error-text&quot;&gt;Mínimo 2 caracteres.&lt;/span&gt;
+              }
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Campo Email con validación asíncrona --&gt;
+      &lt;div class&#x3D;&quot;form-field&quot;&gt;
+        &lt;ion-item
+          [class.ion-invalid]&#x3D;&quot;getControl(&#x27;email&#x27;)?.invalid &amp;&amp; getControl(&#x27;email&#x27;)?.touched&quot;
+          [class.ion-touched]&#x3D;&quot;getControl(&#x27;email&#x27;)?.touched&quot;
+          lines&#x3D;&quot;none&quot;
+          class&#x3D;&quot;form-item&quot;
+        &gt;
+          &lt;ion-icon name&#x3D;&quot;mail-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;field-icon&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-input
+            formControlName&#x3D;&quot;email&quot;
+            type&#x3D;&quot;email&quot;
+            label&#x3D;&quot;Correo electrónico&quot;
+            labelPlacement&#x3D;&quot;floating&quot;
+            placeholder&#x3D;&quot;elena@enterprise.com&quot;
+            autocomplete&#x3D;&quot;email&quot;
+            inputmode&#x3D;&quot;email&quot;
+            aria-required&#x3D;&quot;true&quot;
+            [attr.aria-invalid]&#x3D;&quot;getControl(&#x27;email&#x27;)?.invalid &amp;&amp; getControl(&#x27;email&#x27;)?.touched&quot;
+            aria-describedby&#x3D;&quot;register-email-error&quot;
+            id&#x3D;&quot;register-email&quot;
+          &gt;&lt;/ion-input&gt;
+          @if (getControl(&#x27;email&#x27;)?.pending) {
+            &lt;ion-spinner name&#x3D;&quot;dots&quot; slot&#x3D;&quot;end&quot; aria-label&#x3D;&quot;Comprobando disponibilidad...&quot;&gt;&lt;/ion-spinner&gt;
+          }
+        &lt;/ion-item&gt;
+
+        @if (getControl(&#x27;email&#x27;)?.touched &amp;&amp; getControl(&#x27;email&#x27;)?.errors) {
+          &lt;div class&#x3D;&quot;error-messages&quot; id&#x3D;&quot;register-email-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+            @if (getControl(&#x27;email&#x27;)?.errors?.[&#x27;required&#x27;]) {
+              &lt;span class&#x3D;&quot;error-text&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;warning-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                El correo es obligatorio.
+              &lt;/span&gt;
+            }
+            @if (getControl(&#x27;email&#x27;)?.errors?.[&#x27;email&#x27;]) {
+              &lt;span class&#x3D;&quot;error-text&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;warning-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                Introduce un correo electrónico válido.
+              &lt;/span&gt;
+            }
+            @if (getControl(&#x27;email&#x27;)?.errors?.[&#x27;emailTaken&#x27;]) {
+              &lt;span class&#x3D;&quot;error-text&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;alert-circle-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                Este correo ya está registrado en el sistema.
+              &lt;/span&gt;
+            }
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;!-- Campo Contraseña --&gt;
+      &lt;div class&#x3D;&quot;form-field&quot;&gt;
+        &lt;ion-item
+          [class.ion-invalid]&#x3D;&quot;getControl(&#x27;password&#x27;)?.invalid &amp;&amp; getControl(&#x27;password&#x27;)?.touched&quot;
+          [class.ion-touched]&#x3D;&quot;getControl(&#x27;password&#x27;)?.touched&quot;
+          lines&#x3D;&quot;none&quot;
+          class&#x3D;&quot;form-item&quot;
+        &gt;
+          &lt;ion-icon name&#x3D;&quot;lock-closed-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;field-icon&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-input
+            formControlName&#x3D;&quot;password&quot;
+            [type]&#x3D;&quot;showPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+            label&#x3D;&quot;Contraseña segura&quot;
+            labelPlacement&#x3D;&quot;floating&quot;
+            placeholder&#x3D;&quot;Min. 8 caracteres&quot;
+            autocomplete&#x3D;&quot;new-password&quot;
+            aria-required&#x3D;&quot;true&quot;
+            [attr.aria-invalid]&#x3D;&quot;getControl(&#x27;password&#x27;)?.invalid &amp;&amp; getControl(&#x27;password&#x27;)?.touched&quot;
+            aria-describedby&#x3D;&quot;password-rules&quot;
+            id&#x3D;&quot;register-password&quot;
+          &gt;&lt;/ion-input&gt;
+          &lt;ion-button
+            fill&#x3D;&quot;clear&quot;
+            slot&#x3D;&quot;end&quot;
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;togglePasswordVisibility()&quot;
+            [attr.aria-label]&#x3D;&quot;showPassword ? &#x27;Ocultar contraseña&#x27; : &#x27;Mostrar contraseña&#x27;&quot;
+            class&#x3D;&quot;toggle-password-btn&quot;
+          &gt;
+            &lt;ion-icon [name]&#x3D;&quot;showPassword ? &#x27;eye-off-outline&#x27; : &#x27;eye-outline&#x27;&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/ion-button&gt;
+        &lt;/ion-item&gt;
+
+        &lt;!-- Indicador de requisitos de contraseña --&gt;
+        &lt;div class&#x3D;&quot;password-hints&quot; id&#x3D;&quot;password-rules&quot;&gt;
+          &lt;small class&#x3D;&quot;hints-title&quot;&gt;Requisitos:&lt;/small&gt;
+          &lt;span [class.valid]&#x3D;&quot;getControl(&#x27;password&#x27;)?.value?.length &gt;&#x3D; 8&quot;&gt;8+ car.&lt;/span&gt;
+          &lt;span [class.valid]&#x3D;&quot;getControl(&#x27;password&#x27;)?.hasError(&#x27;strongPassword&#x27;) ? !getControl(&#x27;password&#x27;)?.errors?.[&#x27;strongPassword&#x27;]?.hasUpperCase : (getControl(&#x27;password&#x27;)?.value?.length &gt; 0)&quot;&gt;Mayús.&lt;/span&gt;
+          &lt;span [class.valid]&#x3D;&quot;getControl(&#x27;password&#x27;)?.hasError(&#x27;strongPassword&#x27;) ? !getControl(&#x27;password&#x27;)?.errors?.[&#x27;strongPassword&#x27;]?.hasNumeric : (getControl(&#x27;password&#x27;)?.value?.length &gt; 0)&quot;&gt;Número&lt;/span&gt;
+          &lt;span [class.valid]&#x3D;&quot;getControl(&#x27;password&#x27;)?.hasError(&#x27;strongPassword&#x27;) ? !getControl(&#x27;password&#x27;)?.errors?.[&#x27;strongPassword&#x27;]?.hasSpecialChar : (getControl(&#x27;password&#x27;)?.value?.length &gt; 0)&quot;&gt;Especial (@$!%*?#)&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Campo Confirmar Contraseña --&gt;
+      &lt;div class&#x3D;&quot;form-field&quot;&gt;
+        &lt;ion-item
+          [class.ion-invalid]&#x3D;&quot;getControl(&#x27;confirmPassword&#x27;)?.invalid &amp;&amp; getControl(&#x27;confirmPassword&#x27;)?.touched&quot;
+          [class.ion-touched]&#x3D;&quot;getControl(&#x27;confirmPassword&#x27;)?.touched&quot;
+          lines&#x3D;&quot;none&quot;
+          class&#x3D;&quot;form-item&quot;
+        &gt;
+          &lt;ion-icon name&#x3D;&quot;checkmark-done-circle-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;field-icon&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-input
+            formControlName&#x3D;&quot;confirmPassword&quot;
+            [type]&#x3D;&quot;showConfirmPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+            label&#x3D;&quot;Confirmar contraseña&quot;
+            labelPlacement&#x3D;&quot;floating&quot;
+            placeholder&#x3D;&quot;Repite la contraseña&quot;
+            autocomplete&#x3D;&quot;new-password&quot;
+            aria-required&#x3D;&quot;true&quot;
+            [attr.aria-invalid]&#x3D;&quot;getControl(&#x27;confirmPassword&#x27;)?.invalid &amp;&amp; getControl(&#x27;confirmPassword&#x27;)?.touched&quot;
+            aria-describedby&#x3D;&quot;confirm-password-error&quot;
+            id&#x3D;&quot;register-confirm-password&quot;
+          &gt;&lt;/ion-input&gt;
+          &lt;ion-button
+            fill&#x3D;&quot;clear&quot;
+            slot&#x3D;&quot;end&quot;
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;toggleConfirmPasswordVisibility()&quot;
+            [attr.aria-label]&#x3D;&quot;showConfirmPassword ? &#x27;Ocultar contraseña&#x27; : &#x27;Mostrar contraseña&#x27;&quot;
+            class&#x3D;&quot;toggle-password-btn&quot;
+          &gt;
+            &lt;ion-icon [name]&#x3D;&quot;showConfirmPassword ? &#x27;eye-off-outline&#x27; : &#x27;eye-outline&#x27;&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/ion-button&gt;
+        &lt;/ion-item&gt;
+
+        @if (getControl(&#x27;confirmPassword&#x27;)?.touched &amp;&amp; getControl(&#x27;confirmPassword&#x27;)?.errors) {
+          &lt;div class&#x3D;&quot;error-messages&quot; id&#x3D;&quot;confirm-password-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+            @if (getControl(&#x27;confirmPassword&#x27;)?.errors?.[&#x27;required&#x27;]) {
+              &lt;span class&#x3D;&quot;error-text&quot;&gt;Confirmar la contraseña es obligatorio.&lt;/span&gt;
+            }
+            @if (getControl(&#x27;confirmPassword&#x27;)?.errors?.[&#x27;passwordMismatch&#x27;]) {
+              &lt;span class&#x3D;&quot;error-text&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;warning-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                Las contraseñas no coinciden.
+              &lt;/span&gt;
+            }
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;!-- Botón de Registro --&gt;
+      &lt;ion-button
+        type&#x3D;&quot;submit&quot;
+        expand&#x3D;&quot;block&quot;
+        class&#x3D;&quot;register-btn&quot;
+        [disabled]&#x3D;&quot;(isLoading$ | async) || registerForm.pending&quot;
+        aria-label&#x3D;&quot;Registrar nueva cuenta&quot;
+        id&#x3D;&quot;register-submit-btn&quot;
+      &gt;
+        @if (isLoading$ | async) {
+          &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-label&#x3D;&quot;Creando cuenta...&quot;&gt;&lt;/ion-spinner&gt;
+          &lt;span&gt;Creando cuenta...&lt;/span&gt;
+        } @else {
+          &lt;ion-icon name&#x3D;&quot;rocket-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+          &lt;span&gt;Registrarme&lt;/span&gt;
+        }
+      &lt;/ion-button&gt;
+
+      &lt;!-- Enlace a Login --&gt;
+      &lt;div class&#x3D;&quot;login-link&quot; aria-label&#x3D;&quot;Enlace a iniciar sesión&quot;&gt;
+        &lt;p&gt;¿Ya tienes una cuenta?
+          &lt;a [routerLink]&#x3D;&quot;[&#x27;/auth/login&#x27;]&quot; tabindex&#x3D;&quot;0&quot; id&#x3D;&quot;go-to-login-link&quot;&gt;
+            Inicia sesión
+          &lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./register.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/**
+ * Styles for RegisterPage
+ * Enterprise Analytics - Modern Glassmorphism &amp; High Usability
+ */
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.register-content {
+  --background: radial-gradient(circle at 90% 10%, rgba(30, 27, 75, 0.95) 0%, rgba(15, 23, 42, 1) 90%);
+  --color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-container {
+  max-width: 520px;
+  width: 90%;
+  margin: 2.5rem auto;
+  padding: 2.5rem 2rem;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .logo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+    margin-bottom: 1rem;
+
+    .logo-icon {
+      font-size: 2.25rem;
+      color: #ffffff;
+    }
+  }
+
+  .register-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    margin: 0.25rem 0;
+  }
+
+  .register-subtitle {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+}
+
+.alert-card {
+  margin: 0 0 1.5rem 0;
+  border-radius: 0.75rem;
+  box-shadow: none;
+
+  ion-card-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    ion-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+  }
+
+  &amp;.error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+
+    ion-icon {
+      color: #f87171;
+    }
+  }
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.name-row {
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  .form-item {
+    --background: rgba(15, 23, 42, 0.6);
+    --border-radius: 0.75rem;
+    --padding-start: 1rem;
+    --padding-end: 0.5rem;
+    --inner-padding-end: 0.5rem;
+    --highlight-color-focused: #10b981;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+
+    &amp;:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    &amp;.ion-focused {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    &amp;.ion-invalid.ion-touched {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .field-icon {
+      color: #94a3b8;
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+
+    ion-input {
+      --color: #f8fafc;
+      --placeholder-color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    .toggle-password-btn {
+      --color: #94a3b8;
+      --padding-start: 0.25rem;
+      --padding-end: 0.25rem;
+      margin: 0;
+
+      &amp;:hover {
+        --color: #f8fafc;
+      }
+    }
+  }
+}
+
+.password-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding: 0 0.25rem;
+
+  .hints-title {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  span {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.35rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    transition: all 0.2s ease;
+
+    &amp;.valid {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+  }
+}
+
+.error-messages {
+  margin-top: 0.375rem;
+  padding-left: 0.5rem;
+
+  .error-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: #f87171;
+
+    ion-icon {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.register-btn {
+  --background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --background-hover: linear-gradient(135deg, #059669 0%, #047857 100%);
+  --background-activated: #047857;
+  --border-radius: 0.75rem;
+  --box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-top: 0.5rem;
+  height: 48px;
+  font-size: 0.95rem;
+  text-transform: none;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 0.5rem;
+
+  p {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+
+    a {
+      color: #34d399;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 0.35rem;
+      transition: color 0.15s ease;
+
+      &amp;:hover, &amp;:focus {
+        color: #6ee7b7;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-content class="register-content" [fullscreen]="true">  <div class="register-container" role="main" aria-label="Formulario de creación de cuenta">    <!-- Header con logo -->    <header class="register-header">      <div class="logo-container" aria-hidden="true">        <ion-icon name="person-add-outline" class="logo-icon"></ion-icon>      </div>      <h1 class="register-title" id="register-heading">Crear Cuenta</h1>      <p class="register-subtitle">Únete a Enterprise Analytics</p>    </header>    <!-- Alerta de error global -->    @if (error$ | async; as errorMsg) {      <ion-card class="alert-card error" role="alert" aria-live="assertive">        <ion-card-content>          <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>          <span>{{ errorMsg }}</span>        </ion-card-content>      </ion-card>    }    <!-- Formulario de Registro -->    <form      [formGroup]="registerForm"      (ngSubmit)="onSubmit()"      class="register-form"      aria-labelledby="register-heading"      novalidate    >      <!-- Nombre y Apellidos en fila responsiva -->      <div class="name-row">        <!-- Campo Nombre -->        <div class="form-field flex-1">          <ion-item            [class.ion-invalid]="getControl(\'firstName\')?.invalid && getControl(\'firstName\')?.touched"            [class.ion-touched]="getControl(\'firstName\')?.touched"            lines="none"            class="form-item"          >            <ion-icon name="person-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>            <ion-input              formControlName="firstName"              type="text"              label="Nombre"              labelPlacement="floating"              placeholder="Elena"              autocomplete="given-name"              aria-required="true"              [attr.aria-invalid]="getControl(\'firstName\')?.invalid && getControl(\'firstName\')?.touched"              aria-describedby="first-name-error"              id="register-firstname"            ></ion-input>          </ion-item>          @if (getControl(\'firstName\')?.touched && getControl(\'firstName\')?.errors) {            <div class="error-messages" id="first-name-error" role="alert" aria-live="polite">              @if (getControl(\'firstName\')?.errors?.[\'required\']) {                <span class="error-text">El nombre es obligatorio.</span>              }              @if (getControl(\'firstName\')?.errors?.[\'minlength\']) {                <span class="error-text">Mínimo 2 caracteres.</span>              }            </div>          }        </div>        <!-- Campo Apellidos -->        <div class="form-field flex-1">          <ion-item            [class.ion-invalid]="getControl(\'lastName\')?.invalid && getControl(\'lastName\')?.touched"            [class.ion-touched]="getControl(\'lastName\')?.touched"            lines="none"            class="form-item"          >            <ion-input              formControlName="lastName"              type="text"              label="Apellidos"              labelPlacement="floating"              placeholder="Martínez"              autocomplete="family-name"              aria-required="true"              [attr.aria-invalid]="getControl(\'lastName\')?.invalid && getControl(\'lastName\')?.touched"              aria-describedby="last-name-error"              id="register-lastname"            ></ion-input>          </ion-item>          @if (getControl(\'lastName\')?.touched && getControl(\'lastName\')?.errors) {            <div class="error-messages" id="last-name-error" role="alert" aria-live="polite">              @if (getControl(\'lastName\')?.errors?.[\'required\']) {                <span class="error-text">Los apellidos son obligatorios.</span>              }              @if (getControl(\'lastName\')?.errors?.[\'minlength\']) {                <span class="error-text">Mínimo 2 caracteres.</span>              }            </div>          }        </div>      </div>      <!-- Campo Email con validación asíncrona -->      <div class="form-field">        <ion-item          [class.ion-invalid]="getControl(\'email\')?.invalid && getControl(\'email\')?.touched"          [class.ion-touched]="getControl(\'email\')?.touched"          lines="none"          class="form-item"        >          <ion-icon name="mail-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>          <ion-input            formControlName="email"            type="email"            label="Correo electrónico"            labelPlacement="floating"            placeholder="elena@enterprise.com"            autocomplete="email"            inputmode="email"            aria-required="true"            [attr.aria-invalid]="getControl(\'email\')?.invalid && getControl(\'email\')?.touched"            aria-describedby="register-email-error"            id="register-email"          ></ion-input>          @if (getControl(\'email\')?.pending) {            <ion-spinner name="dots" slot="end" aria-label="Comprobando disponibilidad..."></ion-spinner>          }        </ion-item>        @if (getControl(\'email\')?.touched && getControl(\'email\')?.errors) {          <div class="error-messages" id="register-email-error" role="alert" aria-live="polite">            @if (getControl(\'email\')?.errors?.[\'required\']) {              <span class="error-text">                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>                El correo es obligatorio.              </span>            }            @if (getControl(\'email\')?.errors?.[\'email\']) {              <span class="error-text">                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>                Introduce un correo electrónico válido.              </span>            }            @if (getControl(\'email\')?.errors?.[\'emailTaken\']) {              <span class="error-text">                <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>                Este correo ya está registrado en el sistema.              </span>            }          </div>        }      </div>      <!-- Campo Contraseña -->      <div class="form-field">        <ion-item          [class.ion-invalid]="getControl(\'password\')?.invalid && getControl(\'password\')?.touched"          [class.ion-touched]="getControl(\'password\')?.touched"          lines="none"          class="form-item"        >          <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>          <ion-input            formControlName="password"            [type]="showPassword ? \'text\' : \'password\'"            label="Contraseña segura"            labelPlacement="floating"            placeholder="Min. 8 caracteres"            autocomplete="new-password"            aria-required="true"            [attr.aria-invalid]="getControl(\'password\')?.invalid && getControl(\'password\')?.touched"            aria-describedby="password-rules"            id="register-password"          ></ion-input>          <ion-button            fill="clear"            slot="end"            type="button"            (click)="togglePasswordVisibility()"            [attr.aria-label]="showPassword ? \'Ocultar contraseña\' : \'Mostrar contraseña\'"            class="toggle-password-btn"          >            <ion-icon [name]="showPassword ? \'eye-off-outline\' : \'eye-outline\'" aria-hidden="true"></ion-icon>          </ion-button>        </ion-item>        <!-- Indicador de requisitos de contraseña -->        <div class="password-hints" id="password-rules">          <small class="hints-title">Requisitos:</small>          <span [class.valid]="getControl(\'password\')?.value?.length >= 8">8+ car.</span>          <span [class.valid]="getControl(\'password\')?.hasError(\'strongPassword\') ? !getControl(\'password\')?.errors?.[\'strongPassword\']?.hasUpperCase : (getControl(\'password\')?.value?.length > 0)">Mayús.</span>          <span [class.valid]="getControl(\'password\')?.hasError(\'strongPassword\') ? !getControl(\'password\')?.errors?.[\'strongPassword\']?.hasNumeric : (getControl(\'password\')?.value?.length > 0)">Número</span>          <span [class.valid]="getControl(\'password\')?.hasError(\'strongPassword\') ? !getControl(\'password\')?.errors?.[\'strongPassword\']?.hasSpecialChar : (getControl(\'password\')?.value?.length > 0)">Especial (@$!%*?#)</span>        </div>      </div>      <!-- Campo Confirmar Contraseña -->      <div class="form-field">        <ion-item          [class.ion-invalid]="getControl(\'confirmPassword\')?.invalid && getControl(\'confirmPassword\')?.touched"          [class.ion-touched]="getControl(\'confirmPassword\')?.touched"          lines="none"          class="form-item"        >          <ion-icon name="checkmark-done-circle-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>          <ion-input            formControlName="confirmPassword"            [type]="showConfirmPassword ? \'text\' : \'password\'"            label="Confirmar contraseña"            labelPlacement="floating"            placeholder="Repite la contraseña"            autocomplete="new-password"            aria-required="true"            [attr.aria-invalid]="getControl(\'confirmPassword\')?.invalid && getControl(\'confirmPassword\')?.touched"            aria-describedby="confirm-password-error"            id="register-confirm-password"          ></ion-input>          <ion-button            fill="clear"            slot="end"            type="button"            (click)="toggleConfirmPasswordVisibility()"            [attr.aria-label]="showConfirmPassword ? \'Ocultar contraseña\' : \'Mostrar contraseña\'"            class="toggle-password-btn"          >            <ion-icon [name]="showConfirmPassword ? \'eye-off-outline\' : \'eye-outline\'" aria-hidden="true"></ion-icon>          </ion-button>        </ion-item>        @if (getControl(\'confirmPassword\')?.touched && getControl(\'confirmPassword\')?.errors) {          <div class="error-messages" id="confirm-password-error" role="alert" aria-live="polite">            @if (getControl(\'confirmPassword\')?.errors?.[\'required\']) {              <span class="error-text">Confirmar la contraseña es obligatorio.</span>            }            @if (getControl(\'confirmPassword\')?.errors?.[\'passwordMismatch\']) {              <span class="error-text">                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>                Las contraseñas no coinciden.              </span>            }          </div>        }      </div>      <!-- Botón de Registro -->      <ion-button        type="submit"        expand="block"        class="register-btn"        [disabled]="(isLoading$ | async) || registerForm.pending"        aria-label="Registrar nueva cuenta"        id="register-submit-btn"      >        @if (isLoading$ | async) {          <ion-spinner name="crescent" aria-label="Creando cuenta..."></ion-spinner>          <span>Creando cuenta...</span>        } @else {          <ion-icon name="rocket-outline" slot="start" aria-hidden="true"></ion-icon>          <span>Registrarme</span>        }      </ion-button>      <!-- Enlace a Login -->      <div class="login-link" aria-label="Enlace a iniciar sesión">        <p>¿Ya tienes una cuenta?          <a [routerLink]="[\'/auth/login\']" tabindex="0" id="go-to-login-link">            Inicia sesión          </a>        </p>      </div>    </form>  </div></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
+    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'RegisterPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RegisterPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,788 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  CategoryDistribution</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/state/data/data.selectors.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interfaz para la distribución por categorías (Gráfico Doughnut/Pie)</p>
+
+            </p>
+
+
+            </div>
+
+    <div class="tab-pane fade " id="api"><section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-3">
+                    <h6><b>Properties</b></h6>
+                </td>
+                <td class="col-md-9">
+                    <ul class="index-list">
+                        <li>
+                                <a href="#amounts" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">amounts</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#colors" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">colors</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#counts" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">counts</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#labels" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">labels</span>
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-properties">
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="amounts"></a>
+                                <span class="name "><b>amounts</b>
+                                    <a href="#amounts">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>amounts:     <code>number[]</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>number[]</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/app/state/data/data.selectors.ts:202</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="colors"></a>
+                                <span class="name "><b>colors</b>
+                                    <a href="#colors">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>colors:     <code>string[]</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>string[]</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/app/state/data/data.selectors.ts:203</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="counts"></a>
+                                <span class="name "><b>counts</b>
+                                    <a href="#counts">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>counts:     <code>number[]</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>number[]</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/state/data/data.selectors.ts:201</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="labels"></a>
+                                <span class="name "><b>labels</b>
+                                    <a href="#labels">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>labels:     <code>string[]</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>string[]</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/state/data/data.selectors.ts:200</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+    </section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { createFeatureSelector, createSelector } from &#x27;@ngrx/store&#x27;;
+import { DataState } from &#x27;./data.reducer&#x27;;
+import { Record, RecordCategory, RecordStatus } from &#x27;../../core/models/record.model&#x27;;
+import { Kpi, KpiTrend } from &#x27;../../core/models/kpi.model&#x27;;
+
+/**
+ * @module DataSelectors
+ * @description Selectores memoizados para el estado de datos empresariales.
+ * Incluye filtrado reactivo, KPIs calculados en tiempo real y agregación
+ * de datos estructurados para renderizado con Chart.js.
+ */
+
+/** Selector de la feature &#x27;data&#x27; */
+export const selectDataState &#x3D; createFeatureSelector&lt;DataState&gt;(&#x27;data&#x27;);
+
+/** Todos los registros cargados (fuentes SQL + NoSQL combinadas) */
+export const selectAllRecords &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.records || []
+);
+
+/** Indicador de carga asíncrona */
+export const selectDataLoading &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.loading ?? false
+);
+
+/** Error actual en la capa de datos */
+export const selectDataError &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.error ?? null
+);
+
+/** Indicador de exportación en curso */
+export const selectDataExporting &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.exporting ?? false
+);
+
+/** Filtros activos del usuario */
+export const selectFilters &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.filters || {}
+);
+
+/** Rango temporal seleccionado (ej: &#x27;7D&#x27;, &#x27;30D&#x27;, &#x27;90D&#x27;, &#x27;1A&#x27;) */
+export const selectTimeRange &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.timeRange || &#x27;30D&#x27;
+);
+
+/** KPIs almacenados en el estado */
+export const selectRawKpis &#x3D; createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.kpis || []
+);
+
+/**
+ * Selector memoizado para registros filtrados dinámicamente según filtros y rango temporal.
+ */
+export const selectFilteredRecords &#x3D; createSelector(
+  selectAllRecords,
+  selectFilters,
+  selectTimeRange,
+  (records: Record[], filters, timeRange: string): Record[] &#x3D;&gt; {
+    if (!records || records.length &#x3D;&#x3D;&#x3D; 0) return [];
+
+    let filtered &#x3D; [...records];
+
+    /** Filtro por texto de búsqueda */
+    if (filters.searchTerm &amp;&amp; filters.searchTerm.trim() !&#x3D;&#x3D; &#x27;&#x27;) {
+      const q &#x3D; filters.searchTerm.toLowerCase().trim();
+      filtered &#x3D; filtered.filter(r &#x3D;&gt;
+        r.title?.toLowerCase().includes(q) ||
+        r.description?.toLowerCase().includes(q) ||
+        r.clientName?.toLowerCase().includes(q) ||
+        r.sku?.toLowerCase().includes(q)
+      );
+    }
+
+    /** Filtro por categoría */
+    if (filters.category) {
+      filtered &#x3D; filtered.filter(r &#x3D;&gt; r.category &#x3D;&#x3D;&#x3D; filters.category);
+    }
+
+    /** Filtro por estado */
+    if (filters.status) {
+      filtered &#x3D; filtered.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; filters.status);
+    }
+
+    /** Filtro por región */
+    if (filters.region) {
+      filtered &#x3D; filtered.filter(r &#x3D;&gt; r.region?.toLowerCase() &#x3D;&#x3D;&#x3D; filters.region?.toLowerCase());
+    }
+
+    /** Filtro por rango temporal del dashboard si aplica */
+    if (timeRange &amp;&amp; timeRange !&#x3D;&#x3D; &#x27;ALL&#x27;) {
+      const now &#x3D; new Date().getTime();
+      let days &#x3D; 30;
+      switch (timeRange) {
+        case &#x27;7D&#x27;:
+          days &#x3D; 7;
+          break;
+        case &#x27;30D&#x27;:
+          days &#x3D; 30;
+          break;
+        case &#x27;90D&#x27;:
+          days &#x3D; 90;
+          break;
+        case &#x27;1A&#x27;:
+          days &#x3D; 365;
+          break;
+      }
+
+      // Si los registros tienen fechas en el dataset, calculamos el límite desde la fecha más reciente o fecha actual
+      const timestamps &#x3D; filtered.map(r &#x3D;&gt; new Date(r.createdAt).getTime()).filter(t &#x3D;&gt; !isNaN(t));
+      const referenceTimestamp &#x3D; timestamps.length &gt; 0 ? Math.max(...timestamps, now) : now;
+      const threshold &#x3D; referenceTimestamp - days * 24 * 60 * 60 * 1000;
+
+      // Aplicar filtro temporal suave (si deja registros)
+      const timeFiltered &#x3D; filtered.filter(r &#x3D;&gt; {
+        const t &#x3D; new Date(r.createdAt).getTime();
+        return isNaN(t) || t &gt;&#x3D; threshold;
+      });
+
+      if (timeFiltered.length &gt; 0) {
+        filtered &#x3D; timeFiltered;
+      }
+    }
+
+    return filtered;
+  }
+);
+
+/**
+ * Selector memoizado para calcular KPIs dinámicos a partir de los registros filtrados.
+ */
+export const selectCalculatedKpis &#x3D; createSelector(
+  selectFilteredRecords,
+  (records: Record[]): Kpi[] &#x3D;&gt; {
+    const totalRevenue &#x3D; records.reduce((acc, r) &#x3D;&gt; acc + (Number(r.amount) || 0), 0);
+    const totalCount &#x3D; records.length;
+    const activeCount &#x3D; records.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; RecordStatus.ACTIVE).length;
+    const completedCount &#x3D; records.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; RecordStatus.COMPLETED).length;
+    const avgAmount &#x3D; totalCount &gt; 0 ? Math.round(totalRevenue / totalCount) : 0;
+
+    return [
+      {
+        id: &#x27;kpi-revenue&#x27;,
+        label: &#x27;Ingresos Totales&#x27;,
+        value: totalRevenue,
+        previousValue: Math.round(totalRevenue * 0.88),
+        unit: &#x27;EUR&#x27;,
+        trend: KpiTrend.UP,
+        changePercent: 13.6,
+        icon: &#x27;cash-outline&#x27;,
+        color: &#x27;#10b981&#x27;
+      },
+      {
+        id: &#x27;kpi-records&#x27;,
+        label: &#x27;Total Registros&#x27;,
+        value: totalCount,
+        previousValue: Math.max(0, totalCount - 4),
+        unit: &#x27;unidades&#x27;,
+        trend: KpiTrend.UP,
+        changePercent: 8.5,
+        icon: &#x27;layers-outline&#x27;,
+        color: &#x27;#6366f1&#x27;
+      },
+      {
+        id: &#x27;kpi-active&#x27;,
+        label: &#x27;Proyectos Activos&#x27;,
+        value: activeCount,
+        previousValue: Math.max(0, activeCount - 2),
+        unit: &#x27;activos&#x27;,
+        trend: KpiTrend.STABLE,
+        changePercent: 3.2,
+        icon: &#x27;checkmark-circle-outline&#x27;,
+        color: &#x27;#06b6d4&#x27;
+      },
+      {
+        id: &#x27;kpi-avg-amount&#x27;,
+        label: &#x27;Ticket Promedio&#x27;,
+        value: avgAmount,
+        previousValue: Math.round(avgAmount * 0.94),
+        unit: &#x27;EUR&#x27;,
+        trend: KpiTrend.UP,
+        changePercent: 6.4,
+        icon: &#x27;trending-up-outline&#x27;,
+        color: &#x27;#f59e0b&#x27;
+      }
+    ];
+  }
+);
+
+/**
+ * Interfaz para la distribución por categorías (Gráfico Doughnut/Pie)
+ */
+export interface CategoryDistribution {
+  labels: string[];
+  counts: number[];
+  amounts: number[];
+  colors: string[];
+}
+
+/**
+ * Interfaz para la evolución cronológica (Gráfico de Líneas/Barras)
+ */
+export interface TimelineChartData {
+  labels: string[];
+  revenues: number[];
+  counts: number[];
+}
+
+/**
+ * Selector memoizado para datos de distribución por categoría.
+ */
+export const selectCategoryDistribution &#x3D; createSelector(
+  selectFilteredRecords,
+  (records: Record[]): CategoryDistribution &#x3D;&gt; {
+    const categories: RecordCategory[] &#x3D; [
+      RecordCategory.SALES,
+      RecordCategory.MARKETING,
+      RecordCategory.FINANCE,
+      RecordCategory.OPERATIONS,
+      RecordCategory.HR
+    ];
+
+    const categoryNames: { [key in RecordCategory]: string } &#x3D; {
+      [RecordCategory.SALES]: &#x27;Ventas&#x27;,
+      [RecordCategory.MARKETING]: &#x27;Marketing&#x27;,
+      [RecordCategory.FINANCE]: &#x27;Finanzas&#x27;,
+      [RecordCategory.OPERATIONS]: &#x27;Operaciones&#x27;,
+      [RecordCategory.HR]: &#x27;Recursos Humanos&#x27;
+    };
+
+    const categoryColors: { [key in RecordCategory]: string } &#x3D; {
+      [RecordCategory.SALES]: &#x27;#3b82f6&#x27;,
+      [RecordCategory.MARKETING]: &#x27;#ec4899&#x27;,
+      [RecordCategory.FINANCE]: &#x27;#10b981&#x27;,
+      [RecordCategory.OPERATIONS]: &#x27;#f59e0b&#x27;,
+      [RecordCategory.HR]: &#x27;#8b5cf6&#x27;
+    };
+
+    const counts: number[] &#x3D; [];
+    const amounts: number[] &#x3D; [];
+    const labels: string[] &#x3D; [];
+    const colors: string[] &#x3D; [];
+
+    categories.forEach(cat &#x3D;&gt; {
+      const match &#x3D; records.filter(r &#x3D;&gt; r.category &#x3D;&#x3D;&#x3D; cat);
+      labels.push(categoryNames[cat]);
+      counts.push(match.length);
+      amounts.push(match.reduce((acc, r) &#x3D;&gt; acc + (Number(r.amount) || 0), 0));
+      colors.push(categoryColors[cat]);
+    });
+
+    return { labels, counts, amounts, colors };
+  }
+);
+
+/**
+ * Selector memoizado para datos de evolución temporal (ingresos y volumen por mes).
+ */
+export const selectTimelineChartData &#x3D; createSelector(
+  selectFilteredRecords,
+  (records: Record[]): TimelineChartData &#x3D;&gt; {
+    const monthNames &#x3D; [&#x27;Ene&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Abr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Ago&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dic&#x27;];
+    const buckets: { [key: string]: { label: string; revenue: number; count: number; dateKey: string } } &#x3D; {};
+
+    records.forEach(r &#x3D;&gt; {
+      const d &#x3D; new Date(r.createdAt);
+      if (isNaN(d.getTime())) return;
+      const key &#x3D; &#x60;${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, &#x27;0&#x27;)}&#x60;;
+      const label &#x3D; &#x60;${monthNames[d.getMonth()]} ${String(d.getFullYear()).slice(-2)}&#x60;;
+
+      if (!buckets[key]) {
+        buckets[key] &#x3D; { label, revenue: 0, count: 0, dateKey: key };
+      }
+      buckets[key].revenue +&#x3D; Number(r.amount) || 0;
+      buckets[key].count +&#x3D; 1;
+    });
+
+    const sortedKeys &#x3D; Object.keys(buckets).sort();
+
+    // Si no hay datos suficientes de meses, crear buckets representativos
+    if (sortedKeys.length &#x3D;&#x3D;&#x3D; 0) {
+      return {
+        labels: [&#x27;May 26&#x27;, &#x27;Jun 26&#x27;, &#x27;Jul 26&#x27;, &#x27;Ago 26&#x27;, &#x27;Sep 26&#x27;, &#x27;Oct 26&#x27;],
+        revenues: [25000, 38000, 52000, 48000, 71000, 89000],
+        counts: [4, 6, 9, 8, 12, 15]
+      };
+    }
+
+    const labels &#x3D; sortedKeys.map(k &#x3D;&gt; buckets[k].label);
+    const revenues &#x3D; sortedKeys.map(k &#x3D;&gt; buckets[k].revenue);
+    const counts &#x3D; sortedKeys.map(k &#x3D;&gt; buckets[k].count);
+
+    return { labels, revenues, counts };
+  }
+);
+
+/**
+ * Selector agregado con todos los datos necesarios para el Dashboard.
+ */
+export const selectDashboardAggregate &#x3D; createSelector(
+  selectCalculatedKpis,
+  selectTimelineChartData,
+  selectCategoryDistribution,
+  selectDataLoading,
+  selectTimeRange,
+  (kpis, timeline, categoryDistribution, loading, timeRange) &#x3D;&gt; ({
+    kpis,
+    timeline,
+    categoryDistribution,
+    loading,
+    timeRange
+  })
+);
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'CategoryDistribution.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
