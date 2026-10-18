@@ -11,8 +11,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "docs:generate": "npx compodoc -p tsconfig.doc.json -d documentation --theme material",
-    "docs:serve": "npx compodoc -p tsconfig.doc.json -d documentation --theme material -s"
+    "compodoc": "npx compodoc -p tsconfig.doc.json -d docs",
+    "docs:generate": "npx compodoc -p tsconfig.doc.json -d docs --theme material",
+    "docs:serve": "npx compodoc -s -d docs"
   },
   "private": true,
   "dependencies": {

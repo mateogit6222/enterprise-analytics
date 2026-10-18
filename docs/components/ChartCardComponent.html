@@ -1,0 +1,1214 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ChartCardComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/shared/components/chart-card/chart-card.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>ChartCardComponent
+Wrapper contenedor reutilizable para gráficos (Chart.js / Canvas) con cabecera
+configurable, selector de rango temporal interactivo, estado de carga skeleton y accesibilidad.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;app-chart-card
+  title=&quot;Evolución de Ventas&quot;
+  subtitle=&quot;Comparativa mensual de ingresos acumulados&quot;
+  [loading]=&quot;isLoading$ | async&quot;
+  [selectedTimeRange]=&quot;&#39;30D&#39;&quot;
+  (timeRangeChange)=&quot;onRangeChanged($event)&quot;&gt;
+  &lt;canvas #myChart&gt;&lt;/canvas&gt;
+&lt;/app-chart-card&gt;</code></pre></div>
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+                <div>
+                    <pre class="line-numbers"><code class="language-html">&lt;b&gt;Example :&lt;/b&gt;&lt;div&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;app-chart-card
+  title=&amp;quot;Evolución de Ventas&amp;quot;
+  subtitle=&amp;quot;Comparativa mensual de ingresos acumulados&amp;quot;
+  [loading]=&amp;quot;isLoading$ | async&amp;quot;
+  [selectedTimeRange]=&amp;quot;&amp;#39;30D&amp;#39;&amp;quot;
+  (timeRangeChange)=&amp;quot;onRangeChanged($event)&amp;quot;&amp;gt;
+  &amp;lt;canvas #myChart&amp;gt;&amp;lt;/canvas&amp;gt;
+&amp;lt;/app-chart-card&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</code></pre>
+                </div>
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-chart-card</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>    <code>IonicModule</code>
+</div>
+                        <div>        <code><a href="../components/LoadingSkeletonComponent.html" target="_self" >LoadingSkeletonComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./chart-card.component.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./chart-card.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/DashboardPage.html" target="_self" >DashboardPage</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonicModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/LoadingSkeletonComponent.html" target="_self" >LoadingSkeletonComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onActionClick" >onActionClick</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onRangeChange" >onRangeChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#actionIcon" >actionIcon</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#actionTooltip" >actionTooltip</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#selectedTimeRange" >selectedTimeRange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#showTimeFilter" >showTimeFilter</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#subtitle" >subtitle</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#timeRanges" >timeRanges</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#title" >title</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#actionClick" >actionClick</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#timeRangeChange" >timeRangeChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="actionIcon"></a>
+                        <b>actionIcon</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:57</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Icono opcional para un botón de acción secundario (ej. &#39;download-outline&#39; o &#39;refresh-outline&#39;)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="actionTooltip"></a>
+                        <b>actionTooltip</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Acción adicional&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:60</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Tooltip / aria-label para el botón de acción secundario</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading"></a>
+                        <b>loading</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:45</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Estado de carga que muestra el skeleton</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedTimeRange"></a>
+                        <b>selectedTimeRange</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;30D&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:51</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Rango temporal seleccionado actualmente</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTimeFilter"></a>
+                        <b>showTimeFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:54</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Si es true, renderiza el selector de rango temporal</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subtitle"></a>
+                        <b>subtitle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:42</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Subtítulo descriptivo</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timeRanges"></a>
+                        <b>timeRanges</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;7D&#x27;, &#x27;30D&#x27;, &#x27;90D&#x27;, &#x27;1A&#x27;]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:48</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Opciones de filtros temporales a mostrar en el segmento</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <b>title</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:39</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Título principal del gráfico</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="actionClick"></a>
+                        <b>actionClick</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:66</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite el click en el botón de acción secundario</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timeRangeChange"></a>
+                        <b>timeRangeChange</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:63</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite el nuevo rango temporal seleccionado</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onActionClick"></a>
+                    <span class="name">
+                        <span ><b>onActionClick</b></span>
+                        <a href="#onActionClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onActionClick()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Manejador del botón de acción adicional.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onRangeChange"></a>
+                    <span class="name">
+                        <span ><b>onRangeChange</b></span>
+                        <a href="#onRangeChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onRangeChange(range: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Manejador de cambio de rango temporal.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>range</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Nuevo rango seleccionado.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { LoadingSkeletonComponent } from &#x27;../loading-skeleton/loading-skeleton.component&#x27;;
+
+/**
+ * @component ChartCardComponent
+ * @description Wrapper contenedor reutilizable para gráficos (Chart.js / Canvas) con cabecera
+ * configurable, selector de rango temporal interactivo, estado de carga skeleton y accesibilidad.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-chart-card
+ *   title&#x3D;&quot;Evolución de Ventas&quot;
+ *   subtitle&#x3D;&quot;Comparativa mensual de ingresos acumulados&quot;
+ *   [loading]&#x3D;&quot;isLoading$ | async&quot;
+ *   [selectedTimeRange]&#x3D;&quot;&#x27;30D&#x27;&quot;
+ *   (timeRangeChange)&#x3D;&quot;onRangeChanged($event)&quot;&gt;
+ *   &lt;canvas #myChart&gt;&lt;/canvas&gt;
+ * &lt;/app-chart-card&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-chart-card&#x27;,
+  standalone: true,
+  imports: [CommonModule, IonicModule, LoadingSkeletonComponent],
+  templateUrl: &#x27;./chart-card.component.html&#x27;,
+  styleUrls: [&#x27;./chart-card.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ChartCardComponent {
+  /** Título principal del gráfico */
+  @Input({ required: true }) title!: string;
+
+  /** Subtítulo descriptivo */
+  @Input() subtitle?: string;
+
+  /** Estado de carga que muestra el skeleton */
+  @Input() loading: boolean &#x3D; false;
+
+  /** Opciones de filtros temporales a mostrar en el segmento */
+  @Input() timeRanges: string[] &#x3D; [&#x27;7D&#x27;, &#x27;30D&#x27;, &#x27;90D&#x27;, &#x27;1A&#x27;];
+
+  /** Rango temporal seleccionado actualmente */
+  @Input() selectedTimeRange: string &#x3D; &#x27;30D&#x27;;
+
+  /** Si es true, renderiza el selector de rango temporal */
+  @Input() showTimeFilter: boolean &#x3D; true;
+
+  /** Icono opcional para un botón de acción secundario (ej. &#x27;download-outline&#x27; o &#x27;refresh-outline&#x27;) */
+  @Input() actionIcon?: string;
+
+  /** Tooltip / aria-label para el botón de acción secundario */
+  @Input() actionTooltip: string &#x3D; &#x27;Acción adicional&#x27;;
+
+  /** Emite el nuevo rango temporal seleccionado */
+  @Output() timeRangeChange &#x3D; new EventEmitter&lt;string&gt;();
+
+  /** Emite el click en el botón de acción secundario */
+  @Output() actionClick &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Manejador de cambio de rango temporal.
+   *
+   * @param {string} range - Nuevo rango seleccionado.
+   */
+  onRangeChange(range: string): void {
+    if (this.selectedTimeRange !&#x3D;&#x3D; range) {
+      this.selectedTimeRange &#x3D; range;
+      this.timeRangeChange.emit(range);
+    }
+  }
+
+  /**
+   * Manejador del botón de acción adicional.
+   */
+  onActionClick(): void {
+    this.actionClick.emit();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;chart-container-card&quot; role&#x3D;&quot;region&quot; [attr.aria-label]&#x3D;&quot;title&quot;&gt;
+  &lt;!-- Cabecera del gráfico con filtros y acciones --&gt;
+  &lt;header class&#x3D;&quot;chart-header&quot;&gt;
+    &lt;div class&#x3D;&quot;title-group&quot;&gt;
+      &lt;h3 class&#x3D;&quot;chart-title&quot;&gt;{{ title }}&lt;/h3&gt;
+      @if (subtitle) {
+        &lt;p class&#x3D;&quot;chart-subtitle&quot;&gt;{{ subtitle }}&lt;/p&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;controls-group&quot;&gt;
+      &lt;!-- Selector de rango temporal --&gt;
+      @if (showTimeFilter &amp;&amp; timeRanges.length &gt; 0 &amp;&amp; !loading) {
+        &lt;div class&#x3D;&quot;time-range-pills&quot; role&#x3D;&quot;radiogroup&quot; aria-label&#x3D;&quot;Seleccionar rango temporal&quot;&gt;
+          @for (range of timeRanges; track range) {
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              class&#x3D;&quot;range-pill&quot;
+              [class.active]&#x3D;&quot;selectedTimeRange &#x3D;&#x3D;&#x3D; range&quot;
+              (click)&#x3D;&quot;onRangeChange(range)&quot;
+              role&#x3D;&quot;radio&quot;
+              [attr.aria-checked]&#x3D;&quot;selectedTimeRange &#x3D;&#x3D;&#x3D; range&quot;
+            &gt;
+              {{ range }}
+            &lt;/button&gt;
+          }
+        &lt;/div&gt;
+      }
+
+      &lt;!-- Botón de acción adicional opcional --&gt;
+      @if (actionIcon &amp;&amp; !loading) {
+        &lt;ion-button
+          fill&#x3D;&quot;clear&quot;
+          size&#x3D;&quot;small&quot;
+          class&#x3D;&quot;action-btn&quot;
+          (click)&#x3D;&quot;onActionClick()&quot;
+          [attr.aria-label]&#x3D;&quot;actionTooltip&quot;
+        &gt;
+          &lt;ion-icon [name]&#x3D;&quot;actionIcon&quot; slot&#x3D;&quot;icon-only&quot;&gt;&lt;/ion-icon&gt;
+        &lt;/ion-button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;!-- Cuerpo del gráfico --&gt;
+  &lt;div class&#x3D;&quot;chart-body&quot; [class.is-loading]&#x3D;&quot;loading&quot;&gt;
+    @if (loading) {
+      &lt;app-loading-skeleton type&#x3D;&quot;chart&quot; ariaLabel&#x3D;&quot;Cargando gráfico...&quot;&gt;&lt;/app-loading-skeleton&gt;
+    } @else {
+      &lt;div class&#x3D;&quot;chart-content&quot;&gt;
+        &lt;ng-content&gt;&lt;/ng-content&gt;
+      &lt;/div&gt;
+    }
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./chart-card.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/**
+ * Chart Card Component Styles
+ */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chart-container-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .title-group {
+      .chart-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #f8fafc;
+        margin: 0;
+        letter-spacing: -0.015em;
+      }
+
+      .chart-subtitle {
+        font-size: 0.85rem;
+        color: #94a3b8;
+        margin: 0.25rem 0 0 0;
+      }
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .time-range-pills {
+        display: flex;
+        background: rgba(15, 23, 42, 0.6);
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+
+        .range-pill {
+          background: transparent;
+          border: none;
+          color: #94a3b8;
+          font-size: 0.75rem;
+          font-weight: 600;
+          padding: 0.25rem 0.65rem;
+          border-radius: 0.35rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          outline: none;
+
+          &amp;:hover {
+            color: #ffffff;
+          }
+
+          &amp;.active {
+            background: #6366f1;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+          }
+
+          &amp;:focus-visible {
+            box-shadow: 0 0 0 2px #6366f1;
+          }
+        }
+      }
+
+      .action-btn {
+        --color: #94a3b8;
+        --padding-start: 0.5rem;
+        --padding-end: 0.5rem;
+
+        &amp;:hover {
+          --color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .chart-body {
+    position: relative;
+    width: 100%;
+    min-height: 280px;
+
+    .chart-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ::ng-deep canvas {
+        max-height: 320px;
+        width: 100% !important;
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="chart-container-card" role="region" [attr.aria-label]="title">  <!-- Cabecera del gráfico con filtros y acciones -->  <header class="chart-header">    <div class="title-group">      <h3 class="chart-title">{{ title }}</h3>      @if (subtitle) {        <p class="chart-subtitle">{{ subtitle }}</p>      }    </div>    <div class="controls-group">      <!-- Selector de rango temporal -->      @if (showTimeFilter && timeRanges.length > 0 && !loading) {        <div class="time-range-pills" role="radiogroup" aria-label="Seleccionar rango temporal">          @for (range of timeRanges; track range) {            <button              type="button"              class="range-pill"              [class.active]="selectedTimeRange === range"              (click)="onRangeChange(range)"              role="radio"              [attr.aria-checked]="selectedTimeRange === range"            >              {{ range }}            </button>          }        </div>      }      <!-- Botón de acción adicional opcional -->      @if (actionIcon && !loading) {        <ion-button          fill="clear"          size="small"          class="action-btn"          (click)="onActionClick()"          [attr.aria-label]="actionTooltip"        >          <ion-icon [name]="actionIcon" slot="icon-only"></ion-icon>        </ion-button>      }    </div>  </header>  <!-- Cuerpo del gráfico -->  <div class="chart-body" [class.is-loading]="loading">    @if (loading) {      <app-loading-skeleton type="chart" ariaLabel="Cargando gráfico..."></app-loading-skeleton>    } @else {      <div class="chart-content">        <ng-content></ng-content>      </div>    }  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
+    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'ChartCardComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChartCardComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

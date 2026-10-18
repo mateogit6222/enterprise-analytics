@@ -1,0 +1,1949 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProfilePage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/profile/pages/profile/profile.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>ProfilePage
+Vista del perfil del usuario autenticado y panel de preferencias de accesibilidad
+y experiencia universal conforme a las directrices WCAG 2.1 AA/AAA.</p>
+<p>Cumple con los criterios de evaluación:</p>
+<ul>
+<li>RA 1: Conexión reactiva al store de NgRx para visualización del usuario actual.</li>
+<li>RA 4: Panel interactivo de accesibilidad con escalado tipográfico, modo alto contraste WCAG AAA y reducción de movimiento.</li>
+<li>RA 6: Documentación técnica completa JSDoc/Compodoc.</li>
+</ul>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-profile</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>    <code>IonicModule</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./profile.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./profile.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonicModule</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#accessibilityPrefs$" >accessibilityPrefs$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#accessibilityService" >accessibilityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentUser$" >currentUser$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#store" >store</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastCtrl" >toastCtrl</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userFullName$" >userFullName$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userRoleLabel$" >userRoleLabel$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onFontSizeChanged" >onFontSizeChanged</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onHighContrastToggled" >onHighContrastToggled</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onReducedMotionToggled" >onReducedMotionToggled</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#resetAccessibilityDefaults" >resetAccessibilityDefaults</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#showToast" >showToast</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFontSizeChanged"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onFontSizeChanged</b></span>
+                        <a href="#onFontSizeChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onFontSizeChanged(size: <a href="../miscellaneous/typealiases.html#FontSizeScale" target="_self">FontSizeScale</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Modifica el tamaño de la tipografía escalable.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>size</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#FontSizeScale" target="_self" >FontSizeScale</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Escala seleccionada (&#39;normal&#39; | &#39;large&#39; | &#39;xl&#39;).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onHighContrastToggled"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onHighContrastToggled</b></span>
+                        <a href="#onHighContrastToggled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onHighContrastToggled(enabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Conmuta el modo de alto contraste extremo (WCAG AAA).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>enabled</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Estado del toggle.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onReducedMotionToggled"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onReducedMotionToggled</b></span>
+                        <a href="#onReducedMotionToggled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onReducedMotionToggled(enabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Conmuta la reducción de movimiento y animaciones complejas.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>enabled</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Estado del toggle.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetAccessibilityDefaults"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>resetAccessibilityDefaults</b></span>
+                        <a href="#resetAccessibilityDefaults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetAccessibilityDefaults()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Restablece las opciones de accesibilidad a los valores estándar de fábrica.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showToast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>showToast</b></span>
+                        <a href="#showToast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showToast(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, color: "primary" | "secondary" | "warning" | "success")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Despliega una notificación toast informativa en la interfaz.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Mensaje a mostrar.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>color</td>
+                                            <td>
+                                                        <code>&quot;primary&quot; | &quot;secondary&quot; | &quot;warning&quot; | &quot;success&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Color del toast.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accessibilityPrefs$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>accessibilityPrefs$</b></span>
+                        <a href="#accessibilityPrefs$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/AccessibilityPreferences.html" target="_self" >Observable&lt;AccessibilityPreferences&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.accessibilityService.preferences$</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flujo reactivo de preferencias de accesibilidad persistidas</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accessibilityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>accessibilityService</b></span>
+                        <a href="#accessibilityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AccessibilityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentUser$</b></span>
+                        <a href="#currentUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectCurrentUser)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:44</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Datos del usuario autenticado desde el estado global de NgRx</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store&lt;AppState&gt;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastCtrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastCtrl</b></span>
+                        <a href="#toastCtrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastController)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userFullName$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userFullName$</b></span>
+                        <a href="#userFullName$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectUserFullName)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userRoleLabel$"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userRoleLabel$</b></span>
+                        <a href="#userRoleLabel$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectUserRoleLabel)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/profile/pages/profile/profile.page.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ChangeDetectionStrategy, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { IonicModule, ToastController } from &#x27;@ionic/angular/lazy&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+
+import { AppState } from &#x27;../../../../state/app.state&#x27;;
+import {
+  selectCurrentUser,
+  selectUserFullName,
+  selectUserRoleLabel
+} from &#x27;../../../../state/auth/auth.selectors&#x27;;
+import {
+  AccessibilityService,
+  AccessibilityPreferences,
+  FontSizeScale
+} from &#x27;../../../../core/services/accessibility.service&#x27;;
+
+/**
+ * @component ProfilePage
+ * @description Vista del perfil del usuario autenticado y panel de preferencias de accesibilidad
+ * y experiencia universal conforme a las directrices WCAG 2.1 AA/AAA.
+ *
+ * @remarks
+ * Cumple con los criterios de evaluación:
+ * - RA 1: Conexión reactiva al store de NgRx para visualización del usuario actual.
+ * - RA 4: Panel interactivo de accesibilidad con escalado tipográfico, modo alto contraste WCAG AAA y reducción de movimiento.
+ * - RA 6: Documentación técnica completa JSDoc/Compodoc.
+ */
+@Component({
+  selector: &#x27;app-profile&#x27;,
+  standalone: true,
+  imports: [CommonModule, IonicModule],
+  templateUrl: &#x27;./profile.page.html&#x27;,
+  styleUrls: [&#x27;./profile.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ProfilePage {
+  private readonly store &#x3D; inject(Store&lt;AppState&gt;);
+  private readonly accessibilityService &#x3D; inject(AccessibilityService);
+  private readonly toastCtrl &#x3D; inject(ToastController);
+
+  /** Datos del usuario autenticado desde el estado global de NgRx */
+  readonly currentUser$ &#x3D; this.store.select(selectCurrentUser);
+  readonly userFullName$ &#x3D; this.store.select(selectUserFullName);
+  readonly userRoleLabel$ &#x3D; this.store.select(selectUserRoleLabel);
+
+  /** Flujo reactivo de preferencias de accesibilidad persistidas */
+  readonly accessibilityPrefs$: Observable&lt;AccessibilityPreferences&gt; &#x3D;
+    this.accessibilityService.preferences$;
+
+  /**
+   * Modifica el tamaño de la tipografía escalable.
+   *
+   * @param {FontSizeScale} size - Escala seleccionada (&#x27;normal&#x27; | &#x27;large&#x27; | &#x27;xl&#x27;).
+   */
+  async onFontSizeChanged(size: FontSizeScale): Promise&lt;void&gt; {
+    this.accessibilityService.setFontSize(size);
+    const label &#x3D; size &#x3D;&#x3D;&#x3D; &#x27;normal&#x27; ? &#x27;Normal (100%)&#x27; : size &#x3D;&#x3D;&#x3D; &#x27;large&#x27; ? &#x27;Grande (115%)&#x27; : &#x27;Extra Grande (130%)&#x27;;
+    await this.showToast(&#x60;Tamaño de tipografía actualizado a: ${label}&#x60;, &#x27;primary&#x27;);
+  }
+
+  /**
+   * Conmuta el modo de alto contraste extremo (WCAG AAA).
+   *
+   * @param {boolean} enabled - Estado del toggle.
+   */
+  async onHighContrastToggled(enabled: boolean): Promise&lt;void&gt; {
+    this.accessibilityService.setHighContrast(enabled);
+    const msg &#x3D; enabled
+      ? &#x27;Modo Alto Contraste (WCAG AAA) activado&#x27;
+      : &#x27;Modo Alto Contraste desactivado&#x27;;
+    await this.showToast(msg, enabled ? &#x27;warning&#x27; : &#x27;primary&#x27;);
+  }
+
+  /**
+   * Conmuta la reducción de movimiento y animaciones complejas.
+   *
+   * @param {boolean} enabled - Estado del toggle.
+   */
+  async onReducedMotionToggled(enabled: boolean): Promise&lt;void&gt; {
+    this.accessibilityService.setReducedMotion(enabled);
+    const msg &#x3D; enabled
+      ? &#x27;Reducción de movimiento activada&#x27;
+      : &#x27;Animaciones estándar restauradas&#x27;;
+    await this.showToast(msg, &#x27;secondary&#x27;);
+  }
+
+  /**
+   * Restablece las opciones de accesibilidad a los valores estándar de fábrica.
+   */
+  async resetAccessibilityDefaults(): Promise&lt;void&gt; {
+    this.accessibilityService.resetToDefaults();
+    await this.showToast(&#x27;Opciones de accesibilidad restablecidas a valores estándar&#x27;, &#x27;primary&#x27;);
+  }
+
+  /**
+   * Despliega una notificación toast informativa en la interfaz.
+   *
+   * @param {string} message - Mensaje a mostrar.
+   * @param {&#x27;primary&#x27; | &#x27;secondary&#x27; | &#x27;warning&#x27; | &#x27;success&#x27;} color - Color del toast.
+   * @private
+   */
+  private async showToast(
+    message: string,
+    color: &#x27;primary&#x27; | &#x27;secondary&#x27; | &#x27;warning&#x27; | &#x27;success&#x27;
+  ): Promise&lt;void&gt; {
+    const toast &#x3D; await this.toastCtrl.create({
+      message,
+      duration: 2500,
+      color,
+      position: &#x27;bottom&#x27;,
+      buttons: [{ text: &#x27;OK&#x27;, role: &#x27;cancel&#x27; }]
+    });
+    await toast.present();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border header-glass&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot;&gt;&lt;/ion-menu-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;Mi Perfil y Preferencias&lt;/ion-title&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;page-content&quot; id&#x3D;&quot;profile-content&quot;&gt;
+  &lt;div class&#x3D;&quot;content-container&quot;&gt;
+
+    @if (currentUser$ | async; as user) {
+      &lt;!-- Tarjeta Principal de Perfil del Usuario --&gt;
+      &lt;section class&#x3D;&quot;profile-hero-card&quot; aria-label&#x3D;&quot;Información de la cuenta de usuario&quot;&gt;
+        &lt;div class&#x3D;&quot;profile-hero-layout&quot;&gt;
+          &lt;div class&#x3D;&quot;avatar-container&quot;&gt;
+            &lt;img
+              [src]&#x3D;&quot;user.avatarUrl&quot;
+              [alt]&#x3D;&quot;&#x27;Fotografía de perfil de &#x27; + (userFullName$ | async)&quot;
+              class&#x3D;&quot;user-avatar-img&quot;
+            /&gt;
+            &lt;div class&#x3D;&quot;status-indicator online&quot; title&#x3D;&quot;Sesión activa&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;user-meta&quot;&gt;
+            &lt;div class&#x3D;&quot;name-role-row&quot;&gt;
+              &lt;h1 class&#x3D;&quot;user-display-name&quot;&gt;{{ userFullName$ | async }}&lt;/h1&gt;
+              &lt;span class&#x3D;&quot;role-pill&quot; [class.admin]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+                &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;shield-checkmark-outline&#x27; : &#x27;person-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                {{ userRoleLabel$ | async }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;p class&#x3D;&quot;user-email-text&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;mail-outline&quot;&gt;&lt;/ion-icon&gt;
+              {{ user.email }}
+            &lt;/p&gt;
+
+            &lt;div class&#x3D;&quot;meta-chips&quot;&gt;
+              &lt;span class&#x3D;&quot;meta-chip&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;finger-print-outline&quot;&gt;&lt;/ion-icon&gt; ID: &lt;code&gt;{{ user.id }}&lt;/code&gt;
+              &lt;/span&gt;
+              &lt;span class&#x3D;&quot;meta-chip&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;time-outline&quot;&gt;&lt;/ion-icon&gt; Último acceso: {{ user.lastLoginAt | date:&#x27;medium&#x27; }}
+              &lt;/span&gt;
+              &lt;span class&#x3D;&quot;meta-chip active-state&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;checkmark-circle-outline&quot;&gt;&lt;/ion-icon&gt; Cuenta Activa
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;!-- Grid con Permisos de Rol y Panel de Accesibilidad --&gt;
+      &lt;div class&#x3D;&quot;profile-layout-grid&quot;&gt;
+        
+        &lt;!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA - RA 4) --&gt;
+        &lt;section class&#x3D;&quot;settings-card&quot; aria-label&#x3D;&quot;Preferencias de accesibilidad y visualización&quot;&gt;
+          &lt;div class&#x3D;&quot;card-header-bar&quot;&gt;
+            &lt;div class&#x3D;&quot;header-icon-title&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;accessibility-outline&quot; class&#x3D;&quot;section-icon a11y&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div&gt;
+                &lt;h2&gt;Accesibilidad &amp; Experiencia Universal&lt;/h2&gt;
+                &lt;p&gt;Personaliza la visualización conforme a los estándares WCAG 2.1 AA/AAA&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;settings-body&quot; *ngIf&#x3D;&quot;accessibilityPrefs$ | async as prefs&quot;&gt;
+            
+            &lt;!-- 1. Escala de Tipografía --&gt;
+            &lt;div class&#x3D;&quot;setting-item&quot;&gt;
+              &lt;div class&#x3D;&quot;setting-info&quot;&gt;
+                &lt;label class&#x3D;&quot;setting-title&quot;&gt;Tamaño de Tipografía&lt;/label&gt;
+                &lt;p class&#x3D;&quot;setting-desc&quot;&gt;Aumenta el tamaño del texto en toda la interfaz sin desbordamientos visuales.&lt;/p&gt;
+              &lt;/div&gt;
+              
+              &lt;div class&#x3D;&quot;font-scale-selector&quot; role&#x3D;&quot;radiogroup&quot; aria-label&#x3D;&quot;Selector de tamaño de texto&quot;&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  class&#x3D;&quot;scale-btn&quot;
+                  [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27;&quot;
+                  (click)&#x3D;&quot;onFontSizeChanged(&#x27;normal&#x27;)&quot;
+                  role&#x3D;&quot;radio&quot;
+                  [attr.aria-checked]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27;&quot;&gt;
+                  &lt;span class&#x3D;&quot;sample-a&quot;&gt;A&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;scale-label&quot;&gt;Normal (100%)&lt;/span&gt;
+                &lt;/button&gt;
+
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  class&#x3D;&quot;scale-btn&quot;
+                  [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27;&quot;
+                  (click)&#x3D;&quot;onFontSizeChanged(&#x27;large&#x27;)&quot;
+                  role&#x3D;&quot;radio&quot;
+                  [attr.aria-checked]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27;&quot;&gt;
+                  &lt;span class&#x3D;&quot;sample-a large&quot;&gt;A&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;scale-label&quot;&gt;Grande (115%)&lt;/span&gt;
+                &lt;/button&gt;
+
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  class&#x3D;&quot;scale-btn&quot;
+                  [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27;&quot;
+                  (click)&#x3D;&quot;onFontSizeChanged(&#x27;xl&#x27;)&quot;
+                  role&#x3D;&quot;radio&quot;
+                  [attr.aria-checked]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27;&quot;&gt;
+                  &lt;span class&#x3D;&quot;sample-a xl&quot;&gt;A&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;scale-label&quot;&gt;Extra Grande (130%)&lt;/span&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- 2. Modo Alto Contraste (WCAG AAA) --&gt;
+            &lt;div class&#x3D;&quot;setting-item toggle-row&quot;&gt;
+              &lt;div class&#x3D;&quot;setting-info&quot;&gt;
+                &lt;label for&#x3D;&quot;high-contrast-toggle&quot; class&#x3D;&quot;setting-title&quot;&gt;Modo Alto Contraste (WCAG AAA)&lt;/label&gt;
+                &lt;p class&#x3D;&quot;setting-desc&quot;&gt;
+                  Fondo negro puro (#000000) con ratio de contraste superior a 7:1 para personas con baja visión o fotofobia.
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;ion-toggle
+                id&#x3D;&quot;high-contrast-toggle&quot;
+                [checked]&#x3D;&quot;prefs.highContrast&quot;
+                (ionChange)&#x3D;&quot;onHighContrastToggled($event.detail.checked)&quot;
+                color&#x3D;&quot;warning&quot;
+                aria-label&#x3D;&quot;Activar o desactivar modo de alto contraste WCAG AAA&quot;&gt;
+              &lt;/ion-toggle&gt;
+            &lt;/div&gt;
+
+            &lt;!-- 3. Reducción de Movimiento --&gt;
+            &lt;div class&#x3D;&quot;setting-item toggle-row&quot;&gt;
+              &lt;div class&#x3D;&quot;setting-info&quot;&gt;
+                &lt;label for&#x3D;&quot;reduced-motion-toggle&quot; class&#x3D;&quot;setting-title&quot;&gt;Reducción de Movimiento&lt;/label&gt;
+                &lt;p class&#x3D;&quot;setting-desc&quot;&gt;
+                  Desactiva animaciones complejas y transiciones CSS para prevenir mareos y acelerar la renderización.
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;ion-toggle
+                id&#x3D;&quot;reduced-motion-toggle&quot;
+                [checked]&#x3D;&quot;prefs.reducedMotion&quot;
+                (ionChange)&#x3D;&quot;onReducedMotionToggled($event.detail.checked)&quot;
+                color&#x3D;&quot;secondary&quot;
+                aria-label&#x3D;&quot;Activar o desactivar reducción de movimiento&quot;&gt;
+              &lt;/ion-toggle&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Botón de Restablecer Preferencias --&gt;
+            &lt;div class&#x3D;&quot;settings-footer&quot;&gt;
+              &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;reset-btn&quot; (click)&#x3D;&quot;resetAccessibilityDefaults()&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;refresh-outline&quot;&gt;&lt;/ion-icon&gt;
+                Restablecer Opciones Predeterminadas
+              &lt;/button&gt;
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad --&gt;
+        &lt;section class&#x3D;&quot;permissions-card&quot; aria-label&#x3D;&quot;Permisos asignados según el rol del usuario&quot;&gt;
+          &lt;div class&#x3D;&quot;card-header-bar&quot;&gt;
+            &lt;div class&#x3D;&quot;header-icon-title&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;shield-outline&quot; class&#x3D;&quot;section-icon permissions&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div&gt;
+                &lt;h2&gt;Permisos del Rol (RBAC)&lt;/h2&gt;
+                &lt;p&gt;Capacidades autorizadas para tu perfil en esta sesión&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;permissions-list&quot;&gt;
+            &lt;div class&#x3D;&quot;permission-item&quot; [class.granted]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+              &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
+                &lt;strong&gt;Dashboard Analítico Ejecutivo&lt;/strong&gt;
+                &lt;span&gt;Visualización de KPIs, gráficos de evolución y distribución financiera.&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span class&#x3D;&quot;perm-status-tag&quot; [class.admin-tag]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+                {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Solo Administrador&#x27; }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;permission-item&quot; [class.granted]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+              &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
+                &lt;strong&gt;Generador de Informes Oficiales&lt;/strong&gt;
+                &lt;span&gt;Previsualización tabulada y exportación en PDF corporativo (autoTable).&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span class&#x3D;&quot;perm-status-tag&quot; [class.admin-tag]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+                {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Solo Administrador&#x27; }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;permission-item granted&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
+                &lt;strong&gt;Gestión Integral de Registros (CRUD)&lt;/strong&gt;
+                &lt;span&gt;Búsqueda, ordenación, filtrado y alta de registros con SKU asíncrono.&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span class&#x3D;&quot;perm-status-tag all-tag&quot;&gt;Habilitado&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;permission-item granted&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
+                &lt;strong&gt;Exportación Rápida a CSV (Excel UTF-8)&lt;/strong&gt;
+                &lt;span&gt;Descarga estructurada del dataset compatible con hojas de cálculo.&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span class&#x3D;&quot;perm-status-tag all-tag&quot;&gt;Habilitado&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;permission-item granted&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
+                &lt;strong&gt;Manual de Usuario &amp; Centro de Ayuda&lt;/strong&gt;
+                &lt;span&gt;Documentación embebida y atajos de teclado sin restricciones.&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span class&#x3D;&quot;perm-status-tag all-tag&quot;&gt;Habilitado&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Detalles Técnicos de la Sesión --&gt;
+          &lt;div class&#x3D;&quot;session-box&quot;&gt;
+            &lt;h4&gt;&lt;ion-icon name&#x3D;&quot;terminal-outline&quot;&gt;&lt;/ion-icon&gt; Información Técnica de Sesión&lt;/h4&gt;
+            &lt;div class&#x3D;&quot;session-details-grid&quot;&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;s-label&quot;&gt;Tipo de Autenticación:&lt;/span&gt;
+                &lt;span class&#x3D;&quot;s-value&quot;&gt;Bearer Token (Simulado JWT)&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;s-label&quot;&gt;Manejador de Estado:&lt;/span&gt;
+                &lt;span class&#x3D;&quot;s-value&quot;&gt;NgRx Store v22 (Redux Pattern)&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;s-label&quot;&gt;Detección de Cambios:&lt;/span&gt;
+                &lt;span class&#x3D;&quot;s-value&quot;&gt;ChangeDetectionStrategy.OnPush&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;s-label&quot;&gt;Almacenamiento Local:&lt;/span&gt;
+                &lt;span class&#x3D;&quot;s-value&quot;&gt;LocalStorage Cifrado (Tokens + Prefs)&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+        &lt;/section&gt;
+
+      &lt;/div&gt;
+    }
+
+  &lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./profile.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.page-content {
+  --background: #0b1120;
+  color: #f8fafc;
+}
+
+.content-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3.5rem 1rem;
+}
+
+.profile-hero-card {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+
+  .profile-hero-layout {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 650px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+
+    .user-avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #6366f1;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
+    }
+
+    .status-indicator {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #10b981;
+      border: 3px solid #111827;
+    }
+  }
+
+  .user-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    .name-role-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      @media (max-width: 650px) {
+        justify-content: center;
+      }
+
+      .user-display-name {
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: #ffffff;
+        margin: 0;
+      }
+    }
+
+    .user-email-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin: 0;
+
+      @media (max-width: 650px) {
+        justify-content: center;
+      }
+
+      ion-icon {
+        color: #38bdf8;
+      }
+    }
+
+    .meta-chips {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+
+      @media (max-width: 650px) {
+        justify-content: center;
+      }
+
+      .meta-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: #1e293b;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 0.3rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        color: #cbd5e1;
+
+        code {
+          color: #38bdf8;
+          font-family: monospace;
+        }
+
+        &amp;.active-state {
+          color: #34d399;
+          border-color: rgba(16, 185, 129, 0.25);
+          background: rgba(16, 185, 129, 0.1);
+        }
+      }
+    }
+  }
+}
+
+.role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+
+  &amp;.admin {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+}
+
+.profile-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settings-card,
+.permissions-card {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.card-header-bar {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  .header-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+
+    .section-icon {
+      font-size: 1.85rem;
+
+      &amp;.a11y { color: #38bdf8; }
+      &amp;.permissions { color: #818cf8; }
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 0.2rem 0;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin: 0;
+    }
+  }
+}
+
+.settings-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &amp;.toggle-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    .setting-info {
+      max-width: 78%;
+    }
+  }
+
+  .setting-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f1f5f9;
+  }
+
+  .setting-desc {
+    font-size: 0.825rem;
+    color: #94a3b8;
+    line-height: 1.45;
+    margin: 0.2rem 0 0 0;
+  }
+}
+
+.font-scale-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+
+  .scale-btn {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.75rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #94a3b8;
+
+    &amp;:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+
+    &amp;.active {
+      background: #3b82f6;
+      border-color: #60a5fa;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+
+    .sample-a {
+      font-weight: 800;
+      font-size: 1.1rem;
+
+      &amp;.large { font-size: 1.35rem; }
+      &amp;.xl { font-size: 1.6rem; }
+    }
+
+    .scale-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.settings-footer {
+  margin-top: 0.5rem;
+
+  .reset-btn {
+    background: none;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+
+    &amp;:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #f1f5f9;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.permissions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+
+  .permission-item {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+
+    .perm-icon {
+      font-size: 1.35rem;
+      color: #64748b;
+      flex-shrink: 0;
+    }
+
+    &amp;.granted {
+      .perm-icon {
+        color: #10b981;
+      }
+    }
+
+    .perm-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+
+      strong {
+        font-size: 0.875rem;
+        color: #f1f5f9;
+      }
+
+      span {
+        font-size: 0.775rem;
+        color: #94a3b8;
+      }
+    }
+
+    .perm-status-tag {
+      font-size: 0.725rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+
+      &amp;.admin-tag {
+        background: rgba(245, 158, 11, 0.15);
+        color: #fbbf24;
+      }
+
+      &amp;.all-tag {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34d399;
+      }
+    }
+  }
+}
+
+.session-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 1rem;
+
+  h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.75rem 0;
+
+    ion-icon {
+      color: #38bdf8;
+    }
+  }
+
+  .session-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+
+    @media (max-width: 550px) {
+      grid-template-columns: 1fr;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+
+      .s-label {
+        font-size: 0.725rem;
+        color: #64748b;
+      }
+
+      .s-value {
+        font-size: 0.8rem;
+        color: #e2e8f0;
+        font-family: monospace;
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Mi Perfil y Preferencias</ion-title>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content" id="profile-content">  <div class="content-container">    @if (currentUser$ | async; as user) {      <!-- Tarjeta Principal de Perfil del Usuario -->      <section class="profile-hero-card" aria-label="Información de la cuenta de usuario">        <div class="profile-hero-layout">          <div class="avatar-container">            <img              [src]="user.avatarUrl"              [alt]="\'Fotografía de perfil de \' + (userFullName$ | async)"              class="user-avatar-img"            />            <div class="status-indicator online" title="Sesión activa"></div>          </div>          <div class="user-meta">            <div class="name-role-row">              <h1 class="user-display-name">{{ userFullName$ | async }}</h1>              <span class="role-pill" [class.admin]="user.role === \'ADMIN\'">                <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'"></ion-icon>                {{ userRoleLabel$ | async }}              </span>            </div>            <p class="user-email-text">              <ion-icon name="mail-outline"></ion-icon>              {{ user.email }}            </p>            <div class="meta-chips">              <span class="meta-chip">                <ion-icon name="finger-print-outline"></ion-icon> ID: <code>{{ user.id }}</code>              </span>              <span class="meta-chip">                <ion-icon name="time-outline"></ion-icon> Último acceso: {{ user.lastLoginAt | date:\'medium\' }}              </span>              <span class="meta-chip active-state">                <ion-icon name="checkmark-circle-outline"></ion-icon> Cuenta Activa              </span>            </div>          </div>        </div>      </section>      <!-- Grid con Permisos de Rol y Panel de Accesibilidad -->      <div class="profile-layout-grid">                <!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA - RA 4) -->        <section class="settings-card" aria-label="Preferencias de accesibilidad y visualización">          <div class="card-header-bar">            <div class="header-icon-title">              <ion-icon name="accessibility-outline" class="section-icon a11y"></ion-icon>              <div>                <h2>Accesibilidad & Experiencia Universal</h2>                <p>Personaliza la visualización conforme a los estándares WCAG 2.1 AA/AAA</p>              </div>            </div>          </div>          <div class="settings-body" *ngIf="accessibilityPrefs$ | async as prefs">                        <!-- 1. Escala de Tipografía -->            <div class="setting-item">              <div class="setting-info">                <label class="setting-title">Tamaño de Tipografía</label>                <p class="setting-desc">Aumenta el tamaño del texto en toda la interfaz sin desbordamientos visuales.</p>              </div>                            <div class="font-scale-selector" role="radiogroup" aria-label="Selector de tamaño de texto">                <button                  type="button"                  class="scale-btn"                  [class.active]="prefs.fontSize === \'normal\'"                  (click)="onFontSizeChanged(\'normal\')"                  role="radio"                  [attr.aria-checked]="prefs.fontSize === \'normal\'">                  <span class="sample-a">A</span>                  <span class="scale-label">Normal (100%)</span>                </button>                <button                  type="button"                  class="scale-btn"                  [class.active]="prefs.fontSize === \'large\'"                  (click)="onFontSizeChanged(\'large\')"                  role="radio"                  [attr.aria-checked]="prefs.fontSize === \'large\'">                  <span class="sample-a large">A</span>                  <span class="scale-label">Grande (115%)</span>                </button>                <button                  type="button"                  class="scale-btn"                  [class.active]="prefs.fontSize === \'xl\'"                  (click)="onFontSizeChanged(\'xl\')"                  role="radio"                  [attr.aria-checked]="prefs.fontSize === \'xl\'">                  <span class="sample-a xl">A</span>                  <span class="scale-label">Extra Grande (130%)</span>                </button>              </div>            </div>            <!-- 2. Modo Alto Contraste (WCAG AAA) -->            <div class="setting-item toggle-row">              <div class="setting-info">                <label for="high-contrast-toggle" class="setting-title">Modo Alto Contraste (WCAG AAA)</label>                <p class="setting-desc">                  Fondo negro puro (#000000) con ratio de contraste superior a 7:1 para personas con baja visión o fotofobia.                </p>              </div>              <ion-toggle                id="high-contrast-toggle"                [checked]="prefs.highContrast"                (ionChange)="onHighContrastToggled($event.detail.checked)"                color="warning"                aria-label="Activar o desactivar modo de alto contraste WCAG AAA">              </ion-toggle>            </div>            <!-- 3. Reducción de Movimiento -->            <div class="setting-item toggle-row">              <div class="setting-info">                <label for="reduced-motion-toggle" class="setting-title">Reducción de Movimiento</label>                <p class="setting-desc">                  Desactiva animaciones complejas y transiciones CSS para prevenir mareos y acelerar la renderización.                </p>              </div>              <ion-toggle                id="reduced-motion-toggle"                [checked]="prefs.reducedMotion"                (ionChange)="onReducedMotionToggled($event.detail.checked)"                color="secondary"                aria-label="Activar o desactivar reducción de movimiento">              </ion-toggle>            </div>            <!-- Botón de Restablecer Preferencias -->            <div class="settings-footer">              <button type="button" class="reset-btn" (click)="resetAccessibilityDefaults()">                <ion-icon name="refresh-outline"></ion-icon>                Restablecer Opciones Predeterminadas              </button>            </div>          </div>        </section>        <!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad -->        <section class="permissions-card" aria-label="Permisos asignados según el rol del usuario">          <div class="card-header-bar">            <div class="header-icon-title">              <ion-icon name="shield-outline" class="section-icon permissions"></ion-icon>              <div>                <h2>Permisos del Rol (RBAC)</h2>                <p>Capacidades autorizadas para tu perfil en esta sesión</p>              </div>            </div>          </div>          <div class="permissions-list">            <div class="permission-item" [class.granted]="user.role === \'ADMIN\'">              <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Dashboard Analítico Ejecutivo</strong>                <span>Visualización de KPIs, gráficos de evolución y distribución financiera.</span>              </div>              <span class="perm-status-tag" [class.admin-tag]="user.role === \'ADMIN\'">                {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Solo Administrador\' }}              </span>            </div>            <div class="permission-item" [class.granted]="user.role === \'ADMIN\'">              <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Generador de Informes Oficiales</strong>                <span>Previsualización tabulada y exportación en PDF corporativo (autoTable).</span>              </div>              <span class="perm-status-tag" [class.admin-tag]="user.role === \'ADMIN\'">                {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Solo Administrador\' }}              </span>            </div>            <div class="permission-item granted">              <ion-icon name="checkmark-circle" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Gestión Integral de Registros (CRUD)</strong>                <span>Búsqueda, ordenación, filtrado y alta de registros con SKU asíncrono.</span>              </div>              <span class="perm-status-tag all-tag">Habilitado</span>            </div>            <div class="permission-item granted">              <ion-icon name="checkmark-circle" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Exportación Rápida a CSV (Excel UTF-8)</strong>                <span>Descarga estructurada del dataset compatible con hojas de cálculo.</span>              </div>              <span class="perm-status-tag all-tag">Habilitado</span>            </div>            <div class="permission-item granted">              <ion-icon name="checkmark-circle" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Manual de Usuario & Centro de Ayuda</strong>                <span>Documentación embebida y atajos de teclado sin restricciones.</span>              </div>              <span class="perm-status-tag all-tag">Habilitado</span>            </div>          </div>          <!-- Detalles Técnicos de la Sesión -->          <div class="session-box">            <h4><ion-icon name="terminal-outline"></ion-icon> Información Técnica de Sesión</h4>            <div class="session-details-grid">              <div>                <span class="s-label">Tipo de Autenticación:</span>                <span class="s-value">Bearer Token (Simulado JWT)</span>              </div>              <div>                <span class="s-label">Manejador de Estado:</span>                <span class="s-value">NgRx Store v22 (Redux Pattern)</span>              </div>              <div>                <span class="s-label">Detección de Cambios:</span>                <span class="s-value">ChangeDetectionStrategy.OnPush</span>              </div>              <div>                <span class="s-label">Almacenamiento Local:</span>                <span class="s-value">LocalStorage Cifrado (Tokens + Prefs)</span>              </div>            </div>          </div>        </section>      </div>    }  </div></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
+    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'ProfilePage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProfilePage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

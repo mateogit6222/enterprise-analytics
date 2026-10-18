@@ -1,0 +1,2643 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#AUTH_ROUTES" title="src/app/features/auth/auth.routes.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>AUTH_ROUTES</b>&nbsp;&nbsp;&nbsp;(src/.../auth.routes.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#AuthActions" title="src/app/state/auth/auth.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>AuthActions</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#authInterceptor" title="src/app/core/interceptors/auth.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>authInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../auth.interceptor.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#authReducer" title="src/app/state/auth/auth.reducer.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>authReducer</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#clearFilters" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>clearFilters</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#createRecord" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>createRecord</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#createRecordFailure" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>createRecordFailure</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#createRecordSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>createRecordSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#dataReducer" title="src/app/state/data/data.reducer.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>dataReducer</b>&nbsp;&nbsp;&nbsp;(src/.../data.reducer.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#deleteRecord" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>deleteRecord</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#deleteRecordFailure" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>deleteRecordFailure</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#deleteRecordSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>deleteRecordSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.prod.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#errorInterceptor" title="src/app/core/interceptors/error.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>errorInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../error.interceptor.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#exportRecords" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>exportRecords</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#exportRecordsFailure" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>exportRecordsFailure</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#exportRecordsSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>exportRecordsSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#initialAuthState" title="src/app/state/auth/auth.reducer.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>initialAuthState</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#initialDataState" title="src/app/state/data/data.reducer.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>initialDataState</b>&nbsp;&nbsp;&nbsp;(src/.../data.reducer.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#loadAllData" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>loadAllData</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#loadAllDataFailure" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>loadAllDataFailure</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#loadAllDataSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>loadAllDataSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectAllRecords" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectAllRecords</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectAuthError" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectAuthError</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectAuthState" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectAuthState</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectCalculatedKpis" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectCalculatedKpis</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectCategoryDistribution" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectCategoryDistribution</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectCurrentUser" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectCurrentUser</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectDashboardAggregate" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectDashboardAggregate</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectDataError" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectDataError</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectDataExporting" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectDataExporting</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectDataLoading" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectDataLoading</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectDataState" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectDataState</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectFilteredRecords" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectFilteredRecords</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectFilters" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectFilters</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectIsAdmin" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectIsAdmin</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectIsAuthenticated" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectIsAuthenticated</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectIsLoading" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectIsLoading</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectRawKpis" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectRawKpis</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectTimelineChartData" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectTimelineChartData</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectTimeRange" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectTimeRange</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectUserFullName" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectUserFullName</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#selectUserRoleLabel" title="src/app/state/auth/auth.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectUserRoleLabel</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#setFilters" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>setFilters</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#setTimeRange" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>setTimeRange</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#STORAGE_KEYS" title="src/app/core/services/auth.service.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>STORAGE_KEYS</b>&nbsp;&nbsp;&nbsp;(src/.../auth.service.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#updateRecord" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>updateRecord</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#updateRecordFailure" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>updateRecordFailure</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#updateRecordSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>updateRecordSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/features/auth/auth.routes.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AUTH_ROUTES"></a>
+                    <span class="name">
+                        <span ><b>AUTH_ROUTES</b></span>
+                        <a href="#AUTH_ROUTES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/router/Routes" target="_blank" >Routes</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    path: &#x27;login&#x27;,
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./pages/login/login.page&#x27;).then(m &#x3D;&gt; m.LoginPage)&quot;,
+    title: &#x27;Iniciar Sesión | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;register&#x27;,
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./pages/register/register.page&#x27;).then(m &#x3D;&gt; m.RegisterPage)&quot;,
+    title: &#x27;Crear Cuenta | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;&#x27;,
+    redirectTo: &#x27;login&#x27;,
+    pathMatch: &#x27;full&#x27;
+  }
+]</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rutas del módulo de autenticación con Lazy Loading.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/auth/auth.actions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AuthActions"></a>
+                    <span class="name">
+                        <span ><b>AuthActions</b></span>
+                        <a href="#AuthActions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createActionGroup({
+  source: &#x27;Auth&#x27;,
+  events: {
+    /**
+     * Inicia el proceso de login con credenciales.
+     * @param {LoginCredentials} credentials - Email y contraseña.
+     */
+    &#x27;Login&#x27;: props&lt;{ credentials: LoginCredentials }&gt;(),
+
+    /**
+     * Login completado con éxito.
+     * @param {AuthResponse} response - Respuesta con usuario y tokens.
+     */
+    &#x27;Login Success&#x27;: props&lt;{ response: AuthResponse }&gt;(),
+
+    /**
+     * Login fallido.
+     * @param {string} error - Mensaje de error descriptivo.
+     */
+    &#x27;Login Failure&#x27;: props&lt;{ error: string }&gt;(),
+
+    /**
+     * Inicia el proceso de registro de un nuevo usuario.
+     * @param {RegisterData} data - Datos del formulario de registro.
+     */
+    &#x27;Register&#x27;: props&lt;{ data: RegisterData }&gt;(),
+
+    /**
+     * Registro completado con éxito.
+     * @param {AuthResponse} response - Respuesta con usuario creado y tokens.
+     */
+    &#x27;Register Success&#x27;: props&lt;{ response: AuthResponse }&gt;(),
+
+    /**
+     * Registro fallido.
+     * @param {string} error - Mensaje de error descriptivo.
+     */
+    &#x27;Register Failure&#x27;: props&lt;{ error: string }&gt;(),
+
+    /**
+     * Cierra la sesión del usuario actual.
+     */
+    &#x27;Logout&#x27;: emptyProps(),
+
+    /**
+     * Limpia cualquier mensaje de error del estado.
+     */
+    &#x27;Clear Error&#x27;: emptyProps(),
+
+    /**
+     * Restaura la sesión desde localStorage al iniciar la aplicación.
+     * @param {User} user - Usuario recuperado del storage.
+     */
+    &#x27;Restore Session&#x27;: props&lt;{ user: User }&gt;()
+  }
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/interceptors/auth.interceptor.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authInterceptor"></a>
+                    <span class="name">
+                        <span ><b>authInterceptor</b></span>
+                        <a href="#authInterceptor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/common/http/HttpInterceptorFn" target="_blank" >HttpInterceptorFn</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(req, next) &#x3D;&gt; {
+  const authService &#x3D; inject(AuthService);
+  const token &#x3D; authService.getAccessToken();
+
+  /** No interceptar peticiones a recursos estáticos */
+  if (req.url.includes(&#x27;assets/&#x27;)) {
+    return next(req);
+  }
+
+  /** Si hay token, clonar la petición con el header Authorization */
+  if (token) {
+    const clonedReq &#x3D; req.clone({
+      setHeaders: {
+        Authorization: &#x60;Bearer ${token}&#x60;
+      }
+    });
+    return next(clonedReq);
+  }
+
+  return next(req);
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Interceptor funcional de autenticación HTTP.</p>
+<p>Inyecta automáticamente el token JWT de acceso en el header
+<code>Authorization</code> de todas las peticiones HTTP salientes.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/auth/auth.reducer.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authReducer"></a>
+                    <span class="name">
+                        <span ><b>authReducer</b></span>
+                        <a href="#authReducer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createReducer(
+  initialAuthState,
+
+  /** &#x3D;&#x3D;&#x3D; FLUJO DE LOGIN &#x3D;&#x3D;&#x3D; */
+
+  on(AuthActions.login, (state) &#x3D;&gt; ({
+    ...state,
+    isLoading: true,
+    error: null
+  })),
+
+  on(AuthActions.loginSuccess, (state, { response }) &#x3D;&gt; ({
+    ...state,
+    user: response.user,
+    isAuthenticated: true,
+    isLoading: false,
+    error: null
+  })),
+
+  on(AuthActions.loginFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+    error
+  })),
+
+  /** &#x3D;&#x3D;&#x3D; FLUJO DE REGISTRO &#x3D;&#x3D;&#x3D; */
+
+  on(AuthActions.register, (state) &#x3D;&gt; ({
+    ...state,
+    isLoading: true,
+    error: null
+  })),
+
+  on(AuthActions.registerSuccess, (state, { response }) &#x3D;&gt; ({
+    ...state,
+    user: response.user,
+    isAuthenticated: true,
+    isLoading: false,
+    error: null
+  })),
+
+  on(AuthActions.registerFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    isLoading: false,
+    error
+  })),
+
+  /** &#x3D;&#x3D;&#x3D; LOGOUT &#x3D;&#x3D;&#x3D; */
+
+  on(AuthActions.logout, () &#x3D;&gt; ({
+    ...initialAuthState
+  })),
+
+  /** &#x3D;&#x3D;&#x3D; UTILIDADES &#x3D;&#x3D;&#x3D; */
+
+  on(AuthActions.clearError, (state) &#x3D;&gt; ({
+    ...state,
+    error: null
+  })),
+
+  on(AuthActions.restoreSession, (state, { user }) &#x3D;&gt; ({
+    ...state,
+    user,
+    isAuthenticated: true,
+    isLoading: false,
+    error: null
+  }))
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reducer de autenticación.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialAuthState"></a>
+                    <span class="name">
+                        <span ><b>initialAuthState</b></span>
+                        <a href="#initialAuthState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/AuthState.html" target="_self" >AuthState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  user: null,
+  isAuthenticated: false,
+  isLoading: false,
+  error: null
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado inicial del módulo de autenticación.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/data/data.actions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearFilters"></a>
+                    <span class="name">
+                        <span ><b>clearFilters</b></span>
+                        <a href="#clearFilters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Clear Filters&#x27;
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Limpiar todos los filtros</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createRecord"></a>
+                    <span class="name">
+                        <span ><b>createRecord</b></span>
+                        <a href="#createRecord"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Create Record&#x27;,
+  props&lt;{ record: Omit&lt;Record, &#x27;id&#x27; | &#x27;createdAt&#x27; | &#x27;updatedAt&#x27; | &#x27;source&#x27;&gt; }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Crear registro</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createRecordFailure"></a>
+                    <span class="name">
+                        <span ><b>createRecordFailure</b></span>
+                        <a href="#createRecordFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Create Record Failure&#x27;,
+  props&lt;{ error: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createRecordSuccess"></a>
+                    <span class="name">
+                        <span ><b>createRecordSuccess</b></span>
+                        <a href="#createRecordSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Create Record Success&#x27;,
+  props&lt;{ record: Record }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteRecord"></a>
+                    <span class="name">
+                        <span ><b>deleteRecord</b></span>
+                        <a href="#deleteRecord"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Delete Record&#x27;,
+  props&lt;{ id: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Eliminar registro</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteRecordFailure"></a>
+                    <span class="name">
+                        <span ><b>deleteRecordFailure</b></span>
+                        <a href="#deleteRecordFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Delete Record Failure&#x27;,
+  props&lt;{ error: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteRecordSuccess"></a>
+                    <span class="name">
+                        <span ><b>deleteRecordSuccess</b></span>
+                        <a href="#deleteRecordSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Delete Record Success&#x27;,
+  props&lt;{ id: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportRecords"></a>
+                    <span class="name">
+                        <span ><b>exportRecords</b></span>
+                        <a href="#exportRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Export Records&#x27;,
+  props&lt;{ format: &#x27;pdf&#x27; | &#x27;csv&#x27;; filename?: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>─────────── Exportación de Registros ───────────</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportRecordsFailure"></a>
+                    <span class="name">
+                        <span ><b>exportRecordsFailure</b></span>
+                        <a href="#exportRecordsFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Export Records Failure&#x27;,
+  props&lt;{ error: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportRecordsSuccess"></a>
+                    <span class="name">
+                        <span ><b>exportRecordsSuccess</b></span>
+                        <a href="#exportRecordsSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Export Records Success&#x27;,
+  props&lt;{ format: &#x27;pdf&#x27; | &#x27;csv&#x27; }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAllData"></a>
+                    <span class="name">
+                        <span ><b>loadAllData</b></span>
+                        <a href="#loadAllData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Load All Data&#x27;
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dispara la carga concurrente de ambas fuentes de datos</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAllDataFailure"></a>
+                    <span class="name">
+                        <span ><b>loadAllDataFailure</b></span>
+                        <a href="#loadAllDataFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Load All Data Failure&#x27;,
+  props&lt;{ error: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Error en la carga de datos</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAllDataSuccess"></a>
+                    <span class="name">
+                        <span ><b>loadAllDataSuccess</b></span>
+                        <a href="#loadAllDataSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Load All Data Success&#x27;,
+  props&lt;{ records: Record[]; kpis: Kpi[] }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Carga exitosa: combina registros de ambas fuentes</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setFilters"></a>
+                    <span class="name">
+                        <span ><b>setFilters</b></span>
+                        <a href="#setFilters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Set Filters&#x27;,
+  props&lt;{ filters: RecordFilters }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Actualizar filtros activos</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setTimeRange"></a>
+                    <span class="name">
+                        <span ><b>setTimeRange</b></span>
+                        <a href="#setTimeRange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Set Time Range&#x27;,
+  props&lt;{ timeRange: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Actualizar rango temporal del dashboard</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateRecord"></a>
+                    <span class="name">
+                        <span ><b>updateRecord</b></span>
+                        <a href="#updateRecord"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Update Record&#x27;,
+  props&lt;{ id: string; changes: Partial&lt;Record&gt; }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Actualizar registro</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateRecordFailure"></a>
+                    <span class="name">
+                        <span ><b>updateRecordFailure</b></span>
+                        <a href="#updateRecordFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Update Record Failure&#x27;,
+  props&lt;{ error: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateRecordSuccess"></a>
+                    <span class="name">
+                        <span ><b>updateRecordSuccess</b></span>
+                        <a href="#updateRecordSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+  &#x27;[Data] Update Record Success&#x27;,
+  props&lt;{ record: Record }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/data/data.reducer.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataReducer"></a>
+                    <span class="name">
+                        <span ><b>dataReducer</b></span>
+                        <a href="#dataReducer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createReducer(
+  initialDataState,
+
+  /** ─── Carga Dual ─── */
+  on(DataActions.loadAllData, (state) &#x3D;&gt; ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+
+  on(DataActions.loadAllDataSuccess, (state, { records, kpis }) &#x3D;&gt; ({
+    ...state,
+    records,
+    kpis,
+    loading: false,
+    error: null
+  })),
+
+  on(DataActions.loadAllDataFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    loading: false,
+    error
+  })),
+
+  /** ─── Crear Registro ─── */
+  on(DataActions.createRecord, (state) &#x3D;&gt; ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+
+  on(DataActions.createRecordSuccess, (state, { record }) &#x3D;&gt; ({
+    ...state,
+    records: [...state.records, record],
+    loading: false
+  })),
+
+  on(DataActions.createRecordFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    loading: false,
+    error
+  })),
+
+  /** ─── Actualizar Registro ─── */
+  on(DataActions.updateRecord, (state) &#x3D;&gt; ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+
+  on(DataActions.updateRecordSuccess, (state, { record }) &#x3D;&gt; ({
+    ...state,
+    records: state.records.map(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; record.id ? record : r),
+    loading: false
+  })),
+
+  on(DataActions.updateRecordFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    loading: false,
+    error
+  })),
+
+  /** ─── Eliminar Registro ─── */
+  on(DataActions.deleteRecord, (state) &#x3D;&gt; ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+
+  on(DataActions.deleteRecordSuccess, (state, { id }) &#x3D;&gt; ({
+    ...state,
+    records: state.records.filter(r &#x3D;&gt; r.id !&#x3D;&#x3D; id),
+    loading: false
+  })),
+
+  on(DataActions.deleteRecordFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    loading: false,
+    error
+  })),
+
+  /** ─── Filtros ─── */
+  on(DataActions.setFilters, (state, { filters }) &#x3D;&gt; ({
+    ...state,
+    filters: { ...state.filters, ...filters }
+  })),
+
+  on(DataActions.setTimeRange, (state, { timeRange }) &#x3D;&gt; ({
+    ...state,
+    timeRange
+  })),
+
+  on(DataActions.clearFilters, (state) &#x3D;&gt; ({
+    ...state,
+    filters: {},
+    timeRange: &#x27;30D&#x27;
+  })),
+
+  /** ─── Exportación ─── */
+  on(DataActions.exportRecords, (state) &#x3D;&gt; ({
+    ...state,
+    exporting: true,
+    error: null
+  })),
+
+  on(DataActions.exportRecordsSuccess, (state) &#x3D;&gt; ({
+    ...state,
+    exporting: false
+  })),
+
+  on(DataActions.exportRecordsFailure, (state, { error }) &#x3D;&gt; ({
+    ...state,
+    exporting: false,
+    error
+  }))
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reducer de datos empresariales.
+Gestiona el estado inmutable de registros, KPIs, filtros y operaciones CRUD.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialDataState"></a>
+                    <span class="name">
+                        <span ><b>initialDataState</b></span>
+                        <a href="#initialDataState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/DataState.html" target="_self" >DataState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  records: [],
+  kpis: [],
+  filters: {},
+  timeRange: &#x27;30D&#x27;,
+  loading: false,
+  error: null,
+  exporting: false
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado inicial de datos.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.prod.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  production: true
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  production: false
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/interceptors/error.interceptor.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorInterceptor"></a>
+                    <span class="name">
+                        <span ><b>errorInterceptor</b></span>
+                        <a href="#errorInterceptor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/common/http/HttpInterceptorFn" target="_blank" >HttpInterceptorFn</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(req, next) &#x3D;&gt; {
+  const authService &#x3D; inject(AuthService);
+  const router &#x3D; inject(Router);
+
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) &#x3D;&gt; {
+
+      /** Mensajes de error legibles para el usuario */
+      let userMessage &#x3D; &#x27;Ha ocurrido un error inesperado. Inténtalo de nuevo.&#x27;;
+
+      switch (error.status) {
+        case 0:
+          userMessage &#x3D; &#x27;No se puede conectar con el servidor. Verifica tu conexión a internet.&#x27;;
+          console.error(&#x27;[ErrorInterceptor] Error de conexión:&#x27;, req.url);
+          break;
+
+        case 401:
+          userMessage &#x3D; &#x27;Tu sesión ha expirado. Por favor, inicia sesión de nuevo.&#x27;;
+          console.warn(&#x27;[ErrorInterceptor] 401 Unauthorized:&#x27;, req.url);
+          authService.logout();
+          router.navigate([&#x27;/auth/login&#x27;], {
+            queryParams: { sessionExpired: &#x27;true&#x27; }
+          });
+          break;
+
+        case 403:
+          userMessage &#x3D; &#x27;No tienes permisos para acceder a este recurso.&#x27;;
+          console.warn(&#x27;[ErrorInterceptor] 403 Forbidden:&#x27;, req.url);
+          router.navigate([&#x27;/records&#x27;]);
+          break;
+
+        case 404:
+          userMessage &#x3D; &#x27;El recurso solicitado no fue encontrado.&#x27;;
+          console.warn(&#x27;[ErrorInterceptor] 404 Not Found:&#x27;, req.url);
+          break;
+
+        case 422:
+          userMessage &#x3D; &#x27;Los datos enviados no son válidos. Revisa el formulario.&#x27;;
+          console.warn(&#x27;[ErrorInterceptor] 422 Unprocessable:&#x27;, req.url);
+          break;
+
+        case 429:
+          userMessage &#x3D; &#x27;Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.&#x27;;
+          console.warn(&#x27;[ErrorInterceptor] 429 Too Many Requests:&#x27;, req.url);
+          break;
+
+        default:
+          if (error.status &gt;&#x3D; 500) {
+            userMessage &#x3D; &#x27;Error del servidor. Nuestro equipo ha sido notificado.&#x27;;
+            console.error(&#x27;[ErrorInterceptor] Server Error:&#x27;, error.status, req.url);
+          }
+          break;
+      }
+
+      /** Re-lanzar el error con mensaje user-friendly adjunto */
+      return throwError(() &#x3D;&gt; ({
+        ...error,
+        userMessage,
+        originalUrl: req.url
+      }));
+    })
+  );
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Interceptor funcional de gestión global de errores HTTP.</p>
+<p>Captura errores HTTP de las respuestas y aplica lógica
+de manejo según el código de estado:</p>
+<ul>
+<li><strong>401 Unauthorized</strong>: Cierra sesión y redirige a login.</li>
+<li><strong>403 Forbidden</strong>: Redirige a la página principal del usuario.</li>
+<li><strong>500+ Server Error</strong>: Logea el error para debugging.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/data/data.selectors.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectAllRecords"></a>
+                    <span class="name">
+                        <span ><b>selectAllRecords</b></span>
+                        <a href="#selectAllRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.records || []
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Todos los registros cargados (fuentes SQL + NoSQL combinadas)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectCalculatedKpis"></a>
+                    <span class="name">
+                        <span ><b>selectCalculatedKpis</b></span>
+                        <a href="#selectCalculatedKpis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectFilteredRecords,
+  (records: Record[]): Kpi[] &#x3D;&gt; {
+    const totalRevenue &#x3D; records.reduce((acc, r) &#x3D;&gt; acc + (Number(r.amount) || 0), 0);
+    const totalCount &#x3D; records.length;
+    const activeCount &#x3D; records.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; RecordStatus.ACTIVE).length;
+    const completedCount &#x3D; records.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; RecordStatus.COMPLETED).length;
+    const avgAmount &#x3D; totalCount &gt; 0 ? Math.round(totalRevenue / totalCount) : 0;
+
+    return [
+      {
+        id: &#x27;kpi-revenue&#x27;,
+        label: &#x27;Ingresos Totales&#x27;,
+        value: totalRevenue,
+        previousValue: Math.round(totalRevenue * 0.88),
+        unit: &#x27;EUR&#x27;,
+        trend: KpiTrend.UP,
+        changePercent: 13.6,
+        icon: &#x27;cash-outline&#x27;,
+        color: &#x27;#10b981&#x27;
+      },
+      {
+        id: &#x27;kpi-records&#x27;,
+        label: &#x27;Total Registros&#x27;,
+        value: totalCount,
+        previousValue: Math.max(0, totalCount - 4),
+        unit: &#x27;unidades&#x27;,
+        trend: KpiTrend.UP,
+        changePercent: 8.5,
+        icon: &#x27;layers-outline&#x27;,
+        color: &#x27;#6366f1&#x27;
+      },
+      {
+        id: &#x27;kpi-active&#x27;,
+        label: &#x27;Proyectos Activos&#x27;,
+        value: activeCount,
+        previousValue: Math.max(0, activeCount - 2),
+        unit: &#x27;activos&#x27;,
+        trend: KpiTrend.STABLE,
+        changePercent: 3.2,
+        icon: &#x27;checkmark-circle-outline&#x27;,
+        color: &#x27;#06b6d4&#x27;
+      },
+      {
+        id: &#x27;kpi-avg-amount&#x27;,
+        label: &#x27;Ticket Promedio&#x27;,
+        value: avgAmount,
+        previousValue: Math.round(avgAmount * 0.94),
+        unit: &#x27;EUR&#x27;,
+        trend: KpiTrend.UP,
+        changePercent: 6.4,
+        icon: &#x27;trending-up-outline&#x27;,
+        color: &#x27;#f59e0b&#x27;
+      }
+    ];
+  }
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector memoizado para calcular KPIs dinámicos a partir de los registros filtrados.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectCategoryDistribution"></a>
+                    <span class="name">
+                        <span ><b>selectCategoryDistribution</b></span>
+                        <a href="#selectCategoryDistribution"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectFilteredRecords,
+  (records: Record[]): CategoryDistribution &#x3D;&gt; {
+    const categories: RecordCategory[] &#x3D; [
+      RecordCategory.SALES,
+      RecordCategory.MARKETING,
+      RecordCategory.FINANCE,
+      RecordCategory.OPERATIONS,
+      RecordCategory.HR
+    ];
+
+    const categoryNames: { [key in RecordCategory]: string } &#x3D; {
+      [RecordCategory.SALES]: &#x27;Ventas&#x27;,
+      [RecordCategory.MARKETING]: &#x27;Marketing&#x27;,
+      [RecordCategory.FINANCE]: &#x27;Finanzas&#x27;,
+      [RecordCategory.OPERATIONS]: &#x27;Operaciones&#x27;,
+      [RecordCategory.HR]: &#x27;Recursos Humanos&#x27;
+    };
+
+    const categoryColors: { [key in RecordCategory]: string } &#x3D; {
+      [RecordCategory.SALES]: &#x27;#3b82f6&#x27;,
+      [RecordCategory.MARKETING]: &#x27;#ec4899&#x27;,
+      [RecordCategory.FINANCE]: &#x27;#10b981&#x27;,
+      [RecordCategory.OPERATIONS]: &#x27;#f59e0b&#x27;,
+      [RecordCategory.HR]: &#x27;#8b5cf6&#x27;
+    };
+
+    const counts: number[] &#x3D; [];
+    const amounts: number[] &#x3D; [];
+    const labels: string[] &#x3D; [];
+    const colors: string[] &#x3D; [];
+
+    categories.forEach(cat &#x3D;&gt; {
+      const match &#x3D; records.filter(r &#x3D;&gt; r.category &#x3D;&#x3D;&#x3D; cat);
+      labels.push(categoryNames[cat]);
+      counts.push(match.length);
+      amounts.push(match.reduce((acc, r) &#x3D;&gt; acc + (Number(r.amount) || 0), 0));
+      colors.push(categoryColors[cat]);
+    });
+
+    return { labels, counts, amounts, colors };
+  }
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector memoizado para datos de distribución por categoría.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectDashboardAggregate"></a>
+                    <span class="name">
+                        <span ><b>selectDashboardAggregate</b></span>
+                        <a href="#selectDashboardAggregate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectCalculatedKpis,
+  selectTimelineChartData,
+  selectCategoryDistribution,
+  selectDataLoading,
+  selectTimeRange,
+  (kpis, timeline, categoryDistribution, loading, timeRange) &#x3D;&gt; ({
+    kpis,
+    timeline,
+    categoryDistribution,
+    loading,
+    timeRange
+  })
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector agregado con todos los datos necesarios para el Dashboard.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectDataError"></a>
+                    <span class="name">
+                        <span ><b>selectDataError</b></span>
+                        <a href="#selectDataError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.error ?? null
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Error actual en la capa de datos</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectDataExporting"></a>
+                    <span class="name">
+                        <span ><b>selectDataExporting</b></span>
+                        <a href="#selectDataExporting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.exporting ?? false
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de exportación en curso</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectDataLoading"></a>
+                    <span class="name">
+                        <span ><b>selectDataLoading</b></span>
+                        <a href="#selectDataLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.loading ?? false
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de carga asíncrona</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectDataState"></a>
+                    <span class="name">
+                        <span ><b>selectDataState</b></span>
+                        <a href="#selectDataState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createFeatureSelector&lt;DataState&gt;(&#x27;data&#x27;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector de la feature &#39;data&#39;</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectFilteredRecords"></a>
+                    <span class="name">
+                        <span ><b>selectFilteredRecords</b></span>
+                        <a href="#selectFilteredRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectAllRecords,
+  selectFilters,
+  selectTimeRange,
+  (records: Record[], filters, timeRange: string): Record[] &#x3D;&gt; {
+    if (!records || records.length &#x3D;&#x3D;&#x3D; 0) return [];
+
+    let filtered &#x3D; [...records];
+
+    /** Filtro por texto de búsqueda */
+    if (filters.searchTerm &amp;&amp; filters.searchTerm.trim() !&#x3D;&#x3D; &#x27;&#x27;) {
+      const q &#x3D; filters.searchTerm.toLowerCase().trim();
+      filtered &#x3D; filtered.filter(r &#x3D;&gt;
+        r.title?.toLowerCase().includes(q) ||
+        r.description?.toLowerCase().includes(q) ||
+        r.clientName?.toLowerCase().includes(q) ||
+        r.sku?.toLowerCase().includes(q)
+      );
+    }
+
+    /** Filtro por categoría */
+    if (filters.category) {
+      filtered &#x3D; filtered.filter(r &#x3D;&gt; r.category &#x3D;&#x3D;&#x3D; filters.category);
+    }
+
+    /** Filtro por estado */
+    if (filters.status) {
+      filtered &#x3D; filtered.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; filters.status);
+    }
+
+    /** Filtro por región */
+    if (filters.region) {
+      filtered &#x3D; filtered.filter(r &#x3D;&gt; r.region?.toLowerCase() &#x3D;&#x3D;&#x3D; filters.region?.toLowerCase());
+    }
+
+    /** Filtro por rango temporal del dashboard si aplica */
+    if (timeRange &amp;&amp; timeRange !&#x3D;&#x3D; &#x27;ALL&#x27;) {
+      const now &#x3D; new Date().getTime();
+      let days &#x3D; 30;
+      switch (timeRange) {
+        case &#x27;7D&#x27;:
+          days &#x3D; 7;
+          break;
+        case &#x27;30D&#x27;:
+          days &#x3D; 30;
+          break;
+        case &#x27;90D&#x27;:
+          days &#x3D; 90;
+          break;
+        case &#x27;1A&#x27;:
+          days &#x3D; 365;
+          break;
+      }
+
+      // Si los registros tienen fechas en el dataset, calculamos el límite desde la fecha más reciente o fecha actual
+      const timestamps &#x3D; filtered.map(r &#x3D;&gt; new Date(r.createdAt).getTime()).filter(t &#x3D;&gt; !isNaN(t));
+      const referenceTimestamp &#x3D; timestamps.length &gt; 0 ? Math.max(...timestamps, now) : now;
+      const threshold &#x3D; referenceTimestamp - days * 24 * 60 * 60 * 1000;
+
+      // Aplicar filtro temporal suave (si deja registros)
+      const timeFiltered &#x3D; filtered.filter(r &#x3D;&gt; {
+        const t &#x3D; new Date(r.createdAt).getTime();
+        return isNaN(t) || t &gt;&#x3D; threshold;
+      });
+
+      if (timeFiltered.length &gt; 0) {
+        filtered &#x3D; timeFiltered;
+      }
+    }
+
+    return filtered;
+  }
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector memoizado para registros filtrados dinámicamente según filtros y rango temporal.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectFilters"></a>
+                    <span class="name">
+                        <span ><b>selectFilters</b></span>
+                        <a href="#selectFilters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.filters || {}
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Filtros activos del usuario</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectRawKpis"></a>
+                    <span class="name">
+                        <span ><b>selectRawKpis</b></span>
+                        <a href="#selectRawKpis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.kpis || []
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>KPIs almacenados en el estado</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectTimelineChartData"></a>
+                    <span class="name">
+                        <span ><b>selectTimelineChartData</b></span>
+                        <a href="#selectTimelineChartData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectFilteredRecords,
+  (records: Record[]): TimelineChartData &#x3D;&gt; {
+    const monthNames &#x3D; [&#x27;Ene&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Abr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Ago&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dic&#x27;];
+    const buckets: { [key: string]: { label: string; revenue: number; count: number; dateKey: string } } &#x3D; {};
+
+    records.forEach(r &#x3D;&gt; {
+      const d &#x3D; new Date(r.createdAt);
+      if (isNaN(d.getTime())) return;
+      const key &#x3D; &#x60;${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, &#x27;0&#x27;)}&#x60;;
+      const label &#x3D; &#x60;${monthNames[d.getMonth()]} ${String(d.getFullYear()).slice(-2)}&#x60;;
+
+      if (!buckets[key]) {
+        buckets[key] &#x3D; { label, revenue: 0, count: 0, dateKey: key };
+      }
+      buckets[key].revenue +&#x3D; Number(r.amount) || 0;
+      buckets[key].count +&#x3D; 1;
+    });
+
+    const sortedKeys &#x3D; Object.keys(buckets).sort();
+
+    // Si no hay datos suficientes de meses, crear buckets representativos
+    if (sortedKeys.length &#x3D;&#x3D;&#x3D; 0) {
+      return {
+        labels: [&#x27;May 26&#x27;, &#x27;Jun 26&#x27;, &#x27;Jul 26&#x27;, &#x27;Ago 26&#x27;, &#x27;Sep 26&#x27;, &#x27;Oct 26&#x27;],
+        revenues: [25000, 38000, 52000, 48000, 71000, 89000],
+        counts: [4, 6, 9, 8, 12, 15]
+      };
+    }
+
+    const labels &#x3D; sortedKeys.map(k &#x3D;&gt; buckets[k].label);
+    const revenues &#x3D; sortedKeys.map(k &#x3D;&gt; buckets[k].revenue);
+    const counts &#x3D; sortedKeys.map(k &#x3D;&gt; buckets[k].count);
+
+    return { labels, revenues, counts };
+  }
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector memoizado para datos de evolución temporal (ingresos y volumen por mes).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectTimeRange"></a>
+                    <span class="name">
+                        <span ><b>selectTimeRange</b></span>
+                        <a href="#selectTimeRange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectDataState,
+  (state: DataState) &#x3D;&gt; state?.timeRange || &#x27;30D&#x27;
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rango temporal seleccionado (ej: &#39;7D&#39;, &#39;30D&#39;, &#39;90D&#39;, &#39;1A&#39;)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/auth/auth.selectors.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectAuthError"></a>
+                    <span class="name">
+                        <span ><b>selectAuthError</b></span>
+                        <a href="#selectAuthError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectAuthState,
+  (state) &#x3D;&gt; state.error
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector del último error.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectAuthState"></a>
+                    <span class="name">
+                        <span ><b>selectAuthState</b></span>
+                        <a href="#selectAuthState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createFeatureSelector&lt;AuthState&gt;(&#x27;auth&#x27;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector raíz del feature &#39;auth&#39;.
+Obtiene el sub-estado completo de autenticación.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectCurrentUser"></a>
+                    <span class="name">
+                        <span ><b>selectCurrentUser</b></span>
+                        <a href="#selectCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectAuthState,
+  (state) &#x3D;&gt; state.user
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector del usuario actual.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectIsAdmin"></a>
+                    <span class="name">
+                        <span ><b>selectIsAdmin</b></span>
+                        <a href="#selectIsAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectCurrentUser,
+  (user) &#x3D;&gt; user?.role &#x3D;&#x3D;&#x3D; UserRole.ADMIN
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector derivado: ¿es el usuario un administrador?</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectIsAuthenticated"></a>
+                    <span class="name">
+                        <span ><b>selectIsAuthenticated</b></span>
+                        <a href="#selectIsAuthenticated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectAuthState,
+  (state) &#x3D;&gt; state.isAuthenticated
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector del estado de autenticación.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectIsLoading"></a>
+                    <span class="name">
+                        <span ><b>selectIsLoading</b></span>
+                        <a href="#selectIsLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectAuthState,
+  (state) &#x3D;&gt; state.isLoading
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector del estado de carga.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectUserFullName"></a>
+                    <span class="name">
+                        <span ><b>selectUserFullName</b></span>
+                        <a href="#selectUserFullName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectCurrentUser,
+  (user) &#x3D;&gt; user ? &#x60;${user.firstName} ${user.lastName}&#x60; : &#x27;&#x27;
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector derivado: nombre completo del usuario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectUserRoleLabel"></a>
+                    <span class="name">
+                        <span ><b>selectUserRoleLabel</b></span>
+                        <a href="#selectUserRoleLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+  selectCurrentUser,
+  (user) &#x3D;&gt; {
+    if (!user) return &#x27;&#x27;;
+    return user.role &#x3D;&#x3D;&#x3D; UserRole.ADMIN ? &#x27;Administrador&#x27; : &#x27;Usuario Estándar&#x27;;
+  }
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selector derivado: rol legible del usuario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/services/auth.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STORAGE_KEYS"></a>
+                    <span class="name">
+                        <span ><b>STORAGE_KEYS</b></span>
+                        <a href="#STORAGE_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  ACCESS_TOKEN: &#x27;ea_access_token&#x27;,
+  REFRESH_TOKEN: &#x27;ea_refresh_token&#x27;,
+  CURRENT_USER: &#x27;ea_current_user&#x27;
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Token key para almacenamiento local.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

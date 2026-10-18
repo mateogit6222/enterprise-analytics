@@ -1,0 +1,88 @@
+name: Enterprise Analytics CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-and-typecheck:
+    name: 🔍 TypeScript Typecheck & Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run TypeScript Strict Check (No Emit)
+        run: npx tsc --noEmit
+
+  generate-documentation:
+    name: 📚 Compodoc Technical Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Static Compodoc Documentation
+        run: npm run compodoc
+
+      - name: Upload Documentation Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compodoc-html-docs
+          path: docs/
+          retention-days: 7
+
+  build-production:
+    name: 🚀 Production Build & PWA Artifact
+    runs-on: ubuntu-latest
+    needs: [validate-and-typecheck]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Production Web Application
+        run: npm run build
+
+      - name: Upload Build Artifact (www)
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build-www
+          path: www/
+          retention-days: 14
