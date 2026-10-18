@@ -1,4 +1,5 @@
 import { AuthState } from './auth/auth.reducer';
+import { DataState } from './data/data.reducer';
 
 /**
  * @description Interfaz raíz del estado global de la aplicación (NgRx Store).
@@ -8,7 +9,9 @@ import { AuthState } from './auth/auth.reducer';
  *
  * @interface AppState
  * @property {AuthState} auth - Sub-estado de autenticación y sesión.
+ * @property {DataState} data - Sub-estado de datos empresariales, KPIs y filtros.
  */
 export interface AppState {
   auth: AuthState;
+  data: DataState;
 }
