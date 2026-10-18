@@ -1,0 +1,47 @@
+<div
+  class="confirm-modal-wrapper"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'dialog-title'"
+  [attr.aria-describedby]="'dialog-desc'"
+>
+  <div class="confirm-card" [ngClass]="'variant-' + variant">
+    <!-- Header con icono semántico -->
+    <div class="confirm-header">
+      <div class="icon-bubble" [ngClass]="variant" aria-hidden="true">
+        <ion-icon [name]="icon"></ion-icon>
+      </div>
+      <h2 id="dialog-title" class="dialog-title">{{ title }}</h2>
+    </div>
+
+    <!-- Contenido del mensaje -->
+    <div class="confirm-body">
+      <p id="dialog-desc" class="dialog-message">{{ message }}</p>
+      @if (details) {
+        <p class="dialog-details">{{ details }}</p>
+      }
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="confirm-actions">
+      <ion-button
+        fill="outline"
+        color="medium"
+        class="action-btn cancel-btn"
+        (click)="onCancel()"
+        aria-label="Cancelar y cerrar ventana"
+      >
+        {{ cancelText }}
+      </ion-button>
+
+      <ion-button
+        [color]="variant"
+        class="action-btn confirm-btn"
+        (click)="onConfirm()"
+        [attr.aria-label]="confirmText"
+      >
+        {{ confirmText }}
+      </ion-button>
+    </div>
+  </div>
+</div>

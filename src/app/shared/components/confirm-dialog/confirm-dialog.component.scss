@@ -1,0 +1,119 @@
+/**
+ * Confirm Dialog Component Styles
+ */
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.confirm-modal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.confirm-card {
+  width: 100%;
+  max-width: 440px;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  .confirm-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    .icon-bubble {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      font-size: 1.85rem;
+
+      &.danger {
+        background: rgba(244, 63, 94, 0.15);
+        color: #f43f5e;
+        border: 1px solid rgba(244, 63, 94, 0.3);
+      }
+
+      &.warning {
+        background: rgba(245, 158, 11, 0.15);
+        color: #f59e0b;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+
+      &.primary {
+        background: rgba(99, 102, 241, 0.15);
+        color: #818cf8;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+      }
+    }
+
+    .dialog-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .confirm-body {
+    text-align: center;
+    margin-bottom: 1.75rem;
+
+    .dialog-message {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.5;
+    }
+
+    .dialog-details {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0 0 0;
+    }
+  }
+
+  .confirm-actions {
+    display: flex;
+    gap: 0.85rem;
+
+    .action-btn {
+      flex: 1;
+      height: 44px;
+      --border-radius: 0.65rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: none;
+      margin: 0;
+    }
+
+    .cancel-btn {
+      --border-color: rgba(255, 255, 255, 0.15);
+      --color: #cbd5e1;
+
+      &:hover {
+        --background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}
