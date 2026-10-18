@@ -92,3 +92,10 @@ export interface AuthResponse {
   refreshToken: string;
   expiresIn: number;
 }
+
+/**
+ * Usuario extendido para persistencia de datos mock en desarrollo.
+ */
+export interface MockUserData extends User {
+  password: string;
+}

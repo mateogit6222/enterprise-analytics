@@ -12,8 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [authGuard],
-    canMatch: [roleGuard],
+    canActivate: [authGuard, roleGuard],
     data: { requiredRole: UserRole.ADMIN },
     loadComponent: () =>
       import('./features/dashboard/pages/dashboard/dashboard.page').then(
@@ -32,8 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'reports',
-    canActivate: [authGuard],
-    canMatch: [roleGuard],
+    canActivate: [authGuard, roleGuard],
     data: { requiredRole: UserRole.ADMIN },
     loadComponent: () =>
       import('./features/reports/pages/report-viewer/report-viewer.page').then(

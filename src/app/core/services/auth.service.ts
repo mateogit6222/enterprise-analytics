@@ -1,14 +1,16 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError, timer } from 'rxjs';
-import { map, switchMap, tap, catchError, delay } from 'rxjs/operators';
+import { map, switchMap, tap, catchError, delay, take } from 'rxjs/operators';
 import {
   User,
   UserRole,
   LoginCredentials,
   RegisterData,
-  AuthResponse
+  AuthResponse,
+  MockUserData
 } from '../models/user.model';
+import { FALLBACK_USERS } from '../models/mock-datasets';
 
 /**
  * Token key para almacenamiento local.
@@ -19,14 +21,6 @@ const STORAGE_KEYS = {
   REFRESH_TOKEN: 'ea_refresh_token',
   CURRENT_USER: 'ea_current_user'
 } as const;
-
-/**
- * Interfaz interna para los datos mock de usuario (incluye password).
- * @internal
- */
-interface MockUserData extends User {
-  password: string;
-}
 
 /**
  * @class AuthService
@@ -63,14 +57,22 @@ export class AuthService {
   private readonly http = inject(HttpClient);
 
   /** @private Cache de usuarios mock cargados desde JSON */
-  private mockUsers: MockUserData[] = [];
+  private mockUsers: MockUserData[] = [...FALLBACK_USERS];
 
   /** @private Indica si los datos mock ya fueron cargados */
-  private mockDataLoaded = false;
+  private mockDataLoaded = true;
 
   constructor() {
-    // Precarga inmediata de usuarios en memoria
-    this.loadMockUsers().subscribe();
+    // Sincronización en segundo plano con el archivo JSON si está disponible
+    this.http.get<MockUserData[]>('assets/mock-data/users.mock.json').pipe(
+      catchError(() => this.http.get<MockUserData[]>('/assets/mock-data/users.mock.json')),
+      catchError(() => of([] as MockUserData[])),
+      take(1)
+    ).subscribe((users: MockUserData[]) => {
+      if (users && users.length > 0) {
+        this.mockUsers = users;
+      }
+    });
   }
 
   /**

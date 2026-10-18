@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   ChangeDetectionStrategy,
   inject,
   ChangeDetectorRef
@@ -9,14 +10,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular/lazy';
 import { Store } from '@ngrx/store';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject, combineLatest } from 'rxjs';
+import { map, take, takeUntil } from 'rxjs/operators';
 
 import { AppState } from '../../../../state/app.state';
 import * as DataActions from '../../../../state/data/data.actions';
 import { selectAllRecords, selectDataLoading } from '../../../../state/data/data.selectors';
 import { Record, RecordCategory, RecordStatus } from '../../../../core/models/record.model';
 import { ExportService } from '../../../../core/services/export.service';
+import { CurrencyFormatPipe } from '../../../../shared/pipes/currency-format.pipe';
 
 /**
  * Estructura de resumen ejecutivo por categoría para la tabla agregada.
@@ -56,16 +58,17 @@ export interface ReportMetrics {
 @Component({
   selector: 'app-report-viewer',
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule],
+  imports: [CommonModule, IonicModule, FormsModule, CurrencyFormatPipe],
   templateUrl: './report-viewer.page.html',
   styleUrls: ['./report-viewer.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReportViewerPage implements OnInit {
+export class ReportViewerPage implements OnInit, OnDestroy {
   private readonly store = inject(Store<AppState>);
   private readonly exportService = inject(ExportService);
   private readonly toastCtrl = inject(ToastController);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroy$ = new Subject<void>();
 
   /** Modelos de filtrado local para el informe */
   searchTerm: string = '';
@@ -185,6 +188,19 @@ export class ReportViewerPage implements OnInit {
   ngOnInit(): void {
     // Disparar carga concurrente dual si la store aún no contiene registros
     this.store.dispatch(DataActions.loadAllData());
+
+    this.loading$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cdr.markForCheck();
+    });
+
+    this.filteredRecords$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**
@@ -192,6 +208,7 @@ export class ReportViewerPage implements OnInit {
    */
   onFilterChanged(): void {
     this.filterTrigger$.next();
+    this.cdr.markForCheck();
   }
 
   /**
@@ -203,6 +220,7 @@ export class ReportViewerPage implements OnInit {
     this.selectedStatus = 'ALL';
     this.selectedSource = 'ALL';
     this.filterTrigger$.next();
+    this.cdr.markForCheck();
   }
 
   /**
@@ -210,6 +228,7 @@ export class ReportViewerPage implements OnInit {
    */
   refresh(): void {
     this.store.dispatch(DataActions.loadAllData());
+    this.cdr.markForCheck();
   }
 
   /**
