@@ -1,0 +1,248 @@
+<ion-header class="ion-no-border header-glass">
+  <ion-toolbar color="primary">
+    <ion-title>{{ isEditing ? 'Editar Registro Empresarial' : 'Alta de Nuevo Registro' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" aria-label="Cerrar modal">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="record-form" novalidate>
+    
+    <!-- Aviso de Validación Asíncrona -->
+    <div class="info-banner">
+      <ion-icon name="shield-checkmark-outline"></ion-icon>
+      <span>Validación asíncrona server-side activa para unicidad de código SKU.</span>
+    </div>
+
+    <!-- Campo Código SKU con Validación Asíncrona en Tiempo Real -->
+    <div class="form-group" [class.has-error]="skuControl.invalid && (skuControl.dirty || skuControl.touched)">
+      <label for="sku-input" class="form-label">
+        Código SKU <span class="required">*</span>
+      </label>
+      
+      <div class="input-with-feedback">
+        <input
+          id="sku-input"
+          type="text"
+          formControlName="sku"
+          placeholder="Ej: FIN-AUD-001 o SAL-CRM-005"
+          class="form-control"
+          autocomplete="off"
+          [attr.aria-invalid]="skuControl.invalid"
+          aria-describedby="sku-feedback"
+        />
+
+        <!-- Indicador de Estado de Validación Asíncrona -->
+        <div class="feedback-indicator">
+          @if (skuControl.pending) {
+            <ion-spinner name="crescent" color="primary" class="async-spinner"></ion-spinner>
+          } @else if (skuControl.valid && (skuControl.dirty || skuControl.touched)) {
+            <ion-icon name="checkmark-circle" class="status-icon valid"></ion-icon>
+          } @else if (skuControl.invalid && (skuControl.dirty || skuControl.touched)) {
+            <ion-icon name="alert-circle" class="status-icon invalid"></ion-icon>
+          }
+        </div>
+      </div>
+
+      <!-- Mensajes de Error y Feedback de SKU -->
+      <div id="sku-feedback" class="error-messages" role="alert" aria-live="polite">
+        @if (skuControl.pending) {
+          <span class="info-msg">
+            <ion-spinner name="dots" class="tiny-spinner"></ion-spinner>
+            Verificando disponibilidad de SKU en la base de datos...
+          </span>
+        }
+        @if (skuControl.hasError('required') && (skuControl.dirty || skuControl.touched)) {
+          <span class="error-msg">El código SKU es obligatorio.</span>
+        }
+        @if (skuControl.hasError('minlength') && (skuControl.dirty || skuControl.touched)) {
+          <span class="error-msg">El SKU debe contener al menos 3 caracteres.</span>
+        }
+        @if (skuControl.hasError('pattern') && (skuControl.dirty || skuControl.touched)) {
+          <span class="error-msg">Formato no válido. Use mayúsculas, números y guiones (ej. FIN-AUD-001).</span>
+        }
+        @if (skuControl.hasError('skuTaken') && !skuControl.pending) {
+          <span class="error-msg sku-conflict">
+            <ion-icon name="close-circle"></ion-icon>
+            Este código SKU ya está en uso por otro registro en el sistema.
+          </span>
+        }
+        @if (skuControl.valid && (skuControl.dirty || skuControl.touched)) {
+          <span class="success-msg">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            Código SKU único y disponible.
+          </span>
+        }
+      </div>
+    </div>
+
+    <!-- Campo Título -->
+    <div class="form-group" [class.has-error]="form.get('title')?.invalid && (form.get('title')?.dirty || form.get('title')?.touched)">
+      <label for="title-input" class="form-label">
+        Título del Registro <span class="required">*</span>
+      </label>
+      <input
+        id="title-input"
+        type="text"
+        formControlName="title"
+        placeholder="Nombre o descripción corta del registro"
+        class="form-control"
+      />
+      @if (form.get('title')?.invalid && (form.get('title')?.dirty || form.get('title')?.touched)) {
+        <div class="error-messages">
+          @if (form.get('title')?.hasError('required')) {
+            <span class="error-msg">El título es obligatorio.</span>
+          }
+          @if (form.get('title')?.hasError('minlength')) {
+            <span class="error-msg">El título debe tener al menos 4 caracteres.</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Fila Dual: Categoría y Estado -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="category-select" class="form-label">
+          Categoría de Negocio <span class="required">*</span>
+        </label>
+        <select id="category-select" formControlName="category" class="form-control form-select">
+          <option [value]="RecordCategory.SALES">Ventas (SALES)</option>
+          <option [value]="RecordCategory.MARKETING">Marketing (MARKETING)</option>
+          <option [value]="RecordCategory.FINANCE">Finanzas (FINANCE)</option>
+          <option [value]="RecordCategory.OPERATIONS">Operaciones (OPERATIONS)</option>
+          <option [value]="RecordCategory.HR">Recursos Humanos (HR)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status-select" class="form-label">
+          Estado en Flujo <span class="required">*</span>
+        </label>
+        <select id="status-select" formControlName="status" class="form-control form-select">
+          <option [value]="RecordStatus.ACTIVE">Activo (ACTIVE)</option>
+          <option [value]="RecordStatus.PENDING">Pendiente (PENDING)</option>
+          <option [value]="RecordStatus.COMPLETED">Completado (COMPLETED)</option>
+          <option [value]="RecordStatus.ARCHIVED">Archivado (ARCHIVED)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Fila Dual: Importe y Región -->
+    <div class="form-row">
+      <div class="form-group" [class.has-error]="form.get('amount')?.invalid && (form.get('amount')?.dirty || form.get('amount')?.touched)">
+        <label for="amount-input" class="form-label">
+          Importe (€) <span class="required">*</span>
+        </label>
+        <input
+          id="amount-input"
+          type="number"
+          step="0.01"
+          formControlName="amount"
+          placeholder="0.00"
+          class="form-control"
+        />
+        @if (form.get('amount')?.invalid && (form.get('amount')?.dirty || form.get('amount')?.touched)) {
+          <div class="error-messages">
+            <span class="error-msg">Introduce un importe monetario válido mayor o igual a 0.</span>
+          </div>
+        }
+      </div>
+
+      <div class="form-group" [class.has-error]="form.get('region')?.invalid && (form.get('region')?.dirty || form.get('region')?.touched)">
+        <label for="region-input" class="form-label">
+          Región Operativa <span class="required">*</span>
+        </label>
+        <input
+          id="region-input"
+          type="text"
+          formControlName="region"
+          placeholder="Ej: Madrid, Barcelona, Valencia"
+          class="form-control"
+        />
+        @if (form.get('region')?.invalid && (form.get('region')?.dirty || form.get('region')?.touched)) {
+          <div class="error-messages">
+            <span class="error-msg">La región es obligatoria.</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Fila Dual: Cliente y Email -->
+    <div class="form-row">
+      <div class="form-group" [class.has-error]="form.get('clientName')?.invalid && (form.get('clientName')?.dirty || form.get('clientName')?.touched)">
+        <label for="client-name-input" class="form-label">
+          Nombre de Cliente <span class="required">*</span>
+        </label>
+        <input
+          id="client-name-input"
+          type="text"
+          formControlName="clientName"
+          placeholder="Razón social o cliente"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group" [class.has-error]="form.get('clientEmail')?.invalid && (form.get('clientEmail')?.dirty || form.get('clientEmail')?.touched)">
+        <label for="client-email-input" class="form-label">
+          Email de Contacto <span class="required">*</span>
+        </label>
+        <input
+          id="client-email-input"
+          type="email"
+          formControlName="clientEmail"
+          placeholder="contacto@empresa.es"
+          class="form-control"
+        />
+        @if (form.get('clientEmail')?.invalid && (form.get('clientEmail')?.dirty || form.get('clientEmail')?.touched)) {
+          <div class="error-messages">
+            <span class="error-msg">Introduce un email corporativo válido.</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Campo Descripción -->
+    <div class="form-group" [class.has-error]="form.get('description')?.invalid && (form.get('description')?.dirty || form.get('description')?.touched)">
+      <label for="desc-input" class="form-label">
+        Descripción Detallada <span class="required">*</span>
+      </label>
+      <textarea
+        id="desc-input"
+        rows="3"
+        formControlName="description"
+        placeholder="Detalles sobre el alcance, objetivos y estado del registro..."
+        class="form-control textarea"
+      ></textarea>
+      @if (form.get('description')?.invalid && (form.get('description')?.dirty || form.get('description')?.touched)) {
+        <div class="error-messages">
+          <span class="error-msg">La descripción debe tener entre 10 y 500 caracteres.</span>
+        </div>
+      }
+    </div>
+
+    <!-- Botones de Acción del Modal -->
+    <div class="modal-actions">
+      <ion-button fill="outline" color="medium" (click)="cancel()" type="button">
+        Cancelar
+      </ion-button>
+      <ion-button
+        type="submit"
+        color="primary"
+        [disabled]="form.invalid || form.pending">
+        @if (form.pending) {
+          <ion-spinner name="crescent" slot="start"></ion-spinner>
+          Validando...
+        } @else {
+          <ion-icon [name]="isEditing ? 'save-outline' : 'add-circle-outline'" slot="start"></ion-icon>
+          {{ isEditing ? 'Guardar Cambios' : 'Crear Registro' }}
+        }
+      </ion-button>
+    </div>
+
+  </form>
+</ion-content>

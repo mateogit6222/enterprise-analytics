@@ -1,0 +1,282 @@
+<ion-header [translucent]="true" class="ion-no-border header-glass">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Centro de Informes y Exportación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refresh()" aria-label="Actualizar datos">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-content">
+  <div class="content-container">
+
+    <!-- Encabezado de la Sección -->
+    <header class="section-header">
+      <div class="header-titles">
+        <h1 class="page-title">Generador de Informes Corporativos</h1>
+        <p class="page-subtitle">
+          Previsualización analítica, filtrado multidimensional y generación de informes ejecutivos en PDF y CSV.
+        </p>
+      </div>
+
+      <!-- Botones de Descarga de Informes -->
+      <div class="export-buttons-group">
+        <ion-button
+          color="danger"
+          (click)="downloadPdfReport()"
+          [disabled]="(filteredRecords$ | async)?.length === 0 || isExporting"
+          class="export-btn"
+          aria-label="Descargar informe oficial en formato PDF">
+          @if (isExporting && exportType === 'pdf') {
+            <ion-spinner name="crescent" slot="start"></ion-spinner>
+            Generando PDF...
+          } @else {
+            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            Descargar Informe PDF
+          }
+        </ion-button>
+
+        <ion-button
+          color="success"
+          (click)="downloadCsvReport()"
+          [disabled]="(filteredRecords$ | async)?.length === 0 || isExporting"
+          class="export-btn"
+          aria-label="Descargar datos en formato CSV con UTF-8 BOM">
+          @if (isExporting && exportType === 'csv') {
+            <ion-spinner name="crescent" slot="start"></ion-spinner>
+            Exportando CSV...
+          } @else {
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Exportar a CSV
+          }
+        </ion-button>
+      </div>
+    </header>
+
+    <!-- Barra de Filtros Multidimensionales para el Informe -->
+    <section class="filters-card" aria-label="Filtros del informe">
+      <div class="filters-grid">
+        
+        <!-- Búsqueda libre -->
+        <div class="filter-field">
+          <label for="search-input" class="filter-label">Búsqueda rápida</label>
+          <div class="search-input-wrapper">
+            <ion-icon name="search-outline"></ion-icon>
+            <input
+              id="search-input"
+              type="text"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="onFilterChanged()"
+              placeholder="Buscar por cliente, título o SKU..."
+              class="filter-input"
+            />
+          </div>
+        </div>
+
+        <!-- Filtro por Categoría -->
+        <div class="filter-field">
+          <label for="category-select" class="filter-label">Categoría de Negocio</label>
+          <select
+            id="category-select"
+            [(ngModel)]="selectedCategory"
+            (ngModelChange)="onFilterChanged()"
+            class="filter-select">
+            <option value="ALL">Todas las Categorías</option>
+            <option value="SALES">Ventas</option>
+            <option value="MARKETING">Marketing</option>
+            <option value="FINANCE">Finanzas</option>
+            <option value="OPERATIONS">Operaciones</option>
+            <option value="HR">Recursos Humanos</option>
+          </select>
+        </div>
+
+        <!-- Filtro por Estado -->
+        <div class="filter-field">
+          <label for="status-select" class="filter-label">Estado de Flujo</label>
+          <select
+            id="status-select"
+            [(ngModel)]="selectedStatus"
+            (ngModelChange)="onFilterChanged()"
+            class="filter-select">
+            <option value="ALL">Todos los Estados</option>
+            <option value="ACTIVE">Activo</option>
+            <option value="PENDING">Pendiente</option>
+            <option value="COMPLETED">Completado</option>
+            <option value="ARCHIVED">Archivado</option>
+          </select>
+        </div>
+
+        <!-- Filtro por Fuente de Datos -->
+        <div class="filter-field">
+          <label for="source-select" class="filter-label">Fuente de Datos</label>
+          <select
+            id="source-select"
+            [(ngModel)]="selectedSource"
+            (ngModelChange)="onFilterChanged()"
+            class="filter-select">
+            <option value="ALL">Todas las Fuentes</option>
+            <option value="REST">API REST (SQL)</option>
+            <option value="FIRESTORE">Firestore (NoSQL)</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Resumen de registros coincidentes -->
+      <div class="filter-summary-row">
+        <span class="matching-count">
+          Registros seleccionados para el informe: <strong>{{ (filteredRecords$ | async)?.length || 0 }}</strong>
+        </span>
+        <button type="button" class="reset-filters-btn" (click)="resetFilters()">
+          <ion-icon name="refresh-circle-outline"></ion-icon> Restablecer filtros
+        </button>
+      </div>
+    </section>
+
+    <!-- Resumen Ejecutivo (KPIs del Informe Filtrado) -->
+    <section class="summary-kpis-grid" aria-label="Métricas del informe">
+      @if (metrics$ | async; as m) {
+        <div class="metric-card">
+          <div class="metric-icon-box revenue">
+            <ion-icon name="cash-outline"></ion-icon>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Facturación Filtrada</span>
+            <span class="metric-value">{{ m.totalAmount | currency:'EUR':'symbol':'1.2-2':'es' }}</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-box records">
+            <ion-icon name="documents-outline"></ion-icon>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Volumen Operaciones</span>
+            <span class="metric-value">{{ m.totalCount }} registros</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-box average">
+            <ion-icon name="trending-up-outline"></ion-icon>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Ticket Medio</span>
+            <span class="metric-value">{{ m.avgAmount | currency:'EUR':'symbol':'1.0-0':'es' }}</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-box completed">
+            <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Tasa de Completitud</span>
+            <span class="metric-value">{{ m.completionRate }}%</span>
+          </div>
+        </div>
+      }
+    </section>
+
+    <!-- Desglose Tabulado Resumido por Categoría -->
+    <section class="table-section" aria-label="Desglose por categoría">
+      <div class="section-title-bar">
+        <h2>
+          <ion-icon name="pie-chart-outline"></ion-icon>
+          Desglose Agregado por Categoría
+        </h2>
+        <span class="section-note">Resumen ejecutivo consolidado</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="report-table" aria-label="Tabla de desglose de volumen y facturación por categoría">
+          <thead>
+            <tr>
+              <th scope="col">Categoría</th>
+              <th scope="col" class="text-center">Nº Operaciones</th>
+              <th scope="col" class="text-right">Facturación Acumulada</th>
+              <th scope="col" class="text-center">% Volumen</th>
+              <th scope="col" class="text-center">% Facturación</th>
+              <th scope="col" class="text-right">Ticket Medio</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of categorySummary$ | async; track item.category) {
+              <tr>
+                <td>
+                  <span class="category-chip" [attr.data-cat]="item.category">
+                    {{ item.categoryName }}
+                  </span>
+                </td>
+                <td class="text-center font-bold">{{ item.count }}</td>
+                <td class="text-right font-bold text-highlight">{{ item.totalAmount | currency:'EUR':'symbol':'1.2-2':'es' }}</td>
+                <td class="text-center">{{ item.volumePercent }}%</td>
+                <td class="text-center">{{ item.revenuePercent }}%</td>
+                <td class="text-right">{{ item.avgAmount | currency:'EUR':'symbol':'1.0-0':'es' }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="text-center empty-cell">No hay registros con los filtros seleccionados</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Previsualización Detallada de los Registros del Informe -->
+    <section class="table-section" aria-label="Previsualización de registros">
+      <div class="section-title-bar">
+        <h2>
+          <ion-icon name="list-outline"></ion-icon>
+          Previsualización Detallada de Registros para el Informe
+        </h2>
+        <span class="section-note">Datos que se incluirán en la exportación PDF y CSV</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="report-table" aria-label="Tabla de registros previsualizados para exportación">
+          <thead>
+            <tr>
+              <th scope="col">SKU</th>
+              <th scope="col">Título del Registro</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Fuente</th>
+              <th scope="col" class="text-right">Importe (€)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (record of (filteredRecords$ | async)?.slice(0, 15); track record.id) {
+              <tr>
+                <td><code class="sku-tag">{{ record.sku }}</code></td>
+                <td class="title-cell">{{ record.title }}</td>
+                <td>{{ record.clientName }}</td>
+                <td><span class="category-chip" [attr.data-cat]="record.category">{{ record.category }}</span></td>
+                <td><span class="status-badge" [attr.data-status]="record.status">{{ record.status }}</span></td>
+                <td><span class="source-badge" [attr.data-source]="record.source">{{ record.source }}</span></td>
+                <td class="text-right font-bold text-highlight">{{ record.amount | currency:'EUR':'symbol':'1.2-2':'es' }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="7" class="text-center empty-cell">No se encontraron registros que coincidan con los filtros aplicados.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (((filteredRecords$ | async)?.length || 0) > 15) {
+        <p class="preview-notice">
+          Mostrando los primeros 15 registros en la previsualización. El informe PDF y CSV descargará los <strong>{{ (filteredRecords$ | async)?.length }}</strong> registros completos.
+        </p>
+      }
+    </section>
+
+  </div>
+</ion-content>

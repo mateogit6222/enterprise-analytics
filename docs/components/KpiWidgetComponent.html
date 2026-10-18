@@ -1,0 +1,1070 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  KpiWidgetComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/shared/components/kpi-widget/kpi-widget.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>KpiWidgetComponent
+Widget estadístico reutilizable para métricas clave de rendimiento con
+detección de cambios OnPush, indicador visual de tendencia y accesibilidad ARIA completa.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;app-kpi-widget
+  [kpi]=&quot;revenueKpi&quot;
+  [isCurrency]=&quot;true&quot;
+  (kpiClick)=&quot;onKpiSelected($event)&quot;&gt;
+&lt;/app-kpi-widget&gt;</code></pre></div>
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+                <div>
+                    <pre class="line-numbers"><code class="language-html">&lt;b&gt;Example :&lt;/b&gt;&lt;div&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;app-kpi-widget
+  [kpi]=&amp;quot;revenueKpi&amp;quot;
+  [isCurrency]=&amp;quot;true&amp;quot;
+  (kpiClick)=&amp;quot;onKpiSelected($event)&amp;quot;&amp;gt;
+&amp;lt;/app-kpi-widget&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</code></pre>
+                </div>
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-kpi-widget</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>    <code>IonicModule</code>
+</div>
+                        <div>    <code>CurrencyFormatPipe</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./kpi-widget.component.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./kpi-widget.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/DashboardPage.html" target="_self" >DashboardPage</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonicModule</code>
+                                </li>
+                                <li>
+                                        <code>CurrencyFormatPipe</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#KpiTrend" >KpiTrend</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onClick" >onClick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#isCurrency" >isCurrency</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#kpi" >kpi</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#loading" >loading</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#kpiClick" >kpiClick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Accessors</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#ariaDescription" >ariaDescription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isCurrency"></a>
+                        <b>isCurrency</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:40</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Si es true, formatea el valor numérico como moneda EUR</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="kpi"></a>
+                        <b>kpi</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Kpi.html" target="_self" >Kpi</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:37</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Objeto de datos KPI</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading"></a>
+                        <b>loading</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:43</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Estado de carga individual del widget</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="kpiClick"></a>
+                        <b>kpiClick</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:46</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite el evento al hacer click en el widget</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClick"></a>
+                    <span class="name">
+                        <span ><b>onClick</b></span>
+                        <a href="#onClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClick()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Manejador del click para emitir el evento si el widget es interactivo.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="KpiTrend"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>KpiTrend</b></span>
+                        <a href="#KpiTrend"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>KpiTrend</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Exponer enum KpiTrend al template</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaDescription"></a>
+                        <span class="name"><b>ariaDescription</b><a href="#ariaDescription"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>ariaDescription()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/shared/components/kpi-widget/kpi-widget.component.ts:63</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Genera la descripción accesible para lectores de pantalla.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { Kpi, KpiTrend } from &#x27;../../../core/models/kpi.model&#x27;;
+import { CurrencyFormatPipe } from &#x27;../../pipes/currency-format.pipe&#x27;;
+
+/**
+ * @component KpiWidgetComponent
+ * @description Widget estadístico reutilizable para métricas clave de rendimiento con
+ * detección de cambios OnPush, indicador visual de tendencia y accesibilidad ARIA completa.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-kpi-widget
+ *   [kpi]&#x3D;&quot;revenueKpi&quot;
+ *   [isCurrency]&#x3D;&quot;true&quot;
+ *   (kpiClick)&#x3D;&quot;onKpiSelected($event)&quot;&gt;
+ * &lt;/app-kpi-widget&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-kpi-widget&#x27;,
+  standalone: true,
+  imports: [CommonModule, IonicModule, CurrencyFormatPipe],
+  templateUrl: &#x27;./kpi-widget.component.html&#x27;,
+  styleUrls: [&#x27;./kpi-widget.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class KpiWidgetComponent {
+  /** Objeto de datos KPI */
+  @Input({ required: true }) kpi!: Kpi;
+
+  /** Si es true, formatea el valor numérico como moneda EUR */
+  @Input() isCurrency: boolean &#x3D; false;
+
+  /** Estado de carga individual del widget */
+  @Input() loading: boolean &#x3D; false;
+
+  /** Emite el evento al hacer click en el widget */
+  @Output() kpiClick &#x3D; new EventEmitter&lt;Kpi&gt;();
+
+  /** Exponer enum KpiTrend al template */
+  readonly KpiTrend &#x3D; KpiTrend;
+
+  /**
+   * Manejador del click para emitir el evento si el widget es interactivo.
+   */
+  onClick(): void {
+    if (!this.loading) {
+      this.kpiClick.emit(this.kpi);
+    }
+  }
+
+  /**
+   * Genera la descripción accesible para lectores de pantalla.
+   */
+  get ariaDescription(): string {
+    if (!this.kpi) return &#x27;&#x27;;
+    const formattedVal &#x3D; this.isCurrency ? &#x60;${this.kpi.value} euros&#x60; : &#x60;${this.kpi.value} ${this.kpi.unit || &#x27;&#x27;}&#x60;;
+    const trendText &#x3D;
+      this.kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP
+        ? &#x60;aumento de ${this.kpi.changePercent}%&#x60;
+        : this.kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.DOWN
+        ? &#x60;descenso de ${this.kpi.changePercent}%&#x60;
+        : &#x60;sin cambios&#x60;;
+
+    return &#x60;Indicador ${this.kpi.label}: ${formattedVal}, ${trendText} respecto al período anterior.&#x60;;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;kpi-card&quot;
+  [class.interactive]&#x3D;&quot;kpiClick.observed&quot;
+  [class.loading]&#x3D;&quot;loading&quot;
+  (click)&#x3D;&quot;onClick()&quot;
+  [attr.tabindex]&#x3D;&quot;kpiClick.observed ? 0 : null&quot;
+  [attr.role]&#x3D;&quot;kpiClick.observed ? &#x27;button&#x27; : &#x27;region&#x27;&quot;
+  [attr.aria-label]&#x3D;&quot;ariaDescription&quot;
+  (keydown.enter)&#x3D;&quot;onClick()&quot;
+  (keydown.space)&#x3D;&quot;onClick()&quot;
+&gt;
+  @if (loading) {
+    &lt;!-- Estado de carga interno --&gt;
+    &lt;div class&#x3D;&quot;kpi-loading-state&quot;&gt;
+      &lt;div class&#x3D;&quot;loading-top&quot;&gt;
+        &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 60%; height: 16px; border-radius: 4px;&quot;&gt;&lt;/ion-skeleton-text&gt;
+        &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 36px; height: 36px; border-radius: 10px;&quot;&gt;&lt;/ion-skeleton-text&gt;
+      &lt;/div&gt;
+      &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 75%; height: 32px; margin: 12px 0; border-radius: 6px;&quot;&gt;&lt;/ion-skeleton-text&gt;
+      &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 45%; height: 14px; border-radius: 4px;&quot;&gt;&lt;/ion-skeleton-text&gt;
+    &lt;/div&gt;
+  } @else {
+    &lt;!-- Cabecera: Título e Icono temático --&gt;
+    &lt;div class&#x3D;&quot;kpi-top&quot;&gt;
+      &lt;span class&#x3D;&quot;kpi-label&quot;&gt;{{ kpi.label }}&lt;/span&gt;
+      &lt;div
+        class&#x3D;&quot;kpi-icon-container&quot;
+        [style.background]&#x3D;&quot;kpi.color ? kpi.color + &#x27;22&#x27; : &#x27;rgba(99, 102, 241, 0.15)&#x27;&quot;
+        [style.color]&#x3D;&quot;kpi.color || &#x27;#818cf8&#x27;&quot;
+        aria-hidden&#x3D;&quot;true&quot;
+      &gt;
+        &lt;ion-icon [name]&#x3D;&quot;kpi.icon || &#x27;stats-chart-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Valor Principal --&gt;
+    &lt;div class&#x3D;&quot;kpi-value-row&quot;&gt;
+      &lt;span class&#x3D;&quot;kpi-value&quot;&gt;
+        @if (isCurrency) {
+          {{ kpi.value | currencyFormat }}
+        } @else {
+          {{ kpi.value | number:&#x27;1.0-2&#x27;:&#x27;es-ES&#x27; }} &lt;small class&#x3D;&quot;kpi-unit&quot;&gt;{{ kpi.unit }}&lt;/small&gt;
+        }
+      &lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Pie: Indicador de Tendencia y Comparación --&gt;
+    &lt;div class&#x3D;&quot;kpi-footer&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;trend-badge&quot;
+        [ngClass]&#x3D;&quot;{
+          &#x27;trend-up&#x27;: kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP,
+          &#x27;trend-down&#x27;: kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.DOWN,
+          &#x27;trend-stable&#x27;: kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.STABLE
+        }&quot;
+      &gt;
+        &lt;ion-icon
+          [name]&#x3D;&quot;
+            kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP
+              ? &#x27;trending-up-outline&#x27;
+              : kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.DOWN
+              ? &#x27;trending-down-outline&#x27;
+              : &#x27;remove-outline&#x27;
+          &quot;
+          aria-hidden&#x3D;&quot;true&quot;
+        &gt;&lt;/ion-icon&gt;
+        &lt;span class&#x3D;&quot;trend-text&quot;&gt;
+          {{ kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP ? &#x27;+&#x27; : &#x27;&#x27; }}{{ kpi.changePercent }}%
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;span class&#x3D;&quot;comparison-text&quot;&gt;vs período anterior&lt;/span&gt;
+    &lt;/div&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./kpi-widget.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/**
+ * KPI Widget Component Styles
+ * Modern Glassmorphism Card with Trend Indicators
+ */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.kpi-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.1rem;
+  padding: 1.35rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  outline: none;
+
+  &amp;.interactive {
+    cursor: pointer;
+
+    &amp;:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    &amp;:focus-visible {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  .kpi-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+
+    .kpi-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #94a3b8;
+      letter-spacing: 0.01em;
+      text-transform: capitalize;
+    }
+
+    .kpi-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 0.65rem;
+      font-size: 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .kpi-value-row {
+    margin: 0.35rem 0 0.85rem 0;
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+
+      .kpi-unit {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #94a3b8;
+        margin-left: 0.25rem;
+      }
+    }
+  }
+
+  .kpi-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    .trend-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.5rem;
+
+      ion-icon {
+        font-size: 0.9rem;
+      }
+
+      &amp;.trend-up {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+
+      &amp;.trend-down {
+        background: rgba(244, 63, 94, 0.15);
+        color: #fb7185;
+        border: 1px solid rgba(244, 63, 94, 0.3);
+      }
+
+      &amp;.trend-stable {
+        background: rgba(148, 163, 184, 0.15);
+        color: #94a3b8;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+      }
+    }
+
+    .comparison-text {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class="kpi-card"  [class.interactive]="kpiClick.observed"  [class.loading]="loading"  (click)="onClick()"  [attr.tabindex]="kpiClick.observed ? 0 : null"  [attr.role]="kpiClick.observed ? \'button\' : \'region\'"  [attr.aria-label]="ariaDescription"  (keydown.enter)="onClick()"  (keydown.space)="onClick()">  @if (loading) {    <!-- Estado de carga interno -->    <div class="kpi-loading-state">      <div class="loading-top">        <ion-skeleton-text [animated]="true" style="width: 60%; height: 16px; border-radius: 4px;"></ion-skeleton-text>        <ion-skeleton-text [animated]="true" style="width: 36px; height: 36px; border-radius: 10px;"></ion-skeleton-text>      </div>      <ion-skeleton-text [animated]="true" style="width: 75%; height: 32px; margin: 12px 0; border-radius: 6px;"></ion-skeleton-text>      <ion-skeleton-text [animated]="true" style="width: 45%; height: 14px; border-radius: 4px;"></ion-skeleton-text>    </div>  } @else {    <!-- Cabecera: Título e Icono temático -->    <div class="kpi-top">      <span class="kpi-label">{{ kpi.label }}</span>      <div        class="kpi-icon-container"        [style.background]="kpi.color ? kpi.color + \'22\' : \'rgba(99, 102, 241, 0.15)\'"        [style.color]="kpi.color || \'#818cf8\'"        aria-hidden="true"      >        <ion-icon [name]="kpi.icon || \'stats-chart-outline\'"></ion-icon>      </div>    </div>    <!-- Valor Principal -->    <div class="kpi-value-row">      <span class="kpi-value">        @if (isCurrency) {          {{ kpi.value | currencyFormat }}        } @else {          {{ kpi.value | number:\'1.0-2\':\'es-ES\' }} <small class="kpi-unit">{{ kpi.unit }}</small>        }      </span>    </div>    <!-- Pie: Indicador de Tendencia y Comparación -->    <div class="kpi-footer">      <div        class="trend-badge"        [ngClass]="{          \'trend-up\': kpi.trend === KpiTrend.UP,          \'trend-down\': kpi.trend === KpiTrend.DOWN,          \'trend-stable\': kpi.trend === KpiTrend.STABLE        }"      >        <ion-icon          [name]="            kpi.trend === KpiTrend.UP              ? \'trending-up-outline\'              : kpi.trend === KpiTrend.DOWN              ? \'trending-down-outline\'              : \'remove-outline\'          "          aria-hidden="true"        ></ion-icon>        <span class="trend-text">          {{ kpi.trend === KpiTrend.UP ? \'+\' : \'\' }}{{ kpi.changePercent }}%        </span>      </div>      <span class="comparison-text">vs período anterior</span>    </div>  }</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
+    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'KpiWidgetComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'KpiWidgetComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

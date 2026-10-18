@@ -1,0 +1,55 @@
+<div class="chart-container-card" role="region" [attr.aria-label]="title">
+  <!-- Cabecera del gráfico con filtros y acciones -->
+  <header class="chart-header">
+    <div class="title-group">
+      <h3 class="chart-title">{{ title }}</h3>
+      @if (subtitle) {
+        <p class="chart-subtitle">{{ subtitle }}</p>
+      }
+    </div>
+
+    <div class="controls-group">
+      <!-- Selector de rango temporal -->
+      @if (showTimeFilter && timeRanges.length > 0 && !loading) {
+        <div class="time-range-pills" role="radiogroup" aria-label="Seleccionar rango temporal">
+          @for (range of timeRanges; track range) {
+            <button
+              type="button"
+              class="range-pill"
+              [class.active]="selectedTimeRange === range"
+              (click)="onRangeChange(range)"
+              role="radio"
+              [attr.aria-checked]="selectedTimeRange === range"
+            >
+              {{ range }}
+            </button>
+          }
+        </div>
+      }
+
+      <!-- Botón de acción adicional opcional -->
+      @if (actionIcon && !loading) {
+        <ion-button
+          fill="clear"
+          size="small"
+          class="action-btn"
+          (click)="onActionClick()"
+          [attr.aria-label]="actionTooltip"
+        >
+          <ion-icon [name]="actionIcon" slot="icon-only"></ion-icon>
+        </ion-button>
+      }
+    </div>
+  </header>
+
+  <!-- Cuerpo del gráfico -->
+  <div class="chart-body" [class.is-loading]="loading">
+    @if (loading) {
+      <app-loading-skeleton type="chart" ariaLabel="Cargando gráfico..."></app-loading-skeleton>
+    } @else {
+      <div class="chart-content">
+        <ng-content></ng-content>
+      </div>
+    }
+  </div>
+</div>

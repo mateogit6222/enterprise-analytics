@@ -1,0 +1,124 @@
+/**
+ * KPI Widget Component Styles
+ * Modern Glassmorphism Card with Trend Indicators
+ */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.kpi-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.1rem;
+  padding: 1.35rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  outline: none;
+
+  &.interactive {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    &:focus-visible {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  .kpi-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+
+    .kpi-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #94a3b8;
+      letter-spacing: 0.01em;
+      text-transform: capitalize;
+    }
+
+    .kpi-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 0.65rem;
+      font-size: 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .kpi-value-row {
+    margin: 0.35rem 0 0.85rem 0;
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+
+      .kpi-unit {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #94a3b8;
+        margin-left: 0.25rem;
+      }
+    }
+  }
+
+  .kpi-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    .trend-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.5rem;
+
+      ion-icon {
+        font-size: 0.9rem;
+      }
+
+      &.trend-up {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+
+      &.trend-down {
+        background: rgba(244, 63, 94, 0.15);
+        color: #fb7185;
+        border: 1px solid rgba(244, 63, 94, 0.3);
+      }
+
+      &.trend-stable {
+        background: rgba(148, 163, 184, 0.15);
+        color: #94a3b8;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+      }
+    }
+
+    .comparison-text {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+  }
+}

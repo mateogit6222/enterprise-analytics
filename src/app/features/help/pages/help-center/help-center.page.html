@@ -1,0 +1,368 @@
+<ion-header [translucent]="true" class="ion-no-border header-glass">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Centro de Ayuda y Manual de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-content" id="help-content">
+  <div class="content-container">
+
+    <!-- Encabezado Principal con Buscador de Manual -->
+    <header class="help-hero">
+      <div class="hero-badge">
+        <ion-icon name="book-outline"></ion-icon>
+        <span>Manual de Usuario Embebido & Documentación Contextual</span>
+      </div>
+      <h1 class="hero-title">¿En qué podemos ayudarte hoy?</h1>
+      <p class="hero-subtitle">
+        Guía integral sobre arquitectura, roles de usuario, validaciones reactivas, analítica en tiempo real y accesibilidad.
+      </p>
+
+      <!-- Barra de Búsqueda Rápida de Dudas -->
+      <div class="search-box">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearchChange()"
+          placeholder="Buscar conceptos (ej. 'SKU', 'PDF', 'Admin', 'Atajos', 'forkJoin')..."
+          class="search-input"
+          aria-label="Buscar en el manual de usuario"
+        />
+        @if (searchQuery) {
+          <button class="clear-search-btn" (click)="clearSearch()" aria-label="Limpiar búsqueda">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        }
+      </div>
+    </header>
+
+    <!-- Guía Visual Rápida: Flujo Paso a Paso -->
+    @if (!searchQuery) {
+      <section class="onboarding-guide" aria-label="Guía rápida paso a paso">
+        <h2 class="section-title">
+          <ion-icon name="compass-outline"></ion-icon>
+          Flujo de Trabajo del Sistema en 4 Pasos
+        </h2>
+        
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-icon-wrap auth">
+              <ion-icon name="key-outline"></ion-icon>
+            </div>
+            <h3>Autenticación & Roles</h3>
+            <p>Accede con credenciales de <strong>Administrador</strong> (control total) o <strong>Estándar</strong> (operativa de registros).</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-icon-wrap analytics">
+              <ion-icon name="stats-chart-outline"></ion-icon>
+            </div>
+            <h3>Analítica en Vivo</h3>
+            <p>Monitorea KPIs ejecutivos y gráficos interactivos <strong>Chart.js</strong> con sincronización paralela SQL + NoSQL.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-icon-wrap records">
+              <ion-icon name="layers-outline"></ion-icon>
+            </div>
+            <h3>Gestión con SKU Asíncrono</h3>
+            <p>Crea y edita registros con validación en servidor del código <strong>SKU único</strong> sin recargas de página.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-icon-wrap reports">
+              <ion-icon name="document-text-outline"></ion-icon>
+            </div>
+            <h3>Informes & Descarga</h3>
+            <p>Genera y descarga informes en <strong>PDF apaisado</strong> (autoTable) o archivos <strong>CSV con UTF-8 BOM</strong>.</p>
+          </div>
+        </div>
+      </section>
+    }
+
+    <!-- Acordeones Temáticos Accesibles del Manual de Usuario -->
+    <section class="manual-section" aria-label="Módulos del manual de usuario">
+      <div class="manual-header-row">
+        <h2 class="section-title">
+          <ion-icon name="library-outline"></ion-icon>
+          Módulos Documentados del Sistema
+        </h2>
+        @if (searchQuery) {
+          <span class="search-results-count">
+            Resultados para "<strong>{{ searchQuery }}</strong>"
+          </span>
+        }
+      </div>
+
+      <ion-accordion-group [multiple]="true" [value]="['module-1', 'module-2', 'module-3', 'module-4', 'module-5']">
+        
+        <!-- MÓDULO 1: Acceso, Autenticación y Control de Roles -->
+        @if (matchesSearch('acceso', 'roles', 'login', 'admin', 'jwt', 'guard', 'estandar', 'seguridad')) {
+          <ion-accordion value="module-1" class="manual-accordion">
+            <ion-item slot="header" color="dark">
+              <ion-icon name="shield-checkmark-outline" slot="start" class="module-icon admin"></ion-icon>
+              <ion-label>
+                <h3>1. Acceso, Autenticación y Control de Roles (RBAC)</h3>
+                <p>Cuentas demo, Guards de enrutamiento y sesión segura con JWT simulado</p>
+              </ion-label>
+            </ion-item>
+            <div class="accordion-body" slot="content">
+              <h4>Cuentas de Acceso Preconfiguradas</h4>
+              <div class="demo-accounts-table-wrap">
+                <table class="manual-table">
+                  <thead>
+                    <tr>
+                      <th>Rol</th>
+                      <th>Email</th>
+                      <th>Contraseña</th>
+                      <th>Permisos Asignados</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="role-badge admin">ADMINISTRADOR</span></td>
+                      <td><code>admin&#64;enterprise.com</code></td>
+                      <td><code>Admin123!</code></td>
+                      <td>Dashboard Analítico, CRUD Registros, Informes PDF/CSV, Centro de Ayuda.</td>
+                    </tr>
+                    <tr>
+                      <td><span class="role-badge user">ESTÁNDAR</span></td>
+                      <td><code>user&#64;enterprise.com</code></td>
+                      <td><code>User123!</code></td>
+                      <td>CRUD de Registros (lectura/alta/edición), Centro de Ayuda, Perfil.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h4>Protección de Rutas (Angular Route Guards)</h4>
+              <ul>
+                <li><strong>AuthGuard:</strong> Protege todas las rutas internas redirigiendo al login si no existe un token de sesión válido.</li>
+                <li><strong>RoleGuard:</strong> Restringe el acceso a <code>/dashboard</code> y <code>/reports</code> únicamente a cuentas con rol <code>ADMIN</code>. Los usuarios estándar son redirigidos de forma transparente a <code>/records</code>.</li>
+                <li><strong>Interceptors HTTP:</strong> Inyectan automáticamente las cabeceras <code>Authorization: Bearer &lt;token&gt;</code> y capturan errores 401/403 para renovar sesión o notificar al usuario.</li>
+              </ul>
+            </div>
+          </ion-accordion>
+        }
+
+        <!-- MÓDULO 2: Dashboard Analítico Ejecutivo -->
+        @if (matchesSearch('dashboard', 'kpi', 'grafico', 'chart', 'ingresos', 'filtros', 'tiempo', 'analitica')) {
+          <ion-accordion value="module-2" class="manual-accordion">
+            <ion-item slot="header" color="dark">
+              <ion-icon name="pie-chart-outline" slot="start" class="module-icon analytics"></ion-icon>
+              <ion-label>
+                <h3>2. Dashboard Analítico Ejecutivo (Chart.js & KPIs)</h3>
+                <p>Indicadores clave, orquestación dual forkJoin y filtros reactivos en tiempo real</p>
+              </ion-label>
+            </ion-item>
+            <div class="accordion-body" slot="content">
+              <h4>Indicadores Clave de Rendimiento (KPI Widgets)</h4>
+              <p>El dashboard procesa 4 métricas reactivas derivadas directamente del store unificado de NgRx:</p>
+              <div class="kpi-desc-grid">
+                <div class="kpi-mini-card">
+                  <ion-icon name="cash-outline" class="text-success"></ion-icon>
+                  <strong>Ingresos Totales</strong>
+                  <span>Suma monetaria acumulada de las operaciones activas y completadas (€).</span>
+                </div>
+                <div class="kpi-mini-card">
+                  <ion-icon name="layers-outline" class="text-indigo"></ion-icon>
+                  <strong>Total Registros</strong>
+                  <span>Recuento global de entidades combinadas de PostgreSQL y Firestore.</span>
+                </div>
+                <div class="kpi-mini-card">
+                  <ion-icon name="checkmark-circle-outline" class="text-cyan"></ion-icon>
+                  <strong>Proyectos Activos</strong>
+                  <span>Operaciones actualmente en curso con estado <code>ACTIVE</code>.</span>
+                </div>
+                <div class="kpi-mini-card">
+                  <ion-icon name="trending-up-outline" class="text-amber"></ion-icon>
+                  <strong>Ticket Promedio</strong>
+                  <span>Importe medio facturado por operación empresarial.</span>
+                </div>
+              </div>
+
+              <h4>Gráficos Interactivos y Filtrado en Tiempo Real</h4>
+              <ul>
+                <li><strong>Gráfico de Evolución:</strong> Combina una curva con gradiente azul para facturación (€) y barras para volumen de operaciones en un eje secundario.</li>
+                <li><strong>Gráfico Donut:</strong> Ilustra el reparto porcentual entre las 5 áreas departamentales (Ventas, Marketing, Finanzas, Operaciones, RRHH).</li>
+                <li><strong>Filtros Temporales (7D, 30D, 90D, 1A):</strong> Despachan acciones instantáneas a NgRx, actualizando las curvas y los KPIs sin parpadeos gracias a la memoización con selectores.</li>
+              </ul>
+            </div>
+          </ion-accordion>
+        }
+
+        <!-- MÓDULO 3: Gestión de Registros y Validación Asíncrona -->
+        @if (matchesSearch('registros', 'crud', 'sku', 'validacion', 'formulario', 'asincrona', 'tabla', 'datatable')) {
+          <ion-accordion value="module-3" class="manual-accordion">
+            <ion-item slot="header" color="dark">
+              <ion-icon name="grid-outline" slot="start" class="module-icon records"></ion-icon>
+              <ion-label>
+                <h3>3. Gestión de Registros y Validación Asíncrona de SKU</h3>
+                <p>Componente DataTable, formulario reactivo con debounce y unicidad server-side</p>
+              </ion-label>
+            </ion-item>
+            <div class="accordion-body" slot="content">
+              <h4>Validación Asíncrona del Código SKU</h4>
+              <p>
+                Cada registro corporativo posee un código de inventario o proyecto (<strong>SKU</strong>). Para garantizar que no se produzcan duplicados sin saturar el servidor:
+              </p>
+              <ul>
+                <li>Se aplica un operador <strong>debounceTime de 450ms</strong> sobre el campo SKU para esperar a que el usuario termine de teclear.</li>
+                <li>Se invoca el método asíncrono <code>ApiRestService.checkSkuExists(sku)</code> simulando una consulta REST a PostgreSQL.</li>
+                <li><strong>Feedback UX visual:</strong>
+                  <ul>
+                    <li><ion-icon name="time-outline"></ion-icon> <em>Spinner azul:</em> Comprobación asíncrona en curso en servidor.</li>
+                    <li><ion-icon name="checkmark-circle" class="text-success"></ion-icon> <em>Icono verde:</em> Código SKU único y disponible.</li>
+                    <li><ion-icon name="alert-circle" class="text-danger"></ion-icon> <em>Alerta roja:</em> Código SKU ya en uso. El botón de guardar se bloquea automáticamente.</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h4>Funcionalidades de la DataTable Reutilizable</h4>
+              <ul>
+                <li><strong>Búsqueda en vivo:</strong> Filtra simultáneamente por SKU, título, cliente o descripción.</li>
+                <li><strong>Ordenación multicampo:</strong> Haz click en cualquier encabezado para ordenar ascendente o descendentemente.</li>
+                <li><strong>Paginación dinámica:</strong> Elige entre 5, 10, 25 o 50 registros por página.</li>
+                <li><strong>Eliminación con ConfirmDialog:</strong> Cuadro de diálogo modal que solicita confirmación explícita para evitar pérdidas involuntarias de datos.</li>
+              </ul>
+            </div>
+          </ion-accordion>
+        }
+
+        <!-- MÓDULO 4: Informes Corporativos y Exportación -->
+        @if (matchesSearch('informes', 'reportes', 'pdf', 'csv', 'excel', 'exportacion', 'descarga', 'autotable')) {
+          <ion-accordion value="module-4" class="manual-accordion">
+            <ion-item slot="header" color="dark">
+              <ion-icon name="document-text-outline" slot="start" class="module-icon reports"></ion-icon>
+              <ion-label>
+                <h3>4. Informes Corporativos y Exportación a PDF/CSV</h3>
+                <p>Resumen tabulado previsualizable, jsPDF autoTable horizontal y UTF-8 BOM</p>
+              </ion-label>
+            </ion-item>
+            <div class="accordion-body" slot="content">
+              <h4>Exportación a PDF Profesional (jsPDF + autoTable)</h4>
+              <p>Los informes PDF generados desde el Centro de Informes o desde el listado de registros cuentan con estándares corporativos:</p>
+              <ul>
+                <li><strong>Orientación horizontal (A4 Landscape):</strong> Óptima para tablas con múltiples columnas de datos de negocio.</li>
+                <li><strong>Diseño y branding corporativo:</strong> Encabezado azul marino (#0f172a), cabeceras de tabla en tono índigo (#6366f1) y filas alternas para máxima legibilidad.</li>
+                <li><strong>Paginación oficial:</strong> Numeración dinámica en pie de página ("Página X de Y") y sellado de fecha/hora de generación.</li>
+              </ul>
+
+              <h4>Exportación a CSV con Soporte UTF-8 BOM para Excel</h4>
+              <ul>
+                <li>Los archivos CSV generados incorporan el prefijo <strong>UTF-8 BOM (<code>\uFEFF</code>)</strong>.</li>
+                <li>Esto garantiza que Microsoft Excel (tanto en Windows como en Mac) reconozca correctamente caracteres españoles (tildes, eñes, símbolos de euro €) sin requerir conversiones manuales.</li>
+                <li>Delimitador de campos mediante punto y coma (<code>;</code>) acorde a los estándares de hojas de cálculo europeas.</li>
+              </ul>
+            </div>
+          </ion-accordion>
+        }
+
+        <!-- MÓDULO 5: Atajos de Teclado y Accesibilidad Universal -->
+        @if (matchesSearch('atajos', 'teclado', 'accesibilidad', 'wcag', 'contraste', 'alt', 'pantalla', 'aria')) {
+          <ion-accordion value="module-5" class="manual-accordion">
+            <ion-item slot="header" color="dark">
+              <ion-icon name="accessibility-outline" slot="start" class="module-icon a11y"></ion-icon>
+              <ion-label>
+                <h3>5. Atajos de Teclado y Accesibilidad Universal (WCAG 2.1)</h3>
+                <p>Navegación integral sin ratón, atajos globales y modo de alto contraste AAA</p>
+              </ion-label>
+            </ion-item>
+            <div class="accordion-body" slot="content">
+              <h4>Atajos de Teclado Globales del Sistema</h4>
+              <p>Puedes desplazarte rápidamente por la plataforma desde cualquier pantalla utilizando las combinaciones:</p>
+              
+              <div class="shortcuts-table-wrap">
+                <table class="manual-table">
+                  <thead>
+                    <tr>
+                      <th>Combinación</th>
+                      <th>Destino</th>
+                      <th>Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><kbd>Alt</kbd> + <kbd>D</kbd></td>
+                      <td><strong>Dashboard</strong></td>
+                      <td>Acceso directo al panel analítico ejecutivo (Administradores).</td>
+                    </tr>
+                    <tr>
+                      <td><kbd>Alt</kbd> + <kbd>R</kbd></td>
+                      <td><strong>Registros</strong></td>
+                      <td>Ir a la gestión integral y tabla de registros empresariales.</td>
+                    </tr>
+                    <tr>
+                      <td><kbd>Alt</kbd> + <kbd>I</kbd></td>
+                      <td><strong>Informes</strong></td>
+                      <td>Abrir el centro de generación de informes PDF/CSV (Administradores).</td>
+                    </tr>
+                    <tr>
+                      <td><kbd>Alt</kbd> + <kbd>H</kbd></td>
+                      <td><strong>Ayuda</strong></td>
+                      <td>Abrir este manual interactivo de usuario.</td>
+                    </tr>
+                    <tr>
+                      <td><kbd>Alt</kbd> + <kbd>P</kbd></td>
+                      <td><strong>Mi Perfil</strong></td>
+                      <td>Configurar preferencias de accesibilidad, tipografía y contraste.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h4>Conformidad WCAG 2.1 AA/AAA</h4>
+              <ul>
+                <li><strong>Enlace de salto (Bypass Blocks):</strong> Pulsa <kbd>Tab</kbd> nada más cargar la página para ver el botón <em>"Saltar al contenido principal"</em>.</li>
+                <li><strong>Foco Visible Claro:</strong> Todos los elementos interactivos disponen de un contorno de foco cian de 3px (<code>:focus-visible</code>) con separación de 2px.</li>
+                <li><strong>Contraste Extremo (AAA):</strong> Desde la página de Perfil puedes activar el modo de Alto Contraste con fondos negros puros y ratio de contraste superior a 7:1.</li>
+                <li><strong>Escala Tipográfica Fluida:</strong> Selector de tamaño de fuente (Normal, Grande, Extra Grande) para personas con dificultades visuales.</li>
+              </ul>
+            </div>
+          </ion-accordion>
+        }
+
+      </ion-accordion-group>
+    </section>
+
+    <!-- Tarjetas de Preguntas Frecuentes (FAQ) -->
+    <section class="faq-section" aria-label="Preguntas frecuentes">
+      <h2 class="section-title">
+        <ion-icon name="help-circle-outline"></ion-icon>
+        Preguntas Frecuentes (FAQ)
+      </h2>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h4>¿Por qué no puedo ver el Dashboard ni el Generador de Informes?</h4>
+          <p>
+            El sistema implementa <strong>Control de Acceso Basado en Roles (RBAC)</strong>. Esas dos secciones son exclusivas para cuentas con rol <strong>Administrador</strong>. Para probarlas, cierra sesión y accede con <code>admin&#64;enterprise.com</code>.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h4>¿De dónde provienen los datos que visualizo en la aplicación?</h4>
+          <p>
+            La plataforma utiliza una arquitectura híbrida: combina registros históricos procedentes de una API REST que simula <strong>PostgreSQL (SQL)</strong> y un stream reactivo que simula <strong>Firestore (NoSQL)</strong> mediante <code>forkJoin</code>.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h4>¿Se guardan mis preferencias de accesibilidad si recargo el navegador?</h4>
+          <p>
+            <strong>Sí.</strong> El servicio centralizado <code>AccessibilityService</code> persiste la escala de tipografía y el modo de alto contraste en el almacenamiento local del dispositivo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</ion-content>

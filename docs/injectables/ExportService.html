@@ -1,0 +1,1076 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ExportService</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/core/services/export.service.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>ExportService
+Servicio de exportación robusta de datos empresariales en formatos
+PDF (jsPDF + autoTable) y CSV con soporte UTF-8 BOM para Excel.</p>
+<ul>
+<li>PDF: Utiliza jsPDF con plugin autoTable para generar informes tabulados
+con diseño corporativo, encabezados y paginación.</li>
+<li>CSV: Incluye BOM UTF-8 (\uFEFF) para compatibilidad con Microsoft Excel
+y manejo correcto de caracteres especiales españoles (tildes, ñ, etc.).</li>
+<li>Ambos formatos descargan el archivo automáticamente al navegador.</li>
+</ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">this.exportService.exportToCsv(records, &#39;registros_2026&#39;);
+this.exportService.exportToPdf(records, &#39;Informe Analítico Q3&#39;);</code></pre></div>
+            </p>
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">providedIn</td>
+                        <td class="col-md-9"><code>root</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+            </div>
+
+    <div class="tab-pane fade " id="api">
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#downloadFile" >downloadFile</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#escapeCsvField" >escapeCsvField</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#exportToCsv" >exportToCsv</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#exportToPdf" >exportToPdf</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#formatDate" >formatDate</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="downloadFile"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>downloadFile</b></span>
+                        <a href="#downloadFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>downloadFile(content: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filename: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mimeType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/core/services/export.service.ts:219</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Descarga un archivo en el navegador creando un Blob y un enlace temporal.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>content</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Contenido del archivo.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>filename</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Nombre del archivo.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>mimeType</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Tipo MIME del archivo.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="escapeCsvField"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>escapeCsvField</b></span>
+                        <a href="#escapeCsvField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>escapeCsvField(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/core/services/export.service.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Escapa un campo para formato CSV (comillas dobles si contiene separadores).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Campo a escapar.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Campo escapado.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportToCsv"></a>
+                    <span class="name">
+                        <span ><b>exportToCsv</b></span>
+                        <a href="#exportToCsv"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportToCsv(records: <a href="../interfaces/Record.html" target="_self">Record[]</a>, filename: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/core/services/export.service.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Exporta registros a un archivo CSV con soporte UTF-8 BOM para Excel.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>records</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Record.html" target="_self" >Record[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Registros a exportar.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>filename</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;registros_export&#x27;</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Nombre del archivo sin extensión.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportToPdf"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>exportToPdf</b></span>
+                        <a href="#exportToPdf"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportToPdf(records: <a href="../interfaces/Record.html" target="_self">Record[]</a>, title: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filename: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/core/services/export.service.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Exporta registros a un informe PDF con diseño corporativo usando jsPDF + autoTable.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>records</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Record.html" target="_self" >Record[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Registros a exportar.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>title</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;Informe de Registros Empresariales&#x27;</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Título del informe.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>filename</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;informe_registros&#x27;</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Nombre del archivo sin extensión.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDate"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>formatDate</b></span>
+                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>formatDate(isoDate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/core/services/export.service.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Formatea una fecha ISO 8601 a formato legible español.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>isoDate</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Fecha en formato ISO.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Fecha formateada (dd/MM/yyyy HH:mm).</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Record } from &#x27;../models/record.model&#x27;;
+
+/**
+ * @class ExportService
+ * @description Servicio de exportación robusta de datos empresariales en formatos
+ * PDF (jsPDF + autoTable) y CSV con soporte UTF-8 BOM para Excel.
+ *
+ * @remarks
+ * - PDF: Utiliza jsPDF con plugin autoTable para generar informes tabulados
+ *   con diseño corporativo, encabezados y paginación.
+ * - CSV: Incluye BOM UTF-8 (\\uFEFF) para compatibilidad con Microsoft Excel
+ *   y manejo correcto de caracteres especiales españoles (tildes, ñ, etc.).
+ * - Ambos formatos descargan el archivo automáticamente al navegador.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * this.exportService.exportToCsv(records, &#x27;registros_2026&#x27;);
+ * this.exportService.exportToPdf(records, &#x27;Informe Analítico Q3&#x27;);
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class ExportService {
+
+  /**
+   * Exporta registros a un archivo CSV con soporte UTF-8 BOM para Excel.
+   *
+   * @param {Record[]} records - Registros a exportar.
+   * @param {string} [filename&#x3D;&#x27;registros_export&#x27;] - Nombre del archivo sin extensión.
+   */
+  exportToCsv(records: Record[], filename: string &#x3D; &#x27;registros_export&#x27;): void {
+    if (!records || records.length &#x3D;&#x3D;&#x3D; 0) {
+      console.warn(&#x27;[ExportService] No hay registros para exportar a CSV&#x27;);
+      return;
+    }
+
+    /** Definir las cabeceras en español */
+    const headers &#x3D; [
+      &#x27;ID&#x27;, &#x27;Título&#x27;, &#x27;Descripción&#x27;, &#x27;Categoría&#x27;, &#x27;Estado&#x27;,
+      &#x27;Importe (€)&#x27;, &#x27;SKU&#x27;, &#x27;Cliente&#x27;, &#x27;Email Cliente&#x27;, &#x27;Región&#x27;,
+      &#x27;Etiquetas&#x27;, &#x27;Fuente&#x27;, &#x27;Fecha Creación&#x27;, &#x27;Última Actualización&#x27;
+    ];
+
+    /** Mapear datos a filas CSV */
+    const rows &#x3D; records.map(r &#x3D;&gt; [
+      r.id,
+      this.escapeCsvField(r.title),
+      this.escapeCsvField(r.description),
+      r.category,
+      r.status,
+      r.amount.toString(),
+      r.sku,
+      this.escapeCsvField(r.clientName),
+      r.clientEmail,
+      r.region,
+      r.tags.join(&#x27;; &#x27;),
+      r.source,
+      this.formatDate(r.createdAt),
+      this.formatDate(r.updatedAt)
+    ]);
+
+    /** Construir CSV con BOM UTF-8 para Excel */
+    const BOM &#x3D; &#x27;\uFEFF&#x27;;
+    const csvContent &#x3D; BOM +
+      headers.join(&#x27;;&#x27;) + &#x27;\n&#x27; +
+      rows.map(row &#x3D;&gt; row.join(&#x27;;&#x27;)).join(&#x27;\n&#x27;);
+
+    /** Descargar */
+    this.downloadFile(csvContent, &#x60;${filename}.csv&#x60;, &#x27;text/csv;charset&#x3D;utf-8&#x27;);
+  }
+
+  /**
+   * Exporta registros a un informe PDF con diseño corporativo usando jsPDF + autoTable.
+   *
+   * @param {Record[]} records - Registros a exportar.
+   * @param {string} [title&#x3D;&#x27;Informe de Registros Empresariales&#x27;] - Título del informe.
+   * @param {string} [filename&#x3D;&#x27;informe_registros&#x27;] - Nombre del archivo sin extensión.
+   */
+  async exportToPdf(
+    records: Record[],
+    title: string &#x3D; &#x27;Informe de Registros Empresariales&#x27;,
+    filename: string &#x3D; &#x27;informe_registros&#x27;
+  ): Promise&lt;void&gt; {
+    if (!records || records.length &#x3D;&#x3D;&#x3D; 0) {
+      console.warn(&#x27;[ExportService] No hay registros para exportar a PDF&#x27;);
+      return;
+    }
+
+    /** Importación dinámica para reducir el bundle size inicial */
+    const { jsPDF } &#x3D; await import(&#x27;jspdf&#x27;);
+    const autoTable &#x3D; (await import(&#x27;jspdf-autotable&#x27;)).default;
+
+    const doc &#x3D; new jsPDF({
+      orientation: &#x27;landscape&#x27;,
+      unit: &#x27;mm&#x27;,
+      format: &#x27;a4&#x27;
+    });
+
+    /** Diseño corporativo — cabecera */
+    doc.setFillColor(15, 23, 42); // #0f172a — Dark Navy
+    doc.rect(0, 0, 297, 35, &#x27;F&#x27;);
+
+    doc.setTextColor(248, 250, 252); // #f8fafc
+    doc.setFontSize(18);
+    doc.setFont(&#x27;helvetica&#x27;, &#x27;bold&#x27;);
+    doc.text(title, 14, 16);
+
+    doc.setFontSize(10);
+    doc.setFont(&#x27;helvetica&#x27;, &#x27;normal&#x27;);
+    doc.text(&#x60;Enterprise Analytics — Generado: ${this.formatDate(new Date().toISOString())}&#x60;, 14, 25);
+
+    /** Resumen estadístico */
+    const totalAmount &#x3D; records.reduce((sum, r) &#x3D;&gt; sum + r.amount, 0);
+    doc.text(&#x60;Total registros: ${records.length} | Importe total: ${totalAmount.toLocaleString(&#x27;es-ES&#x27;)} EUR&#x60;, 14, 31);
+
+    /** Tabla de datos con autoTable */
+    const tableHeaders &#x3D; [
+      &#x27;Título&#x27;, &#x27;Categoría&#x27;, &#x27;Estado&#x27;, &#x27;Importe (€)&#x27;,
+      &#x27;SKU&#x27;, &#x27;Cliente&#x27;, &#x27;Región&#x27;, &#x27;Actualización&#x27;
+    ];
+
+    const tableData &#x3D; records.map(r &#x3D;&gt; [
+      r.title.substring(0, 35) + (r.title.length &gt; 35 ? &#x27;...&#x27; : &#x27;&#x27;),
+      r.category,
+      r.status,
+      r.amount.toLocaleString(&#x27;es-ES&#x27;),
+      r.sku,
+      r.clientName.substring(0, 20) + (r.clientName.length &gt; 20 ? &#x27;...&#x27; : &#x27;&#x27;),
+      r.region,
+      this.formatDate(r.updatedAt)
+    ]);
+
+    autoTable(doc, {
+      head: [tableHeaders],
+      body: tableData,
+      startY: 40,
+      theme: &#x27;grid&#x27;,
+      headStyles: {
+        fillColor: [99, 102, 241], // #6366f1 — Indigo
+        textColor: [255, 255, 255],
+        fontStyle: &#x27;bold&#x27;,
+        fontSize: 8,
+        halign: &#x27;center&#x27;
+      },
+      bodyStyles: {
+        fontSize: 7,
+        textColor: [30, 41, 59], // #1e293b
+        cellPadding: 2
+      },
+      alternateRowStyles: {
+        fillColor: [241, 245, 249] // #f1f5f9
+      },
+      columnStyles: {
+        3: { halign: &#x27;right&#x27; }
+      },
+      margin: { top: 40, left: 14, right: 14 },
+      didDrawPage: (data: any) &#x3D;&gt; {
+        /** Pie de página con número de página */
+        const pageCount &#x3D; (doc as any).internal.getNumberOfPages();
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184); // #94a3b8
+        doc.text(
+          &#x60;Página ${data.pageNumber} de ${pageCount}&#x60;,
+          297 / 2,
+          doc.internal.pageSize.height - 8,
+          { align: &#x27;center&#x27; }
+        );
+      }
+    });
+
+    /** Descargar el PDF */
+    doc.save(&#x60;${filename}.pdf&#x60;);
+  }
+
+  /**
+   * Escapa un campo para formato CSV (comillas dobles si contiene separadores).
+   *
+   * @private
+   * @param {string} field - Campo a escapar.
+   * @returns {string} Campo escapado.
+   */
+  private escapeCsvField(field: string): string {
+    if (!field) return &#x27;&#x27;;
+    if (field.includes(&#x27;;&#x27;) || field.includes(&#x27;&quot;&#x27;) || field.includes(&#x27;\n&#x27;)) {
+      return &#x60;&quot;${field.replace(/&quot;/g, &#x27;&quot;&quot;&#x27;)}&quot;&#x60;;
+    }
+    return field;
+  }
+
+  /**
+   * Formatea una fecha ISO 8601 a formato legible español.
+   *
+   * @private
+   * @param {string} isoDate - Fecha en formato ISO.
+   * @returns {string} Fecha formateada (dd/MM/yyyy HH:mm).
+   */
+  private formatDate(isoDate: string): string {
+    if (!isoDate) return &#x27;&#x27;;
+    const d &#x3D; new Date(isoDate);
+    return d.toLocaleDateString(&#x27;es-ES&#x27;, {
+      day: &#x27;2-digit&#x27;,
+      month: &#x27;2-digit&#x27;,
+      year: &#x27;numeric&#x27;,
+      hour: &#x27;2-digit&#x27;,
+      minute: &#x27;2-digit&#x27;
+    });
+  }
+
+  /**
+   * Descarga un archivo en el navegador creando un Blob y un enlace temporal.
+   *
+   * @private
+   * @param {string} content - Contenido del archivo.
+   * @param {string} filename - Nombre del archivo.
+   * @param {string} mimeType - Tipo MIME del archivo.
+   */
+  private downloadFile(content: string, filename: string, mimeType: string): void {
+    const blob &#x3D; new Blob([content], { type: mimeType });
+    const url &#x3D; window.URL.createObjectURL(blob);
+    const link &#x3D; document.createElement(&#x27;a&#x27;);
+    link.href &#x3D; url;
+    link.download &#x3D; filename;
+    link.style.display &#x3D; &#x27;none&#x27;;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ExportService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

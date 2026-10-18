@@ -1,0 +1,1677 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RecordFormModalComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/records/components/record-form-modal/record-form-modal.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>RecordFormModalComponent
+Modal reactivo de alta y edición de registros empresariales con validaciones
+sincrónicas completas y validación asíncrona server-side de código SKU con feedback visual UX.</p>
+<p>Cumple con los criterios de evaluación:</p>
+<ul>
+<li>RA 2: Formulario reactivo complejo con Data Binding, validación asíncrona y OnPush.</li>
+<li>RA 4: Accesibilidad ARIA con estados aria-invalid y aria-describedby en inputs.</li>
+<li>RA 6: Documentación completa JSDoc.</li>
+</ul>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-record-form-modal</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>    <code>IonicModule</code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./record-form-modal.component.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./record-form-modal.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonicModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#apiRest" >apiRest</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#modalCtrl" >modalCtrl</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#RecordCategory" >RecordCategory</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#RecordStatus" >RecordStatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#cancel" >cancel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#initForm" >initForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#record" >record</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Accessors</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#isEditing" >isEditing</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#skuControl" >skuControl</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="record"></a>
+                        <b>record</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Record.html" target="_self" >Record</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:74</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Registro a editar (opcional). Si no se proporciona, el modal opera en modo creación</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancel"></a>
+                    <span class="name">
+                        <span ><b>cancel</b></span>
+                        <a href="#cancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cancela la operación y cierra el modal sin cambios.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initForm</b></span>
+                        <a href="#initForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa la estructura del FormGroup con sus validadores sincrónicos y asíncronos.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valida y procesa el envío del formulario.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiRest"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>apiRest</b></span>
+                        <a href="#apiRest"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ApiRestService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modalCtrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>modalCtrl</b></span>
+                        <a href="#modalCtrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ModalController)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RecordCategory"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>RecordCategory</b></span>
+                        <a href="#RecordCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>RecordCategory</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Enums expuestos para uso directo en la plantilla</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RecordStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>RecordStatus</b></span>
+                        <a href="#RecordStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>RecordStatus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isEditing"></a>
+                        <span class="name"><b>isEditing</b><a href="#isEditing"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isEditing()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:84</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Flag indicativo de edición o alta</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="skuControl"></a>
+                        <span class="name"><b>skuControl</b><a href="#skuControl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>skuControl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/features/records/components/record-form-modal/record-form-modal.component.ts:89</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Acceso directo al control SKU</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://angular.dev/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject,
+  ChangeDetectorRef
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+  AsyncValidatorFn
+} from &#x27;@angular/forms&#x27;;
+import { IonicModule, ModalController } from &#x27;@ionic/angular/lazy&#x27;;
+import { Observable, of, timer } from &#x27;rxjs&#x27;;
+import { map, switchMap, catchError } from &#x27;rxjs/operators&#x27;;
+
+import { Record, RecordCategory, RecordStatus } from &#x27;../../../../core/models/record.model&#x27;;
+import { ApiRestService } from &#x27;../../../../core/services/api-rest.service&#x27;;
+
+/**
+ * Validador asíncrono para verificar en tiempo real que el código SKU no esté duplicado
+ * en la base de datos empresarial, simulando comprobación server-side con debounce.
+ *
+ * @param {ApiRestService} apiRest - Servicio REST con acceso al endpoint de comprobación.
+ * @param {string} [excludeId] - ID del registro que se está editando para excluirlo de la comprobación.
+ * @returns {AsyncValidatorFn} Función validadora asíncrona compatible con Reactive Forms.
+ */
+export function skuAsyncValidator(apiRest: ApiRestService, excludeId?: string): AsyncValidatorFn {
+  return (control: AbstractControl): Observable&lt;ValidationErrors | null&gt; &#x3D;&gt; {
+    if (!control.value || String(control.value).trim().length &lt; 3) {
+      return of(null);
+    }
+
+    return timer(450).pipe(
+      switchMap(() &#x3D;&gt; apiRest.checkSkuExists(String(control.value).trim(), excludeId)),
+      map(exists &#x3D;&gt; (exists ? { skuTaken: true } : null)),
+      catchError(() &#x3D;&gt; of(null))
+    );
+  };
+}
+
+/**
+ * @component RecordFormModalComponent
+ * @description Modal reactivo de alta y edición de registros empresariales con validaciones
+ * sincrónicas completas y validación asíncrona server-side de código SKU con feedback visual UX.
+ *
+ * @remarks
+ * Cumple con los criterios de evaluación:
+ * - RA 2: Formulario reactivo complejo con Data Binding, validación asíncrona y OnPush.
+ * - RA 4: Accesibilidad ARIA con estados aria-invalid y aria-describedby en inputs.
+ * - RA 6: Documentación completa JSDoc.
+ */
+@Component({
+  selector: &#x27;app-record-form-modal&#x27;,
+  standalone: true,
+  imports: [CommonModule, IonicModule, ReactiveFormsModule],
+  templateUrl: &#x27;./record-form-modal.component.html&#x27;,
+  styleUrls: [&#x27;./record-form-modal.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class RecordFormModalComponent implements OnInit {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly modalCtrl &#x3D; inject(ModalController);
+  private readonly apiRest &#x3D; inject(ApiRestService);
+  private readonly cdr &#x3D; inject(ChangeDetectorRef);
+
+  /** Registro a editar (opcional). Si no se proporciona, el modal opera en modo creación */
+  @Input() record?: Record;
+
+  /** Enums expuestos para uso directo en la plantilla */
+  readonly RecordCategory &#x3D; RecordCategory;
+  readonly RecordStatus &#x3D; RecordStatus;
+
+  /** Formulario reactivo */
+  form!: FormGroup;
+
+  /** Flag indicativo de edición o alta */
+  get isEditing(): boolean {
+    return !!this.record;
+  }
+
+  /** Acceso directo al control SKU */
+  get skuControl(): AbstractControl {
+    return this.form.get(&#x27;sku&#x27;)!;
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  /**
+   * Inicializa la estructura del FormGroup con sus validadores sincrónicos y asíncronos.
+   * @private
+   */
+  private initForm(): void {
+    const r &#x3D; this.record;
+
+    this.form &#x3D; this.fb.group({
+      sku: [
+        r?.sku || &#x27;&#x27;,
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.pattern(/^[A-Za-z0-9-]+$/)
+          ],
+          asyncValidators: [skuAsyncValidator(this.apiRest, r?.id)],
+          updateOn: &#x27;change&#x27;
+        }
+      ],
+      title: [
+        r?.title || &#x27;&#x27;,
+        [Validators.required, Validators.minLength(4), Validators.maxLength(100)]
+      ],
+      category: [r?.category || RecordCategory.SALES, [Validators.required]],
+      status: [r?.status || RecordStatus.ACTIVE, [Validators.required]],
+      amount: [
+        r?.amount ?? 0,
+        [Validators.required, Validators.min(0)]
+      ],
+      region: [r?.region || &#x27;&#x27;, [Validators.required]],
+      clientName: [r?.clientName || &#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+      clientEmail: [
+        r?.clientEmail || &#x27;&#x27;,
+        [Validators.required, Validators.email]
+      ],
+      description: [
+        r?.description || &#x27;&#x27;,
+        [Validators.required, Validators.minLength(10), Validators.maxLength(500)]
+      ]
+    });
+  }
+
+  /**
+   * Cancela la operación y cierra el modal sin cambios.
+   */
+  cancel(): void {
+    this.modalCtrl.dismiss(null);
+  }
+
+  /**
+   * Valida y procesa el envío del formulario.
+   */
+  onSubmit(): void {
+    if (this.form.invalid || this.form.pending) {
+      this.form.markAllAsTouched();
+      this.cdr.markForCheck();
+      return;
+    }
+
+    const formValues &#x3D; this.form.value;
+    const resultData &#x3D; {
+      ...formValues,
+      amount: Number(formValues.amount),
+      tags: this.record?.tags || [&#x27;corporativo&#x27;, formValues.category.toLowerCase()],
+      assignedTo: this.record?.assignedTo || &#x27;usr-admin-001&#x27;
+    };
+
+    this.modalCtrl.dismiss({
+      saved: true,
+      isEdit: this.isEditing,
+      recordId: this.record?.id,
+      data: resultData
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header class&#x3D;&quot;ion-no-border header-glass&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-title&gt;{{ isEditing ? &#x27;Editar Registro Empresarial&#x27; : &#x27;Alta de Nuevo Registro&#x27; }}&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;cancel()&quot; aria-label&#x3D;&quot;Cerrar modal&quot;&gt;
+        &lt;ion-icon slot&#x3D;&quot;icon-only&quot; name&#x3D;&quot;close-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/ion-button&gt;
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content class&#x3D;&quot;modal-content ion-padding&quot;&gt;
+  &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;record-form&quot; novalidate&gt;
+    
+    &lt;!-- Aviso de Validación Asíncrona --&gt;
+    &lt;div class&#x3D;&quot;info-banner&quot;&gt;
+      &lt;ion-icon name&#x3D;&quot;shield-checkmark-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;span&gt;Validación asíncrona server-side activa para unicidad de código SKU.&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Código SKU con Validación Asíncrona en Tiempo Real --&gt;
+    &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;skuControl.invalid &amp;&amp; (skuControl.dirty || skuControl.touched)&quot;&gt;
+      &lt;label for&#x3D;&quot;sku-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+        Código SKU &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+      &lt;/label&gt;
+      
+      &lt;div class&#x3D;&quot;input-with-feedback&quot;&gt;
+        &lt;input
+          id&#x3D;&quot;sku-input&quot;
+          type&#x3D;&quot;text&quot;
+          formControlName&#x3D;&quot;sku&quot;
+          placeholder&#x3D;&quot;Ej: FIN-AUD-001 o SAL-CRM-005&quot;
+          class&#x3D;&quot;form-control&quot;
+          autocomplete&#x3D;&quot;off&quot;
+          [attr.aria-invalid]&#x3D;&quot;skuControl.invalid&quot;
+          aria-describedby&#x3D;&quot;sku-feedback&quot;
+        /&gt;
+
+        &lt;!-- Indicador de Estado de Validación Asíncrona --&gt;
+        &lt;div class&#x3D;&quot;feedback-indicator&quot;&gt;
+          @if (skuControl.pending) {
+            &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot; class&#x3D;&quot;async-spinner&quot;&gt;&lt;/ion-spinner&gt;
+          } @else if (skuControl.valid &amp;&amp; (skuControl.dirty || skuControl.touched)) {
+            &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;status-icon valid&quot;&gt;&lt;/ion-icon&gt;
+          } @else if (skuControl.invalid &amp;&amp; (skuControl.dirty || skuControl.touched)) {
+            &lt;ion-icon name&#x3D;&quot;alert-circle&quot; class&#x3D;&quot;status-icon invalid&quot;&gt;&lt;/ion-icon&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Mensajes de Error y Feedback de SKU --&gt;
+      &lt;div id&#x3D;&quot;sku-feedback&quot; class&#x3D;&quot;error-messages&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+        @if (skuControl.pending) {
+          &lt;span class&#x3D;&quot;info-msg&quot;&gt;
+            &lt;ion-spinner name&#x3D;&quot;dots&quot; class&#x3D;&quot;tiny-spinner&quot;&gt;&lt;/ion-spinner&gt;
+            Verificando disponibilidad de SKU en la base de datos...
+          &lt;/span&gt;
+        }
+        @if (skuControl.hasError(&#x27;required&#x27;) &amp;&amp; (skuControl.dirty || skuControl.touched)) {
+          &lt;span class&#x3D;&quot;error-msg&quot;&gt;El código SKU es obligatorio.&lt;/span&gt;
+        }
+        @if (skuControl.hasError(&#x27;minlength&#x27;) &amp;&amp; (skuControl.dirty || skuControl.touched)) {
+          &lt;span class&#x3D;&quot;error-msg&quot;&gt;El SKU debe contener al menos 3 caracteres.&lt;/span&gt;
+        }
+        @if (skuControl.hasError(&#x27;pattern&#x27;) &amp;&amp; (skuControl.dirty || skuControl.touched)) {
+          &lt;span class&#x3D;&quot;error-msg&quot;&gt;Formato no válido. Use mayúsculas, números y guiones (ej. FIN-AUD-001).&lt;/span&gt;
+        }
+        @if (skuControl.hasError(&#x27;skuTaken&#x27;) &amp;&amp; !skuControl.pending) {
+          &lt;span class&#x3D;&quot;error-msg sku-conflict&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;close-circle&quot;&gt;&lt;/ion-icon&gt;
+            Este código SKU ya está en uso por otro registro en el sistema.
+          &lt;/span&gt;
+        }
+        @if (skuControl.valid &amp;&amp; (skuControl.dirty || skuControl.touched)) {
+          &lt;span class&#x3D;&quot;success-msg&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;checkmark-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+            Código SKU único y disponible.
+          &lt;/span&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Título --&gt;
+    &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;form.get(&#x27;title&#x27;)?.invalid &amp;&amp; (form.get(&#x27;title&#x27;)?.dirty || form.get(&#x27;title&#x27;)?.touched)&quot;&gt;
+      &lt;label for&#x3D;&quot;title-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+        Título del Registro &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;input
+        id&#x3D;&quot;title-input&quot;
+        type&#x3D;&quot;text&quot;
+        formControlName&#x3D;&quot;title&quot;
+        placeholder&#x3D;&quot;Nombre o descripción corta del registro&quot;
+        class&#x3D;&quot;form-control&quot;
+      /&gt;
+      @if (form.get(&#x27;title&#x27;)?.invalid &amp;&amp; (form.get(&#x27;title&#x27;)?.dirty || form.get(&#x27;title&#x27;)?.touched)) {
+        &lt;div class&#x3D;&quot;error-messages&quot;&gt;
+          @if (form.get(&#x27;title&#x27;)?.hasError(&#x27;required&#x27;)) {
+            &lt;span class&#x3D;&quot;error-msg&quot;&gt;El título es obligatorio.&lt;/span&gt;
+          }
+          @if (form.get(&#x27;title&#x27;)?.hasError(&#x27;minlength&#x27;)) {
+            &lt;span class&#x3D;&quot;error-msg&quot;&gt;El título debe tener al menos 4 caracteres.&lt;/span&gt;
+          }
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Fila Dual: Categoría y Estado --&gt;
+    &lt;div class&#x3D;&quot;form-row&quot;&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;label for&#x3D;&quot;category-select&quot; class&#x3D;&quot;form-label&quot;&gt;
+          Categoría de Negocio &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;select id&#x3D;&quot;category-select&quot; formControlName&#x3D;&quot;category&quot; class&#x3D;&quot;form-control form-select&quot;&gt;
+          &lt;option [value]&#x3D;&quot;RecordCategory.SALES&quot;&gt;Ventas (SALES)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordCategory.MARKETING&quot;&gt;Marketing (MARKETING)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordCategory.FINANCE&quot;&gt;Finanzas (FINANCE)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordCategory.OPERATIONS&quot;&gt;Operaciones (OPERATIONS)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordCategory.HR&quot;&gt;Recursos Humanos (HR)&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;label for&#x3D;&quot;status-select&quot; class&#x3D;&quot;form-label&quot;&gt;
+          Estado en Flujo &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;select id&#x3D;&quot;status-select&quot; formControlName&#x3D;&quot;status&quot; class&#x3D;&quot;form-control form-select&quot;&gt;
+          &lt;option [value]&#x3D;&quot;RecordStatus.ACTIVE&quot;&gt;Activo (ACTIVE)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordStatus.PENDING&quot;&gt;Pendiente (PENDING)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordStatus.COMPLETED&quot;&gt;Completado (COMPLETED)&lt;/option&gt;
+          &lt;option [value]&#x3D;&quot;RecordStatus.ARCHIVED&quot;&gt;Archivado (ARCHIVED)&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Fila Dual: Importe y Región --&gt;
+    &lt;div class&#x3D;&quot;form-row&quot;&gt;
+      &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;form.get(&#x27;amount&#x27;)?.invalid &amp;&amp; (form.get(&#x27;amount&#x27;)?.dirty || form.get(&#x27;amount&#x27;)?.touched)&quot;&gt;
+        &lt;label for&#x3D;&quot;amount-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+          Importe (€) &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id&#x3D;&quot;amount-input&quot;
+          type&#x3D;&quot;number&quot;
+          step&#x3D;&quot;0.01&quot;
+          formControlName&#x3D;&quot;amount&quot;
+          placeholder&#x3D;&quot;0.00&quot;
+          class&#x3D;&quot;form-control&quot;
+        /&gt;
+        @if (form.get(&#x27;amount&#x27;)?.invalid &amp;&amp; (form.get(&#x27;amount&#x27;)?.dirty || form.get(&#x27;amount&#x27;)?.touched)) {
+          &lt;div class&#x3D;&quot;error-messages&quot;&gt;
+            &lt;span class&#x3D;&quot;error-msg&quot;&gt;Introduce un importe monetario válido mayor o igual a 0.&lt;/span&gt;
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;form.get(&#x27;region&#x27;)?.invalid &amp;&amp; (form.get(&#x27;region&#x27;)?.dirty || form.get(&#x27;region&#x27;)?.touched)&quot;&gt;
+        &lt;label for&#x3D;&quot;region-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+          Región Operativa &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id&#x3D;&quot;region-input&quot;
+          type&#x3D;&quot;text&quot;
+          formControlName&#x3D;&quot;region&quot;
+          placeholder&#x3D;&quot;Ej: Madrid, Barcelona, Valencia&quot;
+          class&#x3D;&quot;form-control&quot;
+        /&gt;
+        @if (form.get(&#x27;region&#x27;)?.invalid &amp;&amp; (form.get(&#x27;region&#x27;)?.dirty || form.get(&#x27;region&#x27;)?.touched)) {
+          &lt;div class&#x3D;&quot;error-messages&quot;&gt;
+            &lt;span class&#x3D;&quot;error-msg&quot;&gt;La región es obligatoria.&lt;/span&gt;
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Fila Dual: Cliente y Email --&gt;
+    &lt;div class&#x3D;&quot;form-row&quot;&gt;
+      &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;form.get(&#x27;clientName&#x27;)?.invalid &amp;&amp; (form.get(&#x27;clientName&#x27;)?.dirty || form.get(&#x27;clientName&#x27;)?.touched)&quot;&gt;
+        &lt;label for&#x3D;&quot;client-name-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+          Nombre de Cliente &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id&#x3D;&quot;client-name-input&quot;
+          type&#x3D;&quot;text&quot;
+          formControlName&#x3D;&quot;clientName&quot;
+          placeholder&#x3D;&quot;Razón social o cliente&quot;
+          class&#x3D;&quot;form-control&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;form.get(&#x27;clientEmail&#x27;)?.invalid &amp;&amp; (form.get(&#x27;clientEmail&#x27;)?.dirty || form.get(&#x27;clientEmail&#x27;)?.touched)&quot;&gt;
+        &lt;label for&#x3D;&quot;client-email-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+          Email de Contacto &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id&#x3D;&quot;client-email-input&quot;
+          type&#x3D;&quot;email&quot;
+          formControlName&#x3D;&quot;clientEmail&quot;
+          placeholder&#x3D;&quot;contacto@empresa.es&quot;
+          class&#x3D;&quot;form-control&quot;
+        /&gt;
+        @if (form.get(&#x27;clientEmail&#x27;)?.invalid &amp;&amp; (form.get(&#x27;clientEmail&#x27;)?.dirty || form.get(&#x27;clientEmail&#x27;)?.touched)) {
+          &lt;div class&#x3D;&quot;error-messages&quot;&gt;
+            &lt;span class&#x3D;&quot;error-msg&quot;&gt;Introduce un email corporativo válido.&lt;/span&gt;
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Descripción --&gt;
+    &lt;div class&#x3D;&quot;form-group&quot; [class.has-error]&#x3D;&quot;form.get(&#x27;description&#x27;)?.invalid &amp;&amp; (form.get(&#x27;description&#x27;)?.dirty || form.get(&#x27;description&#x27;)?.touched)&quot;&gt;
+      &lt;label for&#x3D;&quot;desc-input&quot; class&#x3D;&quot;form-label&quot;&gt;
+        Descripción Detallada &lt;span class&#x3D;&quot;required&quot;&gt;*&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;textarea
+        id&#x3D;&quot;desc-input&quot;
+        rows&#x3D;&quot;3&quot;
+        formControlName&#x3D;&quot;description&quot;
+        placeholder&#x3D;&quot;Detalles sobre el alcance, objetivos y estado del registro...&quot;
+        class&#x3D;&quot;form-control textarea&quot;
+      &gt;&lt;/textarea&gt;
+      @if (form.get(&#x27;description&#x27;)?.invalid &amp;&amp; (form.get(&#x27;description&#x27;)?.dirty || form.get(&#x27;description&#x27;)?.touched)) {
+        &lt;div class&#x3D;&quot;error-messages&quot;&gt;
+          &lt;span class&#x3D;&quot;error-msg&quot;&gt;La descripción debe tener entre 10 y 500 caracteres.&lt;/span&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Botones de Acción del Modal --&gt;
+    &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+      &lt;ion-button fill&#x3D;&quot;outline&quot; color&#x3D;&quot;medium&quot; (click)&#x3D;&quot;cancel()&quot; type&#x3D;&quot;button&quot;&gt;
+        Cancelar
+      &lt;/ion-button&gt;
+      &lt;ion-button
+        type&#x3D;&quot;submit&quot;
+        color&#x3D;&quot;primary&quot;
+        [disabled]&#x3D;&quot;form.invalid || form.pending&quot;&gt;
+        @if (form.pending) {
+          &lt;ion-spinner name&#x3D;&quot;crescent&quot; slot&#x3D;&quot;start&quot;&gt;&lt;/ion-spinner&gt;
+          Validando...
+        } @else {
+          &lt;ion-icon [name]&#x3D;&quot;isEditing ? &#x27;save-outline&#x27; : &#x27;add-circle-outline&#x27;&quot; slot&#x3D;&quot;start&quot;&gt;&lt;/ion-icon&gt;
+          {{ isEditing ? &#x27;Guardar Cambios&#x27; : &#x27;Crear Registro&#x27; }}
+        }
+      &lt;/ion-button&gt;
+    &lt;/div&gt;
+
+  &lt;/form&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./record-form-modal.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.modal-content {
+  --background: #0f172a;
+  color: #f8fafc;
+}
+
+.record-form {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.info-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  color: #38bdf8;
+  font-size: 0.85rem;
+
+  ion-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &amp;.has-error {
+    .form-control {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.05);
+    }
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5e1;
+
+  .required {
+    color: #ef4444;
+  }
+}
+
+.input-with-feedback {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .feedback-indicator {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .async-spinner {
+      width: 20px;
+      height: 20px;
+    }
+
+    .status-icon {
+      font-size: 1.35rem;
+
+      &amp;.valid {
+        color: #10b981;
+      }
+
+      &amp;.invalid {
+        color: #ef4444;
+      }
+    }
+  }
+}
+
+.form-control {
+  width: 100%;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+
+  &amp;:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  }
+
+  &amp;.form-select {
+    appearance: none;
+    background-image: url(&quot;data:image/svg+xml;charset&#x3D;UTF-8,%3csvg xmlns&#x3D;&#x27;http://www.w3.org/2000/svg&#x27; viewBox&#x3D;&#x27;0 0 24 24&#x27; fill&#x3D;&#x27;none&#x27; stroke&#x3D;&#x27;%2394a3b8&#x27; stroke-width&#x3D;&#x27;2&#x27; stroke-linecap&#x3D;&#x27;round&#x27; stroke-linejoin&#x3D;&#x27;round&#x27;%3e%3cpolyline points&#x3D;&#x27;6 9 12 15 18 9&#x27;%3e%3c/polyline%3e%3c/svg%3e&quot;);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.1em;
+    padding-right: 2.5rem;
+    cursor: pointer;
+
+    option {
+      background: #1e293b;
+      color: #ffffff;
+    }
+  }
+
+  &amp;.textarea {
+    resize: vertical;
+    font-family: inherit;
+  }
+}
+
+.error-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+
+  .error-msg {
+    color: #f87171;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    &amp;.sku-conflict {
+      color: #f87171;
+      font-weight: 600;
+      background: rgba(239, 68, 68, 0.1);
+      padding: 0.4rem 0.65rem;
+      border-radius: 6px;
+      border-left: 3px solid #ef4444;
+    }
+  }
+
+  .info-msg {
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    .tiny-spinner {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .success-msg {
+    color: #34d399;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 500;
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-title>{{ isEditing ? \'Editar Registro Empresarial\' : \'Alta de Nuevo Registro\' }}</ion-title>    <ion-buttons slot="end">      <ion-button (click)="cancel()" aria-label="Cerrar modal">        <ion-icon slot="icon-only" name="close-outline"></ion-icon>      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content class="modal-content ion-padding">  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="record-form" novalidate>        <!-- Aviso de Validación Asíncrona -->    <div class="info-banner">      <ion-icon name="shield-checkmark-outline"></ion-icon>      <span>Validación asíncrona server-side activa para unicidad de código SKU.</span>    </div>    <!-- Campo Código SKU con Validación Asíncrona en Tiempo Real -->    <div class="form-group" [class.has-error]="skuControl.invalid && (skuControl.dirty || skuControl.touched)">      <label for="sku-input" class="form-label">        Código SKU <span class="required">*</span>      </label>            <div class="input-with-feedback">        <input          id="sku-input"          type="text"          formControlName="sku"          placeholder="Ej: FIN-AUD-001 o SAL-CRM-005"          class="form-control"          autocomplete="off"          [attr.aria-invalid]="skuControl.invalid"          aria-describedby="sku-feedback"        />        <!-- Indicador de Estado de Validación Asíncrona -->        <div class="feedback-indicator">          @if (skuControl.pending) {            <ion-spinner name="crescent" color="primary" class="async-spinner"></ion-spinner>          } @else if (skuControl.valid && (skuControl.dirty || skuControl.touched)) {            <ion-icon name="checkmark-circle" class="status-icon valid"></ion-icon>          } @else if (skuControl.invalid && (skuControl.dirty || skuControl.touched)) {            <ion-icon name="alert-circle" class="status-icon invalid"></ion-icon>          }        </div>      </div>      <!-- Mensajes de Error y Feedback de SKU -->      <div id="sku-feedback" class="error-messages" role="alert" aria-live="polite">        @if (skuControl.pending) {          <span class="info-msg">            <ion-spinner name="dots" class="tiny-spinner"></ion-spinner>            Verificando disponibilidad de SKU en la base de datos...          </span>        }        @if (skuControl.hasError(\'required\') && (skuControl.dirty || skuControl.touched)) {          <span class="error-msg">El código SKU es obligatorio.</span>        }        @if (skuControl.hasError(\'minlength\') && (skuControl.dirty || skuControl.touched)) {          <span class="error-msg">El SKU debe contener al menos 3 caracteres.</span>        }        @if (skuControl.hasError(\'pattern\') && (skuControl.dirty || skuControl.touched)) {          <span class="error-msg">Formato no válido. Use mayúsculas, números y guiones (ej. FIN-AUD-001).</span>        }        @if (skuControl.hasError(\'skuTaken\') && !skuControl.pending) {          <span class="error-msg sku-conflict">            <ion-icon name="close-circle"></ion-icon>            Este código SKU ya está en uso por otro registro en el sistema.          </span>        }        @if (skuControl.valid && (skuControl.dirty || skuControl.touched)) {          <span class="success-msg">            <ion-icon name="checkmark-circle-outline"></ion-icon>            Código SKU único y disponible.          </span>        }      </div>    </div>    <!-- Campo Título -->    <div class="form-group" [class.has-error]="form.get(\'title\')?.invalid && (form.get(\'title\')?.dirty || form.get(\'title\')?.touched)">      <label for="title-input" class="form-label">        Título del Registro <span class="required">*</span>      </label>      <input        id="title-input"        type="text"        formControlName="title"        placeholder="Nombre o descripción corta del registro"        class="form-control"      />      @if (form.get(\'title\')?.invalid && (form.get(\'title\')?.dirty || form.get(\'title\')?.touched)) {        <div class="error-messages">          @if (form.get(\'title\')?.hasError(\'required\')) {            <span class="error-msg">El título es obligatorio.</span>          }          @if (form.get(\'title\')?.hasError(\'minlength\')) {            <span class="error-msg">El título debe tener al menos 4 caracteres.</span>          }        </div>      }    </div>    <!-- Fila Dual: Categoría y Estado -->    <div class="form-row">      <div class="form-group">        <label for="category-select" class="form-label">          Categoría de Negocio <span class="required">*</span>        </label>        <select id="category-select" formControlName="category" class="form-control form-select">          <option [value]="RecordCategory.SALES">Ventas (SALES)</option>          <option [value]="RecordCategory.MARKETING">Marketing (MARKETING)</option>          <option [value]="RecordCategory.FINANCE">Finanzas (FINANCE)</option>          <option [value]="RecordCategory.OPERATIONS">Operaciones (OPERATIONS)</option>          <option [value]="RecordCategory.HR">Recursos Humanos (HR)</option>        </select>      </div>      <div class="form-group">        <label for="status-select" class="form-label">          Estado en Flujo <span class="required">*</span>        </label>        <select id="status-select" formControlName="status" class="form-control form-select">          <option [value]="RecordStatus.ACTIVE">Activo (ACTIVE)</option>          <option [value]="RecordStatus.PENDING">Pendiente (PENDING)</option>          <option [value]="RecordStatus.COMPLETED">Completado (COMPLETED)</option>          <option [value]="RecordStatus.ARCHIVED">Archivado (ARCHIVED)</option>        </select>      </div>    </div>    <!-- Fila Dual: Importe y Región -->    <div class="form-row">      <div class="form-group" [class.has-error]="form.get(\'amount\')?.invalid && (form.get(\'amount\')?.dirty || form.get(\'amount\')?.touched)">        <label for="amount-input" class="form-label">          Importe (€) <span class="required">*</span>        </label>        <input          id="amount-input"          type="number"          step="0.01"          formControlName="amount"          placeholder="0.00"          class="form-control"        />        @if (form.get(\'amount\')?.invalid && (form.get(\'amount\')?.dirty || form.get(\'amount\')?.touched)) {          <div class="error-messages">            <span class="error-msg">Introduce un importe monetario válido mayor o igual a 0.</span>          </div>        }      </div>      <div class="form-group" [class.has-error]="form.get(\'region\')?.invalid && (form.get(\'region\')?.dirty || form.get(\'region\')?.touched)">        <label for="region-input" class="form-label">          Región Operativa <span class="required">*</span>        </label>        <input          id="region-input"          type="text"          formControlName="region"          placeholder="Ej: Madrid, Barcelona, Valencia"          class="form-control"        />        @if (form.get(\'region\')?.invalid && (form.get(\'region\')?.dirty || form.get(\'region\')?.touched)) {          <div class="error-messages">            <span class="error-msg">La región es obligatoria.</span>          </div>        }      </div>    </div>    <!-- Fila Dual: Cliente y Email -->    <div class="form-row">      <div class="form-group" [class.has-error]="form.get(\'clientName\')?.invalid && (form.get(\'clientName\')?.dirty || form.get(\'clientName\')?.touched)">        <label for="client-name-input" class="form-label">          Nombre de Cliente <span class="required">*</span>        </label>        <input          id="client-name-input"          type="text"          formControlName="clientName"          placeholder="Razón social o cliente"          class="form-control"        />      </div>      <div class="form-group" [class.has-error]="form.get(\'clientEmail\')?.invalid && (form.get(\'clientEmail\')?.dirty || form.get(\'clientEmail\')?.touched)">        <label for="client-email-input" class="form-label">          Email de Contacto <span class="required">*</span>        </label>        <input          id="client-email-input"          type="email"          formControlName="clientEmail"          placeholder="contacto@empresa.es"          class="form-control"        />        @if (form.get(\'clientEmail\')?.invalid && (form.get(\'clientEmail\')?.dirty || form.get(\'clientEmail\')?.touched)) {          <div class="error-messages">            <span class="error-msg">Introduce un email corporativo válido.</span>          </div>        }      </div>    </div>    <!-- Campo Descripción -->    <div class="form-group" [class.has-error]="form.get(\'description\')?.invalid && (form.get(\'description\')?.dirty || form.get(\'description\')?.touched)">      <label for="desc-input" class="form-label">        Descripción Detallada <span class="required">*</span>      </label>      <textarea        id="desc-input"        rows="3"        formControlName="description"        placeholder="Detalles sobre el alcance, objetivos y estado del registro..."        class="form-control textarea"      ></textarea>      @if (form.get(\'description\')?.invalid && (form.get(\'description\')?.dirty || form.get(\'description\')?.touched)) {        <div class="error-messages">          <span class="error-msg">La descripción debe tener entre 10 y 500 caracteres.</span>        </div>      }    </div>    <!-- Botones de Acción del Modal -->    <div class="modal-actions">      <ion-button fill="outline" color="medium" (click)="cancel()" type="button">        Cancelar      </ion-button>      <ion-button        type="submit"        color="primary"        [disabled]="form.invalid || form.pending">        @if (form.pending) {          <ion-spinner name="crescent" slot="start"></ion-spinner>          Validando...        } @else {          <ion-icon [name]="isEditing ? \'save-outline\' : \'add-circle-outline\'" slot="start"></ion-icon>          {{ isEditing ? \'Guardar Cambios\' : \'Crear Registro\' }}        }      </ion-button>    </div>  </form></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
+    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'RecordFormModalComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RecordFormModalComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

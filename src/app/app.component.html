@@ -1,3 +1,84 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <ion-split-pane contentId="main-content" [disabled]="!(isAuthenticated$ | async)">
+    <!-- Side Menu (Solo visible si hay sesión autenticada) -->
+    @if (isAuthenticated$ | async) {
+      <ion-menu contentId="main-content" type="overlay" menuId="main-menu">
+        <ion-header class="ion-no-border">
+          <ion-toolbar class="menu-header-toolbar">
+            <div class="menu-brand">
+              <div class="brand-icon">
+                <ion-icon name="analytics-outline"></ion-icon>
+              </div>
+              <div class="brand-text">
+                <h2>Enterprise</h2>
+                <span>Analytics Platform</span>
+              </div>
+            </div>
+          </ion-toolbar>
+
+          <!-- Perfil del usuario activo en el menú -->
+          @if (currentUser$ | async; as user) {
+            <div class="user-profile-badge">
+              <ion-avatar class="user-avatar">
+                <img [src]="user.avatarUrl" [alt]="'Avatar de ' + (userFullName$ | async)" />
+              </ion-avatar>
+              <div class="user-info">
+                <p class="user-name">{{ userFullName$ | async }}</p>
+                <div class="role-pill" [class.admin]="user.role === 'ADMIN'">
+                  <ion-icon [name]="user.role === 'ADMIN' ? 'shield-checkmark-outline' : 'person-outline'"></ion-icon>
+                  <span>{{ userRoleLabel$ | async }}</span>
+                </div>
+              </div>
+            </div>
+          }
+        </ion-header>
+
+        <ion-content class="menu-content">
+          <ion-list id="inbox-list" lines="none">
+            <ion-list-header class="menu-list-title">Navegación</ion-list-header>
+
+            @for (p of appPages; track p.url) {
+              <!-- Ocultar items de Admin si el usuario no tiene rol ADMIN -->
+              @if (!p.adminOnly || (isAdmin$ | async)) {
+                <ion-menu-toggle auto-hide="false">
+                  <ion-item
+                    routerDirection="root"
+                    [routerLink]="[p.url]"
+                    routerLinkActive="selected"
+                    detail="false"
+                    class="nav-item"
+                  >
+                    <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>
+                    <ion-label>{{ p.title }}</ion-label>
+                  </ion-item>
+                </ion-menu-toggle>
+              }
+            }
+          </ion-list>
+        </ion-content>
+
+        <ion-footer class="ion-no-border menu-footer">
+          <ion-menu-toggle auto-hide="false">
+            <ion-button
+              expand="block"
+              fill="clear"
+              color="danger"
+              class="logout-btn"
+              (click)="onLogout()"
+              aria-label="Cerrar sesión"
+            >
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <span>Cerrar Sesión</span>
+            </ion-button>
+          </ion-menu-toggle>
+        </ion-footer>
+      </ion-menu>
+    }
+
+    <!-- Main Content Area -->
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

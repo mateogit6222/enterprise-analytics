@@ -1,0 +1,178 @@
+/**
+ * Shell styles for Enterprise Analytics
+ */
+
+ion-menu {
+  --background: #0f172a;
+  --width: 290px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  .menu-header-toolbar {
+    --background: #0f172a;
+    --padding-top: 1.25rem;
+    --padding-bottom: 0.5rem;
+    --padding-start: 1.25rem;
+    --padding-end: 1.25rem;
+  }
+
+  .menu-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+
+    .brand-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      color: #ffffff;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .brand-text {
+      h2 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+      }
+
+      span {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .user-profile-badge {
+    margin: 1rem 1.25rem 0.5rem 1.25rem;
+    padding: 0.85rem;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .user-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #6366f1;
+    }
+
+    .user-info {
+      overflow: hidden;
+
+      .user-name {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #f8fafc;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .role-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.15rem 0.5rem;
+        border-radius: 1rem;
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+
+        &.admin {
+          background: rgba(129, 140, 248, 0.15);
+          color: #a5b4fc;
+          border-color: rgba(129, 140, 248, 0.3);
+        }
+
+        ion-icon {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .menu-content {
+    --background: #0f172a;
+
+    .menu-list-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      font-weight: 700;
+      padding-left: 1.5rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-item {
+      --background: transparent;
+      --color: #94a3b8;
+      --border-radius: 0.65rem;
+      --padding-start: 1rem;
+      margin: 0.25rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+
+      ion-icon {
+        color: #94a3b8;
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+        transition: color 0.2s ease;
+      }
+
+      &:hover {
+        --background: rgba(255, 255, 255, 0.04);
+        --color: #ffffff;
+
+        ion-icon {
+          color: #ffffff;
+        }
+      }
+
+      &.selected {
+        --background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.05) 100%);
+        --color: #818cf8;
+        border-left: 3px solid #6366f1;
+
+        ion-icon {
+          color: #818cf8;
+        }
+      }
+    }
+  }
+
+  .menu-footer {
+    --background: #0f172a;
+    padding: 0.75rem 1rem 1.25rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    .logout-btn {
+      --color: #f87171;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: none;
+
+      &:hover {
+        --background: rgba(239, 68, 68, 0.1);
+      }
+    }
+  }
+}
