@@ -240,7 +240,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:42</a></div>
                                 </td>
                             </tr>
 
@@ -279,7 +279,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:43</a></div>
                                 </td>
                             </tr>
 
@@ -318,7 +318,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:40</a></div>
                                 </td>
                             </tr>
 
@@ -357,7 +357,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:41</a></div>
                                 </td>
                             </tr>
 
@@ -371,6 +371,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   Component,
   OnInit,
+  OnDestroy,
   ChangeDetectionStrategy,
   inject,
   ChangeDetectorRef
@@ -379,14 +380,15 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { IonicModule, ToastController } from &#x27;@ionic/angular/lazy&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { Observable, BehaviorSubject, combineLatest } from &#x27;rxjs&#x27;;
-import { map, take } from &#x27;rxjs/operators&#x27;;
+import { Observable, BehaviorSubject, Subject, combineLatest } from &#x27;rxjs&#x27;;
+import { map, take, takeUntil } from &#x27;rxjs/operators&#x27;;
 
 import { AppState } from &#x27;../../../../state/app.state&#x27;;
 import * as DataActions from &#x27;../../../../state/data/data.actions&#x27;;
 import { selectAllRecords, selectDataLoading } from &#x27;../../../../state/data/data.selectors&#x27;;
 import { Record, RecordCategory, RecordStatus } from &#x27;../../../../core/models/record.model&#x27;;
 import { ExportService } from &#x27;../../../../core/services/export.service&#x27;;
+import { CurrencyFormatPipe } from &#x27;../../../../shared/pipes/currency-format.pipe&#x27;;
 
 /**
  * Estructura de resumen ejecutivo por categoría para la tabla agregada.
@@ -426,16 +428,17 @@ export interface ReportMetrics {
 @Component({
   selector: &#x27;app-report-viewer&#x27;,
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule],
+  imports: [CommonModule, IonicModule, FormsModule, CurrencyFormatPipe],
   templateUrl: &#x27;./report-viewer.page.html&#x27;,
   styleUrls: [&#x27;./report-viewer.page.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReportViewerPage implements OnInit {
+export class ReportViewerPage implements OnInit, OnDestroy {
   private readonly store &#x3D; inject(Store&lt;AppState&gt;);
   private readonly exportService &#x3D; inject(ExportService);
   private readonly toastCtrl &#x3D; inject(ToastController);
   private readonly cdr &#x3D; inject(ChangeDetectorRef);
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
 
   /** Modelos de filtrado local para el informe */
   searchTerm: string &#x3D; &#x27;&#x27;;
@@ -555,6 +558,19 @@ export class ReportViewerPage implements OnInit {
   ngOnInit(): void {
     // Disparar carga concurrente dual si la store aún no contiene registros
     this.store.dispatch(DataActions.loadAllData());
+
+    this.loading$.pipe(takeUntil(this.destroy$)).subscribe(() &#x3D;&gt; {
+      this.cdr.markForCheck();
+    });
+
+    this.filteredRecords$.pipe(takeUntil(this.destroy$)).subscribe(() &#x3D;&gt; {
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**
@@ -562,6 +578,7 @@ export class ReportViewerPage implements OnInit {
    */
   onFilterChanged(): void {
     this.filterTrigger$.next();
+    this.cdr.markForCheck();
   }
 
   /**
@@ -573,6 +590,7 @@ export class ReportViewerPage implements OnInit {
     this.selectedStatus &#x3D; &#x27;ALL&#x27;;
     this.selectedSource &#x3D; &#x27;ALL&#x27;;
     this.filterTrigger$.next();
+    this.cdr.markForCheck();
   }
 
   /**
@@ -580,6 +598,7 @@ export class ReportViewerPage implements OnInit {
    */
   refresh(): void {
     this.store.dispatch(DataActions.loadAllData());
+    this.cdr.markForCheck();
   }
 
   /**

@@ -69,7 +69,7 @@ export interface Record {
   tags: string[];
   createdAt: string;
   updatedAt: string;
-  source: 'REST' | 'FIRESTORE';
+  source: 'SUPABASE' | 'REST';
 }
 
 /**

@@ -174,6 +174,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
     </p>
     <p class="comment">
                     <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.dev/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
     <p class="comment">
@@ -272,6 +273,9 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
                                 </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                                </li>
                         </ul>
                 </div>
             </div>
@@ -295,8 +299,20 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
@@ -358,6 +374,10 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#exportToPdf" >exportToPdf</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -430,8 +450,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="192"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:192</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:211</a></div>
                         </td>
                     </tr>
 
@@ -506,8 +526,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="231"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:231</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:250</a></div>
                         </td>
                     </tr>
 
@@ -545,8 +565,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:237</a></div>
                         </td>
                     </tr>
 
@@ -555,6 +575,43 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 <td class="col-md-4">
                         <div class="io-description"><p>Exporta la colección de registros a formato PDF profesional.</p>
 </div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -584,8 +641,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:129</a></div>
                         </td>
                     </tr>
 
@@ -623,8 +680,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="151"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:151</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:170</a></div>
                         </td>
                     </tr>
 
@@ -701,8 +758,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -743,8 +800,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:184</a></div>
                         </td>
                     </tr>
 
@@ -822,8 +879,8 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="248"
-                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:248</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:267</a></div>
                         </td>
                     </tr>
 
@@ -941,7 +998,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:108</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -951,6 +1008,39 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 </div>
                 </td>
             </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:56</a></div>
+                        </td>
+                    </tr>
+
 
         </tbody>
     </table>
@@ -975,9 +1065,10 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>[
-    { key: &#x27;sku&#x27;, label: &#x27;SKU&#x27;, sortable: true, width: &#x27;130px&#x27; },
+    { key: &#x27;sku&#x27;, label: &#x27;SKU&#x27;, sortable: true, width: &#x27;120px&#x27; },
     { key: &#x27;title&#x27;, label: &#x27;Título del Registro&#x27;, sortable: true },
     { key: &#x27;clientName&#x27;, label: &#x27;Cliente&#x27;, sortable: true },
+    { key: &#x27;manager&#x27;, label: &#x27;Responsable&#x27;, sortable: true, type: &#x27;avatar&#x27; },
     {
       key: &#x27;category&#x27;,
       label: &#x27;Categoría&#x27;,
@@ -1011,7 +1102,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
       type: &#x27;badge&#x27;,
       badgeColorMap: {
         REST: &#x27;badge-primary&#x27;,
-        FIRESTORE: &#x27;badge-warning&#x27;
+        SUPABASE: &#x27;badge-success&#x27;
       }
     },
     { key: &#x27;createdAt&#x27;, label: &#x27;Fecha Alta&#x27;, sortable: true, type: &#x27;date&#x27; }
@@ -1020,7 +1111,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -1030,6 +1121,39 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
 </div>
                 </td>
             </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:57</a></div>
+                        </td>
+                    </tr>
+
 
         </tbody>
     </table>
@@ -1058,7 +1182,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -1096,7 +1220,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -1135,7 +1259,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -1167,7 +1291,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -1206,7 +1330,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -1239,7 +1363,7 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/records/pages/record-list/record-list.page.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -1255,13 +1379,16 @@ Conectada al store de NgRx y al componente reutilizable DataTable.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   Component,
   OnInit,
+  OnDestroy,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   inject
 } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { IonicModule, ModalController, ToastController } from &#x27;@ionic/angular/lazy&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
+import { Observable, Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
 
 import { AppState } from &#x27;../../../../state/app.state&#x27;;
 import * as DataActions from &#x27;../../../../state/data/data.actions&#x27;;
@@ -1300,10 +1427,12 @@ import { RecordFormModalComponent } from &#x27;../../components/record-form-moda
   styleUrls: [&#x27;./record-list.page.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecordListPage implements OnInit {
+export class RecordListPage implements OnInit, OnDestroy {
   private readonly store &#x3D; inject(Store&lt;AppState&gt;);
   private readonly modalCtrl &#x3D; inject(ModalController);
   private readonly toastCtrl &#x3D; inject(ToastController);
+  private readonly cdr &#x3D; inject(ChangeDetectorRef);
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
 
   /** Flujo reactivo de registros corporativos desde el Store de NgRx */
   readonly records$: Observable&lt;Record[]&gt; &#x3D; this.store.select(selectAllRecords);
@@ -1316,9 +1445,10 @@ export class RecordListPage implements OnInit {
 
   /** Configuración de columnas para el componente DataTable */
   readonly columns: TableColumn&lt;Record&gt;[] &#x3D; [
-    { key: &#x27;sku&#x27;, label: &#x27;SKU&#x27;, sortable: true, width: &#x27;130px&#x27; },
+    { key: &#x27;sku&#x27;, label: &#x27;SKU&#x27;, sortable: true, width: &#x27;120px&#x27; },
     { key: &#x27;title&#x27;, label: &#x27;Título del Registro&#x27;, sortable: true },
     { key: &#x27;clientName&#x27;, label: &#x27;Cliente&#x27;, sortable: true },
+    { key: &#x27;manager&#x27;, label: &#x27;Responsable&#x27;, sortable: true, type: &#x27;avatar&#x27; },
     {
       key: &#x27;category&#x27;,
       label: &#x27;Categoría&#x27;,
@@ -1352,7 +1482,7 @@ export class RecordListPage implements OnInit {
       type: &#x27;badge&#x27;,
       badgeColorMap: {
         REST: &#x27;badge-primary&#x27;,
-        FIRESTORE: &#x27;badge-warning&#x27;
+        SUPABASE: &#x27;badge-success&#x27;
       }
     },
     { key: &#x27;createdAt&#x27;, label: &#x27;Fecha Alta&#x27;, sortable: true, type: &#x27;date&#x27; }
@@ -1377,6 +1507,19 @@ export class RecordListPage implements OnInit {
   ngOnInit(): void {
     // Inicializar datos en el store si no se han cargado previamente
     this.store.dispatch(DataActions.loadAllData());
+
+    this.loading$.pipe(takeUntil(this.destroy$)).subscribe(() &#x3D;&gt; {
+      this.cdr.markForCheck();
+    });
+
+    this.records$.pipe(takeUntil(this.destroy$)).subscribe(() &#x3D;&gt; {
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**
@@ -1524,7 +1667,7 @@ export class RecordListPage implements OnInit {
     &lt;/ion-buttons&gt;
     &lt;ion-title&gt;Gestión Integral de Registros&lt;/ion-title&gt;
     &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
-      &lt;ion-button (click)&#x3D;&quot;openCreateModal()&quot; color&#x3D;&quot;light&quot; class&#x3D;&quot;create-btn&quot; aria-label&#x3D;&quot;Crear nuevo registro&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;openCreateModal()&quot; color&#x3D;&quot;light&quot; class&#x3D;&quot;create-btn&quot; aria-label&#x3D;&quot;Crear nuevo registro empresarial&quot;&gt;
         &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;add-circle-outline&quot;&gt;&lt;/ion-icon&gt;
         &lt;span class&#x3D;&quot;btn-text&quot;&gt;Nuevo Registro&lt;/span&gt;
       &lt;/ion-button&gt;
@@ -1533,53 +1676,57 @@ export class RecordListPage implements OnInit {
 &lt;/ion-header&gt;
 
 &lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;page-content&quot;&gt;
-  &lt;div class&#x3D;&quot;content-container&quot;&gt;
+  &lt;div class&#x3D;&quot;container-fluid px-3 px-lg-4 py-4&quot;&gt;
 
-    &lt;!-- Encabezado de la Sección --&gt;
-    &lt;header class&#x3D;&quot;section-header&quot;&gt;
-      &lt;div class&#x3D;&quot;header-titles&quot;&gt;
-        &lt;h1 class&#x3D;&quot;page-title&quot;&gt;Directorio de Registros Corporativos&lt;/h1&gt;
-        &lt;p class&#x3D;&quot;page-subtitle&quot;&gt;
-          Administración y consulta unificada de registros procedentes de bases de datos relacionales (SQL) y NoSQL.
-        &lt;/p&gt;
-      &lt;/div&gt;
+    &lt;!-- Encabezado de la Sección con Bento Grid y Bootstrap 5 --&gt;
+    &lt;header class&#x3D;&quot;bento-header p-4 mb-4 bg-white rounded-3 border shadow-sm&quot;&gt;
+      &lt;div class&#x3D;&quot;d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3&quot;&gt;
+        &lt;div class&#x3D;&quot;header-titles&quot;&gt;
+          &lt;div class&#x3D;&quot;d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-2 rounded-2 bg-light border text-primary small fw-semibold&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;server-outline&quot;&gt;&lt;/ion-icon&gt;
+            &lt;span&gt;Supabase Cloud &amp; REST Pipeline&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;h1 class&#x3D;&quot;h3 fw-bold text-dark mb-1&quot;&gt;Directorio de Registros Corporativos&lt;/h1&gt;
+          &lt;p class&#x3D;&quot;text-secondary mb-0 small&quot; style&#x3D;&quot;max-width: 720px;&quot;&gt;
+            Administración unificada de operaciones empresariales sincronizadas directamente con Supabase PostgreSQL Cloud y almacenamiento de alta disponibilidad.
+          &lt;/p&gt;
+        &lt;/div&gt;
 
-      &lt;!-- Barra de Acciones Globales de Exportación --&gt;
-      &lt;div class&#x3D;&quot;export-actions-bar&quot; aria-label&#x3D;&quot;Acciones de exportación&quot;&gt;
-        &lt;ion-button
-          fill&#x3D;&quot;outline&quot;
-          color&#x3D;&quot;danger&quot;
-          size&#x3D;&quot;small&quot;
-          (click)&#x3D;&quot;exportToPdf()&quot;
-          [disabled]&#x3D;&quot;exporting$ | async&quot;
-          aria-label&#x3D;&quot;Exportar todos los registros a documento PDF profesional&quot;&gt;
-          &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;document-text-outline&quot;&gt;&lt;/ion-icon&gt;
-          Exportar PDF
-        &lt;/ion-button&gt;
+        &lt;!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 --&gt;
+        &lt;div class&#x3D;&quot;d-flex align-items-center gap-2 flex-wrap&quot; aria-label&#x3D;&quot;Acciones de exportación de registros&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            class&#x3D;&quot;btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2&quot;
+            (click)&#x3D;&quot;exportToPdf()&quot;
+            [disabled]&#x3D;&quot;exporting$ | async&quot;
+            aria-label&#x3D;&quot;Exportar todos los registros a documento PDF profesional&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;document-text-outline&quot; class&#x3D;&quot;fs-6&quot;&gt;&lt;/ion-icon&gt;
+            &lt;span&gt;Exportar PDF&lt;/span&gt;
+          &lt;/button&gt;
 
-        &lt;ion-button
-          fill&#x3D;&quot;outline&quot;
-          color&#x3D;&quot;success&quot;
-          size&#x3D;&quot;small&quot;
-          (click)&#x3D;&quot;exportToCsv()&quot;
-          [disabled]&#x3D;&quot;exporting$ | async&quot;
-          aria-label&#x3D;&quot;Exportar datos a formato CSV con codificación UTF-8 para Excel&quot;&gt;
-          &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;download-outline&quot;&gt;&lt;/ion-icon&gt;
-          Exportar CSV
-        &lt;/ion-button&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            class&#x3D;&quot;btn btn-outline-success btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2&quot;
+            (click)&#x3D;&quot;exportToCsv()&quot;
+            [disabled]&#x3D;&quot;exporting$ | async&quot;
+            aria-label&#x3D;&quot;Exportar datos a formato CSV con codificación UTF-8 para Excel&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;download-outline&quot; class&#x3D;&quot;fs-6&quot;&gt;&lt;/ion-icon&gt;
+            &lt;span&gt;Exportar CSV&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
     &lt;/header&gt;
 
     &lt;!-- Indicador de carga asíncrona --&gt;
     @if (loading$ | async) {
-      &lt;div class&#x3D;&quot;loading-state-bar&quot;&gt;
+      &lt;div class&#x3D;&quot;alert alert-info d-flex align-items-center gap-3 py-2 px-3 mb-4 rounded-3 shadow-sm border-0&quot; role&#x3D;&quot;status&quot;&gt;
         &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-spinner&gt;
-        &lt;span&gt;Sincronizando registros con API REST y Firestore...&lt;/span&gt;
+        &lt;span class&#x3D;&quot;small fw-semibold text-primary&quot;&gt;Sincronizando registros con Supabase PostgreSQL Cloud...&lt;/span&gt;
       &lt;/div&gt;
     }
 
-    &lt;!-- Componente DataTable Reutilizable (Fase 2) --&gt;
-    &lt;div class&#x3D;&quot;table-card&quot;&gt;
+    &lt;!-- Componente DataTable Reutilizable en Bento Card --&gt;
+    &lt;div class&#x3D;&quot;bento-table-card&quot;&gt;
       &lt;app-data-table
         [data]&#x3D;&quot;(records$ | async) ?? []&quot;
         [loading]&#x3D;&quot;(loading$ | async) ?? false&quot;
@@ -1602,54 +1749,18 @@ export class RecordListPage implements OnInit {
                     <code>./record-list.page.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.page-content {
-  --background: #0b1120;
-  color: #f8fafc;
+  --background: #f8fafc;
+  color: #0f172a;
 }
 
-.content-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3rem 1rem;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-
-  .page-title {
-    font-size: 1.85rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    color: #ffffff;
-    margin: 0 0 0.35rem 0;
-  }
-
-  .page-subtitle {
-    font-size: 0.95rem;
-    color: #94a3b8;
-    margin: 0;
-    max-width: 750px;
-    line-height: 1.5;
-  }
-}
-
-.export-actions-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  ion-button {
-    font-weight: 600;
-  }
+.bento-header {
+  border-color: #e2e8f0 !important;
+  border-radius: 14px;
 }
 
 .create-btn {
   font-weight: 600;
-  --background: #3b82f6;
+  --background: #0284c7;
   --color: #ffffff;
   border-radius: 8px;
 
@@ -1660,30 +1771,8 @@ export class RecordListPage implements OnInit {
   }
 }
 
-.loading-state-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  color: #38bdf8;
-  font-size: 0.9rem;
-  margin-bottom: 1.25rem;
-
-  ion-spinner {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-.table-card {
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.bento-table-card {
   border-radius: 14px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
 }
 </code></pre>
     </div>
@@ -1713,7 +1802,7 @@ export class RecordListPage implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Gestión Integral de Registros</ion-title>    <ion-buttons slot="end">      <ion-button (click)="openCreateModal()" color="light" class="create-btn" aria-label="Crear nuevo registro">        <ion-icon slot="start" name="add-circle-outline"></ion-icon>        <span class="btn-text">Nuevo Registro</span>      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content">  <div class="content-container">    <!-- Encabezado de la Sección -->    <header class="section-header">      <div class="header-titles">        <h1 class="page-title">Directorio de Registros Corporativos</h1>        <p class="page-subtitle">          Administración y consulta unificada de registros procedentes de bases de datos relacionales (SQL) y NoSQL.        </p>      </div>      <!-- Barra de Acciones Globales de Exportación -->      <div class="export-actions-bar" aria-label="Acciones de exportación">        <ion-button          fill="outline"          color="danger"          size="small"          (click)="exportToPdf()"          [disabled]="exporting$ | async"          aria-label="Exportar todos los registros a documento PDF profesional">          <ion-icon slot="start" name="document-text-outline"></ion-icon>          Exportar PDF        </ion-button>        <ion-button          fill="outline"          color="success"          size="small"          (click)="exportToCsv()"          [disabled]="exporting$ | async"          aria-label="Exportar datos a formato CSV con codificación UTF-8 para Excel">          <ion-icon slot="start" name="download-outline"></ion-icon>          Exportar CSV        </ion-button>      </div>    </header>    <!-- Indicador de carga asíncrona -->    @if (loading$ | async) {      <div class="loading-state-bar">        <ion-spinner name="crescent" color="primary"></ion-spinner>        <span>Sincronizando registros con API REST y Firestore...</span>      </div>    }    <!-- Componente DataTable Reutilizable (Fase 2) -->    <div class="table-card">      <app-data-table        [data]="(records$ | async) ?? []"        [loading]="(loading$ | async) ?? false"        [columns]="columns"        [actions]="actions"        [pageSize]="10"        [pageSizeOptions]="[5, 10, 25, 50]"        (actionTriggered)="onActionTriggered($event)"        (exportCsv)="exportToCsv()">      </app-data-table>    </div>  </div></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Gestión Integral de Registros</ion-title>    <ion-buttons slot="end">      <ion-button (click)="openCreateModal()" color="light" class="create-btn" aria-label="Crear nuevo registro empresarial">        <ion-icon slot="start" name="add-circle-outline"></ion-icon>        <span class="btn-text">Nuevo Registro</span>      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content">  <div class="container-fluid px-3 px-lg-4 py-4">    <!-- Encabezado de la Sección con Bento Grid y Bootstrap 5 -->    <header class="bento-header p-4 mb-4 bg-white rounded-3 border shadow-sm">      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">        <div class="header-titles">          <div class="d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-2 rounded-2 bg-light border text-primary small fw-semibold">            <ion-icon name="server-outline"></ion-icon>            <span>Supabase Cloud & REST Pipeline</span>          </div>          <h1 class="h3 fw-bold text-dark mb-1">Directorio de Registros Corporativos</h1>          <p class="text-secondary mb-0 small" style="max-width: 720px;">            Administración unificada de operaciones empresariales sincronizadas directamente con Supabase PostgreSQL Cloud y almacenamiento de alta disponibilidad.          </p>        </div>        <!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 -->        <div class="d-flex align-items-center gap-2 flex-wrap" aria-label="Acciones de exportación de registros">          <button            type="button"            class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2"            (click)="exportToPdf()"            [disabled]="exporting$ | async"            aria-label="Exportar todos los registros a documento PDF profesional">            <ion-icon name="document-text-outline" class="fs-6"></ion-icon>            <span>Exportar PDF</span>          </button>          <button            type="button"            class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2"            (click)="exportToCsv()"            [disabled]="exporting$ | async"            aria-label="Exportar datos a formato CSV con codificación UTF-8 para Excel">            <ion-icon name="download-outline" class="fs-6"></ion-icon>            <span>Exportar CSV</span>          </button>        </div>      </div>    </header>    <!-- Indicador de carga asíncrona -->    @if (loading$ | async) {      <div class="alert alert-info d-flex align-items-center gap-3 py-2 px-3 mb-4 rounded-3 shadow-sm border-0" role="status">        <ion-spinner name="crescent" color="primary"></ion-spinner>        <span class="small fw-semibold text-primary">Sincronizando registros con Supabase PostgreSQL Cloud...</span>      </div>    }    <!-- Componente DataTable Reutilizable en Bento Card -->    <div class="bento-table-card">      <app-data-table        [data]="(records$ | async) ?? []"        [loading]="(loading$ | async) ?? false"        [columns]="columns"        [actions]="actions"        [pageSize]="10"        [pageSizeOptions]="[5, 10, 25, 50]"        (actionTriggered)="onActionTriggered($event)"        (exportCsv)="exportToCsv()">      </app-data-table>    </div>  </div></ion-content></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
     var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'RecordListPage'};

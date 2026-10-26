@@ -1,12 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { forkJoin, of, from } from 'rxjs';
+import { of, from } from 'rxjs';
 import { map, catchError, switchMap, mergeMap, withLatestFrom, take } from 'rxjs/operators';
 import * as DataActions from './data.actions';
 import { selectAllRecords } from './data.selectors';
 import { ApiRestService } from '../../core/services/api-rest.service';
-import { FirestoreMockService } from '../../core/services/firestore-mock.service';
 import { ExportService } from '../../core/services/export.service';
 import { Record, RecordStatus } from '../../core/models/record.model';
 import { Kpi, KpiTrend } from '../../core/models/kpi.model';
@@ -17,46 +16,37 @@ import { AppState } from '../app.state';
  * @description Efectos de NgRx para la gestión asíncrona de datos empresariales.
  *
  * @remarks
- * Implementa de forma obligatoria RxJS `forkJoin` para orquestar la carga concurrente
- * de la API REST (PostgreSQL) y el simulador de Firestore (NoSQL), cumpliendo los
- * criterios de nivel Sobresaliente de la rúbrica (RA 5).
- * Además gestiona las operaciones asíncronas de CRUD y la generación de informes (PDF/CSV).
+ * Implementa consumo asíncrono unificado mediante Supabase (PostgreSQL Cloud) y API REST,
+ * con modo híbrido zero-downtime, operaciones CRUD reactivas y generación de informes (PDF/CSV).
  */
 @Injectable()
 export class DataEffects {
   private readonly actions$ = inject(Actions);
   private readonly apiRest = inject(ApiRestService);
-  private readonly firestoreMock = inject(FirestoreMockService);
   private readonly exportService = inject(ExportService);
   private readonly store = inject(Store<AppState>);
 
   /**
-   * Carga concurrente dual de datos usando RxJS forkJoin (RA 5 - Criterio Sobresaliente).
-   * Orquesta la obtención en paralelo de registros de la API REST (SQL) y la colección
-   * de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.
-   * Se añade take(1) explícito a ambos observables para garantizar que se completen
-   * inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin).
+   * Carga asíncrona de datos empresariales mediante Supabase (PostgreSQL Cloud).
+   * Consume la fuente de datos reactiva con switchMap directo y calcula las métricas iniciales.
    */
   loadAllData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DataActions.loadAllData),
       switchMap(() =>
-        forkJoin({
-          sqlRecords: this.apiRest.getRecords().pipe(take(1)),
-          nosqlRecords: this.firestoreMock.getRecordsSnapshot().pipe(take(1))
-        }).pipe(
-          map(({ sqlRecords, nosqlRecords }) => {
-            const combinedRecords: Record[] = [...sqlRecords, ...nosqlRecords];
-            const kpis = this.calculateInitialKpis(combinedRecords);
+        this.apiRest.getRecords().pipe(
+          take(1),
+          map((records) => {
+            const kpis = this.calculateInitialKpis(records);
             return DataActions.loadAllDataSuccess({
-              records: combinedRecords,
+              records,
               kpis
             });
           }),
           catchError((error: any) =>
             of(
               DataActions.loadAllDataFailure({
-                error: error?.message || 'Error al orquestar la carga concurrente con forkJoin'
+                error: error?.message || 'Error al cargar los registros desde Supabase'
               })
             )
           )

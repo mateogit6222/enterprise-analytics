@@ -252,7 +252,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:44</a></div>
                                 </td>
                             </tr>
 
@@ -291,7 +291,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:43</a></div>
                                 </td>
                             </tr>
 
@@ -330,7 +330,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:41</a></div>
                                 </td>
                             </tr>
 
@@ -369,7 +369,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:42</a></div>
                                 </td>
                             </tr>
 
@@ -413,7 +413,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:45</a></div>
                                 </td>
                             </tr>
 
@@ -433,7 +433,9 @@
   OnDestroy,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  inject
 } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
@@ -452,7 +454,7 @@ export interface TableColumn&lt;T &#x3D; any&gt; {
   key: string;
   label: string;
   sortable?: boolean;
-  type?: &#x27;text&#x27; | &#x27;currency&#x27; | &#x27;date&#x27; | &#x27;relative-time&#x27; | &#x27;badge&#x27; | &#x27;custom&#x27;;
+  type?: &#x27;text&#x27; | &#x27;currency&#x27; | &#x27;date&#x27; | &#x27;relative-time&#x27; | &#x27;badge&#x27; | &#x27;avatar&#x27; | &#x27;custom&#x27;;
   align?: &#x27;left&#x27; | &#x27;center&#x27; | &#x27;right&#x27;;
   badgeColorMap?: Record&lt;string, string&gt;;
   width?: string;
@@ -517,6 +519,8 @@ export type SortDirection &#x3D; &#x27;asc&#x27; | &#x27;desc&#x27; | &#x27;none
 })
 export class DataTableComponent&lt;T extends Record&lt;string, any&gt; &#x3D; any&gt;
   implements OnInit, OnDestroy, OnChanges {
+
+  private readonly cdr &#x3D; inject(ChangeDetectorRef);
 
   /** Colección completa de datos a renderizar */
   @Input() data: T[] &#x3D; [];
@@ -694,6 +698,7 @@ export class DataTableComponent&lt;T extends Record&lt;string, any&gt; &#x3D; an
 
     const startIndex &#x3D; (this.currentPage - 1) * this.pageSize;
     this.pagedData &#x3D; this.filteredData.slice(startIndex, startIndex + this.pageSize);
+    this.cdr.markForCheck();
   }
 
   /**
@@ -830,6 +835,17 @@ export class DataTableComponent&lt;T extends Record&lt;string, any&gt; &#x3D; an
   getRowAriaLabel(row: T, index: number): string {
     const name &#x3D; row[&#x27;title&#x27;] || row[&#x27;name&#x27;] || row[&#x27;id&#x27;] || (index + 1);
     return &#x60;Seleccionar fila ${name}&#x60;;
+  }
+
+  /**
+   * Obtiene la ruta del avatar vectorial según el nombre del responsable.
+   */
+  getAvatarForManager(name: any): string {
+    const str &#x3D; String(name || &#x27;&#x27;).toLowerCase();
+    if (str.includes(&#x27;elena&#x27;)) return &#x27;assets/images/avatar-elena.svg&#x27;;
+    if (str.includes(&#x27;javier&#x27;)) return &#x27;assets/images/avatar-javier.svg&#x27;;
+    if (str.includes(&#x27;maría&#x27;) || str.includes(&#x27;maria&#x27;)) return &#x27;assets/images/avatar-maria.svg&#x27;;
+    return &#x27;assets/images/avatar-carlos.svg&#x27;;
   }
 }
 </code></pre>

@@ -13,79 +13,91 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="page-content">
-  <div class="content-container">
+  <div class="container-fluid px-3 px-lg-4 py-4">
 
-    <!-- Encabezado de la Sección -->
-    <header class="section-header">
-      <div class="header-titles">
-        <h1 class="page-title">Generador de Informes Corporativos</h1>
-        <p class="page-subtitle">
-          Previsualización analítica, filtrado multidimensional y generación de informes ejecutivos en PDF y CSV.
-        </p>
-      </div>
+    <!-- Encabezado de la Sección con Bento Grid -->
+    <header class="bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+          <div class="d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-2 rounded-2 bg-light border text-primary small fw-semibold">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span>Informes Ejecutivos & Auditoría</span>
+          </div>
+          <h1 class="h3 fw-bold text-dark mb-1">Generador de Informes Corporativos</h1>
+          <p class="text-secondary mb-0 small" style="max-width: 720px;">
+            Previsualización analítica, filtrado multidimensional y generación de informes oficiales en PDF y CSV sincronizados con Supabase Cloud.
+          </p>
+        </div>
 
-      <!-- Botones de Descarga de Informes -->
-      <div class="export-buttons-group">
-        <ion-button
-          color="danger"
-          (click)="downloadPdfReport()"
-          [disabled]="(filteredRecords$ | async)?.length === 0 || isExporting"
-          class="export-btn"
-          aria-label="Descargar informe oficial en formato PDF">
-          @if (isExporting && exportType === 'pdf') {
-            <ion-spinner name="crescent" slot="start"></ion-spinner>
-            Generando PDF...
-          } @else {
-            <ion-icon slot="start" name="document-text-outline"></ion-icon>
-            Descargar Informe PDF
-          }
-        </ion-button>
+        <!-- Botones de Descarga Bootstrap 5 -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2 shadow-sm"
+            (click)="downloadPdfReport()"
+            [disabled]="(filteredRecords$ | async)?.length === 0 || isExporting"
+            aria-label="Descargar informe oficial en formato PDF">
+            @if (isExporting && exportType === 'pdf') {
+              <ion-spinner name="crescent" class="me-1" style="width: 16px; height: 16px;"></ion-spinner>
+              <span>Generando PDF...</span>
+            } @else {
+              <ion-icon name="document-text-outline" class="fs-6"></ion-icon>
+              <span>Descargar PDF</span>
+            }
+          </button>
 
-        <ion-button
-          color="success"
-          (click)="downloadCsvReport()"
-          [disabled]="(filteredRecords$ | async)?.length === 0 || isExporting"
-          class="export-btn"
-          aria-label="Descargar datos en formato CSV con UTF-8 BOM">
-          @if (isExporting && exportType === 'csv') {
-            <ion-spinner name="crescent" slot="start"></ion-spinner>
-            Exportando CSV...
-          } @else {
-            <ion-icon slot="start" name="download-outline"></ion-icon>
-            Exportar a CSV
-          }
-        </ion-button>
+          <button
+            type="button"
+            class="btn btn-success btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2 shadow-sm"
+            (click)="downloadCsvReport()"
+            [disabled]="(filteredRecords$ | async)?.length === 0 || isExporting"
+            aria-label="Descargar datos en formato CSV con UTF-8 BOM">
+            @if (isExporting && exportType === 'csv') {
+              <ion-spinner name="crescent" class="me-1" style="width: 16px; height: 16px;"></ion-spinner>
+              <span>Exportando CSV...</span>
+            } @else {
+              <ion-icon name="download-outline" class="fs-6"></ion-icon>
+              <span>Exportar a CSV</span>
+            }
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- Barra de Filtros Multidimensionales para el Informe -->
-    <section class="filters-card" aria-label="Filtros del informe">
-      <div class="filters-grid">
-        
-        <!-- Búsqueda libre -->
-        <div class="filter-field">
-          <label for="search-input" class="filter-label">Búsqueda rápida</label>
-          <div class="search-input-wrapper">
-            <ion-icon name="search-outline"></ion-icon>
+    <!-- Barra de Filtros Multidimensionales con Grilla Bootstrap 5 -->
+    <section class="bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm" aria-label="Filtros del informe">
+      <h2 class="h6 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+        <ion-icon name="funnel-outline" class="text-primary"></ion-icon>
+        <span>Filtros Multidimensionales para el Informe</span>
+      </h2>
+
+      <div class="row g-3">
+        <!-- Búsqueda rápida -->
+        <div class="col-12 col-md-6 col-xl-3">
+          <label for="report-search-input" class="form-label small fw-semibold text-secondary">Búsqueda rápida</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+              <ion-icon name="search-outline" class="text-secondary"></ion-icon>
+            </span>
             <input
-              id="search-input"
+              id="report-search-input"
               type="text"
               [(ngModel)]="searchTerm"
               (ngModelChange)="onFilterChanged()"
-              placeholder="Buscar por cliente, título o SKU..."
-              class="filter-input"
+              placeholder="Cliente, título o SKU..."
+              class="form-control border-start-0"
             />
           </div>
         </div>
 
         <!-- Filtro por Categoría -->
-        <div class="filter-field">
-          <label for="category-select" class="filter-label">Categoría de Negocio</label>
+        <div class="col-12 col-md-6 col-xl-3">
+          <label for="report-category-select" class="form-label small fw-semibold text-secondary">Categoría de Negocio</label>
           <select
-            id="category-select"
+            id="report-category-select"
             [(ngModel)]="selectedCategory"
             (ngModelChange)="onFilterChanged()"
-            class="filter-select">
+            class="form-select">
             <option value="ALL">Todas las Categorías</option>
             <option value="SALES">Ventas</option>
             <option value="MARKETING">Marketing</option>
@@ -96,13 +108,13 @@
         </div>
 
         <!-- Filtro por Estado -->
-        <div class="filter-field">
-          <label for="status-select" class="filter-label">Estado de Flujo</label>
+        <div class="col-12 col-md-6 col-xl-3">
+          <label for="report-status-select" class="form-label small fw-semibold text-secondary">Estado de Flujo</label>
           <select
-            id="status-select"
+            id="report-status-select"
             [(ngModel)]="selectedStatus"
             (ngModelChange)="onFilterChanged()"
-            class="filter-select">
+            class="form-select">
             <option value="ALL">Todos los Estados</option>
             <option value="ACTIVE">Activo</option>
             <option value="PENDING">Pendiente</option>
@@ -112,116 +124,124 @@
         </div>
 
         <!-- Filtro por Fuente de Datos -->
-        <div class="filter-field">
-          <label for="source-select" class="filter-label">Fuente de Datos</label>
+        <div class="col-12 col-md-6 col-xl-3">
+          <label for="report-source-select" class="form-label small fw-semibold text-secondary">Fuente de Datos</label>
           <select
-            id="source-select"
+            id="report-source-select"
             [(ngModel)]="selectedSource"
             (ngModelChange)="onFilterChanged()"
-            class="filter-select">
+            class="form-select">
             <option value="ALL">Todas las Fuentes</option>
             <option value="REST">API REST (SQL)</option>
-            <option value="FIRESTORE">Firestore (NoSQL)</option>
+            <option value="SUPABASE">Supabase Cloud (PostgreSQL)</option>
           </select>
         </div>
-
       </div>
 
       <!-- Resumen de registros coincidentes -->
-      <div class="filter-summary-row">
-        <span class="matching-count">
-          Registros seleccionados para el informe: <strong>{{ (filteredRecords$ | async)?.length || 0 }}</strong>
+      <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">
+        <span class="small text-secondary">
+          Registros seleccionados para el informe: <strong class="text-dark">{{ (filteredRecords$ | async)?.length || 0 }}</strong>
         </span>
-        <button type="button" class="reset-filters-btn" (click)="resetFilters()">
-          <ion-icon name="refresh-circle-outline"></ion-icon> Restablecer filtros
+        <button type="button" class="btn btn-link btn-sm text-decoration-none p-0 text-primary fw-semibold d-inline-flex align-items-center gap-1" (click)="resetFilters()">
+          <ion-icon name="refresh-circle-outline"></ion-icon>
+          <span>Restablecer filtros</span>
         </button>
       </div>
     </section>
 
-    <!-- Resumen Ejecutivo (KPIs del Informe Filtrado) -->
-    <section class="summary-kpis-grid" aria-label="Métricas del informe">
+    <!-- Resumen Ejecutivo (Bento Grid de KPIs) -->
+    <section class="row g-3 mb-4" aria-label="Métricas del informe">
       @if (metrics$ | async; as m) {
-        <div class="metric-card">
-          <div class="metric-icon-box revenue">
-            <ion-icon name="cash-outline"></ion-icon>
-          </div>
-          <div class="metric-info">
-            <span class="metric-label">Facturación Filtrada</span>
-            <span class="metric-value">{{ m.totalAmount | currencyFormat }}</span>
-          </div>
-        </div>
-
-        <div class="metric-card">
-          <div class="metric-icon-box records">
-            <ion-icon name="documents-outline"></ion-icon>
-          </div>
-          <div class="metric-info">
-            <span class="metric-label">Volumen Operaciones</span>
-            <span class="metric-value">{{ m.totalCount }} registros</span>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="bento-card p-3 bg-white rounded-3 border shadow-sm h-100 d-flex align-items-center gap-3">
+            <div class="rounded-3 p-3 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+              <ion-icon name="cash-outline" class="fs-4"></ion-icon>
+            </div>
+            <div>
+              <span class="d-block small text-secondary fw-semibold">Facturación Filtrada</span>
+              <span class="d-block h5 fw-bold text-dark mb-0">{{ m.totalAmount | currencyFormat }}</span>
+            </div>
           </div>
         </div>
 
-        <div class="metric-card">
-          <div class="metric-icon-box average">
-            <ion-icon name="trending-up-outline"></ion-icon>
-          </div>
-          <div class="metric-info">
-            <span class="metric-label">Ticket Medio</span>
-            <span class="metric-value">{{ m.avgAmount | currencyFormat:'EUR':'es-ES':0 }}</span>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="bento-card p-3 bg-white rounded-3 border shadow-sm h-100 d-flex align-items-center gap-3">
+            <div class="rounded-3 p-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+              <ion-icon name="documents-outline" class="fs-4"></ion-icon>
+            </div>
+            <div>
+              <span class="d-block small text-secondary fw-semibold">Volumen Operaciones</span>
+              <span class="d-block h5 fw-bold text-dark mb-0">{{ m.totalCount }} registros</span>
+            </div>
           </div>
         </div>
 
-        <div class="metric-card">
-          <div class="metric-icon-box completed">
-            <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="bento-card p-3 bg-white rounded-3 border shadow-sm h-100 d-flex align-items-center gap-3">
+            <div class="rounded-3 p-3 bg-info bg-opacity-10 text-info d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+              <ion-icon name="trending-up-outline" class="fs-4"></ion-icon>
+            </div>
+            <div>
+              <span class="d-block small text-secondary fw-semibold">Ticket Medio</span>
+              <span class="d-block h5 fw-bold text-dark mb-0">{{ m.avgAmount | currencyFormat:'EUR':'es-ES':0 }}</span>
+            </div>
           </div>
-          <div class="metric-info">
-            <span class="metric-label">Tasa de Completitud</span>
-            <span class="metric-value">{{ m.completionRate }}%</span>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="bento-card p-3 bg-white rounded-3 border shadow-sm h-100 d-flex align-items-center gap-3">
+            <div class="rounded-3 p-3 bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+              <ion-icon name="checkmark-done-circle-outline" class="fs-4"></ion-icon>
+            </div>
+            <div>
+              <span class="d-block small text-secondary fw-semibold">Tasa Completitud</span>
+              <span class="d-block h5 fw-bold text-dark mb-0">{{ m.completionRate }}%</span>
+            </div>
           </div>
         </div>
       }
     </section>
 
     <!-- Desglose Tabulado Resumido por Categoría -->
-    <section class="table-section" aria-label="Desglose por categoría">
-      <div class="section-title-bar">
-        <h2>
-          <ion-icon name="pie-chart-outline"></ion-icon>
-          Desglose Agregado por Categoría
+    <section class="bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm" aria-label="Desglose por categoría">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h6 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+          <ion-icon name="pie-chart-outline" class="text-primary"></ion-icon>
+          <span>Desglose Agregado por Categoría</span>
         </h2>
-        <span class="section-note">Resumen ejecutivo consolidado</span>
+        <span class="badge bg-light text-secondary border">Resumen Ejecutivo</span>
       </div>
 
-      <div class="table-wrapper">
-        <table class="report-table" aria-label="Tabla de desglose de volumen y facturación por categoría">
-          <thead>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" aria-label="Tabla de desglose de volumen y facturación por categoría">
+          <thead class="table-light text-uppercase small text-secondary">
             <tr>
               <th scope="col">Categoría</th>
               <th scope="col" class="text-center">Nº Operaciones</th>
-              <th scope="col" class="text-right">Facturación Acumulada</th>
+              <th scope="col" class="text-end">Facturación Acumulada</th>
               <th scope="col" class="text-center">% Volumen</th>
               <th scope="col" class="text-center">% Facturación</th>
-              <th scope="col" class="text-right">Ticket Medio</th>
+              <th scope="col" class="text-end">Ticket Medio</th>
             </tr>
           </thead>
           <tbody>
             @for (item of categorySummary$ | async; track item.category) {
               <tr>
                 <td>
-                  <span class="category-chip" [attr.data-cat]="item.category">
+                  <span class="badge bg-light text-dark border fw-semibold">
                     {{ item.categoryName }}
                   </span>
                 </td>
-                <td class="text-center font-bold">{{ item.count }}</td>
-                <td class="text-right font-bold text-highlight">{{ item.totalAmount | currencyFormat }}</td>
-                <td class="text-center">{{ item.volumePercent }}%</td>
-                <td class="text-center">{{ item.revenuePercent }}%</td>
-                <td class="text-right">{{ item.avgAmount | currencyFormat:'EUR':'es-ES':0 }}</td>
+                <td class="text-center fw-bold">{{ item.count }}</td>
+                <td class="text-end fw-bold text-dark">{{ item.totalAmount | currencyFormat }}</td>
+                <td class="text-center text-secondary small">{{ item.volumePercent }}%</td>
+                <td class="text-center text-secondary small">{{ item.revenuePercent }}%</td>
+                <td class="text-end text-secondary small">{{ item.avgAmount | currencyFormat:'EUR':'es-ES':0 }}</td>
               </tr>
             } @empty {
               <tr>
-                <td colspan="6" class="text-center empty-cell">No hay registros con los filtros seleccionados</td>
+                <td colspan="6" class="text-center py-4 text-secondary small">No hay registros con los filtros seleccionados</td>
               </tr>
             }
           </tbody>
@@ -230,18 +250,18 @@
     </section>
 
     <!-- Previsualización Detallada de los Registros del Informe -->
-    <section class="table-section" aria-label="Previsualización de registros">
-      <div class="section-title-bar">
-        <h2>
-          <ion-icon name="list-outline"></ion-icon>
-          Previsualización Detallada de Registros para el Informe
+    <section class="bento-card p-4 bg-white rounded-3 border shadow-sm" aria-label="Previsualización de registros">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h6 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+          <ion-icon name="list-outline" class="text-primary"></ion-icon>
+          <span>Previsualización Detallada de Registros</span>
         </h2>
-        <span class="section-note">Datos que se incluirán en la exportación PDF y CSV</span>
+        <span class="badge bg-light text-secondary border">Primeras 15 filas</span>
       </div>
 
-      <div class="table-wrapper">
-        <table class="report-table" aria-label="Tabla de registros previsualizados para exportación">
-          <thead>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" aria-label="Tabla de registros previsualizados para exportación">
+          <thead class="table-light text-uppercase small text-secondary">
             <tr>
               <th scope="col">SKU</th>
               <th scope="col">Título del Registro</th>
@@ -249,30 +269,31 @@
               <th scope="col">Categoría</th>
               <th scope="col">Estado</th>
               <th scope="col">Fuente</th>
-              <th scope="col" class="text-right">Importe (€)</th>
+              <th scope="col" class="text-end">Importe (€)</th>
             </tr>
           </thead>
           <tbody>
             @for (record of (filteredRecords$ | async)?.slice(0, 15); track record.id) {
               <tr>
-                <td><code class="sku-tag">{{ record.sku }}</code></td>
-                <td class="title-cell">{{ record.title }}</td>
-                <td>{{ record.clientName }}</td>
-                <td><span class="category-chip" [attr.data-cat]="record.category">{{ record.category }}</span></td>
-                <td><span class="status-badge" [attr.data-status]="record.status">{{ record.status }}</span></td>
-                <td><span class="source-badge" [attr.data-source]="record.source">{{ record.source }}</span></td>
-                <td class="text-right font-bold text-highlight">{{ record.amount | currencyFormat }}</td>
+                <td><code class="bg-light px-2 py-1 rounded text-primary fw-bold">{{ record.sku }}</code></td>
+                <td class="fw-semibold text-dark">{{ record.title }}</td>
+                <td class="text-secondary small">{{ record.clientName }}</td>
+                <td><span class="badge bg-light text-secondary border">{{ record.category }}</span></td>
+                <td><span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">{{ record.status }}</span></td>
+                <td><span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">{{ record.source }}</span></td>
+                <td class="text-end fw-bold text-dark">{{ record.amount | currencyFormat }}</td>
               </tr>
             } @empty {
               <tr>
-                <td colspan="7" class="text-center empty-cell">No se encontraron registros que coincidan con los filtros aplicados.</td>
+                <td colspan="7" class="text-center py-4 text-secondary small">No se encontraron registros que coincidan con los filtros aplicados.</td>
               </tr>
             }
           </tbody>
         </table>
       </div>
+
       @if (((filteredRecords$ | async)?.length || 0) > 15) {
-        <p class="preview-notice">
+        <p class="small text-secondary mt-3 mb-0">
           Mostrando los primeros 15 registros en la previsualización. El informe PDF y CSV descargará los <strong>{{ (filteredRecords$ | async)?.length }}</strong> registros completos.
         </p>
       }

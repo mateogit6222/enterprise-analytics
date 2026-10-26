@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Gestión Integral de Registros</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="openCreateModal()" color="light" class="create-btn" aria-label="Crear nuevo registro">
+      <ion-button (click)="openCreateModal()" color="light" class="create-btn" aria-label="Crear nuevo registro empresarial">
         <ion-icon slot="start" name="add-circle-outline"></ion-icon>
         <span class="btn-text">Nuevo Registro</span>
       </ion-button>
@@ -14,53 +14,57 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="page-content">
-  <div class="content-container">
+  <div class="container-fluid px-3 px-lg-4 py-4">
 
-    <!-- Encabezado de la Sección -->
-    <header class="section-header">
-      <div class="header-titles">
-        <h1 class="page-title">Directorio de Registros Corporativos</h1>
-        <p class="page-subtitle">
-          Administración y consulta unificada de registros procedentes de bases de datos relacionales (SQL) y NoSQL.
-        </p>
-      </div>
+    <!-- Encabezado de la Sección con Bento Grid y Bootstrap 5 -->
+    <header class="bento-header p-4 mb-4 bg-white rounded-3 border shadow-sm">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div class="header-titles">
+          <div class="d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-2 rounded-2 bg-light border text-primary small fw-semibold">
+            <ion-icon name="server-outline"></ion-icon>
+            <span>Supabase Cloud & REST Pipeline</span>
+          </div>
+          <h1 class="h3 fw-bold text-dark mb-1">Directorio de Registros Corporativos</h1>
+          <p class="text-secondary mb-0 small" style="max-width: 720px;">
+            Administración unificada de operaciones empresariales sincronizadas directamente con Supabase PostgreSQL Cloud y almacenamiento de alta disponibilidad.
+          </p>
+        </div>
 
-      <!-- Barra de Acciones Globales de Exportación -->
-      <div class="export-actions-bar" aria-label="Acciones de exportación">
-        <ion-button
-          fill="outline"
-          color="danger"
-          size="small"
-          (click)="exportToPdf()"
-          [disabled]="exporting$ | async"
-          aria-label="Exportar todos los registros a documento PDF profesional">
-          <ion-icon slot="start" name="document-text-outline"></ion-icon>
-          Exportar PDF
-        </ion-button>
+        <!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 -->
+        <div class="d-flex align-items-center gap-2 flex-wrap" aria-label="Acciones de exportación de registros">
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2"
+            (click)="exportToPdf()"
+            [disabled]="exporting$ | async"
+            aria-label="Exportar todos los registros a documento PDF profesional">
+            <ion-icon name="document-text-outline" class="fs-6"></ion-icon>
+            <span>Exportar PDF</span>
+          </button>
 
-        <ion-button
-          fill="outline"
-          color="success"
-          size="small"
-          (click)="exportToCsv()"
-          [disabled]="exporting$ | async"
-          aria-label="Exportar datos a formato CSV con codificación UTF-8 para Excel">
-          <ion-icon slot="start" name="download-outline"></ion-icon>
-          Exportar CSV
-        </ion-button>
+          <button
+            type="button"
+            class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2"
+            (click)="exportToCsv()"
+            [disabled]="exporting$ | async"
+            aria-label="Exportar datos a formato CSV con codificación UTF-8 para Excel">
+            <ion-icon name="download-outline" class="fs-6"></ion-icon>
+            <span>Exportar CSV</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <!-- Indicador de carga asíncrona -->
     @if (loading$ | async) {
-      <div class="loading-state-bar">
+      <div class="alert alert-info d-flex align-items-center gap-3 py-2 px-3 mb-4 rounded-3 shadow-sm border-0" role="status">
         <ion-spinner name="crescent" color="primary"></ion-spinner>
-        <span>Sincronizando registros con API REST y Firestore...</span>
+        <span class="small fw-semibold text-primary">Sincronizando registros con Supabase PostgreSQL Cloud...</span>
       </div>
     }
 
-    <!-- Componente DataTable Reutilizable (Fase 2) -->
-    <div class="table-card">
+    <!-- Componente DataTable Reutilizable en Bento Card -->
+    <div class="bento-table-card">
       <app-data-table
         [data]="(records$ | async) ?? []"
         [loading]="(loading$ | async) ?? false"

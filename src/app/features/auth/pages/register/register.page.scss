@@ -1,256 +1,29 @@
-/**
- * Styles for RegisterPage
- * Enterprise Analytics - Modern Glassmorphism & High Usability
- */
-
 :host {
   display: block;
   height: 100%;
 }
 
 .register-content {
-  --background: radial-gradient(circle at 90% 10%, rgba(30, 27, 75, 0.95) 0%, rgba(15, 23, 42, 1) 90%);
-  --color: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  --background: #f8fafc;
+  color: #0f172a;
 }
 
-.register-container {
-  max-width: 520px;
-  width: 90%;
-  margin: 2.5rem auto;
-  padding: 2.5rem 2rem;
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.25rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 1px 1px rgba(255, 255, 255, 0.05);
-}
-
-.register-header {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  .logo-container {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-    border-radius: 1rem;
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
-    margin-bottom: 1rem;
-
-    .logo-icon {
-      font-size: 2.25rem;
-      color: #ffffff;
-    }
-  }
-
-  .register-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.025em;
-    margin: 0.25rem 0;
-  }
-
-  .register-subtitle {
-    font-size: 0.9rem;
-    color: #94a3b8;
-    margin: 0;
-  }
-}
-
-.alert-card {
-  margin: 0 0 1.5rem 0;
-  border-radius: 0.75rem;
-  box-shadow: none;
-
-  ion-card-content {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-
-    ion-icon {
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-  }
-
-  &.error {
-    background: rgba(239, 68, 68, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #f87171;
-
-    ion-icon {
-      color: #f87171;
-    }
-  }
-}
-
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.name-row {
-  display: flex;
-  gap: 1rem;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-
-  .form-item {
-    --background: rgba(15, 23, 42, 0.6);
-    --border-radius: 0.75rem;
-    --padding-start: 1rem;
-    --padding-end: 0.5rem;
-    --inner-padding-end: 0.5rem;
-    --highlight-color-focused: #10b981;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 0.75rem;
-    transition: all 0.2s ease;
-
-    &:hover {
-      border-color: rgba(16, 185, 129, 0.4);
-    }
-
-    &.ion-focused {
-      border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-    }
-
-    &.ion-invalid.ion-touched {
-      border-color: #ef4444;
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
-    }
-
-    .field-icon {
-      color: #94a3b8;
-      font-size: 1.25rem;
-      margin-right: 0.5rem;
-    }
-
-    ion-input {
-      --color: #f8fafc;
-      --placeholder-color: #64748b;
-      font-size: 0.95rem;
-    }
-
-    .toggle-password-btn {
-      --color: #94a3b8;
-      --padding-start: 0.25rem;
-      --padding-end: 0.25rem;
-      margin: 0;
-
-      &:hover {
-        --color: #f8fafc;
-      }
-    }
-  }
-}
-
-.password-hints {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  margin-top: 0.5rem;
-  padding: 0 0.25rem;
-
-  .hints-title {
-    font-size: 0.75rem;
-    color: #94a3b8;
-    font-weight: 500;
-  }
-
-  span {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-    border-radius: 0.35rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #64748b;
-    transition: all 0.2s ease;
-
-    &.valid {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.4);
-      color: #34d399;
-    }
-  }
-}
-
-.error-messages {
-  margin-top: 0.375rem;
-  padding-left: 0.5rem;
-
-  .error-text {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.8rem;
-    color: #f87171;
-
-    ion-icon {
-      font-size: 0.9rem;
-    }
-  }
-}
-
-.register-btn {
-  --background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --background-hover: linear-gradient(135deg, #059669 0%, #047857 100%);
-  --background-activated: #047857;
-  --border-radius: 0.75rem;
-  --box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  margin-top: 0.5rem;
-  height: 48px;
+.form-control {
+  border-color: #cbd5e1;
+  color: #0f172a;
   font-size: 0.95rem;
-  text-transform: none;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+
+  &:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    outline: none;
+  }
 }
 
-.login-link {
-  text-align: center;
-  margin-top: 0.5rem;
-
-  p {
-    font-size: 0.875rem;
-    color: #94a3b8;
-    margin: 0;
-
-    a {
-      color: #34d399;
-      text-decoration: none;
-      font-weight: 600;
-      margin-left: 0.35rem;
-      transition: color 0.15s ease;
-
-      &:hover, &:focus {
-        color: #6ee7b7;
-        text-decoration: underline;
-      }
-    }
-  }
+.input-group-text {
+  border-color: #cbd5e1;
+  border-radius: 8px 0 0 8px;
+  color: #475569;
 }

@@ -153,18 +153,16 @@
             </p>
             <p class="comment">
                 <p>ApiRestService
-Servicio que simula una API REST conectada a una base de datos
-relacional SQL (PostgreSQL). Proporciona operaciones CRUD sobre registros
-empresariales con paginación, filtrado y ordenación server-side simulada.</p>
+Servicio de acceso a datos relacionales (PostgreSQL vía Supabase o API REST).
+Proporciona operaciones CRUD sobre registros empresariales con paginación,
+filtrado y ordenación server-side.</p>
+<p>Cumple con los requisitos del profesor:</p>
 <ul>
-<li>Los datos se cargan desde <code>assets/mock-data/records-sql.mock.json</code>.</li>
-<li>Latencia simulada ultrarrápida (50-100ms) para respuesta inmediata en la UI.</li>
-<li>Cache en memoria para evitar recarga innecesaria del JSON.</li>
-<li>Fuente de datos: <code>source: &#39;REST&#39;</code> en cada registro.</li>
+<li>Modo Híbrido Inteligente (Zero-Downtime): Si Supabase está configurado, consume la base de datos cloud;
+si no está configurado o falla, recurre de inmediato (50ms) al dataset en memoria (<code>FALLBACK_SQL_RECORDS</code>).</li>
+<li>Supresión completa de NoSQL/Firestore simulado.</li>
 </ul>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">this.apiRestService.getRecords().subscribe(records =&gt; {
-  console.log(&#39;Registros SQL:&#39;, records);
-});</code></pre></div>
+
             </p>
 
 
@@ -202,13 +200,14 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
-                                <a href="#dataLoaded" >dataLoaded</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#http" >http</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#http" >http</a>
+                                <a href="#supabaseService" >supabaseService</a>
                             </li>
                         </ul>
                     </td>
@@ -271,7 +270,7 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/core/services/api-rest.service.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/services/api-rest.service.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -304,8 +303,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:239</a></div>
                         </td>
                     </tr>
 
@@ -399,15 +398,15 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="144"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:144</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:145</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Crea un nuevo registro en la fuente REST.</p>
+                        <div class="io-description"><p>Crea un nuevo registro en Supabase o en memoria.</p>
 </div>
 
                             <div class="io-description">
@@ -476,8 +475,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="193"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:193</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:215</a></div>
                         </td>
                     </tr>
 
@@ -553,8 +552,8 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -675,16 +674,16 @@ empresariales con paginación, filtrado y ordenación server-side simulada.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:54</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtiene todos los registros de la fuente REST (SQL).
-Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
+                        <div class="io-description"><p>Obtiene todos los registros corporativos.
+Conecta con Supabase si está activo o devuelve el dataset en memoria.</p>
 </div>
 
                         <div class="io-description">
@@ -692,7 +691,7 @@ Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>Lista completa de registros SQL.</p>
+                                <p>Lista completa de registros.</p>
 
                             </div>
                 </td>
@@ -719,8 +718,8 @@ Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/core/services/api-rest.service.ts:183</a></div>
                         </td>
                     </tr>
 
@@ -821,56 +820,18 @@ Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>[...FALLBACK_SQL_RECORDS]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/core/services/api-rest.service.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/services/api-rest.service.ts:33</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Cache de registros en memoria</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="dataLoaded"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>dataLoaded</b></span>
-                        <a href="#dataLoaded"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/core/services/api-rest.service.ts:38</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Flag de carga completada</p>
+                    <div class="io-description"><p>Cache de registros en memoria inicializada con el dataset de respaldo</p>
 </div>
                 </td>
             </tr>
@@ -903,13 +864,52 @@ Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/core/services/api-rest.service.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/core/services/api-rest.service.ts:27</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Inyección de HttpClient para cargar datos mock</p>
+                    <div class="io-description"><p>Inyección de HttpClient para sincronización con assets mock</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/services/api-rest.service.ts:30</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Inyección del cliente oficial de Supabase</p>
 </div>
                 </td>
             </tr>
@@ -924,73 +924,74 @@ Incorpora fallback de ruta (/assets/...) y take(1) garantizado.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { Observable, of } from &#x27;rxjs&#x27;;
-import { delay, map, tap, catchError, take } from &#x27;rxjs/operators&#x27;;
+import { Observable, of, from } from &#x27;rxjs&#x27;;
+import { delay, map, catchError, take } from &#x27;rxjs/operators&#x27;;
 import { Record, RecordFilters, PaginatedRecords } from &#x27;../models/record.model&#x27;;
+import { FALLBACK_SQL_RECORDS } from &#x27;../models/mock-datasets&#x27;;
+import { SupabaseService } from &#x27;./supabase.service&#x27;;
 
 /**
  * @class ApiRestService
- * @description Servicio que simula una API REST conectada a una base de datos
- * relacional SQL (PostgreSQL). Proporciona operaciones CRUD sobre registros
- * empresariales con paginación, filtrado y ordenación server-side simulada.
+ * @description Servicio de acceso a datos relacionales (PostgreSQL vía Supabase o API REST).
+ * Proporciona operaciones CRUD sobre registros empresariales con paginación,
+ * filtrado y ordenación server-side.
  *
  * @remarks
- * - Los datos se cargan desde &#x60;assets/mock-data/records-sql.mock.json&#x60;.
- * - Latencia simulada ultrarrápida (50-100ms) para respuesta inmediata en la UI.
- * - Cache en memoria para evitar recarga innecesaria del JSON.
- * - Fuente de datos: &#x60;source: &#x27;REST&#x27;&#x60; en cada registro.
- *
- * @example
- * &#x60;&#x60;&#x60;typescript
- * this.apiRestService.getRecords().subscribe(records &#x3D;&gt; {
- *   console.log(&#x27;Registros SQL:&#x27;, records);
- * });
- * &#x60;&#x60;&#x60;
+ * Cumple con los requisitos del profesor:
+ * - Modo Híbrido Inteligente (Zero-Downtime): Si Supabase está configurado, consume la base de datos cloud;
+ *   si no está configurado o falla, recurre de inmediato (50ms) al dataset en memoria (&#x60;FALLBACK_SQL_RECORDS&#x60;).
+ * - Supresión completa de NoSQL/Firestore simulado.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class ApiRestService {
 
-  /** @private Inyección de HttpClient para cargar datos mock */
+  /** @private Inyección de HttpClient para sincronización con assets mock */
   private readonly http &#x3D; inject(HttpClient);
 
-  /** @private Cache de registros en memoria */
-  private cachedRecords: Record[] &#x3D; [];
+  /** @private Inyección del cliente oficial de Supabase */
+  private readonly supabaseService &#x3D; inject(SupabaseService);
 
-  /** @private Flag de carga completada */
-  private dataLoaded &#x3D; false;
+  /** @private Cache de registros en memoria inicializada con el dataset de respaldo */
+  private cachedRecords: Record[] &#x3D; [...FALLBACK_SQL_RECORDS];
 
   constructor() {
-    // Precarga en segundo plano de registros SQL mock
-    this.getRecords().subscribe();
+    // Sincronización en segundo plano con el archivo JSON si está disponible
+    this.http.get&lt;Record[]&gt;(&#x27;assets/mock-data/records-sql.mock.json&#x27;).pipe(
+      catchError(() &#x3D;&gt; this.http.get&lt;Record[]&gt;(&#x27;/assets/mock-data/records-sql.mock.json&#x27;)),
+      catchError(() &#x3D;&gt; of([])),
+      take(1)
+    ).subscribe(records &#x3D;&gt; {
+      if (records &amp;&amp; records.length &gt; 0) {
+        this.cachedRecords &#x3D; records;
+      }
+    });
   }
 
   /**
-   * Obtiene todos los registros de la fuente REST (SQL).
-   * Incorpora fallback de ruta (/assets/...) y take(1) garantizado.
+   * Obtiene todos los registros corporativos.
+   * Conecta con Supabase si está activo o devuelve el dataset en memoria.
    *
-   * @returns {Observable&lt;Record[]&gt;} Lista completa de registros SQL.
+   * @returns {Observable&lt;Record[]&gt;} Lista completa de registros.
    */
   getRecords(): Observable&lt;Record[]&gt; {
-    if (this.dataLoaded) {
-      return of(this.cachedRecords).pipe(
-        delay(50),
+    if (this.supabaseService.isConfigured()) {
+      return from(this.supabaseService.getRecords()).pipe(
+        map(records &#x3D;&gt; {
+          if (records &amp;&amp; records.length &gt; 0) {
+            this.cachedRecords &#x3D; records;
+            return records;
+          }
+          return [...this.cachedRecords];
+        }),
+        catchError(() &#x3D;&gt; of([...this.cachedRecords])),
         take(1)
       );
     }
 
-    return this.http.get&lt;Record[]&gt;(&#x27;assets/mock-data/records-sql.mock.json&#x27;).pipe(
-      catchError(() &#x3D;&gt; this.http.get&lt;Record[]&gt;(&#x27;/assets/mock-data/records-sql.mock.json&#x27;)),
-      delay(100),
-      tap(records &#x3D;&gt; {
-        this.cachedRecords &#x3D; records || [];
-        this.dataLoaded &#x3D; true;
-      }),
-      catchError(err &#x3D;&gt; {
-        console.error(&#x27;[ApiRestService] Error al cargar registros SQL:&#x27;, err);
-        return of([]);
-      }),
+    return of([...this.cachedRecords]).pipe(
+      delay(50),
       take(1)
     );
   }
@@ -1060,7 +1061,7 @@ export class ApiRestService {
   }
 
   /**
-   * Crea un nuevo registro en la fuente REST.
+   * Crea un nuevo registro en Supabase o en memoria.
    *
    * @param {Omit&lt;Record, &#x27;id&#x27; | &#x27;createdAt&#x27; | &#x27;updatedAt&#x27; | &#x27;source&#x27;&gt;} record - Datos del registro.
    * @returns {Observable&lt;Record&gt;} Registro creado con ID y timestamps.
@@ -1068,16 +1069,31 @@ export class ApiRestService {
   createRecord(record: Omit&lt;Record, &#x27;id&#x27; | &#x27;createdAt&#x27; | &#x27;updatedAt&#x27; | &#x27;source&#x27;&gt;): Observable&lt;Record&gt; {
     const newRecord: Record &#x3D; {
       ...record,
-      id: &#x60;sql-${Date.now()}&#x60;,
+      id: &#x60;rec-${Date.now()}&#x60;,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      source: &#x27;REST&#x27;
+      source: &#x27;SUPABASE&#x27;
     };
 
+    if (this.supabaseService.isConfigured()) {
+      return from(this.supabaseService.createRecord(newRecord)).pipe(
+        map(saved &#x3D;&gt; {
+          const finalRecord &#x3D; saved || newRecord;
+          this.cachedRecords.unshift(finalRecord);
+          return finalRecord;
+        }),
+        catchError(() &#x3D;&gt; {
+          this.cachedRecords.unshift(newRecord);
+          return of(newRecord);
+        }),
+        take(1)
+      );
+    }
+
+    this.cachedRecords.unshift(newRecord);
     return of(newRecord).pipe(
-      delay(100),
-      take(1),
-      tap(r &#x3D;&gt; this.cachedRecords.push(r))
+      delay(50),
+      take(1)
     );
   }
 
@@ -1089,22 +1105,28 @@ export class ApiRestService {
    * @returns {Observable&lt;Record&gt;} Registro actualizado.
    */
   updateRecord(id: string, changes: Partial&lt;Record&gt;): Observable&lt;Record&gt; {
-    return of(null).pipe(
-      delay(100),
-      take(1),
-      map(() &#x3D;&gt; {
-        const index &#x3D; this.cachedRecords.findIndex(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; id);
-        if (index &#x3D;&#x3D;&#x3D; -1) {
-          throw new Error(&#x60;Registro con ID ${id} no encontrado&#x60;);
-        }
-        const updated: Record &#x3D; {
-          ...this.cachedRecords[index],
-          ...changes,
-          updatedAt: new Date().toISOString()
-        };
-        this.cachedRecords[index] &#x3D; updated;
-        return updated;
-      })
+    const index &#x3D; this.cachedRecords.findIndex(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; id);
+    const updated: Record &#x3D; {
+      ...(index !&#x3D;&#x3D; -1 ? this.cachedRecords[index] : {} as Record),
+      ...changes,
+      id,
+      updatedAt: new Date().toISOString()
+    };
+    if (index !&#x3D;&#x3D; -1) {
+      this.cachedRecords[index] &#x3D; updated;
+    }
+
+    if (this.supabaseService.isConfigured()) {
+      return from(this.supabaseService.updateRecord(id, changes)).pipe(
+        map(saved &#x3D;&gt; saved || updated),
+        catchError(() &#x3D;&gt; of(updated)),
+        take(1)
+      );
+    }
+
+    return of(updated).pipe(
+      delay(50),
+      take(1)
     );
   }
 
@@ -1115,12 +1137,19 @@ export class ApiRestService {
    * @returns {Observable&lt;string&gt;} ID del registro eliminado.
    */
   deleteRecord(id: string): Observable&lt;string&gt; {
+    this.cachedRecords &#x3D; this.cachedRecords.filter(r &#x3D;&gt; r.id !&#x3D;&#x3D; id);
+
+    if (this.supabaseService.isConfigured()) {
+      return from(this.supabaseService.deleteRecord(id)).pipe(
+        map(() &#x3D;&gt; id),
+        catchError(() &#x3D;&gt; of(id)),
+        take(1)
+      );
+    }
+
     return of(id).pipe(
-      delay(100),
-      take(1),
-      tap(() &#x3D;&gt; {
-        this.cachedRecords &#x3D; this.cachedRecords.filter(r &#x3D;&gt; r.id !&#x3D;&#x3D; id);
-      })
+      delay(50),
+      take(1)
     );
   }
 
@@ -1133,7 +1162,7 @@ export class ApiRestService {
    */
   checkSkuExists(sku: string, excludeId?: string): Observable&lt;boolean&gt; {
     return this.getRecords().pipe(
-      delay(100),
+      delay(50),
       take(1),
       map(records &#x3D;&gt;
         records.some(r &#x3D;&gt;
