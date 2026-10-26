@@ -298,7 +298,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule, isDevMode } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { LOCALE_ID, NgModule, isDevMode } from &#x27;@angular/core&#x27;;
+import { registerLocaleData } from &#x27;@angular/common&#x27;;
+import localeEs from &#x27;@angular/common/locales/es&#x27;;
 import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
 import { RouteReuseStrategy } from &#x27;@angular/router&#x27;;
 import { provideHttpClient, withInterceptors } from &#x27;@angular/common/http&#x27;;
@@ -315,6 +317,8 @@ import { dataReducer } from &#x27;./state/data/data.reducer&#x27;;
 import { DataEffects } from &#x27;./state/data/data.effects&#x27;;
 import { authInterceptor } from &#x27;./core/interceptors/auth.interceptor&#x27;;
 import { errorInterceptor } from &#x27;./core/interceptors/error.interceptor&#x27;;
+
+registerLocaleData(localeEs, &#x27;es&#x27;);
 
 @NgModule({
   declarations: [AppComponent],
@@ -335,6 +339,7 @@ import { errorInterceptor } from &#x27;./core/interceptors/error.interceptor&#x2
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: LOCALE_ID, useValue: &#x27;es&#x27; },
     provideHttpClient(
       withInterceptors([authInterceptor, errorInterceptor])
     )

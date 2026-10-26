@@ -1128,44 +1128,49 @@ export class ProfilePage {
 &lt;/ion-header&gt;
 
 &lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;page-content&quot; id&#x3D;&quot;profile-content&quot;&gt;
-  &lt;div class&#x3D;&quot;content-container&quot;&gt;
+  &lt;div class&#x3D;&quot;container-fluid px-3 px-lg-4 py-4&quot;&gt;
 
     @if (currentUser$ | async; as user) {
-      &lt;!-- Tarjeta Principal de Perfil del Usuario --&gt;
-      &lt;section class&#x3D;&quot;profile-hero-card&quot; aria-label&#x3D;&quot;Información de la cuenta de usuario&quot;&gt;
-        &lt;div class&#x3D;&quot;profile-hero-layout&quot;&gt;
-          &lt;div class&#x3D;&quot;avatar-container&quot;&gt;
+      &lt;!-- Tarjeta Principal de Perfil del Usuario en Bento Card --&gt;
+      &lt;section class&#x3D;&quot;bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm&quot; aria-label&#x3D;&quot;Información de la cuenta de usuario&quot;&gt;
+        &lt;div class&#x3D;&quot;d-flex flex-column flex-sm-row align-items-center gap-4&quot;&gt;
+          &lt;div class&#x3D;&quot;position-relative&quot;&gt;
             &lt;img
               [src]&#x3D;&quot;user.avatarUrl&quot;
               [alt]&#x3D;&quot;&#x27;Fotografía de perfil de &#x27; + (userFullName$ | async)&quot;
-              class&#x3D;&quot;user-avatar-img&quot;
+              width&#x3D;&quot;88&quot;
+              height&#x3D;&quot;88&quot;
+              loading&#x3D;&quot;lazy&quot;
+              class&#x3D;&quot;rounded-circle border border-2 shadow-sm&quot;
             /&gt;
-            &lt;div class&#x3D;&quot;status-indicator online&quot; title&#x3D;&quot;Sesión activa&quot;&gt;&lt;/div&gt;
+            &lt;span class&#x3D;&quot;position-absolute bottom-0 end-0 p-2 bg-success border border-white rounded-circle&quot; title&#x3D;&quot;Sesión activa&quot;&gt;
+              &lt;span class&#x3D;&quot;visually-hidden&quot;&gt;En línea&lt;/span&gt;
+            &lt;/span&gt;
           &lt;/div&gt;
 
-          &lt;div class&#x3D;&quot;user-meta&quot;&gt;
-            &lt;div class&#x3D;&quot;name-role-row&quot;&gt;
-              &lt;h1 class&#x3D;&quot;user-display-name&quot;&gt;{{ userFullName$ | async }}&lt;/h1&gt;
-              &lt;span class&#x3D;&quot;role-pill&quot; [class.admin]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
-                &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;shield-checkmark-outline&#x27; : &#x27;person-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
+          &lt;div class&#x3D;&quot;text-center text-sm-start flex-grow-1&quot;&gt;
+            &lt;div class&#x3D;&quot;d-flex flex-column flex-sm-row align-items-center align-items-sm-baseline gap-2 mb-1&quot;&gt;
+              &lt;h1 class&#x3D;&quot;h4 fw-bold text-dark mb-0&quot;&gt;{{ userFullName$ | async }}&lt;/h1&gt;
+              &lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bg-primary&#x27; : &#x27;bg-secondary&#x27;&quot;&gt;
+                &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;shield-checkmark-outline&#x27; : &#x27;person-outline&#x27;&quot; class&#x3D;&quot;me-1&quot;&gt;&lt;/ion-icon&gt;
                 {{ userRoleLabel$ | async }}
               &lt;/span&gt;
             &lt;/div&gt;
 
-            &lt;p class&#x3D;&quot;user-email-text&quot;&gt;
+            &lt;p class&#x3D;&quot;text-secondary small mb-2 d-inline-flex align-items-center gap-1&quot;&gt;
               &lt;ion-icon name&#x3D;&quot;mail-outline&quot;&gt;&lt;/ion-icon&gt;
-              {{ user.email }}
+              &lt;span&gt;{{ user.email }}&lt;/span&gt;
             &lt;/p&gt;
 
-            &lt;div class&#x3D;&quot;meta-chips&quot;&gt;
-              &lt;span class&#x3D;&quot;meta-chip&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;finger-print-outline&quot;&gt;&lt;/ion-icon&gt; ID: &lt;code&gt;{{ user.id }}&lt;/code&gt;
+            &lt;div class&#x3D;&quot;d-flex flex-wrap gap-2 justify-content-center justify-content-sm-start&quot;&gt;
+              &lt;span class&#x3D;&quot;badge bg-light text-secondary border small fw-normal&quot;&gt;
+                ID: &lt;code&gt;{{ user.id }}&lt;/code&gt;
               &lt;/span&gt;
-              &lt;span class&#x3D;&quot;meta-chip&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;time-outline&quot;&gt;&lt;/ion-icon&gt; Último acceso: {{ user.lastLoginAt | date:&#x27;medium&#x27; }}
+              &lt;span class&#x3D;&quot;badge bg-light text-secondary border small fw-normal&quot;&gt;
+                Último acceso: {{ user.lastLoginAt | date:&#x27;medium&#x27; }}
               &lt;/span&gt;
-              &lt;span class&#x3D;&quot;meta-chip active-state&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;checkmark-circle-outline&quot;&gt;&lt;/ion-icon&gt; Cuenta Activa
+              &lt;span class&#x3D;&quot;badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small fw-normal&quot;&gt;
+                Cuenta Activa
               &lt;/span&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -1173,197 +1178,188 @@ export class ProfilePage {
       &lt;/section&gt;
 
       &lt;!-- Grid con Permisos de Rol y Panel de Accesibilidad --&gt;
-      &lt;div class&#x3D;&quot;profile-layout-grid&quot;&gt;
+      &lt;div class&#x3D;&quot;row g-4&quot;&gt;
         
-        &lt;!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA - RA 4) --&gt;
-        &lt;section class&#x3D;&quot;settings-card&quot; aria-label&#x3D;&quot;Preferencias de accesibilidad y visualización&quot;&gt;
-          &lt;div class&#x3D;&quot;card-header-bar&quot;&gt;
-            &lt;div class&#x3D;&quot;header-icon-title&quot;&gt;
-              &lt;ion-icon name&#x3D;&quot;accessibility-outline&quot; class&#x3D;&quot;section-icon a11y&quot;&gt;&lt;/ion-icon&gt;
+        &lt;!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA) --&gt;
+        &lt;div class&#x3D;&quot;col-12 col-lg-6&quot;&gt;
+          &lt;section class&#x3D;&quot;bento-card p-4 bg-white rounded-3 border shadow-sm h-100&quot; aria-label&#x3D;&quot;Preferencias de accesibilidad y visualización&quot;&gt;
+            &lt;div class&#x3D;&quot;d-flex align-items-center gap-3 mb-4 pb-3 border-bottom&quot;&gt;
+              &lt;div class&#x3D;&quot;rounded-3 p-2 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center&quot; style&#x3D;&quot;width: 42px; height: 42px;&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;accessibility-outline&quot; class&#x3D;&quot;fs-5&quot;&gt;&lt;/ion-icon&gt;
+              &lt;/div&gt;
               &lt;div&gt;
-                &lt;h2&gt;Accesibilidad &amp; Experiencia Universal&lt;/h2&gt;
-                &lt;p&gt;Personaliza la visualización conforme a los estándares WCAG 2.1 AA/AAA&lt;/p&gt;
+                &lt;h2 class&#x3D;&quot;h6 fw-bold text-dark mb-0&quot;&gt;Accesibilidad &amp; Experiencia Universal&lt;/h2&gt;
+                &lt;p class&#x3D;&quot;small text-secondary mb-0&quot;&gt;Personaliza la visualización conforme a WCAG 2.1 AA/AAA&lt;/p&gt;
               &lt;/div&gt;
             &lt;/div&gt;
-          &lt;/div&gt;
 
-          &lt;div class&#x3D;&quot;settings-body&quot; *ngIf&#x3D;&quot;accessibilityPrefs$ | async as prefs&quot;&gt;
-            
-            &lt;!-- 1. Escala de Tipografía --&gt;
-            &lt;div class&#x3D;&quot;setting-item&quot;&gt;
-              &lt;div class&#x3D;&quot;setting-info&quot;&gt;
-                &lt;label class&#x3D;&quot;setting-title&quot;&gt;Tamaño de Tipografía&lt;/label&gt;
-                &lt;p class&#x3D;&quot;setting-desc&quot;&gt;Aumenta el tamaño del texto en toda la interfaz sin desbordamientos visuales.&lt;/p&gt;
-              &lt;/div&gt;
+            &lt;div *ngIf&#x3D;&quot;accessibilityPrefs$ | async as prefs&quot; class&#x3D;&quot;d-flex flex-column gap-4&quot;&gt;
               
-              &lt;div class&#x3D;&quot;font-scale-selector&quot; role&#x3D;&quot;radiogroup&quot; aria-label&#x3D;&quot;Selector de tamaño de texto&quot;&gt;
-                &lt;button
-                  type&#x3D;&quot;button&quot;
-                  class&#x3D;&quot;scale-btn&quot;
-                  [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27;&quot;
-                  (click)&#x3D;&quot;onFontSizeChanged(&#x27;normal&#x27;)&quot;
-                  role&#x3D;&quot;radio&quot;
-                  [attr.aria-checked]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;sample-a&quot;&gt;A&lt;/span&gt;
-                  &lt;span class&#x3D;&quot;scale-label&quot;&gt;Normal (100%)&lt;/span&gt;
-                &lt;/button&gt;
+              &lt;!-- 1. Escala de Tipografía --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;form-label fw-semibold text-dark small mb-1&quot;&gt;Tamaño de Tipografía&lt;/label&gt;
+                &lt;p class&#x3D;&quot;text-secondary small mb-2&quot;&gt;Aumenta el tamaño del texto en toda la interfaz sin desbordamientos.&lt;/p&gt;
+                
+                &lt;div class&#x3D;&quot;btn-group w-100&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Selector de tamaño de texto&quot;&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    class&#x3D;&quot;btn btn-sm&quot;
+                    [ngClass]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-outline-secondary&#x27;&quot;
+                    (click)&#x3D;&quot;onFontSizeChanged(&#x27;normal&#x27;)&quot;&gt;
+                    Normal (100%)
+                  &lt;/button&gt;
 
-                &lt;button
-                  type&#x3D;&quot;button&quot;
-                  class&#x3D;&quot;scale-btn&quot;
-                  [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27;&quot;
-                  (click)&#x3D;&quot;onFontSizeChanged(&#x27;large&#x27;)&quot;
-                  role&#x3D;&quot;radio&quot;
-                  [attr.aria-checked]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;sample-a large&quot;&gt;A&lt;/span&gt;
-                  &lt;span class&#x3D;&quot;scale-label&quot;&gt;Grande (115%)&lt;/span&gt;
-                &lt;/button&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    class&#x3D;&quot;btn btn-sm&quot;
+                    [ngClass]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-outline-secondary&#x27;&quot;
+                    (click)&#x3D;&quot;onFontSizeChanged(&#x27;large&#x27;)&quot;&gt;
+                    Grande (115%)
+                  &lt;/button&gt;
 
-                &lt;button
-                  type&#x3D;&quot;button&quot;
-                  class&#x3D;&quot;scale-btn&quot;
-                  [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27;&quot;
-                  (click)&#x3D;&quot;onFontSizeChanged(&#x27;xl&#x27;)&quot;
-                  role&#x3D;&quot;radio&quot;
-                  [attr.aria-checked]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;sample-a xl&quot;&gt;A&lt;/span&gt;
-                  &lt;span class&#x3D;&quot;scale-label&quot;&gt;Extra Grande (130%)&lt;/span&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    class&#x3D;&quot;btn btn-sm&quot;
+                    [ngClass]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-outline-secondary&#x27;&quot;
+                    (click)&#x3D;&quot;onFontSizeChanged(&#x27;xl&#x27;)&quot;&gt;
+                    Extra (130%)
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- 2. Modo Alto Contraste --&gt;
+              &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center pt-2 border-top&quot;&gt;
+                &lt;div class&#x3D;&quot;pe-3&quot;&gt;
+                  &lt;label for&#x3D;&quot;high-contrast-toggle&quot; class&#x3D;&quot;fw-semibold text-dark small mb-0 d-block&quot;&gt;Modo Alto Contraste (WCAG AAA)&lt;/label&gt;
+                  &lt;span class&#x3D;&quot;text-secondary small&quot;&gt;Fondo negro puro con contraste superior a 7:1.&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;ion-toggle
+                  id&#x3D;&quot;high-contrast-toggle&quot;
+                  [checked]&#x3D;&quot;prefs.highContrast&quot;
+                  (ionChange)&#x3D;&quot;onHighContrastToggled($event.detail.checked)&quot;
+                  color&#x3D;&quot;warning&quot;
+                  aria-label&#x3D;&quot;Activar o desactivar modo de alto contraste WCAG AAA&quot;&gt;
+                &lt;/ion-toggle&gt;
+              &lt;/div&gt;
+
+              &lt;!-- 3. Reducción de Movimiento --&gt;
+              &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center pt-2 border-top&quot;&gt;
+                &lt;div class&#x3D;&quot;pe-3&quot;&gt;
+                  &lt;label for&#x3D;&quot;reduced-motion-toggle&quot; class&#x3D;&quot;fw-semibold text-dark small mb-0 d-block&quot;&gt;Reducción de Movimiento&lt;/label&gt;
+                  &lt;span class&#x3D;&quot;text-secondary small&quot;&gt;Desactiva animaciones complejas y transiciones CSS.&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;ion-toggle
+                  id&#x3D;&quot;reduced-motion-toggle&quot;
+                  [checked]&#x3D;&quot;prefs.reducedMotion&quot;
+                  (ionChange)&#x3D;&quot;onReducedMotionToggled($event.detail.checked)&quot;
+                  color&#x3D;&quot;secondary&quot;
+                  aria-label&#x3D;&quot;Activar o desactivar reducción de movimiento&quot;&gt;
+                &lt;/ion-toggle&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Botón de Restablecer --&gt;
+              &lt;div class&#x3D;&quot;pt-3 border-top&quot;&gt;
+                &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm w-100 d-inline-flex align-items-center justify-content-center gap-2&quot; (click)&#x3D;&quot;resetAccessibilityDefaults()&quot;&gt;
+                  &lt;ion-icon name&#x3D;&quot;refresh-outline&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;span&gt;Restablecer Opciones Predeterminadas&lt;/span&gt;
                 &lt;/button&gt;
               &lt;/div&gt;
-            &lt;/div&gt;
 
-            &lt;!-- 2. Modo Alto Contraste (WCAG AAA) --&gt;
-            &lt;div class&#x3D;&quot;setting-item toggle-row&quot;&gt;
-              &lt;div class&#x3D;&quot;setting-info&quot;&gt;
-                &lt;label for&#x3D;&quot;high-contrast-toggle&quot; class&#x3D;&quot;setting-title&quot;&gt;Modo Alto Contraste (WCAG AAA)&lt;/label&gt;
-                &lt;p class&#x3D;&quot;setting-desc&quot;&gt;
-                  Fondo negro puro (#000000) con ratio de contraste superior a 7:1 para personas con baja visión o fotofobia.
-                &lt;/p&gt;
-              &lt;/div&gt;
-              &lt;ion-toggle
-                id&#x3D;&quot;high-contrast-toggle&quot;
-                [checked]&#x3D;&quot;prefs.highContrast&quot;
-                (ionChange)&#x3D;&quot;onHighContrastToggled($event.detail.checked)&quot;
-                color&#x3D;&quot;warning&quot;
-                aria-label&#x3D;&quot;Activar o desactivar modo de alto contraste WCAG AAA&quot;&gt;
-              &lt;/ion-toggle&gt;
             &lt;/div&gt;
-
-            &lt;!-- 3. Reducción de Movimiento --&gt;
-            &lt;div class&#x3D;&quot;setting-item toggle-row&quot;&gt;
-              &lt;div class&#x3D;&quot;setting-info&quot;&gt;
-                &lt;label for&#x3D;&quot;reduced-motion-toggle&quot; class&#x3D;&quot;setting-title&quot;&gt;Reducción de Movimiento&lt;/label&gt;
-                &lt;p class&#x3D;&quot;setting-desc&quot;&gt;
-                  Desactiva animaciones complejas y transiciones CSS para prevenir mareos y acelerar la renderización.
-                &lt;/p&gt;
-              &lt;/div&gt;
-              &lt;ion-toggle
-                id&#x3D;&quot;reduced-motion-toggle&quot;
-                [checked]&#x3D;&quot;prefs.reducedMotion&quot;
-                (ionChange)&#x3D;&quot;onReducedMotionToggled($event.detail.checked)&quot;
-                color&#x3D;&quot;secondary&quot;
-                aria-label&#x3D;&quot;Activar o desactivar reducción de movimiento&quot;&gt;
-              &lt;/ion-toggle&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Botón de Restablecer Preferencias --&gt;
-            &lt;div class&#x3D;&quot;settings-footer&quot;&gt;
-              &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;reset-btn&quot; (click)&#x3D;&quot;resetAccessibilityDefaults()&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;refresh-outline&quot;&gt;&lt;/ion-icon&gt;
-                Restablecer Opciones Predeterminadas
-              &lt;/button&gt;
-            &lt;/div&gt;
-
-          &lt;/div&gt;
-        &lt;/section&gt;
+          &lt;/section&gt;
+        &lt;/div&gt;
 
         &lt;!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad --&gt;
-        &lt;section class&#x3D;&quot;permissions-card&quot; aria-label&#x3D;&quot;Permisos asignados según el rol del usuario&quot;&gt;
-          &lt;div class&#x3D;&quot;card-header-bar&quot;&gt;
-            &lt;div class&#x3D;&quot;header-icon-title&quot;&gt;
-              &lt;ion-icon name&#x3D;&quot;shield-outline&quot; class&#x3D;&quot;section-icon permissions&quot;&gt;&lt;/ion-icon&gt;
-              &lt;div&gt;
-                &lt;h2&gt;Permisos del Rol (RBAC)&lt;/h2&gt;
-                &lt;p&gt;Capacidades autorizadas para tu perfil en esta sesión&lt;/p&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;permissions-list&quot;&gt;
-            &lt;div class&#x3D;&quot;permission-item&quot; [class.granted]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
-              &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
-              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
-                &lt;strong&gt;Dashboard Analítico Ejecutivo&lt;/strong&gt;
-                &lt;span&gt;Visualización de KPIs, gráficos de evolución y distribución financiera.&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;perm-status-tag&quot; [class.admin-tag]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
-                {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Solo Administrador&#x27; }}
-              &lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;permission-item&quot; [class.granted]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
-              &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
-              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
-                &lt;strong&gt;Generador de Informes Oficiales&lt;/strong&gt;
-                &lt;span&gt;Previsualización tabulada y exportación en PDF corporativo (autoTable).&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;perm-status-tag&quot; [class.admin-tag]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
-                {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Solo Administrador&#x27; }}
-              &lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;permission-item granted&quot;&gt;
-              &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
-              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
-                &lt;strong&gt;Gestión Integral de Registros (CRUD)&lt;/strong&gt;
-                &lt;span&gt;Búsqueda, ordenación, filtrado y alta de registros con SKU asíncrono.&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;perm-status-tag all-tag&quot;&gt;Habilitado&lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;permission-item granted&quot;&gt;
-              &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
-              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
-                &lt;strong&gt;Exportación Rápida a CSV (Excel UTF-8)&lt;/strong&gt;
-                &lt;span&gt;Descarga estructurada del dataset compatible con hojas de cálculo.&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;perm-status-tag all-tag&quot;&gt;Habilitado&lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;permission-item granted&quot;&gt;
-              &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;perm-icon&quot;&gt;&lt;/ion-icon&gt;
-              &lt;div class&#x3D;&quot;perm-text&quot;&gt;
-                &lt;strong&gt;Manual de Usuario &amp; Centro de Ayuda&lt;/strong&gt;
-                &lt;span&gt;Documentación embebida y atajos de teclado sin restricciones.&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;perm-status-tag all-tag&quot;&gt;Habilitado&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Detalles Técnicos de la Sesión --&gt;
-          &lt;div class&#x3D;&quot;session-box&quot;&gt;
-            &lt;h4&gt;&lt;ion-icon name&#x3D;&quot;terminal-outline&quot;&gt;&lt;/ion-icon&gt; Información Técnica de Sesión&lt;/h4&gt;
-            &lt;div class&#x3D;&quot;session-details-grid&quot;&gt;
-              &lt;div&gt;
-                &lt;span class&#x3D;&quot;s-label&quot;&gt;Tipo de Autenticación:&lt;/span&gt;
-                &lt;span class&#x3D;&quot;s-value&quot;&gt;Bearer Token (Simulado JWT)&lt;/span&gt;
+        &lt;div class&#x3D;&quot;col-12 col-lg-6&quot;&gt;
+          &lt;section class&#x3D;&quot;bento-card p-4 bg-white rounded-3 border shadow-sm h-100&quot; aria-label&#x3D;&quot;Permisos asignados según el rol del usuario&quot;&gt;
+            &lt;div class&#x3D;&quot;d-flex align-items-center gap-3 mb-4 pb-3 border-bottom&quot;&gt;
+              &lt;div class&#x3D;&quot;rounded-3 p-2 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center&quot; style&#x3D;&quot;width: 42px; height: 42px;&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;shield-outline&quot; class&#x3D;&quot;fs-5&quot;&gt;&lt;/ion-icon&gt;
               &lt;/div&gt;
               &lt;div&gt;
-                &lt;span class&#x3D;&quot;s-label&quot;&gt;Manejador de Estado:&lt;/span&gt;
-                &lt;span class&#x3D;&quot;s-value&quot;&gt;NgRx Store v22 (Redux Pattern)&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;div&gt;
-                &lt;span class&#x3D;&quot;s-label&quot;&gt;Detección de Cambios:&lt;/span&gt;
-                &lt;span class&#x3D;&quot;s-value&quot;&gt;ChangeDetectionStrategy.OnPush&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;div&gt;
-                &lt;span class&#x3D;&quot;s-label&quot;&gt;Almacenamiento Local:&lt;/span&gt;
-                &lt;span class&#x3D;&quot;s-value&quot;&gt;LocalStorage Cifrado (Tokens + Prefs)&lt;/span&gt;
+                &lt;h2 class&#x3D;&quot;h6 fw-bold text-dark mb-0&quot;&gt;Permisos del Rol (RBAC)&lt;/h2&gt;
+                &lt;p class&#x3D;&quot;small text-secondary mb-0&quot;&gt;Capacidades autorizadas para tu perfil&lt;/p&gt;
               &lt;/div&gt;
             &lt;/div&gt;
-          &lt;/div&gt;
 
-        &lt;/section&gt;
+            &lt;div class&#x3D;&quot;list-group list-group-flush mb-4&quot;&gt;
+              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+                &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
+                  &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;text-success&#x27; : &#x27;text-secondary&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;div&gt;
+                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Dashboard Analítico&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Visualización de métricas y gráficos spline.&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bg-primary&#x27; : &#x27;bg-light text-secondary border&#x27;&quot;&gt;
+                  {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Admin&#x27; }}
+                &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+                &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
+                  &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;text-success&#x27; : &#x27;text-secondary&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;div&gt;
+                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Generador de Informes&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Previsualización y exportación en PDF.&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bg-primary&#x27; : &#x27;bg-light text-secondary border&#x27;&quot;&gt;
+                  {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Admin&#x27; }}
+                &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+                &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
+                  &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;text-success&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;div&gt;
+                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Gestión de Registros (CRUD)&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Búsqueda, ordenación y alta de registros.&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;badge bg-success bg-opacity-10 text-success border border-success border-opacity-25&quot;&gt;Habilitado&lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+                &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
+                  &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;text-success&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;div&gt;
+                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Exportación a CSV (Excel UTF-8)&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Descarga estructurada del dataset.&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;badge bg-success bg-opacity-10 text-success border border-success border-opacity-25&quot;&gt;Habilitado&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Detalles Técnicos de la Sesión --&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-light rounded-3 border&quot;&gt;
+              &lt;h3 class&#x3D;&quot;h6 fw-bold text-dark mb-2 d-flex align-items-center gap-2&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;terminal-outline&quot; class&#x3D;&quot;text-primary&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Detalles Técnicos de Sesión&lt;/span&gt;
+              &lt;/h3&gt;
+              &lt;div class&#x3D;&quot;row g-2 small text-secondary&quot;&gt;
+                &lt;div class&#x3D;&quot;col-6&quot;&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Base de Datos:&lt;/span&gt;
+                  &lt;span&gt;Supabase Cloud PostgreSQL&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-6&quot;&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Manejador Estado:&lt;/span&gt;
+                  &lt;span&gt;NgRx Store v22&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-6&quot;&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Detección Cambios:&lt;/span&gt;
+                  &lt;span&gt;OnPush Reactivo&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-6&quot;&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Diseño:&lt;/span&gt;
+                  &lt;span&gt;Bootstrap 5 Bento Grid&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+          &lt;/section&gt;
+        &lt;/div&gt;
 
       &lt;/div&gt;
     }
@@ -1378,435 +1374,13 @@ export class ProfilePage {
                     <code>./profile.page.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.page-content {
-  --background: #0b1120;
-  color: #f8fafc;
+  --background: #f8fafc;
+  color: #0f172a;
 }
 
-.content-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3.5rem 1rem;
-}
-
-.profile-hero-card {
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 1.75rem 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-
-  .profile-hero-layout {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    flex-wrap: wrap;
-
-    @media (max-width: 650px) {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
-
-  .avatar-container {
-    position: relative;
-    width: 96px;
-    height: 96px;
-    flex-shrink: 0;
-
-    .user-avatar-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #6366f1;
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
-    }
-
-    .status-indicator {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #10b981;
-      border: 3px solid #111827;
-    }
-  }
-
-  .user-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-
-    .name-role-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-
-      @media (max-width: 650px) {
-        justify-content: center;
-      }
-
-      .user-display-name {
-        font-size: 1.75rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        color: #ffffff;
-        margin: 0;
-      }
-    }
-
-    .user-email-text {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #94a3b8;
-      font-size: 0.95rem;
-      margin: 0;
-
-      @media (max-width: 650px) {
-        justify-content: center;
-      }
-
-      ion-icon {
-        color: #38bdf8;
-      }
-    }
-
-    .meta-chips {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-
-      @media (max-width: 650px) {
-        justify-content: center;
-      }
-
-      .meta-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        background: #1e293b;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 0.3rem 0.75rem;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        color: #cbd5e1;
-
-        code {
-          color: #38bdf8;
-          font-family: monospace;
-        }
-
-        &amp;.active-state {
-          color: #34d399;
-          border-color: rgba(16, 185, 129, 0.25);
-          background: rgba(16, 185, 129, 0.1);
-        }
-      }
-    }
-  }
-}
-
-.role-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.35);
-
-  &amp;.admin {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-    border-color: rgba(245, 158, 11, 0.4);
-  }
-}
-
-.profile-layout-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
-
-  @media (max-width: 960px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.settings-card,
-.permissions-card {
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.bento-card {
+  border-color: #e2e8f0 !important;
   border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-.card-header-bar {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-  .header-icon-title {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-
-    .section-icon {
-      font-size: 1.85rem;
-
-      &amp;.a11y { color: #38bdf8; }
-      &amp;.permissions { color: #818cf8; }
-    }
-
-    h2 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0 0 0.2rem 0;
-    }
-
-    p {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      margin: 0;
-    }
-  }
-}
-
-.settings-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.setting-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  &amp;.toggle-row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-    .setting-info {
-      max-width: 78%;
-    }
-  }
-
-  .setting-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #f1f5f9;
-  }
-
-  .setting-desc {
-    font-size: 0.825rem;
-    color: #94a3b8;
-    line-height: 1.45;
-    margin: 0.2rem 0 0 0;
-  }
-}
-
-.font-scale-selector {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.65rem;
-
-  @media (max-width: 500px) {
-    grid-template-columns: 1fr;
-  }
-
-  .scale-btn {
-    background: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 0.75rem 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: #94a3b8;
-
-    &amp;:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #f1f5f9;
-      transform: translateY(-1px);
-    }
-
-    &amp;.active {
-      background: #3b82f6;
-      border-color: #60a5fa;
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
-    }
-
-    .sample-a {
-      font-weight: 800;
-      font-size: 1.1rem;
-
-      &amp;.large { font-size: 1.35rem; }
-      &amp;.xl { font-size: 1.6rem; }
-    }
-
-    .scale-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-  }
-}
-
-.settings-footer {
-  margin-top: 0.5rem;
-
-  .reset-btn {
-    background: none;
-    border: 1px dashed rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    color: #94a3b8;
-    font-size: 0.85rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: all 0.2s;
-
-    &amp;:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: #f1f5f9;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-  }
-}
-
-.permissions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-
-  .permission-item {
-    background: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-
-    .perm-icon {
-      font-size: 1.35rem;
-      color: #64748b;
-      flex-shrink: 0;
-    }
-
-    &amp;.granted {
-      .perm-icon {
-        color: #10b981;
-      }
-    }
-
-    .perm-text {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-
-      strong {
-        font-size: 0.875rem;
-        color: #f1f5f9;
-      }
-
-      span {
-        font-size: 0.775rem;
-        color: #94a3b8;
-      }
-    }
-
-    .perm-status-tag {
-      font-size: 0.725rem;
-      font-weight: 600;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      white-space: nowrap;
-      background: rgba(148, 163, 184, 0.15);
-      color: #94a3b8;
-
-      &amp;.admin-tag {
-        background: rgba(245, 158, 11, 0.15);
-        color: #fbbf24;
-      }
-
-      &amp;.all-tag {
-        background: rgba(16, 185, 129, 0.15);
-        color: #34d399;
-      }
-    }
-  }
-}
-
-.session-box {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  padding: 1rem;
-
-  h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #cbd5e1;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin: 0 0 0.75rem 0;
-
-    ion-icon {
-      color: #38bdf8;
-    }
-  }
-
-  .session-details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.65rem;
-
-    @media (max-width: 550px) {
-      grid-template-columns: 1fr;
-    }
-
-    div {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-
-      .s-label {
-        font-size: 0.725rem;
-        color: #64748b;
-      }
-
-      .s-value {
-        font-size: 0.8rem;
-        color: #e2e8f0;
-        font-family: monospace;
-      }
-    }
-  }
 }
 </code></pre>
     </div>
@@ -1836,7 +1410,7 @@ export class ProfilePage {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Mi Perfil y Preferencias</ion-title>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content" id="profile-content">  <div class="content-container">    @if (currentUser$ | async; as user) {      <!-- Tarjeta Principal de Perfil del Usuario -->      <section class="profile-hero-card" aria-label="Información de la cuenta de usuario">        <div class="profile-hero-layout">          <div class="avatar-container">            <img              [src]="user.avatarUrl"              [alt]="\'Fotografía de perfil de \' + (userFullName$ | async)"              class="user-avatar-img"            />            <div class="status-indicator online" title="Sesión activa"></div>          </div>          <div class="user-meta">            <div class="name-role-row">              <h1 class="user-display-name">{{ userFullName$ | async }}</h1>              <span class="role-pill" [class.admin]="user.role === \'ADMIN\'">                <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'"></ion-icon>                {{ userRoleLabel$ | async }}              </span>            </div>            <p class="user-email-text">              <ion-icon name="mail-outline"></ion-icon>              {{ user.email }}            </p>            <div class="meta-chips">              <span class="meta-chip">                <ion-icon name="finger-print-outline"></ion-icon> ID: <code>{{ user.id }}</code>              </span>              <span class="meta-chip">                <ion-icon name="time-outline"></ion-icon> Último acceso: {{ user.lastLoginAt | date:\'medium\' }}              </span>              <span class="meta-chip active-state">                <ion-icon name="checkmark-circle-outline"></ion-icon> Cuenta Activa              </span>            </div>          </div>        </div>      </section>      <!-- Grid con Permisos de Rol y Panel de Accesibilidad -->      <div class="profile-layout-grid">                <!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA - RA 4) -->        <section class="settings-card" aria-label="Preferencias de accesibilidad y visualización">          <div class="card-header-bar">            <div class="header-icon-title">              <ion-icon name="accessibility-outline" class="section-icon a11y"></ion-icon>              <div>                <h2>Accesibilidad & Experiencia Universal</h2>                <p>Personaliza la visualización conforme a los estándares WCAG 2.1 AA/AAA</p>              </div>            </div>          </div>          <div class="settings-body" *ngIf="accessibilityPrefs$ | async as prefs">                        <!-- 1. Escala de Tipografía -->            <div class="setting-item">              <div class="setting-info">                <label class="setting-title">Tamaño de Tipografía</label>                <p class="setting-desc">Aumenta el tamaño del texto en toda la interfaz sin desbordamientos visuales.</p>              </div>                            <div class="font-scale-selector" role="radiogroup" aria-label="Selector de tamaño de texto">                <button                  type="button"                  class="scale-btn"                  [class.active]="prefs.fontSize === \'normal\'"                  (click)="onFontSizeChanged(\'normal\')"                  role="radio"                  [attr.aria-checked]="prefs.fontSize === \'normal\'">                  <span class="sample-a">A</span>                  <span class="scale-label">Normal (100%)</span>                </button>                <button                  type="button"                  class="scale-btn"                  [class.active]="prefs.fontSize === \'large\'"                  (click)="onFontSizeChanged(\'large\')"                  role="radio"                  [attr.aria-checked]="prefs.fontSize === \'large\'">                  <span class="sample-a large">A</span>                  <span class="scale-label">Grande (115%)</span>                </button>                <button                  type="button"                  class="scale-btn"                  [class.active]="prefs.fontSize === \'xl\'"                  (click)="onFontSizeChanged(\'xl\')"                  role="radio"                  [attr.aria-checked]="prefs.fontSize === \'xl\'">                  <span class="sample-a xl">A</span>                  <span class="scale-label">Extra Grande (130%)</span>                </button>              </div>            </div>            <!-- 2. Modo Alto Contraste (WCAG AAA) -->            <div class="setting-item toggle-row">              <div class="setting-info">                <label for="high-contrast-toggle" class="setting-title">Modo Alto Contraste (WCAG AAA)</label>                <p class="setting-desc">                  Fondo negro puro (#000000) con ratio de contraste superior a 7:1 para personas con baja visión o fotofobia.                </p>              </div>              <ion-toggle                id="high-contrast-toggle"                [checked]="prefs.highContrast"                (ionChange)="onHighContrastToggled($event.detail.checked)"                color="warning"                aria-label="Activar o desactivar modo de alto contraste WCAG AAA">              </ion-toggle>            </div>            <!-- 3. Reducción de Movimiento -->            <div class="setting-item toggle-row">              <div class="setting-info">                <label for="reduced-motion-toggle" class="setting-title">Reducción de Movimiento</label>                <p class="setting-desc">                  Desactiva animaciones complejas y transiciones CSS para prevenir mareos y acelerar la renderización.                </p>              </div>              <ion-toggle                id="reduced-motion-toggle"                [checked]="prefs.reducedMotion"                (ionChange)="onReducedMotionToggled($event.detail.checked)"                color="secondary"                aria-label="Activar o desactivar reducción de movimiento">              </ion-toggle>            </div>            <!-- Botón de Restablecer Preferencias -->            <div class="settings-footer">              <button type="button" class="reset-btn" (click)="resetAccessibilityDefaults()">                <ion-icon name="refresh-outline"></ion-icon>                Restablecer Opciones Predeterminadas              </button>            </div>          </div>        </section>        <!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad -->        <section class="permissions-card" aria-label="Permisos asignados según el rol del usuario">          <div class="card-header-bar">            <div class="header-icon-title">              <ion-icon name="shield-outline" class="section-icon permissions"></ion-icon>              <div>                <h2>Permisos del Rol (RBAC)</h2>                <p>Capacidades autorizadas para tu perfil en esta sesión</p>              </div>            </div>          </div>          <div class="permissions-list">            <div class="permission-item" [class.granted]="user.role === \'ADMIN\'">              <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Dashboard Analítico Ejecutivo</strong>                <span>Visualización de KPIs, gráficos de evolución y distribución financiera.</span>              </div>              <span class="perm-status-tag" [class.admin-tag]="user.role === \'ADMIN\'">                {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Solo Administrador\' }}              </span>            </div>            <div class="permission-item" [class.granted]="user.role === \'ADMIN\'">              <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Generador de Informes Oficiales</strong>                <span>Previsualización tabulada y exportación en PDF corporativo (autoTable).</span>              </div>              <span class="perm-status-tag" [class.admin-tag]="user.role === \'ADMIN\'">                {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Solo Administrador\' }}              </span>            </div>            <div class="permission-item granted">              <ion-icon name="checkmark-circle" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Gestión Integral de Registros (CRUD)</strong>                <span>Búsqueda, ordenación, filtrado y alta de registros con SKU asíncrono.</span>              </div>              <span class="perm-status-tag all-tag">Habilitado</span>            </div>            <div class="permission-item granted">              <ion-icon name="checkmark-circle" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Exportación Rápida a CSV (Excel UTF-8)</strong>                <span>Descarga estructurada del dataset compatible con hojas de cálculo.</span>              </div>              <span class="perm-status-tag all-tag">Habilitado</span>            </div>            <div class="permission-item granted">              <ion-icon name="checkmark-circle" class="perm-icon"></ion-icon>              <div class="perm-text">                <strong>Manual de Usuario & Centro de Ayuda</strong>                <span>Documentación embebida y atajos de teclado sin restricciones.</span>              </div>              <span class="perm-status-tag all-tag">Habilitado</span>            </div>          </div>          <!-- Detalles Técnicos de la Sesión -->          <div class="session-box">            <h4><ion-icon name="terminal-outline"></ion-icon> Información Técnica de Sesión</h4>            <div class="session-details-grid">              <div>                <span class="s-label">Tipo de Autenticación:</span>                <span class="s-value">Bearer Token (Simulado JWT)</span>              </div>              <div>                <span class="s-label">Manejador de Estado:</span>                <span class="s-value">NgRx Store v22 (Redux Pattern)</span>              </div>              <div>                <span class="s-label">Detección de Cambios:</span>                <span class="s-value">ChangeDetectionStrategy.OnPush</span>              </div>              <div>                <span class="s-label">Almacenamiento Local:</span>                <span class="s-value">LocalStorage Cifrado (Tokens + Prefs)</span>              </div>            </div>          </div>        </section>      </div>    }  </div></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Mi Perfil y Preferencias</ion-title>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content" id="profile-content">  <div class="container-fluid px-3 px-lg-4 py-4">    @if (currentUser$ | async; as user) {      <!-- Tarjeta Principal de Perfil del Usuario en Bento Card -->      <section class="bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm" aria-label="Información de la cuenta de usuario">        <div class="d-flex flex-column flex-sm-row align-items-center gap-4">          <div class="position-relative">            <img              [src]="user.avatarUrl"              [alt]="\'Fotografía de perfil de \' + (userFullName$ | async)"              width="88"              height="88"              loading="lazy"              class="rounded-circle border border-2 shadow-sm"            />            <span class="position-absolute bottom-0 end-0 p-2 bg-success border border-white rounded-circle" title="Sesión activa">              <span class="visually-hidden">En línea</span>            </span>          </div>          <div class="text-center text-sm-start flex-grow-1">            <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-baseline gap-2 mb-1">              <h1 class="h4 fw-bold text-dark mb-0">{{ userFullName$ | async }}</h1>              <span class="badge" [ngClass]="user.role === \'ADMIN\' ? \'bg-primary\' : \'bg-secondary\'">                <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'" class="me-1"></ion-icon>                {{ userRoleLabel$ | async }}              </span>            </div>            <p class="text-secondary small mb-2 d-inline-flex align-items-center gap-1">              <ion-icon name="mail-outline"></ion-icon>              <span>{{ user.email }}</span>            </p>            <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-sm-start">              <span class="badge bg-light text-secondary border small fw-normal">                ID: <code>{{ user.id }}</code>              </span>              <span class="badge bg-light text-secondary border small fw-normal">                Último acceso: {{ user.lastLoginAt | date:\'medium\' }}              </span>              <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small fw-normal">                Cuenta Activa              </span>            </div>          </div>        </div>      </section>      <!-- Grid con Permisos de Rol y Panel de Accesibilidad -->      <div class="row g-4">                <!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA) -->        <div class="col-12 col-lg-6">          <section class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100" aria-label="Preferencias de accesibilidad y visualización">            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">              <div class="rounded-3 p-2 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">                <ion-icon name="accessibility-outline" class="fs-5"></ion-icon>              </div>              <div>                <h2 class="h6 fw-bold text-dark mb-0">Accesibilidad & Experiencia Universal</h2>                <p class="small text-secondary mb-0">Personaliza la visualización conforme a WCAG 2.1 AA/AAA</p>              </div>            </div>            <div *ngIf="accessibilityPrefs$ | async as prefs" class="d-flex flex-column gap-4">                            <!-- 1. Escala de Tipografía -->              <div>                <label class="form-label fw-semibold text-dark small mb-1">Tamaño de Tipografía</label>                <p class="text-secondary small mb-2">Aumenta el tamaño del texto en toda la interfaz sin desbordamientos.</p>                                <div class="btn-group w-100" role="group" aria-label="Selector de tamaño de texto">                  <button                    type="button"                    class="btn btn-sm"                    [ngClass]="prefs.fontSize === \'normal\' ? \'btn-primary\' : \'btn-outline-secondary\'"                    (click)="onFontSizeChanged(\'normal\')">                    Normal (100%)                  </button>                  <button                    type="button"                    class="btn btn-sm"                    [ngClass]="prefs.fontSize === \'large\' ? \'btn-primary\' : \'btn-outline-secondary\'"                    (click)="onFontSizeChanged(\'large\')">                    Grande (115%)                  </button>                  <button                    type="button"                    class="btn btn-sm"                    [ngClass]="prefs.fontSize === \'xl\' ? \'btn-primary\' : \'btn-outline-secondary\'"                    (click)="onFontSizeChanged(\'xl\')">                    Extra (130%)                  </button>                </div>              </div>              <!-- 2. Modo Alto Contraste -->              <div class="d-flex justify-content-between align-items-center pt-2 border-top">                <div class="pe-3">                  <label for="high-contrast-toggle" class="fw-semibold text-dark small mb-0 d-block">Modo Alto Contraste (WCAG AAA)</label>                  <span class="text-secondary small">Fondo negro puro con contraste superior a 7:1.</span>                </div>                <ion-toggle                  id="high-contrast-toggle"                  [checked]="prefs.highContrast"                  (ionChange)="onHighContrastToggled($event.detail.checked)"                  color="warning"                  aria-label="Activar o desactivar modo de alto contraste WCAG AAA">                </ion-toggle>              </div>              <!-- 3. Reducción de Movimiento -->              <div class="d-flex justify-content-between align-items-center pt-2 border-top">                <div class="pe-3">                  <label for="reduced-motion-toggle" class="fw-semibold text-dark small mb-0 d-block">Reducción de Movimiento</label>                  <span class="text-secondary small">Desactiva animaciones complejas y transiciones CSS.</span>                </div>                <ion-toggle                  id="reduced-motion-toggle"                  [checked]="prefs.reducedMotion"                  (ionChange)="onReducedMotionToggled($event.detail.checked)"                  color="secondary"                  aria-label="Activar o desactivar reducción de movimiento">                </ion-toggle>              </div>              <!-- Botón de Restablecer -->              <div class="pt-3 border-top">                <button type="button" class="btn btn-outline-secondary btn-sm w-100 d-inline-flex align-items-center justify-content-center gap-2" (click)="resetAccessibilityDefaults()">                  <ion-icon name="refresh-outline"></ion-icon>                  <span>Restablecer Opciones Predeterminadas</span>                </button>              </div>            </div>          </section>        </div>        <!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad -->        <div class="col-12 col-lg-6">          <section class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100" aria-label="Permisos asignados según el rol del usuario">            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">              <div class="rounded-3 p-2 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">                <ion-icon name="shield-outline" class="fs-5"></ion-icon>              </div>              <div>                <h2 class="h6 fw-bold text-dark mb-0">Permisos del Rol (RBAC)</h2>                <p class="small text-secondary mb-0">Capacidades autorizadas para tu perfil</p>              </div>            </div>            <div class="list-group list-group-flush mb-4">              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" [ngClass]="user.role === \'ADMIN\' ? \'text-success\' : \'text-secondary\'"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Dashboard Analítico</strong>                    <span class="small text-secondary">Visualización de métricas y gráficos spline.</span>                  </div>                </div>                <span class="badge" [ngClass]="user.role === \'ADMIN\' ? \'bg-primary\' : \'bg-light text-secondary border\'">                  {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Admin\' }}                </span>              </div>              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" [ngClass]="user.role === \'ADMIN\' ? \'text-success\' : \'text-secondary\'"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Generador de Informes</strong>                    <span class="small text-secondary">Previsualización y exportación en PDF.</span>                  </div>                </div>                <span class="badge" [ngClass]="user.role === \'ADMIN\' ? \'bg-primary\' : \'bg-light text-secondary border\'">                  {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Admin\' }}                </span>              </div>              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon name="checkmark-circle" class="text-success"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Gestión de Registros (CRUD)</strong>                    <span class="small text-secondary">Búsqueda, ordenación y alta de registros.</span>                  </div>                </div>                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">Habilitado</span>              </div>              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon name="checkmark-circle" class="text-success"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Exportación a CSV (Excel UTF-8)</strong>                    <span class="small text-secondary">Descarga estructurada del dataset.</span>                  </div>                </div>                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">Habilitado</span>              </div>            </div>            <!-- Detalles Técnicos de la Sesión -->            <div class="p-3 bg-light rounded-3 border">              <h3 class="h6 fw-bold text-dark mb-2 d-flex align-items-center gap-2">                <ion-icon name="terminal-outline" class="text-primary"></ion-icon>                <span>Detalles Técnicos de Sesión</span>              </h3>              <div class="row g-2 small text-secondary">                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Base de Datos:</span>                  <span>Supabase Cloud PostgreSQL</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Manejador Estado:</span>                  <span>NgRx Store v22</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Detección Cambios:</span>                  <span>OnPush Reactivo</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Diseño:</span>                  <span>Bootstrap 5 Bento Grid</span>                </div>              </div>            </div>          </section>        </div>      </div>    }  </div></ion-content></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
     var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'ProfilePage'};

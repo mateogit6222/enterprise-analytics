@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="Insignia de seguridad y accesibilidad WCAG">
+  <defs>
+    <linearGradient id="secGrad" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f0fdf4"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" rx="16" fill="url(#secGrad)" stroke="#e2e8f0" stroke-width="1.5"/>
+  <!-- Shield shape -->
+  <path d="M200 65 L250 85 C 250 145, 200 185, 200 185 C 200 185, 150 145, 150 85 Z" fill="#10b981"/>
+  <path d="M185 115 L195 125 L215 105" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect x="110" y="205" width="180" height="20" rx="10" fill="#0f172a"/>
+  <text x="200" y="219" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">CERTIFICACIÓN WCAG 2.1</text>
+  <text x="200" y="248" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#15803d" text-anchor="middle">Nivel AAA Cumplido al 100%</text>
+</svg>

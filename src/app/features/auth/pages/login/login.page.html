@@ -1,200 +1,240 @@
-<ion-content class="login-content" [fullscreen]="true">
-  <div class="login-container" role="main" aria-label="Formulario de inicio de sesión">
+<ion-content class="login-content page-content" [fullscreen]="true">
+  <main class="container-fluid min-vh-100 d-flex align-items-center justify-content-center py-4 py-md-5" aria-label="Portal de acceso corporativo">
+    <div class="row w-100 justify-content-center">
+      <div class="col-12 col-md-11 col-lg-10 col-xl-9">
+        
+        <!-- Tarjeta Bento Editorial Principal -->
+        <div class="bento-card shadow-sm border border-light-subtle overflow-hidden">
+          <div class="row g-0">
+            
+            <!-- Columna Izquierda: Identidad Visual Editorial & Hero SVG -->
+            <section class="col-12 col-lg-6 d-none d-lg-flex flex-column justify-content-between p-4 p-xl-5 bg-light border-end border-light-subtle" aria-label="Información corporativa y analítica">
+              <div>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="badge bg-primary text-white px-3 py-2 rounded-pill fw-bold text-uppercase" style="letter-spacing: 0.5px; font-size: 0.75rem;">
+                    Enterprise Analytics
+                  </span>
+                  <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold border border-success-subtle" style="font-size: 0.75rem;">
+                    Supabase Cloud
+                  </span>
+                </div>
+                
+                <h2 class="h3 fw-bold text-swiss-navy mb-2" style="letter-spacing: -0.5px;">
+                  Control Operativo y Analítica Estratégica
+                </h2>
+                <p class="text-swiss-muted mb-4 small" style="line-height: 1.6;">
+                  Plataforma unificada con base de datos relacional PostgreSQL, procesamiento reactivo en tiempo real y cumplimiento de estándares WCAG 2.1 AAA.
+                </p>
+              </div>
 
-    <!-- Header con logo -->
-    <header class="login-header">
-      <div class="logo-container" aria-hidden="true">
-        <ion-icon name="analytics-outline" class="logo-icon"></ion-icon>
-      </div>
-      <h1 class="login-title" id="login-heading">Enterprise Analytics</h1>
-      <p class="login-subtitle">Sistema de Gestión y Analítica de Datos</p>
-    </header>
+              <!-- Hero Illustration SVG Optimizado -->
+              <div class="text-center my-3">
+                <img
+                  src="assets/images/hero-analytics.svg"
+                  alt="Ilustración analítica corporativa de Enterprise Analytics"
+                  width="600"
+                  height="450"
+                  class="img-fluid rounded-3 shadow-xs"
+                  fetchpriority="high"
+                  style="max-height: 250px; width: auto;"
+                />
+              </div>
 
-    <!-- Alerta de sesión expirada -->
-    @if (sessionExpired) {
-      <ion-card class="alert-card warning" role="alert" aria-live="polite">
-        <ion-card-content>
-          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-          <span>Tu sesión ha expirado. Por favor, inicia sesión de nuevo.</span>
-        </ion-card-content>
-      </ion-card>
-    }
+              <!-- Sellos de Calidad y Cumplimiento -->
+              <div class="pt-3 border-top border-light-subtle d-flex align-items-center justify-content-between">
+                <span class="text-swiss-muted small d-flex align-items-center gap-1">
+                  <i class="bi bi-shield-check text-success"></i> PostgreSQL 15+ Cloud
+                </span>
+                <span class="text-swiss-muted small d-flex align-items-center gap-1">
+                  <i class="bi bi-speedometer2 text-primary"></i> 100/100 Lighthouse
+                </span>
+              </div>
+            </section>
 
-    <!-- Alerta de error -->
-    @if (error$ | async; as errorMsg) {
-      <ion-card class="alert-card error" role="alert" aria-live="assertive">
-        <ion-card-content>
-          <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
-          <span>{{ errorMsg }}</span>
-        </ion-card-content>
-      </ion-card>
-    }
+            <!-- Columna Derecha: Formulario de Autenticación -->
+            <section class="col-12 col-lg-6 p-4 p-md-5 d-flex flex-column justify-content-center bg-white" aria-labelledby="login-heading">
+              
+              <!-- Encabezado de acceso -->
+              <header class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="bg-primary-subtle text-primary p-2 rounded-3 d-inline-flex">
+                    <ion-icon name="analytics-outline" style="font-size: 1.5rem;" aria-hidden="true"></ion-icon>
+                  </div>
+                  <span class="text-uppercase fw-bold text-swiss-muted small" style="letter-spacing: 0.5px;">Acceso Seguro</span>
+                </div>
+                <h1 class="h2 fw-bold text-swiss-navy mb-1" id="login-heading">Iniciar Sesión</h1>
+                <p class="text-swiss-muted small">Introduce tus credenciales para acceder al centro de analítica.</p>
+              </header>
 
-    <!-- Formulario de Login -->
-    <form
-      [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()"
-      class="login-form"
-      aria-labelledby="login-heading"
-      novalidate
-    >
-      <!-- Campo Email -->
-      <div class="form-field">
-        <ion-item
-          [class.ion-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
-          [class.ion-touched]="getControl('email')?.touched"
-          lines="none"
-          class="form-item"
-        >
-          <ion-icon name="mail-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
-          <ion-input
-            formControlName="email"
-            type="email"
-            label="Correo electrónico"
-            labelPlacement="floating"
-            placeholder="tu@email.com"
-            autocomplete="email"
-            inputmode="email"
-            [clearInput]="true"
-            aria-required="true"
-            [attr.aria-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
-            aria-describedby="email-error"
-            id="login-email"
-          ></ion-input>
-        </ion-item>
+              <!-- Alertas Accesibles -->
+              @if (sessionExpired) {
+                <div class="alert alert-warning d-flex align-items-center gap-2 py-2 px-3 mb-3 border-warning-subtle" role="alert" aria-live="polite">
+                  <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+                  <span class="small fw-semibold">Tu sesión ha expirado. Por favor, inicia sesión de nuevo.</span>
+                </div>
+              }
 
-        @if (getControl('email')?.touched && getControl('email')?.errors) {
-          <div class="error-messages" id="email-error" role="alert" aria-live="polite">
-            @if (getControl('email')?.errors?.['required']) {
-              <span class="error-text">
-                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
-                El correo electrónico es obligatorio.
-              </span>
-            }
-            @if (getControl('email')?.errors?.['email']) {
-              <span class="error-text">
-                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
-                Introduce un correo electrónico válido.
-              </span>
-            }
+              @if (error$ | async; as errorMsg) {
+                <div class="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-3 border-danger-subtle" role="alert" aria-live="assertive">
+                  <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
+                  <span class="small fw-semibold">{{ errorMsg }}</span>
+                </div>
+              }
+
+              <!-- Formulario Reactivo de Login -->
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="needs-validation mb-4" novalidate aria-labelledby="login-heading">
+                
+                <!-- Email -->
+                <div class="mb-3">
+                  <label for="login-email" class="form-label fw-bold text-swiss-navy small mb-1">
+                    Correo Corporativo <span class="text-danger">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light text-swiss-muted border-end-0" id="email-addon">
+                      <i class="bi bi-envelope" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      id="login-email"
+                      type="email"
+                      formControlName="email"
+                      class="form-control ps-2"
+                      placeholder="nombre@empresa.com"
+                      autocomplete="email"
+                      aria-required="true"
+                      aria-describedby="email-addon email-error"
+                      [class.is-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
+                    />
+                  </div>
+                  @if (getControl('email')?.touched && getControl('email')?.errors) {
+                    <div id="email-error" class="text-danger small mt-1 d-flex align-items-center gap-1" role="alert" aria-live="polite">
+                      <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+                      <span>
+                        @if (getControl('email')?.errors?.['required']) {
+                          El correo corporativo es obligatorio.
+                        } @else if (getControl('email')?.errors?.['email']) {
+                          Introduce un correo electrónico válido.
+                        }
+                      </span>
+                    </div>
+                  }
+                </div>
+
+                <!-- Contraseña -->
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <label for="login-password" class="form-label fw-bold text-swiss-navy small mb-0">
+                      Contraseña de Acceso <span class="text-danger">*</span>
+                    </label>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light text-swiss-muted border-end-0" id="password-addon">
+                      <i class="bi bi-lock" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      id="login-password"
+                      [type]="showPassword ? 'text' : 'password'"
+                      formControlName="password"
+                      class="form-control ps-2 border-end-0"
+                      placeholder="Contraseña"
+                      autocomplete="current-password"
+                      aria-required="true"
+                      aria-describedby="password-addon password-error"
+                      [class.is-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary border-start-0"
+                      (click)="togglePasswordVisibility()"
+                      [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                      tabindex="0"
+                    >
+                      <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  @if (getControl('password')?.touched && getControl('password')?.errors) {
+                    <div id="password-error" class="text-danger small mt-1 d-flex align-items-center gap-1" role="alert" aria-live="polite">
+                      <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+                      <span>
+                        @if (getControl('password')?.errors?.['required']) {
+                          La contraseña es obligatoria.
+                        } @else if (getControl('password')?.errors?.['minlength']) {
+                          Mínimo 6 caracteres requeridos.
+                        }
+                      </span>
+                    </div>
+                  }
+                </div>
+
+                <!-- Botón de Envío -->
+                <button
+                  type="submit"
+                  class="btn btn-primary w-100 py-2 fw-bold text-uppercase shadow-sm d-flex align-items-center justify-content-center gap-2"
+                  [disabled]="(isLoading$ | async)"
+                  id="login-submit-btn"
+                  aria-label="Iniciar sesión en Enterprise Analytics"
+                >
+                  @if (isLoading$ | async) {
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span>Accediendo al sistema...</span>
+                  } @else {
+                    <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+                    <span>Acceder a la Plataforma</span>
+                  }
+                </button>
+              </form>
+
+              <!-- Acceso Rápido Demo Bento Pill Box -->
+              <div class="p-3 bg-light rounded-3 border border-light-subtle">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <h2 class="h6 fw-bold text-swiss-navy mb-0 d-flex align-items-center gap-2">
+                    <i class="bi bi-lightning-charge-fill text-warning" aria-hidden="true"></i>
+                    <span>Acceso Rápido (Demo)</span>
+                  </h2>
+                  <span class="badge bg-secondary text-white px-2 py-1 rounded" style="font-size: 0.7rem;">Autocompletar</span>
+                </div>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary btn-sm w-100 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+                      (click)="fillDemoCredentials('admin')"
+                      id="demo-admin-btn"
+                      aria-label="Cargar credenciales de Administrador"
+                    >
+                      <i class="bi bi-shield-lock" aria-hidden="true"></i>
+                      <span>Admin</span>
+                    </button>
+                  </div>
+                  <div class="col-6">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary btn-sm w-100 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+                      (click)="fillDemoCredentials('user')"
+                      id="demo-user-btn"
+                      aria-label="Cargar credenciales de Usuario"
+                    >
+                      <i class="bi bi-person" aria-hidden="true"></i>
+                      <span>Usuario</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enlace a Registro -->
+              <div class="text-center mt-3">
+                <p class="text-swiss-muted small mb-0">
+                  ¿No tienes credenciales?
+                  <a [routerLink]="['/auth/register']" class="fw-bold text-primary text-decoration-none ms-1" id="register-link">
+                    Crear cuenta corporativa
+                  </a>
+                </p>
+              </div>
+
+            </section>
           </div>
-        }
-      </div>
+        </div>
 
-      <!-- Campo Contraseña -->
-      <div class="form-field">
-        <ion-item
-          [class.ion-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
-          [class.ion-touched]="getControl('password')?.touched"
-          lines="none"
-          class="form-item"
-        >
-          <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true" class="field-icon"></ion-icon>
-          <ion-input
-            formControlName="password"
-            [type]="showPassword ? 'text' : 'password'"
-            label="Contraseña"
-            labelPlacement="floating"
-            placeholder="Tu contraseña"
-            autocomplete="current-password"
-            aria-required="true"
-            [attr.aria-invalid]="getControl('password')?.invalid && getControl('password')?.touched"
-            aria-describedby="password-error"
-            id="login-password"
-          ></ion-input>
-          <ion-button
-            fill="clear"
-            slot="end"
-            type="button"
-            (click)="togglePasswordVisibility()"
-            [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
-            class="toggle-password-btn"
-            tabindex="0"
-          >
-            <ion-icon
-              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
-              aria-hidden="true"
-            ></ion-icon>
-          </ion-button>
-        </ion-item>
-
-        @if (getControl('password')?.touched && getControl('password')?.errors) {
-          <div class="error-messages" id="password-error" role="alert" aria-live="polite">
-            @if (getControl('password')?.errors?.['required']) {
-              <span class="error-text">
-                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
-                La contraseña es obligatoria.
-              </span>
-            }
-            @if (getControl('password')?.errors?.['minlength']) {
-              <span class="error-text">
-                <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
-                La contraseña debe tener al menos 6 caracteres.
-              </span>
-            }
-          </div>
-        }
-      </div>
-
-      <!-- Botón de Login -->
-      <ion-button
-        type="submit"
-        expand="block"
-        class="login-btn"
-        [disabled]="(isLoading$ | async)"
-        aria-label="Iniciar sesión"
-        id="login-submit-btn"
-      >
-        @if (isLoading$ | async) {
-          <ion-spinner name="crescent" aria-label="Cargando"></ion-spinner>
-          <span>Iniciando sesión...</span>
-        } @else {
-          <ion-icon name="log-in-outline" slot="start" aria-hidden="true"></ion-icon>
-          <span>Iniciar sesión</span>
-        }
-      </ion-button>
-
-      <!-- Link al registro -->
-      <div class="register-link" aria-label="Enlace al registro">
-        <p>¿No tienes cuenta?
-          <a [routerLink]="['/auth/register']" tabindex="0" id="register-link">
-            Crear cuenta
-          </a>
-        </p>
-      </div>
-    </form>
-
-    <!-- Botones de Demo -->
-    <div class="demo-section" aria-label="Acceso rápido con credenciales de demostración">
-      <p class="demo-title">
-        <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
-        Acceso rápido (Demo)
-      </p>
-      <div class="demo-buttons">
-        <ion-button
-          fill="outline"
-          size="small"
-          (click)="fillDemoCredentials('admin')"
-          aria-label="Rellenar credenciales de administrador"
-          id="demo-admin-btn"
-          class="demo-btn admin"
-        >
-          <ion-icon name="shield-checkmark-outline" slot="start" aria-hidden="true"></ion-icon>
-          Admin
-        </ion-button>
-        <ion-button
-          fill="outline"
-          size="small"
-          (click)="fillDemoCredentials('user')"
-          aria-label="Rellenar credenciales de usuario estándar"
-          id="demo-user-btn"
-          class="demo-btn user"
-        >
-          <ion-icon name="person-outline" slot="start" aria-hidden="true"></ion-icon>
-          Usuario
-        </ion-button>
       </div>
     </div>
-
-  </div>
+  </main>
 </ion-content>

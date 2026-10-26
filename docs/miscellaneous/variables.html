@@ -191,6 +191,12 @@
                             <a href="#exportRecordsSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>exportRecordsSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
                         </li>
                         <li>
+                            <a href="#FALLBACK_SQL_RECORDS" title="src/app/core/models/mock-datasets.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>FALLBACK_SQL_RECORDS</b>&nbsp;&nbsp;&nbsp;(src/.../mock-datasets.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#FALLBACK_USERS" title="src/app/core/models/mock-datasets.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>FALLBACK_USERS</b>&nbsp;&nbsp;&nbsp;(src/.../mock-datasets.ts)</span></a>
+                        </li>
+                        <li>
                             <a href="#initialAuthState" title="src/app/state/auth/auth.reducer.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>initialAuthState</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</span></a>
                         </li>
                         <li>
@@ -1424,7 +1430,9 @@ Gestiona el estado inmutable de registros, KPIs, filtros y operaciones CRUD.</p>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-  production: true
+  production: true,
+  supabaseUrl: &#x27;&#x27;,
+  supabaseAnonKey: &#x27;&#x27;
 }</code>
                     </td>
                 </tr>
@@ -1455,7 +1463,9 @@ Gestiona el estado inmutable de registros, KPIs, filtros y operaciones CRUD.</p>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-  production: false
+  production: false,
+  supabaseUrl: &#x27;&#x27;,
+  supabaseAnonKey: &#x27;&#x27;
 }</code>
                     </td>
                 </tr>
@@ -1561,6 +1571,431 @@ de manejo según el código de estado:</p>
 <li><strong>403 Forbidden</strong>: Redirige a la página principal del usuario.</li>
 <li><strong>500+ Server Error</strong>: Logea el error para debugging.</li>
 </ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/models/mock-datasets.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FALLBACK_SQL_RECORDS"></a>
+                    <span class="name">
+                        <span ><b>FALLBACK_SQL_RECORDS</b></span>
+                        <a href="#FALLBACK_SQL_RECORDS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Record.html" target="_self" >Record[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    id: &quot;rec-001&quot;,
+    title: &quot;Auditoría Financiera Corporativa Q3&quot;,
+    description: &quot;Revisión exhaustiva de estados financieros y cumplimiento normativo del tercer trimestre fiscal.&quot;,
+    category: RecordCategory.FINANCE,
+    status: RecordStatus.COMPLETED,
+    amount: 45000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Banco Santander&quot;,
+    clientEmail: &quot;finanzas@santander.es&quot;,
+    sku: &quot;FIN-AUD-001&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;auditoría&quot;, &quot;finanzas&quot;, &quot;Q3&quot;],
+    createdAt: &quot;2026-07-15T09:00:00.000Z&quot;,
+    updatedAt: &quot;2026-09-28T14:30:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-002&quot;,
+    title: &quot;Campaña Lanzamiento Cloud Enterprise&quot;,
+    description: &quot;Estrategia integral de marketing digital para el lanzamiento de la plataforma cloud corporativa.&quot;,
+    category: RecordCategory.MARKETING,
+    status: RecordStatus.ACTIVE,
+    amount: 82500,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Telefónica Tech&quot;,
+    clientEmail: &quot;cloud@telefonica.com&quot;,
+    sku: &quot;MKT-CLD-002&quot;,
+    region: &quot;Barcelona&quot;,
+    tags: [&quot;cloud&quot;, &quot;marketing&quot;, &quot;lanzamiento&quot;],
+    createdAt: &quot;2026-08-01T10:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-10T11:45:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-003&quot;,
+    title: &quot;Optimización de Rutas Logísticas&quot;,
+    description: &quot;Rediseño algorítmico de rutas de distribución para reducir costes operativos un 18%.&quot;,
+    category: RecordCategory.OPERATIONS,
+    status: RecordStatus.PENDING,
+    amount: 29000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;SEUR Internacional&quot;,
+    clientEmail: &quot;ops@seur.com&quot;,
+    sku: &quot;OPS-LOG-003&quot;,
+    region: &quot;Valencia&quot;,
+    tags: [&quot;logística&quot;, &quot;optimización&quot;, &quot;rutas&quot;],
+    createdAt: &quot;2026-09-05T08:30:00.000Z&quot;,
+    updatedAt: &quot;2026-10-12T16:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-004&quot;,
+    title: &quot;Renovación Licencias Enterprise SAP&quot;,
+    description: &quot;Negociación y renovación de contratos de licencias SAP S/4HANA para el grupo corporativo.&quot;,
+    category: RecordCategory.SALES,
+    status: RecordStatus.ACTIVE,
+    amount: 142000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Inditex Global&quot;,
+    clientEmail: &quot;tech@inditex.com&quot;,
+    sku: &quot;SAL-LIC-004&quot;,
+    region: &quot;Galicia&quot;,
+    tags: [&quot;SAP&quot;, &quot;licencias&quot;, &quot;enterprise&quot;],
+    createdAt: &quot;2026-06-20T11:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-05T09:15:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-005&quot;,
+    title: &quot;Consultoría Big Data e IA Antifraude&quot;,
+    description: &quot;Diseño e implementación de pipeline de datos con modelos predictivos ML para detección de fraude.&quot;,
+    category: RecordCategory.FINANCE,
+    status: RecordStatus.ACTIVE,
+    amount: 67000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;BBVA Seguros&quot;,
+    clientEmail: &quot;innovacion@bbva.es&quot;,
+    sku: &quot;FIN-DAT-005&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;big-data&quot;, &quot;IA&quot;, &quot;fraude&quot;],
+    createdAt: &quot;2026-07-28T15:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-14T10:20:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-006&quot;,
+    title: &quot;Reestructuración y Onboarding Talento Tech&quot;,
+    description: &quot;Plan estratégico de atracción y acogida de perfiles sénior en ingeniería de software.&quot;,
+    category: RecordCategory.HR,
+    status: RecordStatus.COMPLETED,
+    amount: 18500,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Cabify España&quot;,
+    clientEmail: &quot;talent@cabify.com&quot;,
+    sku: &quot;HR-ONB-006&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;talento&quot;, &quot;RRHH&quot;, &quot;onboarding&quot;],
+    createdAt: &quot;2026-05-10T09:30:00.000Z&quot;,
+    updatedAt: &quot;2026-08-15T12:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-007&quot;,
+    title: &quot;Migración Arquitectura Microservicios AWS&quot;,
+    description: &quot;Modernización de monolito a arquitectura basada en contenedores ECS y Kubernetes.&quot;,
+    category: RecordCategory.OPERATIONS,
+    status: RecordStatus.ACTIVE,
+    amount: 115000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;Repsol Digital&quot;,
+    clientEmail: &quot;cloud@repsol.com&quot;,
+    sku: &quot;OPS-MIG-007&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;AWS&quot;, &quot;microservicios&quot;, &quot;kubernetes&quot;],
+    createdAt: &quot;2026-08-12T08:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-16T17:30:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-008&quot;,
+    title: &quot;Auditoría Ciberseguridad Pentesting ISO 27001&quot;,
+    description: &quot;Análisis de vulnerabilidades y pruebas de intrusión en infraestructura crítica.&quot;,
+    category: RecordCategory.FINANCE,
+    status: RecordStatus.COMPLETED,
+    amount: 54000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Iberdrola España&quot;,
+    clientEmail: &quot;security@iberdrola.es&quot;,
+    sku: &quot;FIN-SEC-008&quot;,
+    region: &quot;Bilbao&quot;,
+    tags: [&quot;ciberseguridad&quot;, &quot;pentesting&quot;, &quot;ISO27001&quot;],
+    createdAt: &quot;2026-06-01T10:30:00.000Z&quot;,
+    updatedAt: &quot;2026-09-10T14:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-009&quot;,
+    title: &quot;Estrategia SEO y Performance Internacional&quot;,
+    description: &quot;Posicionamiento orgánico y aceleración Core Web Vitals en 12 mercados europeos.&quot;,
+    category: RecordCategory.MARKETING,
+    status: RecordStatus.PENDING,
+    amount: 38000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;Mango Fashion&quot;,
+    clientEmail: &quot;growth@mango.com&quot;,
+    sku: &quot;MKT-SEO-009&quot;,
+    region: &quot;Barcelona&quot;,
+    tags: [&quot;SEO&quot;, &quot;performance&quot;, &quot;internacional&quot;],
+    createdAt: &quot;2026-09-18T13:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-15T11:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-010&quot;,
+    title: &quot;Plataforma B2B E-commerce Mayorista&quot;,
+    description: &quot;Desarrollo de portal de compras transaccional de alta concurrencia para distribuidores.&quot;,
+    category: RecordCategory.SALES,
+    status: RecordStatus.ACTIVE,
+    amount: 96000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Mercadona Proveedores&quot;,
+    clientEmail: &quot;b2b@mercadona.es&quot;,
+    sku: &quot;SAL-B2B-010&quot;,
+    region: &quot;Valencia&quot;,
+    tags: [&quot;ecommerce&quot;, &quot;B2B&quot;, &quot;ventas&quot;],
+    createdAt: &quot;2026-07-05T12:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-11T16:45:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-011&quot;,
+    title: &quot;Programa de Upskilling en Inteligencia Artificial&quot;,
+    description: &quot;Capacitación ejecutiva y técnica en herramientas de IA Generativa para 200 empleados.&quot;,
+    category: RecordCategory.HR,
+    status: RecordStatus.ACTIVE,
+    amount: 27500,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;Ferrovial Tech&quot;,
+    clientEmail: &quot;learning@ferrovial.com&quot;,
+    sku: &quot;HR-TRA-011&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;formación&quot;, &quot;IA&quot;, &quot;upskilling&quot;],
+    createdAt: &quot;2026-08-20T09:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-13T10:15:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-012&quot;,
+    title: &quot;Automatización de Facturación con RPA UiPath&quot;,
+    description: &quot;Implementación de bots software para conciliación bancaria y facturas de proveedores.&quot;,
+    category: RecordCategory.OPERATIONS,
+    status: RecordStatus.COMPLETED,
+    amount: 62000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Naturgy Energía&quot;,
+    clientEmail: &quot;rpa@naturgy.com&quot;,
+    sku: &quot;OPS-RPA-012&quot;,
+    region: &quot;Barcelona&quot;,
+    tags: [&quot;RPA&quot;, &quot;UiPath&quot;, &quot;automatización&quot;],
+    createdAt: &quot;2026-05-25T11:30:00.000Z&quot;,
+    updatedAt: &quot;2026-09-30T15:20:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-013&quot;,
+    title: &quot;Acuerdo de Distribución Sector Hospitalario&quot;,
+    description: &quot;Contrato marco de distribución de suministros tecnológicos en 14 complejos sanitarios.&quot;,
+    category: RecordCategory.SALES,
+    status: RecordStatus.ACTIVE,
+    amount: 178000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Quirónsalud&quot;,
+    clientEmail: &quot;compras@quironsalud.es&quot;,
+    sku: &quot;SAL-DIS-013&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;salud&quot;, &quot;distribución&quot;, &quot;contrato&quot;],
+    createdAt: &quot;2026-06-15T08:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-08T18:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-014&quot;,
+    title: &quot;Rediseño de Identidad y Branding Global&quot;,
+    description: &quot;Renovación de sistema visual, tipografía y manual de marca multicanal.&quot;,
+    category: RecordCategory.MARKETING,
+    status: RecordStatus.ARCHIVED,
+    amount: 32000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;Acciona Energía&quot;,
+    clientEmail: &quot;marca@acciona.com&quot;,
+    sku: &quot;MKT-BRD-014&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;branding&quot;, &quot;identidad&quot;, &quot;diseño&quot;],
+    createdAt: &quot;2026-04-20T08:30:00.000Z&quot;,
+    updatedAt: &quot;2026-08-30T15:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-015&quot;,
+    title: &quot;Plataforma Compliance GDPR y Privacidad&quot;,
+    description: &quot;Sistema automatizado de gestión de consentimientos y derechos ARCO bajo RGPD.&quot;,
+    category: RecordCategory.FINANCE,
+    status: RecordStatus.ACTIVE,
+    amount: 39000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;Endesa Energía&quot;,
+    clientEmail: &quot;legal@endesa.es&quot;,
+    sku: &quot;FIN-GDP-015&quot;,
+    region: &quot;Sevilla&quot;,
+    tags: [&quot;GDPR&quot;, &quot;compliance&quot;, &quot;privacidad&quot;],
+    createdAt: &quot;2026-08-05T10:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-16T12:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-016&quot;,
+    title: &quot;Transformación Digital Retail Omnicanal&quot;,
+    description: &quot;Proyecto omnicanal integrando POS, e-commerce y app móvil con experiencia unificada.&quot;,
+    category: RecordCategory.SALES,
+    status: RecordStatus.PENDING,
+    amount: 125000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;El Corte Inglés&quot;,
+    clientEmail: &quot;digital@elcorteingles.es&quot;,
+    sku: &quot;SAL-RET-016&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;retail&quot;, &quot;omnicanal&quot;, &quot;UX&quot;],
+    createdAt: &quot;2026-08-15T11:00:00.000Z&quot;,
+    updatedAt: &quot;2026-10-17T09:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-017&quot;,
+    title: &quot;Sistema de Retención y Beneficios Flexibles&quot;,
+    description: &quot;Plataforma de compensación total con seguro médico, guardería y retribución flexible.&quot;,
+    category: RecordCategory.HR,
+    status: RecordStatus.COMPLETED,
+    amount: 24000,
+    assignedTo: &quot;usr-user-001&quot;,
+    clientName: &quot;Glovo España&quot;,
+    clientEmail: &quot;people@glovo.com&quot;,
+    sku: &quot;HR-BEN-017&quot;,
+    region: &quot;Barcelona&quot;,
+    tags: [&quot;beneficios&quot;, &quot;retención&quot;, &quot;compensación&quot;],
+    createdAt: &quot;2026-06-10T09:00:00.000Z&quot;,
+    updatedAt: &quot;2026-09-20T17:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  },
+  {
+    id: &quot;rec-018&quot;,
+    title: &quot;Centro de Operaciones de Ciberseguridad (SOC)&quot;,
+    description: &quot;Despliegue de SOC 24/7 con plataforma SIEM y monitorización de alertas en tiempo real.&quot;,
+    category: RecordCategory.OPERATIONS,
+    status: RecordStatus.ACTIVE,
+    amount: 88000,
+    assignedTo: &quot;usr-admin-001&quot;,
+    clientName: &quot;Aena Aeropuertos&quot;,
+    clientEmail: &quot;soc@aena.es&quot;,
+    sku: &quot;OPS-SOC-018&quot;,
+    region: &quot;Madrid&quot;,
+    tags: [&quot;ciberseguridad&quot;, &quot;SOC&quot;, &quot;SIEM&quot;],
+    createdAt: &quot;2026-07-20T07:30:00.000Z&quot;,
+    updatedAt: &quot;2026-10-18T06:00:00.000Z&quot;,
+    source: &quot;SUPABASE&quot;
+  }
+]</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dataset corporativo en memoria para fallback inteligente (Zero-Downtime).
+Garantiza que la plataforma funcione al 100% tanto en local como en Vercel
+sin requerir conexión externa obligatoria a Supabase.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FALLBACK_USERS"></a>
+                    <span class="name">
+                        <span ><b>FALLBACK_USERS</b></span>
+                        <a href="#FALLBACK_USERS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MockUserData[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    id: &quot;usr-admin-001&quot;,
+    email: &quot;admin@enterprise.com&quot;,
+    password: &quot;Admin2026!&quot;,
+    firstName: &quot;Elena&quot;,
+    lastName: &quot;Martínez&quot;,
+    role: UserRole.ADMIN,
+    avatarUrl: &quot;https://api.dicebear.com/9.x/initials/svg?seed&#x3D;EM&amp;backgroundColor&#x3D;6366f1&quot;,
+    isActive: true,
+    createdAt: &quot;2025-01-15T08:30:00.000Z&quot;,
+    lastLoginAt: &quot;2026-10-17T09:15:00.000Z&quot;
+  },
+  {
+    id: &quot;usr-user-001&quot;,
+    email: &quot;user@enterprise.com&quot;,
+    password: &quot;User2026!&quot;,
+    firstName: &quot;Carlos&quot;,
+    lastName: &quot;López&quot;,
+    role: UserRole.USER,
+    avatarUrl: &quot;https://api.dicebear.com/9.x/initials/svg?seed&#x3D;CL&amp;backgroundColor&#x3D;06b6d4&quot;,
+    isActive: true,
+    createdAt: &quot;2025-03-22T14:00:00.000Z&quot;,
+    lastLoginAt: &quot;2026-10-16T17:45:00.000Z&quot;
+  },
+  {
+    id: &quot;usr-user-002&quot;,
+    email: &quot;javier.ruiz@enterprise.com&quot;,
+    password: &quot;Javier2026!&quot;,
+    firstName: &quot;Javier&quot;,
+    lastName: &quot;Ruiz&quot;,
+    role: UserRole.USER,
+    avatarUrl: &quot;https://api.dicebear.com/9.x/initials/svg?seed&#x3D;JR&amp;backgroundColor&#x3D;10b981&quot;,
+    isActive: true,
+    createdAt: &quot;2025-06-10T11:20:00.000Z&quot;,
+    lastLoginAt: &quot;2026-10-15T08:30:00.000Z&quot;
+  },
+  {
+    id: &quot;usr-admin-002&quot;,
+    email: &quot;maria.garcia@enterprise.com&quot;,
+    password: &quot;Maria2026!&quot;,
+    firstName: &quot;María&quot;,
+    lastName: &quot;García&quot;,
+    role: UserRole.ADMIN,
+    avatarUrl: &quot;https://api.dicebear.com/9.x/initials/svg?seed&#x3D;MG&amp;backgroundColor&#x3D;f43f5e&quot;,
+    isActive: true,
+    createdAt: &quot;2025-02-28T09:45:00.000Z&quot;,
+    lastLoginAt: &quot;2026-10-17T07:00:00.000Z&quot;
+  }
+]</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dataset en memoria de usuarios para autenticación instantánea.</p>
 </div>
                 </td>
             </tr>

@@ -154,10 +154,8 @@
             <p class="comment">
                 <p>DataEffects
 Efectos de NgRx para la gestión asíncrona de datos empresariales.</p>
-<p>Implementa de forma obligatoria RxJS <code>forkJoin</code> para orquestar la carga concurrente
-de la API REST (PostgreSQL) y el simulador de Firestore (NoSQL), cumpliendo los
-criterios de nivel Sobresaliente de la rúbrica (RA 5).
-Además gestiona las operaciones asíncronas de CRUD y la generación de informes (PDF/CSV).</p>
+<p>Implementa consumo asíncrono unificado mediante Supabase (PostgreSQL Cloud) y API REST,
+con modo híbrido zero-downtime, operaciones CRUD reactivas y generación de informes (PDF/CSV).</p>
 
             </p>
 
@@ -206,12 +204,6 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#exportService" >exportService</a>
-                            </li>
-                            <li>
-                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#firestoreMock" >firestoreMock</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
@@ -286,8 +278,8 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/state/data/data.effects.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/state/data/data.effects.ts:152</a></div>
                         </td>
                     </tr>
 
@@ -368,7 +360,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/state/data/data.effects.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/state/data/data.effects.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -401,7 +393,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/state/data/data.effects.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/state/data/data.effects.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -448,7 +440,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/state/data/data.effects.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/state/data/data.effects.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -501,7 +493,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/state/data/data.effects.ts:113</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/state/data/data.effects.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -561,7 +553,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/state/data/data.effects.ts:134</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/state/data/data.effects.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -600,40 +592,7 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/state/data/data.effects.ts:30</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="firestoreMock"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Readonly</span>
-                        <span ><b>firestoreMock</b></span>
-                        <a href="#firestoreMock"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(FirestoreMockService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/state/data/data.effects.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/state/data/data.effects.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -663,22 +622,19 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
     this.actions$.pipe(
       ofType(DataActions.loadAllData),
       switchMap(() &#x3D;&gt;
-        forkJoin({
-          sqlRecords: this.apiRest.getRecords().pipe(take(1)),
-          nosqlRecords: this.firestoreMock.getRecordsSnapshot().pipe(take(1))
-        }).pipe(
-          map(({ sqlRecords, nosqlRecords }) &#x3D;&gt; {
-            const combinedRecords: Record[] &#x3D; [...sqlRecords, ...nosqlRecords];
-            const kpis &#x3D; this.calculateInitialKpis(combinedRecords);
+        this.apiRest.getRecords().pipe(
+          take(1),
+          map((records) &#x3D;&gt; {
+            const kpis &#x3D; this.calculateInitialKpis(records);
             return DataActions.loadAllDataSuccess({
-              records: combinedRecords,
+              records,
               kpis
             });
           }),
           catchError((error: any) &#x3D;&gt;
             of(
               DataActions.loadAllDataFailure({
-                error: error?.message || &#x27;Error al orquestar la carga concurrente con forkJoin&#x27;
+                error: error?.message || &#x27;Error al cargar los registros desde Supabase&#x27;
               })
             )
           )
@@ -690,17 +646,14 @@ Además gestiona las operaciones asíncronas de CRUD y la generación de informe
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/state/data/data.effects.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/state/data/data.effects.ts:33</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Carga concurrente dual de datos usando RxJS forkJoin (RA 5 - Criterio Sobresaliente).
-Orquesta la obtención en paralelo de registros de la API REST (SQL) y la colección
-de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.
-Se añade take(1) explícito a ambos observables para garantizar que se completen
-inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin).</p>
+                    <div class="io-description"><p>Carga asíncrona de datos empresariales mediante Supabase (PostgreSQL Cloud).
+Consume la fuente de datos reactiva con switchMap directo y calcula las métricas iniciales.</p>
 </div>
                 </td>
             </tr>
@@ -733,7 +686,7 @@ inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/state/data/data.effects.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/state/data/data.effects.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -780,7 +733,7 @@ inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/state/data/data.effects.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/state/data/data.effects.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -802,12 +755,11 @@ inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { forkJoin, of, from } from &#x27;rxjs&#x27;;
+import { of, from } from &#x27;rxjs&#x27;;
 import { map, catchError, switchMap, mergeMap, withLatestFrom, take } from &#x27;rxjs/operators&#x27;;
 import * as DataActions from &#x27;./data.actions&#x27;;
 import { selectAllRecords } from &#x27;./data.selectors&#x27;;
 import { ApiRestService } from &#x27;../../core/services/api-rest.service&#x27;;
-import { FirestoreMockService } from &#x27;../../core/services/firestore-mock.service&#x27;;
 import { ExportService } from &#x27;../../core/services/export.service&#x27;;
 import { Record, RecordStatus } from &#x27;../../core/models/record.model&#x27;;
 import { Kpi, KpiTrend } from &#x27;../../core/models/kpi.model&#x27;;
@@ -818,46 +770,37 @@ import { AppState } from &#x27;../app.state&#x27;;
  * @description Efectos de NgRx para la gestión asíncrona de datos empresariales.
  *
  * @remarks
- * Implementa de forma obligatoria RxJS &#x60;forkJoin&#x60; para orquestar la carga concurrente
- * de la API REST (PostgreSQL) y el simulador de Firestore (NoSQL), cumpliendo los
- * criterios de nivel Sobresaliente de la rúbrica (RA 5).
- * Además gestiona las operaciones asíncronas de CRUD y la generación de informes (PDF/CSV).
+ * Implementa consumo asíncrono unificado mediante Supabase (PostgreSQL Cloud) y API REST,
+ * con modo híbrido zero-downtime, operaciones CRUD reactivas y generación de informes (PDF/CSV).
  */
 @Injectable()
 export class DataEffects {
   private readonly actions$ &#x3D; inject(Actions);
   private readonly apiRest &#x3D; inject(ApiRestService);
-  private readonly firestoreMock &#x3D; inject(FirestoreMockService);
   private readonly exportService &#x3D; inject(ExportService);
   private readonly store &#x3D; inject(Store&lt;AppState&gt;);
 
   /**
-   * Carga concurrente dual de datos usando RxJS forkJoin (RA 5 - Criterio Sobresaliente).
-   * Orquesta la obtención en paralelo de registros de la API REST (SQL) y la colección
-   * de Firestore (NoSQL), unificando los datos y calculando métricas iniciales.
-   * Se añade take(1) explícito a ambos observables para garantizar que se completen
-   * inmediatamente (evitando que BehaviorSubjects sin complete() bloqueen a forkJoin).
+   * Carga asíncrona de datos empresariales mediante Supabase (PostgreSQL Cloud).
+   * Consume la fuente de datos reactiva con switchMap directo y calcula las métricas iniciales.
    */
   loadAllData$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(DataActions.loadAllData),
       switchMap(() &#x3D;&gt;
-        forkJoin({
-          sqlRecords: this.apiRest.getRecords().pipe(take(1)),
-          nosqlRecords: this.firestoreMock.getRecordsSnapshot().pipe(take(1))
-        }).pipe(
-          map(({ sqlRecords, nosqlRecords }) &#x3D;&gt; {
-            const combinedRecords: Record[] &#x3D; [...sqlRecords, ...nosqlRecords];
-            const kpis &#x3D; this.calculateInitialKpis(combinedRecords);
+        this.apiRest.getRecords().pipe(
+          take(1),
+          map((records) &#x3D;&gt; {
+            const kpis &#x3D; this.calculateInitialKpis(records);
             return DataActions.loadAllDataSuccess({
-              records: combinedRecords,
+              records,
               kpis
             });
           }),
           catchError((error: any) &#x3D;&gt;
             of(
               DataActions.loadAllDataFailure({
-                error: error?.message || &#x27;Error al orquestar la carga concurrente con forkJoin&#x27;
+                error: error?.message || &#x27;Error al cargar los registros desde Supabase&#x27;
               })
             )
           )

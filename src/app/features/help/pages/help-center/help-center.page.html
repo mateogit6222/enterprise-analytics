@@ -8,96 +8,137 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="page-content" id="help-content">
-  <div class="content-container">
+  <div class="container-fluid px-3 px-lg-4 py-4">
 
-    <!-- Encabezado Principal con Buscador de Manual -->
-    <header class="help-hero">
-      <div class="hero-badge">
-        <ion-icon name="book-outline"></ion-icon>
-        <span>Manual de Usuario Embebido & Documentación Contextual</span>
-      </div>
-      <h1 class="hero-title">¿En qué podemos ayudarte hoy?</h1>
-      <p class="hero-subtitle">
-        Guía integral sobre arquitectura, roles de usuario, validaciones reactivas, analítica en tiempo real y accesibilidad.
-      </p>
+    <!-- Encabezado Principal con Banner Bento e Ilustración SVG -->
+    <header class="bento-card p-4 p-lg-5 mb-4 bg-white rounded-3 border shadow-sm">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-md-7 col-lg-8">
+          <div class="d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-3 rounded-2 bg-light border text-primary small fw-semibold">
+            <ion-icon name="book-outline"></ion-icon>
+            <span>Manual de Usuario Embebido & Documentación Contextual</span>
+          </div>
+          <h1 class="h2 fw-bold text-dark mb-2">¿En qué podemos ayudarte hoy?</h1>
+          <p class="text-secondary mb-4" style="max-width: 650px;">
+            Guía integral sobre arquitectura cloud con Supabase, control de roles (RBAC), validaciones asíncronas de SKU, analítica reactiva y accesibilidad universal WCAG 2.1 AAA.
+          </p>
 
-      <!-- Barra de Búsqueda Rápida de Dudas -->
-      <div class="search-box">
-        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          (ngModelChange)="onSearchChange()"
-          placeholder="Buscar conceptos (ej. 'SKU', 'PDF', 'Admin', 'Atajos', 'forkJoin')..."
-          class="search-input"
-          aria-label="Buscar en el manual de usuario"
-        />
-        @if (searchQuery) {
-          <button class="clear-search-btn" (click)="clearSearch()" aria-label="Limpiar búsqueda">
-            <ion-icon name="close-circle"></ion-icon>
-          </button>
-        }
+          <!-- Barra de Búsqueda Rápida de Dudas -->
+          <div class="input-group input-group-lg shadow-sm" style="max-width: 540px;">
+            <span class="input-group-text bg-white border-end-0 text-secondary">
+              <ion-icon name="search-outline"></ion-icon>
+            </span>
+            <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              (ngModelChange)="onSearchChange()"
+              placeholder="Buscar conceptos ('SKU', 'PDF', 'Admin', 'Supabase')..."
+              class="form-control border-start-0"
+              aria-label="Buscar en el manual de usuario"
+            />
+            @if (searchQuery) {
+              <button class="btn btn-outline-secondary border-start-0" type="button" (click)="clearSearch()" aria-label="Limpiar búsqueda">
+                <ion-icon name="close-circle"></ion-icon>
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="col-12 col-md-5 col-lg-4 text-center">
+          <img
+            src="assets/images/help-guide.svg"
+            alt="Ilustración corporativa del manual de usuario y soporte técnico"
+            width="320"
+            height="240"
+            loading="lazy"
+            class="img-fluid"
+          />
+        </div>
       </div>
     </header>
 
-    <!-- Guía Visual Rápida: Flujo Paso a Paso -->
+    <!-- Guía Visual Rápida: Flujo Paso a Paso en Bento Grid -->
     @if (!searchQuery) {
-      <section class="onboarding-guide" aria-label="Guía rápida paso a paso">
-        <h2 class="section-title">
-          <ion-icon name="compass-outline"></ion-icon>
-          Flujo de Trabajo del Sistema en 4 Pasos
+      <section class="mb-5" aria-label="Guía rápida paso a paso">
+        <h2 class="h5 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+          <ion-icon name="compass-outline" class="text-primary"></ion-icon>
+          <span>Flujo de Trabajo del Sistema en 4 Pasos</span>
         </h2>
         
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-number">1</div>
-            <div class="step-icon-wrap auth">
-              <ion-icon name="key-outline"></ion-icon>
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-3 p-2 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                  <ion-icon name="key-outline" class="fs-5"></ion-icon>
+                </div>
+                <span class="badge rounded-pill bg-light text-secondary border fw-bold">Paso 1</span>
+              </div>
+              <h3 class="h6 fw-bold text-dark mb-2">Autenticación & Roles</h3>
+              <p class="small text-secondary mb-0">
+                Accede con credenciales de <strong>Administrador</strong> (control total) o <strong>Estándar</strong> (operativa de registros).
+              </p>
             </div>
-            <h3>Autenticación & Roles</h3>
-            <p>Accede con credenciales de <strong>Administrador</strong> (control total) o <strong>Estándar</strong> (operativa de registros).</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-number">2</div>
-            <div class="step-icon-wrap analytics">
-              <ion-icon name="stats-chart-outline"></ion-icon>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-3 p-2 bg-info bg-opacity-10 text-info d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                  <ion-icon name="stats-chart-outline" class="fs-5"></ion-icon>
+                </div>
+                <span class="badge rounded-pill bg-light text-secondary border fw-bold">Paso 2</span>
+              </div>
+              <h3 class="h6 fw-bold text-dark mb-2">Analítica en Vivo</h3>
+              <p class="small text-secondary mb-0">
+                Monitorea KPIs ejecutivos y gráficos <strong>Spline Area y Polar</strong> con conexión en tiempo real a Supabase Cloud.
+              </p>
             </div>
-            <h3>Analítica en Vivo</h3>
-            <p>Monitorea KPIs ejecutivos y gráficos interactivos <strong>Chart.js</strong> con sincronización paralela SQL + NoSQL.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-number">3</div>
-            <div class="step-icon-wrap records">
-              <ion-icon name="layers-outline"></ion-icon>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-3 p-2 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                  <ion-icon name="layers-outline" class="fs-5"></ion-icon>
+                </div>
+                <span class="badge rounded-pill bg-light text-secondary border fw-bold">Paso 3</span>
+              </div>
+              <h3 class="h6 fw-bold text-dark mb-2">Gestión con SKU</h3>
+              <p class="small text-secondary mb-0">
+                Crea y edita registros con validación reactiva asíncrona del código <strong>SKU único</strong> sin recargas de página.
+              </p>
             </div>
-            <h3>Gestión con SKU Asíncrono</h3>
-            <p>Crea y edita registros con validación en servidor del código <strong>SKU único</strong> sin recargas de página.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-number">4</div>
-            <div class="step-icon-wrap reports">
-              <ion-icon name="document-text-outline"></ion-icon>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-3 p-2 bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                  <ion-icon name="document-text-outline" class="fs-5"></ion-icon>
+                </div>
+                <span class="badge rounded-pill bg-light text-secondary border fw-bold">Paso 4</span>
+              </div>
+              <h3 class="h6 fw-bold text-dark mb-2">Informes Oficiales</h3>
+              <p class="small text-secondary mb-0">
+                Genera y descarga informes en <strong>PDF apaisado</strong> (jsPDF autoTable) o archivos <strong>CSV con UTF-8 BOM</strong>.
+              </p>
             </div>
-            <h3>Informes & Descarga</h3>
-            <p>Genera y descarga informes en <strong>PDF apaisado</strong> (autoTable) o archivos <strong>CSV con UTF-8 BOM</strong>.</p>
           </div>
         </div>
       </section>
     }
 
     <!-- Acordeones Temáticos Accesibles del Manual de Usuario -->
-    <section class="manual-section" aria-label="Módulos del manual de usuario">
-      <div class="manual-header-row">
-        <h2 class="section-title">
-          <ion-icon name="library-outline"></ion-icon>
-          Módulos Documentados del Sistema
+    <section class="mb-5" aria-label="Módulos del manual de usuario">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+          <ion-icon name="library-outline" class="text-primary"></ion-icon>
+          <span>Módulos Documentados del Sistema</span>
         </h2>
         @if (searchQuery) {
-          <span class="search-results-count">
-            Resultados para "<strong>{{ searchQuery }}</strong>"
+          <span class="badge bg-light text-primary border">
+            Resultados para "{{ searchQuery }}"
           </span>
         }
       </div>
@@ -105,20 +146,20 @@
       <ion-accordion-group [multiple]="true" [value]="['module-1', 'module-2', 'module-3', 'module-4', 'module-5']">
         
         <!-- MÓDULO 1: Acceso, Autenticación y Control de Roles -->
-        @if (matchesSearch('acceso', 'roles', 'login', 'admin', 'jwt', 'guard', 'estandar', 'seguridad')) {
-          <ion-accordion value="module-1" class="manual-accordion">
-            <ion-item slot="header" color="dark">
-              <ion-icon name="shield-checkmark-outline" slot="start" class="module-icon admin"></ion-icon>
+        @if (matchesSearch('acceso', 'roles', 'login', 'admin', 'jwt', 'guard', 'estandar', 'seguridad', 'supabase')) {
+          <ion-accordion value="module-1" class="bento-accordion mb-3 bg-white rounded-3 border shadow-sm">
+            <ion-item slot="header" color="light" class="rounded-3">
+              <ion-icon name="shield-checkmark-outline" slot="start" color="primary"></ion-icon>
               <ion-label>
-                <h3>1. Acceso, Autenticación y Control de Roles (RBAC)</h3>
-                <p>Cuentas demo, Guards de enrutamiento y sesión segura con JWT simulado</p>
+                <h3 class="fw-bold text-dark">1. Acceso, Autenticación y Control de Roles (RBAC)</h3>
+                <p class="text-secondary small">Cuentas demo, Guards de enrutamiento y sesión segura</p>
               </ion-label>
             </ion-item>
-            <div class="accordion-body" slot="content">
-              <h4>Cuentas de Acceso Preconfiguradas</h4>
-              <div class="demo-accounts-table-wrap">
-                <table class="manual-table">
-                  <thead>
+            <div class="p-4" slot="content">
+              <h4 class="h6 fw-bold text-dark mb-2">Cuentas de Acceso Preconfiguradas</h4>
+              <div class="table-responsive mb-3">
+                <table class="table table-bordered table-sm align-middle mb-0">
+                  <thead class="table-light small text-secondary">
                     <tr>
                       <th>Rol</th>
                       <th>Email</th>
@@ -128,72 +169,64 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><span class="role-badge admin">ADMINISTRADOR</span></td>
+                      <td><span class="badge bg-primary">ADMINISTRADOR</span></td>
                       <td><code>admin&#64;enterprise.com</code></td>
                       <td><code>Admin123!</code></td>
-                      <td>Dashboard Analítico, CRUD Registros, Informes PDF/CSV, Centro de Ayuda.</td>
+                      <td class="small">Dashboard Analítico, CRUD Registros, Informes PDF/CSV, Centro de Ayuda.</td>
                     </tr>
                     <tr>
-                      <td><span class="role-badge user">ESTÁNDAR</span></td>
+                      <td><span class="badge bg-secondary">ESTÁNDAR</span></td>
                       <td><code>user&#64;enterprise.com</code></td>
                       <td><code>User123!</code></td>
-                      <td>CRUD de Registros (lectura/alta/edición), Centro de Ayuda, Perfil.</td>
+                      <td class="small">CRUD de Registros (lectura/alta/edición), Centro de Ayuda, Perfil.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <h4>Protección de Rutas (Angular Route Guards)</h4>
-              <ul>
+              <h4 class="h6 fw-bold text-dark mb-2">Protección de Rutas (Angular Route Guards)</h4>
+              <ul class="small text-secondary mb-0">
                 <li><strong>AuthGuard:</strong> Protege todas las rutas internas redirigiendo al login si no existe un token de sesión válido.</li>
                 <li><strong>RoleGuard:</strong> Restringe el acceso a <code>/dashboard</code> y <code>/reports</code> únicamente a cuentas con rol <code>ADMIN</code>. Los usuarios estándar son redirigidos de forma transparente a <code>/records</code>.</li>
-                <li><strong>Interceptors HTTP:</strong> Inyectan automáticamente las cabeceras <code>Authorization: Bearer &lt;token&gt;</code> y capturan errores 401/403 para renovar sesión o notificar al usuario.</li>
+                <li><strong>Interceptors HTTP:</strong> Inyectan automáticamente las cabeceras <code>Authorization: Bearer &lt;token&gt;</code> y capturan errores para garantizar integridad de sesión.</li>
               </ul>
             </div>
           </ion-accordion>
         }
 
         <!-- MÓDULO 2: Dashboard Analítico Ejecutivo -->
-        @if (matchesSearch('dashboard', 'kpi', 'grafico', 'chart', 'ingresos', 'filtros', 'tiempo', 'analitica')) {
-          <ion-accordion value="module-2" class="manual-accordion">
-            <ion-item slot="header" color="dark">
-              <ion-icon name="pie-chart-outline" slot="start" class="module-icon analytics"></ion-icon>
+        @if (matchesSearch('dashboard', 'kpi', 'grafico', 'chart', 'ingresos', 'filtros', 'tiempo', 'analitica', 'area', 'polar')) {
+          <ion-accordion value="module-2" class="bento-accordion mb-3 bg-white rounded-3 border shadow-sm">
+            <ion-item slot="header" color="light" class="rounded-3">
+              <ion-icon name="pie-chart-outline" slot="start" color="info"></ion-icon>
               <ion-label>
-                <h3>2. Dashboard Analítico Ejecutivo (Chart.js & KPIs)</h3>
-                <p>Indicadores clave, orquestación dual forkJoin y filtros reactivos en tiempo real</p>
+                <h3 class="fw-bold text-dark">2. Dashboard Analítico Ejecutivo (Chart.js & KPIs)</h3>
+                <p class="text-secondary small">Spline Area Chart, Polar Area y métricas reactivas sin gráficos de barras</p>
               </ion-label>
             </ion-item>
-            <div class="accordion-body" slot="content">
-              <h4>Indicadores Clave de Rendimiento (KPI Widgets)</h4>
-              <p>El dashboard procesa 4 métricas reactivas derivadas directamente del store unificado de NgRx:</p>
-              <div class="kpi-desc-grid">
-                <div class="kpi-mini-card">
-                  <ion-icon name="cash-outline" class="text-success"></ion-icon>
-                  <strong>Ingresos Totales</strong>
-                  <span>Suma monetaria acumulada de las operaciones activas y completadas (€).</span>
+            <div class="p-4" slot="content">
+              <h4 class="h6 fw-bold text-dark mb-2">Indicadores Clave de Rendimiento (KPI Widgets)</h4>
+              <p class="small text-secondary">El dashboard procesa 4 métricas reactivas derivadas directamente del store unificado de NgRx:</p>
+              <div class="row g-2 mb-3">
+                <div class="col-12 col-sm-6">
+                  <div class="p-3 bg-light rounded-2 border">
+                    <strong class="d-block text-dark small">Ingresos Totales (€)</strong>
+                    <span class="small text-secondary">Suma monetaria acumulada de las operaciones activas y completadas.</span>
+                  </div>
                 </div>
-                <div class="kpi-mini-card">
-                  <ion-icon name="layers-outline" class="text-indigo"></ion-icon>
-                  <strong>Total Registros</strong>
-                  <span>Recuento global de entidades combinadas de PostgreSQL y Firestore.</span>
-                </div>
-                <div class="kpi-mini-card">
-                  <ion-icon name="checkmark-circle-outline" class="text-cyan"></ion-icon>
-                  <strong>Proyectos Activos</strong>
-                  <span>Operaciones actualmente en curso con estado <code>ACTIVE</code>.</span>
-                </div>
-                <div class="kpi-mini-card">
-                  <ion-icon name="trending-up-outline" class="text-amber"></ion-icon>
-                  <strong>Ticket Promedio</strong>
-                  <span>Importe medio facturado por operación empresarial.</span>
+                <div class="col-12 col-sm-6">
+                  <div class="p-3 bg-light rounded-2 border">
+                    <strong class="d-block text-dark small">Total Registros</strong>
+                    <span class="small text-secondary">Recuento global de entidades sincronizadas con Supabase Cloud.</span>
+                  </div>
                 </div>
               </div>
 
-              <h4>Gráficos Interactivos y Filtrado en Tiempo Real</h4>
-              <ul>
-                <li><strong>Gráfico de Evolución:</strong> Combina una curva con gradiente azul para facturación (€) y barras para volumen de operaciones en un eje secundario.</li>
-                <li><strong>Gráfico Donut:</strong> Ilustra el reparto porcentual entre las 5 áreas departamentales (Ventas, Marketing, Finanzas, Operaciones, RRHH).</li>
-                <li><strong>Filtros Temporales (7D, 30D, 90D, 1A):</strong> Despachan acciones instantáneas a NgRx, actualizando las curvas y los KPIs sin parpadeos gracias a la memoización con selectores.</li>
+              <h4 class="h6 fw-bold text-dark mb-2">Gráficos Interactivos Autorizados</h4>
+              <ul class="small text-secondary mb-0">
+                <li><strong>Gráfico de Área Suavizada (Spline Area Chart):</strong> Representa la evolución temporal de ingresos y volumen con relleno traslúcido y curvatura cúbica suave (tension: 0.4).</li>
+                <li><strong>Gráfico Polar Area:</strong> Ilustra el reparto de operaciones entre departamentos (Ventas, Marketing, Finanzas, Operaciones, RRHH) respetando la prohibición de gráficos de barras.</li>
+                <li><strong>Filtros Temporales (7D, 30D, 90D, 1A):</strong> Despachan acciones instantáneas a NgRx recalculando las curvas sin retraso ni parpadeos.</li>
               </ul>
             </div>
           </ion-accordion>
@@ -201,37 +234,30 @@
 
         <!-- MÓDULO 3: Gestión de Registros y Validación Asíncrona -->
         @if (matchesSearch('registros', 'crud', 'sku', 'validacion', 'formulario', 'asincrona', 'tabla', 'datatable')) {
-          <ion-accordion value="module-3" class="manual-accordion">
-            <ion-item slot="header" color="dark">
-              <ion-icon name="grid-outline" slot="start" class="module-icon records"></ion-icon>
+          <ion-accordion value="module-3" class="bento-accordion mb-3 bg-white rounded-3 border shadow-sm">
+            <ion-item slot="header" color="light" class="rounded-3">
+              <ion-icon name="grid-outline" slot="start" color="success"></ion-icon>
               <ion-label>
-                <h3>3. Gestión de Registros y Validación Asíncrona de SKU</h3>
-                <p>Componente DataTable, formulario reactivo con debounce y unicidad server-side</p>
+                <h3 class="fw-bold text-dark">3. Gestión de Registros y Validación Asíncrona de SKU</h3>
+                <p class="text-secondary small">Componente DataTable, formulario reactivo con debounce y unicidad server-side</p>
               </ion-label>
             </ion-item>
-            <div class="accordion-body" slot="content">
-              <h4>Validación Asíncrona del Código SKU</h4>
-              <p>
+            <div class="p-4" slot="content">
+              <h4 class="h6 fw-bold text-dark mb-2">Validación Asíncrona del Código SKU</h4>
+              <p class="small text-secondary">
                 Cada registro corporativo posee un código de inventario o proyecto (<strong>SKU</strong>). Para garantizar que no se produzcan duplicados sin saturar el servidor:
               </p>
-              <ul>
+              <ul class="small text-secondary mb-3">
                 <li>Se aplica un operador <strong>debounceTime de 450ms</strong> sobre el campo SKU para esperar a que el usuario termine de teclear.</li>
-                <li>Se invoca el método asíncrono <code>ApiRestService.checkSkuExists(sku)</code> simulando una consulta REST a PostgreSQL.</li>
-                <li><strong>Feedback UX visual:</strong>
-                  <ul>
-                    <li><ion-icon name="time-outline"></ion-icon> <em>Spinner azul:</em> Comprobación asíncrona en curso en servidor.</li>
-                    <li><ion-icon name="checkmark-circle" class="text-success"></ion-icon> <em>Icono verde:</em> Código SKU único y disponible.</li>
-                    <li><ion-icon name="alert-circle" class="text-danger"></ion-icon> <em>Alerta roja:</em> Código SKU ya en uso. El botón de guardar se bloquea automáticamente.</li>
-                  </ul>
-                </li>
+                <li>Se invoca el método asíncrono <code>ApiRestService.checkSkuExists(sku)</code> validando contra Supabase o el dataset en memoria.</li>
+                <li>Feedback visual accesible: spinner durante comprobación, marca de verificación verde cuando está libre o alerta roja si está duplicado.</li>
               </ul>
 
-              <h4>Funcionalidades de la DataTable Reutilizable</h4>
-              <ul>
-                <li><strong>Búsqueda en vivo:</strong> Filtra simultáneamente por SKU, título, cliente o descripción.</li>
-                <li><strong>Ordenación multicampo:</strong> Haz click en cualquier encabezado para ordenar ascendente o descendentemente.</li>
-                <li><strong>Paginación dinámica:</strong> Elige entre 5, 10, 25 o 50 registros por página.</li>
-                <li><strong>Eliminación con ConfirmDialog:</strong> Cuadro de diálogo modal que solicita confirmación explícita para evitar pérdidas involuntarias de datos.</li>
+              <h4 class="h6 fw-bold text-dark mb-2">Funcionalidades de la DataTable Reutilizable</h4>
+              <ul class="small text-secondary mb-0">
+                <li><strong>Búsqueda debounced:</strong> Filtra simultáneamente por SKU, título, cliente o descripción.</li>
+                <li><strong>Avatares de Responsable:</strong> Cada fila incorpora la miniatura vectorial optimizada del responsable asignado.</li>
+                <li><strong>Paginación dinámica:</strong> 5, 10, 25 o 50 registros por página con selección múltiple y exportación a CSV.</li>
               </ul>
             </div>
           </ion-accordion>
@@ -239,28 +265,25 @@
 
         <!-- MÓDULO 4: Informes Corporativos y Exportación -->
         @if (matchesSearch('informes', 'reportes', 'pdf', 'csv', 'excel', 'exportacion', 'descarga', 'autotable')) {
-          <ion-accordion value="module-4" class="manual-accordion">
-            <ion-item slot="header" color="dark">
-              <ion-icon name="document-text-outline" slot="start" class="module-icon reports"></ion-icon>
+          <ion-accordion value="module-4" class="bento-accordion mb-3 bg-white rounded-3 border shadow-sm">
+            <ion-item slot="header" color="light" class="rounded-3">
+              <ion-icon name="document-text-outline" slot="start" color="warning"></ion-icon>
               <ion-label>
-                <h3>4. Informes Corporativos y Exportación a PDF/CSV</h3>
-                <p>Resumen tabulado previsualizable, jsPDF autoTable horizontal y UTF-8 BOM</p>
+                <h3 class="fw-bold text-dark">4. Informes Corporativos y Exportación a PDF/CSV</h3>
+                <p class="text-secondary small">Resumen tabulado previsualizable, jsPDF autoTable horizontal y UTF-8 BOM</p>
               </ion-label>
             </ion-item>
-            <div class="accordion-body" slot="content">
-              <h4>Exportación a PDF Profesional (jsPDF + autoTable)</h4>
-              <p>Los informes PDF generados desde el Centro de Informes o desde el listado de registros cuentan con estándares corporativos:</p>
-              <ul>
-                <li><strong>Orientación horizontal (A4 Landscape):</strong> Óptima para tablas con múltiples columnas de datos de negocio.</li>
-                <li><strong>Diseño y branding corporativo:</strong> Encabezado azul marino (#0f172a), cabeceras de tabla en tono índigo (#6366f1) y filas alternas para máxima legibilidad.</li>
-                <li><strong>Paginación oficial:</strong> Numeración dinámica en pie de página ("Página X de Y") y sellado de fecha/hora de generación.</li>
+            <div class="p-4" slot="content">
+              <h4 class="h6 fw-bold text-dark mb-2">Exportación a PDF Profesional (jsPDF + autoTable)</h4>
+              <ul class="small text-secondary mb-3">
+                <li><strong>Orientación horizontal (A4 Landscape):</strong> Óptima para tablas con múltiples columnas de datos empresariales.</li>
+                <li><strong>Diseño y branding corporativo:</strong> Encabezado azul marino corporativo (#0f172a), cabeceras estilizadas y filas alternas para máxima legibilidad.</li>
+                <li><strong>Paginación oficial:</strong> Numeración dinámica ("Página X de Y") y sellado de fecha y hora.</li>
               </ul>
 
-              <h4>Exportación a CSV con Soporte UTF-8 BOM para Excel</h4>
-              <ul>
-                <li>Los archivos CSV generados incorporan el prefijo <strong>UTF-8 BOM (<code>\uFEFF</code>)</strong>.</li>
-                <li>Esto garantiza que Microsoft Excel (tanto en Windows como en Mac) reconozca correctamente caracteres españoles (tildes, eñes, símbolos de euro €) sin requerir conversiones manuales.</li>
-                <li>Delimitador de campos mediante punto y coma (<code>;</code>) acorde a los estándares de hojas de cálculo europeas.</li>
+              <h4 class="h6 fw-bold text-dark mb-2">Exportación a CSV con Soporte UTF-8 BOM para Excel</h4>
+              <ul class="small text-secondary mb-0">
+                <li>Los archivos CSV incorporan el prefijo <strong>UTF-8 BOM (<code>\uFEFF</code>)</strong> para que Microsoft Excel en Windows y Mac visualice caracteres en español (tildes, eñes, €) de forma nativa sin errores de codificación.</li>
               </ul>
             </div>
           </ion-accordion>
@@ -268,21 +291,19 @@
 
         <!-- MÓDULO 5: Atajos de Teclado y Accesibilidad Universal -->
         @if (matchesSearch('atajos', 'teclado', 'accesibilidad', 'wcag', 'contraste', 'alt', 'pantalla', 'aria')) {
-          <ion-accordion value="module-5" class="manual-accordion">
-            <ion-item slot="header" color="dark">
-              <ion-icon name="accessibility-outline" slot="start" class="module-icon a11y"></ion-icon>
+          <ion-accordion value="module-5" class="bento-accordion mb-3 bg-white rounded-3 border shadow-sm">
+            <ion-item slot="header" color="light" class="rounded-3">
+              <ion-icon name="accessibility-outline" slot="start" color="secondary"></ion-icon>
               <ion-label>
-                <h3>5. Atajos de Teclado y Accesibilidad Universal (WCAG 2.1)</h3>
-                <p>Navegación integral sin ratón, atajos globales y modo de alto contraste AAA</p>
+                <h3 class="fw-bold text-dark">5. Atajos de Teclado y Accesibilidad Universal (WCAG 2.1)</h3>
+                <p class="text-secondary small">Navegación integral sin ratón, atajos globales y modo de alto contraste AAA</p>
               </ion-label>
             </ion-item>
-            <div class="accordion-body" slot="content">
-              <h4>Atajos de Teclado Globales del Sistema</h4>
-              <p>Puedes desplazarte rápidamente por la plataforma desde cualquier pantalla utilizando las combinaciones:</p>
-              
-              <div class="shortcuts-table-wrap">
-                <table class="manual-table">
-                  <thead>
+            <div class="p-4" slot="content">
+              <h4 class="h6 fw-bold text-dark mb-2">Atajos de Teclado Globales</h4>
+              <div class="table-responsive mb-3">
+                <table class="table table-bordered table-sm align-middle mb-0">
+                  <thead class="table-light small text-secondary">
                     <tr>
                       <th>Combinación</th>
                       <th>Destino</th>
@@ -291,41 +312,28 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><kbd>Alt</kbd> + <kbd>D</kbd></td>
+                      <td><kbd class="bg-light text-dark border px-2 py-1 rounded">Alt + D</kbd></td>
                       <td><strong>Dashboard</strong></td>
-                      <td>Acceso directo al panel analítico ejecutivo (Administradores).</td>
+                      <td class="small">Acceso directo al panel analítico ejecutivo.</td>
                     </tr>
                     <tr>
-                      <td><kbd>Alt</kbd> + <kbd>R</kbd></td>
+                      <td><kbd class="bg-light text-dark border px-2 py-1 rounded">Alt + R</kbd></td>
                       <td><strong>Registros</strong></td>
-                      <td>Ir a la gestión integral y tabla de registros empresariales.</td>
+                      <td class="small">Ir a la gestión integral y tabla de registros.</td>
                     </tr>
                     <tr>
-                      <td><kbd>Alt</kbd> + <kbd>I</kbd></td>
+                      <td><kbd class="bg-light text-dark border px-2 py-1 rounded">Alt + I</kbd></td>
                       <td><strong>Informes</strong></td>
-                      <td>Abrir el centro de generación de informes PDF/CSV (Administradores).</td>
+                      <td class="small">Abrir el centro de generación de informes PDF/CSV.</td>
                     </tr>
                     <tr>
-                      <td><kbd>Alt</kbd> + <kbd>H</kbd></td>
+                      <td><kbd class="bg-light text-dark border px-2 py-1 rounded">Alt + H</kbd></td>
                       <td><strong>Ayuda</strong></td>
-                      <td>Abrir este manual interactivo de usuario.</td>
-                    </tr>
-                    <tr>
-                      <td><kbd>Alt</kbd> + <kbd>P</kbd></td>
-                      <td><strong>Mi Perfil</strong></td>
-                      <td>Configurar preferencias de accesibilidad, tipografía y contraste.</td>
+                      <td class="small">Abrir este manual interactivo de usuario.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-
-              <h4>Conformidad WCAG 2.1 AA/AAA</h4>
-              <ul>
-                <li><strong>Enlace de salto (Bypass Blocks):</strong> Pulsa <kbd>Tab</kbd> nada más cargar la página para ver el botón <em>"Saltar al contenido principal"</em>.</li>
-                <li><strong>Foco Visible Claro:</strong> Todos los elementos interactivos disponen de un contorno de foco cian de 3px (<code>:focus-visible</code>) con separación de 2px.</li>
-                <li><strong>Contraste Extremo (AAA):</strong> Desde la página de Perfil puedes activar el modo de Alto Contraste con fondos negros puros y ratio de contraste superior a 7:1.</li>
-                <li><strong>Escala Tipográfica Fluida:</strong> Selector de tamaño de fuente (Normal, Grande, Extra Grande) para personas con dificultades visuales.</li>
-              </ul>
             </div>
           </ion-accordion>
         }
@@ -333,33 +341,51 @@
       </ion-accordion-group>
     </section>
 
-    <!-- Tarjetas de Preguntas Frecuentes (FAQ) -->
-    <section class="faq-section" aria-label="Preguntas frecuentes">
-      <h2 class="section-title">
-        <ion-icon name="help-circle-outline"></ion-icon>
-        Preguntas Frecuentes (FAQ)
+    <!-- Tarjetas de Preguntas Frecuentes (FAQ) en Bento Grid -->
+    <section class="mb-4" aria-label="Preguntas frecuentes">
+      <h2 class="h5 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+        <ion-icon name="help-circle-outline" class="text-primary"></ion-icon>
+        <span>Preguntas Frecuentes (FAQ)</span>
       </h2>
 
-      <div class="faq-grid">
-        <div class="faq-card">
-          <h4>¿Por qué no puedo ver el Dashboard ni el Generador de Informes?</h4>
-          <p>
-            El sistema implementa <strong>Control de Acceso Basado en Roles (RBAC)</strong>. Esas dos secciones son exclusivas para cuentas con rol <strong>Administrador</strong>. Para probarlas, cierra sesión y accede con <code>admin&#64;enterprise.com</code>.
-          </p>
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100">
+            <h3 class="h6 fw-bold text-dark mb-2">¿Por qué no puedo ver el Dashboard ni Informes?</h3>
+            <p class="small text-secondary mb-0">
+              El sistema implementa <strong>Control de Acceso Basado en Roles (RBAC)</strong>. Esas secciones son exclusivas para cuentas con rol <strong>Administrador</strong>. Para probarlas, accede con <code>admin&#64;enterprise.com</code>.
+            </p>
+          </div>
         </div>
 
-        <div class="faq-card">
-          <h4>¿De dónde provienen los datos que visualizo en la aplicación?</h4>
-          <p>
-            La plataforma utiliza una arquitectura híbrida: combina registros históricos procedentes de una API REST que simula <strong>PostgreSQL (SQL)</strong> y un stream reactivo que simula <strong>Firestore (NoSQL)</strong> mediante <code>forkJoin</code>.
-          </p>
+        <div class="col-12 col-md-4">
+          <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100">
+            <h3 class="h6 fw-bold text-dark mb-2">¿De dónde provienen los datos de la app?</h3>
+            <p class="small text-secondary mb-0">
+              La plataforma conecta directamente a <strong>Supabase Cloud (PostgreSQL)</strong>, con un mecanismo inteligente de zero-downtime fallback en memoria para garantizar disponibilidad total tanto en local como en Vercel.
+            </p>
+          </div>
         </div>
 
-        <div class="faq-card">
-          <h4>¿Se guardan mis preferencias de accesibilidad si recargo el navegador?</h4>
-          <p>
-            <strong>Sí.</strong> El servicio centralizado <code>AccessibilityService</code> persiste la escala de tipografía y el modo de alto contraste en el almacenamiento local del dispositivo.
-          </p>
+        <div class="col-12 col-md-4">
+          <div class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100 d-flex flex-column justify-content-between">
+            <div>
+              <h3 class="h6 fw-bold text-dark mb-2">¿Seguridad y Políticas RLS?</h3>
+              <p class="small text-secondary mb-2">
+                Las tablas de Supabase cuentan con <strong>Row Level Security (RLS)</strong> activado para salvaguardar la privacidad de las operaciones corporativas.
+              </p>
+            </div>
+            <div class="text-center pt-2">
+              <img
+                src="assets/images/security-badge.svg"
+                alt="Insignia de seguridad cloud con cifrado y roles RBAC"
+                width="160"
+                height="120"
+                loading="lazy"
+                class="img-fluid"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
