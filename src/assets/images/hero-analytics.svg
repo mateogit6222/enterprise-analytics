@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" fill="none" role="img" aria-label="Ilustración corporativa de Enterprise Analytics">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="600" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="50" y1="50" x2="350" y2="250" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10" y="-10" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="600" height="450" rx="24" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Swiss Grid pattern -->
+  <g stroke="#cbd5e1" stroke-width="0.75" stroke-dasharray="4 4" opacity="0.6">
+    <line x1="50" y1="0" x2="50" y2="450"/>
+    <line x1="150" y1="0" x2="150" y2="450"/>
+    <line x1="250" y1="0" x2="250" y2="450"/>
+    <line x1="350" y1="0" x2="350" y2="450"/>
+    <line x1="450" y1="0" x2="450" y2="450"/>
+    <line x1="550" y1="0" x2="550" y2="450"/>
+    <line x1="0" y1="75" x2="600" y2="75"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="225" x2="600" y2="225"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="0" y1="375" x2="600" y2="375"/>
+  </g>
+
+  <!-- Main Bento Card: Analytics Growth -->
+  <g filter="url(#cardShadow)">
+    <rect x="70" y="65" width="460" height="270" rx="16" fill="url(#cardGrad1)" stroke="#e2e8f0" stroke-width="1.5"/>
+    
+    <!-- Window controls -->
+    <circle cx="95" cy="90" r="5" fill="#ef4444"/>
+    <circle cx="112" cy="90" r="5" fill="#f59e0b"/>
+    <circle cx="129" cy="90" r="5" fill="#10b981"/>
+
+    <!-- Header bar -->
+    <rect x="160" y="83" width="160" height="14" rx="7" fill="#e2e8f0"/>
+    <rect x="420" y="80" width="85" height="20" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="435" y="94" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#1d4ed8">SUPABASE</text>
+
+    <!-- KPI Metric box -->
+    <rect x="95" y="120" width="120" height="70" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="107" y="140" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">FACTURACIÓN</text>
+    <text x="107" y="165" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#0f172a">€ 1,280,500</text>
+    <path d="M107 175 L120 175" stroke="#10b981" stroke-width="2"/>
+    <text x="126" y="178" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#10b981">+24.5% Q3</text>
+
+    <!-- Spline Area Chart Illustration inside Main Card -->
+    <g transform="translate(235, 120)">
+      <rect width="270" height="180" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+      <!-- Grid lines -->
+      <line x1="15" y1="40" x2="255" y2="40" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="15" y1="80" x2="255" y2="80" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="15" y1="120" x2="255" y2="120" stroke="#f1f5f9" stroke-width="1"/>
+      
+      <!-- Chart Area -->
+      <path d="M20 135 C 60 120, 90 60, 130 75 C 170 90, 200 35, 250 25 L250 150 L20 150 Z" fill="url(#chartGrad)"/>
+      <path d="M20 135 C 60 120, 90 60, 130 75 C 170 90, 200 35, 250 25" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+      
+      <!-- Secondary Spline line -->
+      <path d="M20 145 C 70 140, 110 110, 150 125 C 190 135, 220 95, 250 85" stroke="#059669" stroke-width="2" stroke-dasharray="4 4"/>
+
+      <!-- Data points -->
+      <circle cx="130" cy="75" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+      <circle cx="250" cy="25" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+    </g>
+
+    <!-- Mini Table Rows in Card -->
+    <g transform="translate(95, 205)">
+      <rect width="120" height="24" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+      <circle cx="108" cy="217" r="4" fill="#3b82f6"/>
+      <text x="120" y="220" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#334155">Telefonica Tech</text>
+      
+      <rect y="32" width="120" height="24" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+      <circle cx="108" cy="249" r="4" fill="#10b981"/>
+      <text x="120" y="252" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#334155">Inditex Group</text>
+
+      <rect y="64" width="120" height="24" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+      <circle cx="108" cy="281" r="4" fill="#f59e0b"/>
+      <text x="120" y="284" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#334155">Banco Santander</text>
+    </g>
+  </g>
+
+  <!-- Floating Bento Badge 1: Cloud Status -->
+  <g filter="url(#cardShadow)" transform="translate(420, 290)">
+    <rect width="130" height="60" rx="12" fill="#0f172a"/>
+    <circle cx="22" cy="30" r="5" fill="#10b981"/>
+    <text x="35" y="27" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#ffffff">POSTGRESQL</text>
+    <text x="35" y="42" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#94a3b8">Cloud Synced 100%</text>
+  </g>
+
+  <!-- Floating Bento Badge 2: Security & Roles -->
+  <g filter="url(#cardShadow)" transform="translate(45, 335)">
+    <rect width="145" height="55" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <path d="M22 24 L27 19 L32 24 L32 33 L22 33 Z" fill="#2563eb"/>
+    <text x="40" y="26" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#0f172a">WCAG 2.1 AAA</text>
+    <text x="40" y="40" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#16a34a">100/100 Lighthouse</text>
+  </g>
+</svg>

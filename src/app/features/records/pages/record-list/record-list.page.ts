@@ -67,9 +67,10 @@ export class RecordListPage implements OnInit, OnDestroy {
 
   /** Configuración de columnas para el componente DataTable */
   readonly columns: TableColumn<Record>[] = [
-    { key: 'sku', label: 'SKU', sortable: true, width: '130px' },
+    { key: 'sku', label: 'SKU', sortable: true, width: '120px' },
     { key: 'title', label: 'Título del Registro', sortable: true },
     { key: 'clientName', label: 'Cliente', sortable: true },
+    { key: 'manager', label: 'Responsable', sortable: true, type: 'avatar' },
     {
       key: 'category',
       label: 'Categoría',
@@ -103,7 +104,7 @@ export class RecordListPage implements OnInit, OnDestroy {
       type: 'badge',
       badgeColorMap: {
         REST: 'badge-primary',
-        FIRESTORE: 'badge-warning'
+        SUPABASE: 'badge-success'
       }
     },
     { key: 'createdAt', label: 'Fecha Alta', sortable: true, type: 'date' }

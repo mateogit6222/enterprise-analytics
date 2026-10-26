@@ -28,7 +28,7 @@ export interface TableColumn<T = any> {
   key: string;
   label: string;
   sortable?: boolean;
-  type?: 'text' | 'currency' | 'date' | 'relative-time' | 'badge' | 'custom';
+  type?: 'text' | 'currency' | 'date' | 'relative-time' | 'badge' | 'avatar' | 'custom';
   align?: 'left' | 'center' | 'right';
   badgeColorMap?: Record<string, string>;
   width?: string;
@@ -409,5 +409,16 @@ export class DataTableComponent<T extends Record<string, any> = any>
   getRowAriaLabel(row: T, index: number): string {
     const name = row['title'] || row['name'] || row['id'] || (index + 1);
     return `Seleccionar fila ${name}`;
+  }
+
+  /**
+   * Obtiene la ruta del avatar vectorial según el nombre del responsable.
+   */
+  getAvatarForManager(name: any): string {
+    const str = String(name || '').toLowerCase();
+    if (str.includes('elena')) return 'assets/images/avatar-elena.svg';
+    if (str.includes('javier')) return 'assets/images/avatar-javier.svg';
+    if (str.includes('maría') || str.includes('maria')) return 'assets/images/avatar-maria.svg';
+    return 'assets/images/avatar-carlos.svg';
   }
 }

@@ -201,6 +201,21 @@
                       </span>
                     }
 
+                    <!-- Tipo: Avatar de Responsable -->
+                    @else if (col.type === 'avatar' || col.key === 'manager') {
+                      <div class="d-flex align-items-center gap-2">
+                        <img
+                          [src]="getAvatarForManager(getNestedValue(row, col.key))"
+                          [alt]="'Avatar corporativo de ' + (getNestedValue(row, col.key) || 'Responsable')"
+                          width="28"
+                          height="28"
+                          loading="lazy"
+                          class="rounded-circle border flex-shrink-0"
+                        />
+                        <span class="cell-text fw-medium">{{ getNestedValue(row, col.key) }}</span>
+                      </div>
+                    }
+
                     <!-- Tipo: Texto por defecto con Resaltado de Búsqueda -->
                     @else {
                       <span

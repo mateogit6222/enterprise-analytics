@@ -13,7 +13,8 @@
     "lint": "ng lint",
     "compodoc": "npx compodoc -p tsconfig.doc.json -d docs",
     "docs:generate": "npx compodoc -p tsconfig.doc.json -d docs --theme material",
-    "docs:serve": "npx compodoc -s -d docs"
+    "docs:serve": "npx compodoc -s -d docs",
+    "serve:prod": "npm run build && npx serve www -s -l 8100"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +35,9 @@
     "@ngrx/effects": "^22.0.1",
     "@ngrx/store": "^22.0.1",
     "@ngrx/store-devtools": "^22.0.1",
+    "@supabase/supabase-js": "^2.118.0",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.2",
     "chart.js": "^4.5.1",
     "ionicons": "^8.1.0",
     "jspdf": "^4.2.1",

@@ -807,7 +807,7 @@ export class KpiWidgetComponent {
                 </p>
                 <pre class="line-numbers"><code class="language-scss">/**
  * KPI Widget Component Styles
- * Modern Glassmorphism Card with Trend Indicators
+ * Swiss Corporate Bento Grid Clean Light Aesthetic
  */
 
 :host {
@@ -816,28 +816,26 @@ export class KpiWidgetComponent {
 }
 
 .kpi-card {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.1rem;
-  padding: 1.35rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
   outline: none;
 
   &amp;.interactive {
     cursor: pointer;
 
     &amp;:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
+      border-color: #cbd5e1;
     }
 
     &amp;:focus-visible {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
     }
   }
 
@@ -849,8 +847,8 @@ export class KpiWidgetComponent {
 
     .kpi-label {
       font-size: 0.85rem;
-      font-weight: 500;
-      color: #94a3b8;
+      font-weight: 600;
+      color: #475569;
       letter-spacing: 0.01em;
       text-transform: capitalize;
     }
@@ -859,11 +857,11 @@ export class KpiWidgetComponent {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 0.65rem;
-      font-size: 1.35rem;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      font-size: 1.25rem;
+      border: 1px solid rgba(15, 23, 42, 0.06);
     }
   }
 
@@ -872,15 +870,15 @@ export class KpiWidgetComponent {
 
     .kpi-value {
       font-size: 1.85rem;
-      font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: -0.025em;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.03em;
       line-height: 1.2;
 
       .kpi-unit {
         font-size: 0.95rem;
-        font-weight: 500;
-        color: #94a3b8;
+        font-weight: 600;
+        color: #64748b;
         margin-left: 0.25rem;
       }
     }
@@ -896,36 +894,37 @@ export class KpiWidgetComponent {
       align-items: center;
       gap: 0.25rem;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       padding: 0.2rem 0.55rem;
-      border-radius: 0.5rem;
+      border-radius: 6px;
 
       ion-icon {
         font-size: 0.9rem;
       }
 
       &amp;.trend-up {
-        background: rgba(16, 185, 129, 0.15);
-        color: #34d399;
-        border: 1px solid rgba(16, 185, 129, 0.3);
+        background: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
       }
 
       &amp;.trend-down {
-        background: rgba(244, 63, 94, 0.15);
-        color: #fb7185;
-        border: 1px solid rgba(244, 63, 94, 0.3);
+        background: #fff1f2;
+        color: #be123c;
+        border: 1px solid #fecdd3;
       }
 
       &amp;.trend-stable {
-        background: rgba(148, 163, 184, 0.15);
-        color: #94a3b8;
-        border: 1px solid rgba(148, 163, 184, 0.25);
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
       }
     }
 
     .comparison-text {
       font-size: 0.75rem;
       color: #64748b;
+      font-weight: 500;
     }
   }
 }

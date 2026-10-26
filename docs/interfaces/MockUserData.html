@@ -128,7 +128,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/auth.service.ts</code>
+    <code>src/app/core/models/user.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -159,7 +159,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interfaz interna para los datos mock de usuario (incluye password).</p>
+                <p>Usuario extendido para persistencia de datos mock en desarrollo.</p>
 
             </p>
 
@@ -295,7 +295,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/core/services/auth.service.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/core/models/user.model.ts:100</a></div>
                                 </td>
                             </tr>
 
@@ -334,7 +334,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/core/services/auth.service.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/core/models/user.model.ts:44</a></div>
                                 </td>
                             </tr>
 
@@ -373,7 +373,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/core/services/auth.service.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/core/models/user.model.ts:46</a></div>
                                 </td>
                             </tr>
 
@@ -412,7 +412,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/core/services/auth.service.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/core/models/user.model.ts:40</a></div>
                                 </td>
                             </tr>
 
@@ -451,7 +451,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/core/services/auth.service.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/core/models/user.model.ts:41</a></div>
                                 </td>
                             </tr>
 
@@ -490,7 +490,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/services/auth.service.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/models/user.model.ts:39</a></div>
                                 </td>
                             </tr>
 
@@ -529,7 +529,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/core/services/auth.service.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/core/models/user.model.ts:45</a></div>
                                 </td>
                             </tr>
 
@@ -568,7 +568,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/core/services/auth.service.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/core/models/user.model.ts:47</a></div>
                                 </td>
                             </tr>
 
@@ -607,7 +607,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/core/services/auth.service.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/core/models/user.model.ts:42</a></div>
                                 </td>
                             </tr>
 
@@ -646,7 +646,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/core/services/auth.service.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/core/models/user.model.ts:43</a></div>
                                 </td>
                             </tr>
 
@@ -657,421 +657,88 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { BehaviorSubject, Observable, of, throwError, timer } from &#x27;rxjs&#x27;;
-import { map, switchMap, tap, catchError, delay } from &#x27;rxjs/operators&#x27;;
-import {
-  User,
-  UserRole,
-  LoginCredentials,
-  RegisterData,
-  AuthResponse
-} from &#x27;../models/user.model&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export enum UserRole {
+  ADMIN &#x3D; &#x27;ADMIN&#x27;,
+  USER &#x3D; &#x27;USER&#x27;
+}
 
 /**
- * Token key para almacenamiento local.
- * @constant
+ * Interfaz que representa un usuario del sistema.
+ *
+ * @interface User
+ * @property {string} id - Identificador único del usuario (UUID v4).
+ * @property {string} email - Correo electrónico (único, usado como login).
+ * @property {string} firstName - Nombre del usuario.
+ * @property {string} lastName - Apellido del usuario.
+ * @property {UserRole} role - Rol asignado al usuario.
+ * @property {string} avatarUrl - URL del avatar del usuario.
+ * @property {boolean} isActive - Indica si la cuenta está activa.
+ * @property {string} createdAt - Fecha de creación de la cuenta (ISO 8601).
+ * @property {string} lastLoginAt - Fecha del último inicio de sesión (ISO 8601).
  */
-const STORAGE_KEYS &#x3D; {
-  ACCESS_TOKEN: &#x27;ea_access_token&#x27;,
-  REFRESH_TOKEN: &#x27;ea_refresh_token&#x27;,
-  CURRENT_USER: &#x27;ea_current_user&#x27;
-} as const;
+export interface User {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: UserRole;
+  avatarUrl: string;
+  isActive: boolean;
+  createdAt: string;
+  lastLoginAt: string;
+}
 
 /**
- * Interfaz interna para los datos mock de usuario (incluye password).
- * @internal
+ * Credenciales de inicio de sesión.
+ *
+ * @interface LoginCredentials
+ * @property {string} email - Correo electrónico del usuario.
+ * @property {string} password - Contraseña del usuario.
  */
-interface MockUserData extends User {
+export interface LoginCredentials {
+  email: string;
   password: string;
 }
 
 /**
- * @class AuthService
- * @description Servicio singleton de autenticación y autorización.
+ * Datos para el registro de un nuevo usuario.
  *
- * Gestiona el ciclo completo de autenticación:
- * - Login con credenciales contra datos mock (simula API REST).
- * - Registro de nuevos usuarios con validación de email único.
- * - Gestión de tokens JWT mock (access + refresh).
- * - Persistencia de sesión en localStorage.
- * - Emisión reactiva del estado de autenticación via BehaviorSubject.
- *
- * @remarks
- * Todos los datos son sintéticos y simulados localmente.
- * No se realizan llamadas HTTP reales a servicios externos.
- * El delay artificial simula latencia de red realista.
- *
- * @example
- * &#x60;&#x60;&#x60;typescript
- * // En un componente
- * constructor(private authService: AuthService) {
- *   this.authService.currentUser$.subscribe(user &#x3D;&gt; {
- *     console.log(&#x27;Usuario actual:&#x27;, user);
- *   });
- * }
- * &#x60;&#x60;&#x60;
+ * @interface RegisterData
+ * @property {string} email - Correo electrónico (debe ser único en el sistema).
+ * @property {string} password - Contraseña (mínimo 8 caracteres, 1 mayúscula, 1 número).
+ * @property {string} confirmPassword - Confirmación de la contraseña.
+ * @property {string} firstName - Nombre del usuario.
+ * @property {string} lastName - Apellido del usuario.
  */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class AuthService {
+export interface RegisterData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+}
 
-  /** @private Inyección del HttpClient para cargar datos mock */
-  private readonly http &#x3D; inject(HttpClient);
+/**
+ * Respuesta del servidor tras una autenticación exitosa.
+ *
+ * @interface AuthResponse
+ * @property {User} user - Datos del usuario autenticado.
+ * @property {string} accessToken - Token JWT de acceso (mock).
+ * @property {string} refreshToken - Token JWT de refresco (mock).
+ * @property {number} expiresIn - Tiempo de expiración en segundos.
+ */
+export interface AuthResponse {
+  user: User;
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+}
 
-  /** @private Cache de usuarios mock cargados desde JSON */
-  private mockUsers: MockUserData[] &#x3D; [];
-
-  /** @private Indica si los datos mock ya fueron cargados */
-  private mockDataLoaded &#x3D; false;
-
-  constructor() {
-    // Precarga inmediata de usuarios en memoria
-    this.loadMockUsers().subscribe();
-  }
-
-  /**
-   * BehaviorSubject que emite el usuario actual o null si no hay sesión.
-   * @private
-   */
-  private readonly currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(
-    this.getStoredUser()
-  );
-
-  /**
-   * BehaviorSubject que emite el estado de carga de la autenticación.
-   * @private
-   */
-  private readonly isLoadingSubject &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-
-  /**
-   * Observable público del usuario actual.
-   * Emite &#x60;null&#x60; cuando no hay sesión activa.
-   *
-   * @type {Observable&lt;User | null&gt;}
-   */
-  readonly currentUser$: Observable&lt;User | null&gt; &#x3D; this.currentUserSubject.asObservable();
-
-  /**
-   * Observable público del estado de carga.
-   *
-   * @type {Observable&lt;boolean&gt;}
-   */
-  readonly isLoading$: Observable&lt;boolean&gt; &#x3D; this.isLoadingSubject.asObservable();
-
-  /**
-   * Observable derivado que indica si el usuario está autenticado.
-   *
-   * @type {Observable&lt;boolean&gt;}
-   */
-  readonly isAuthenticated$: Observable&lt;boolean&gt; &#x3D; this.currentUser$.pipe(
-    map(user &#x3D;&gt; !!user)
-  );
-
-  /**
-   * Observable derivado que indica si el usuario tiene rol ADMIN.
-   *
-   * @type {Observable&lt;boolean&gt;}
-   */
-  readonly isAdmin$: Observable&lt;boolean&gt; &#x3D; this.currentUser$.pipe(
-    map(user &#x3D;&gt; user?.role &#x3D;&#x3D;&#x3D; UserRole.ADMIN)
-  );
-
-  /**
-   * Carga los datos mock de usuarios desde el archivo JSON.
-   * Solo carga una vez (lazy loading con cache).
-   *
-   * @private
-   * @returns {Observable&lt;MockUserData[]&gt;} Lista de usuarios mock.
-   */
-  private loadMockUsers(): Observable&lt;MockUserData[]&gt; {
-    if (this.mockDataLoaded) {
-      return of(this.mockUsers);
-    }
-
-    return this.http.get&lt;MockUserData[]&gt;(&#x27;assets/mock-data/users.mock.json&#x27;).pipe(
-      catchError(() &#x3D;&gt; this.http.get&lt;MockUserData[]&gt;(&#x27;/assets/mock-data/users.mock.json&#x27;)),
-      tap(users &#x3D;&gt; {
-        this.mockUsers &#x3D; users || [];
-        this.mockDataLoaded &#x3D; true;
-      }),
-      catchError(() &#x3D;&gt; {
-        console.error(&#x27;[AuthService] Error al cargar datos mock de usuarios&#x27;);
-        return of([]);
-      })
-    );
-  }
-
-  /**
-   * Genera un token JWT mock (base64 codificado, no criptográficamente seguro).
-   *
-   * @private
-   * @param {User} user - Usuario para el cual generar el token.
-   * @param {&#x27;access&#x27; | &#x27;refresh&#x27;} type - Tipo de token.
-   * @returns {string} Token JWT mock.
-   */
-  private generateMockToken(user: User, type: &#x27;access&#x27; | &#x27;refresh&#x27;): string {
-    const header &#x3D; btoa(JSON.stringify({ alg: &#x27;HS256&#x27;, typ: &#x27;JWT&#x27; }));
-    const now &#x3D; Math.floor(Date.now() / 1000);
-    const payload &#x3D; btoa(JSON.stringify({
-      sub: user.id,
-      email: user.email,
-      role: user.role,
-      type,
-      iat: now,
-      exp: now + (type &#x3D;&#x3D;&#x3D; &#x27;access&#x27; ? 3600 : 86400)
-    }));
-    const signature &#x3D; btoa(&#x60;mock_signature_${user.id}_${type}&#x60;);
-    return &#x60;${header}.${payload}.${signature}&#x60;;
-  }
-
-  /**
-   * Inicia sesión con las credenciales proporcionadas.
-   *
-   * @param {LoginCredentials} credentials - Email y contraseña del usuario.
-   * @returns {Observable&lt;AuthResponse&gt;} Respuesta con usuario y tokens.
-   * @throws {Error} Si las credenciales son inválidas o la cuenta está inactiva.
-   *
-   * @example
-   * &#x60;&#x60;&#x60;typescript
-   * this.authService.login({ email: &#x27;admin@enterprise.com&#x27;, password: &#x27;Admin2026!&#x27; })
-   *   .subscribe({
-   *     next: (response) &#x3D;&gt; console.log(&#x27;Login exitoso&#x27;, response.user),
-   *     error: (err) &#x3D;&gt; console.error(&#x27;Error de login&#x27;, err.message)
-   *   });
-   * &#x60;&#x60;&#x60;
-   */
-  login(credentials: LoginCredentials): Observable&lt;AuthResponse&gt; {
-    this.isLoadingSubject.next(true);
-
-    return this.loadMockUsers().pipe(
-      /** Simula latencia de red ultrarrápida */
-      delay(100),
-      switchMap(users &#x3D;&gt; {
-        const user &#x3D; users.find(
-          u &#x3D;&gt; u.email.toLowerCase() &#x3D;&#x3D;&#x3D; credentials.email.toLowerCase()
-            &amp;&amp; u.password &#x3D;&#x3D;&#x3D; credentials.password
-        );
-
-        if (!user) {
-          return throwError(() &#x3D;&gt; new Error(
-            &#x27;Credenciales incorrectas. Verifica tu email y contraseña.&#x27;
-          ));
-        }
-
-        if (!user.isActive) {
-          return throwError(() &#x3D;&gt; new Error(
-            &#x27;Esta cuenta está desactivada. Contacta con el administrador.&#x27;
-          ));
-        }
-
-        /** Extraemos el password antes de guardar */
-        const { password, ...safeUser } &#x3D; user;
-
-        /** Actualizamos lastLoginAt */
-        const loggedInUser: User &#x3D; {
-          ...safeUser,
-          lastLoginAt: new Date().toISOString()
-        };
-
-        const accessToken &#x3D; this.generateMockToken(loggedInUser, &#x27;access&#x27;);
-        const refreshToken &#x3D; this.generateMockToken(loggedInUser, &#x27;refresh&#x27;);
-
-        const response: AuthResponse &#x3D; {
-          user: loggedInUser,
-          accessToken,
-          refreshToken,
-          expiresIn: 3600
-        };
-
-        /** Persistir en localStorage */
-        this.storeSession(response);
-
-        /** Emitir usuario en el BehaviorSubject */
-        this.currentUserSubject.next(loggedInUser);
-
-        return of(response);
-      }),
-      tap(() &#x3D;&gt; this.isLoadingSubject.next(false)),
-      catchError(error &#x3D;&gt; {
-        this.isLoadingSubject.next(false);
-        return throwError(() &#x3D;&gt; error);
-      })
-    );
-  }
-
-  /**
-   * Registra un nuevo usuario en el sistema.
-   *
-   * @param {RegisterData} data - Datos de registro del nuevo usuario.
-   * @returns {Observable&lt;AuthResponse&gt;} Respuesta con el usuario creado y tokens.
-   * @throws {Error} Si el email ya existe en el sistema.
-   *
-   * @example
-   * &#x60;&#x60;&#x60;typescript
-   * this.authService.register({
-   *   email: &#x27;nuevo@enterprise.com&#x27;,
-   *   password: &#x27;Segura2026!&#x27;,
-   *   confirmPassword: &#x27;Segura2026!&#x27;,
-   *   firstName: &#x27;Ana&#x27;,
-   *   lastName: &#x27;Torres&#x27;
-   * }).subscribe({
-   *   next: (response) &#x3D;&gt; console.log(&#x27;Registro exitoso&#x27;),
-   *   error: (err) &#x3D;&gt; console.error(err.message)
-   * });
-   * &#x60;&#x60;&#x60;
-   */
-  register(data: RegisterData): Observable&lt;AuthResponse&gt; {
-    this.isLoadingSubject.next(true);
-
-    return this.loadMockUsers().pipe(
-      delay(1000 + Math.random() * 500),
-      switchMap(users &#x3D;&gt; {
-        /** Verificar que el email no existe */
-        const exists &#x3D; users.some(
-          u &#x3D;&gt; u.email.toLowerCase() &#x3D;&#x3D;&#x3D; data.email.toLowerCase()
-        );
-
-        if (exists) {
-          return throwError(() &#x3D;&gt; new Error(
-            &#x27;Este email ya está registrado en el sistema.&#x27;
-          ));
-        }
-
-        /** Crear el nuevo usuario */
-        const newUser: User &#x3D; {
-          id: crypto.randomUUID(),
-          email: data.email,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          role: UserRole.USER,
-          avatarUrl: &#x60;https://api.dicebear.com/9.x/initials/svg?seed&#x3D;${data.firstName[0]}${data.lastName[0]}&amp;backgroundColor&#x3D;6366f1&#x60;,
-          isActive: true,
-          createdAt: new Date().toISOString(),
-          lastLoginAt: new Date().toISOString()
-        };
-
-        /** Agregar a la lista mock en memoria */
-        this.mockUsers.push({ ...newUser, password: data.password } as MockUserData);
-
-        const accessToken &#x3D; this.generateMockToken(newUser, &#x27;access&#x27;);
-        const refreshToken &#x3D; this.generateMockToken(newUser, &#x27;refresh&#x27;);
-
-        const response: AuthResponse &#x3D; {
-          user: newUser,
-          accessToken,
-          refreshToken,
-          expiresIn: 3600
-        };
-
-        this.storeSession(response);
-        this.currentUserSubject.next(newUser);
-
-        return of(response);
-      }),
-      tap(() &#x3D;&gt; this.isLoadingSubject.next(false)),
-      catchError(error &#x3D;&gt; {
-        this.isLoadingSubject.next(false);
-        return throwError(() &#x3D;&gt; error);
-      })
-    );
-  }
-
-  /**
-   * Verifica si un email ya está registrado en el sistema.
-   * Diseñado para ser usado como validador asíncrono en formularios reactivos.
-   *
-   * @param {string} email - Email a verificar.
-   * @returns {Observable&lt;boolean&gt;} &#x60;true&#x60; si el email ya existe, &#x60;false&#x60; si está disponible.
-   *
-   * @example
-   * &#x60;&#x60;&#x60;typescript
-   * // Como validador asíncrono en un FormControl
-   * emailControl &#x3D; new FormControl(&#x27;&#x27;, [], [
-   *   (control) &#x3D;&gt; this.authService.checkEmailExists(control.value).pipe(
-   *     map(exists &#x3D;&gt; exists ? { emailTaken: true } : null)
-   *   )
-   * ]);
-   * &#x60;&#x60;&#x60;
-   */
-  checkEmailExists(email: string): Observable&lt;boolean&gt; {
-    return this.loadMockUsers().pipe(
-      delay(500 + Math.random() * 300),
-      map(users &#x3D;&gt; users.some(
-        u &#x3D;&gt; u.email.toLowerCase() &#x3D;&#x3D;&#x3D; email.toLowerCase()
-      ))
-    );
-  }
-
-  /**
-   * Cierra la sesión actual: limpia tokens, storage y emite null.
-   *
-   * @returns {void}
-   */
-  logout(): void {
-    localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
-    localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
-    localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
-    this.currentUserSubject.next(null);
-  }
-
-  /**
-   * Obtiene el token de acceso actual del storage.
-   *
-   * @returns {string | null} Token de acceso o null si no hay sesión.
-   */
-  getAccessToken(): string | null {
-    return localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
-  }
-
-  /**
-   * Obtiene el usuario actual de forma síncrona (snapshot).
-   *
-   * @returns {User | null} Usuario actual o null.
-   */
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.getValue();
-  }
-
-  /**
-   * Verifica si el usuario actual tiene un rol específico.
-   *
-   * @param {UserRole} role - Rol a verificar.
-   * @returns {boolean} &#x60;true&#x60; si el usuario tiene el rol indicado.
-   */
-  hasRole(role: UserRole): boolean {
-    const user &#x3D; this.getCurrentUser();
-    return user?.role &#x3D;&#x3D;&#x3D; role;
-  }
-
-  /**
-   * Persiste la sesión en localStorage.
-   *
-   * @private
-   * @param {AuthResponse} response - Respuesta de autenticación a almacenar.
-   */
-  private storeSession(response: AuthResponse): void {
-    localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, response.accessToken);
-    localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, response.refreshToken);
-    localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(response.user));
-  }
-
-  /**
-   * Recupera el usuario almacenado en localStorage.
-   *
-   * @private
-   * @returns {User | null} Usuario almacenado o null si no hay sesión guardada.
-   */
-  private getStoredUser(): User | null {
-    try {
-      const stored &#x3D; localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
-      return stored ? JSON.parse(stored) as User : null;
-    } catch {
-      return null;
-    }
-  }
+/**
+ * Usuario extendido para persistencia de datos mock en desarrollo.
+ */
+export interface MockUserData extends User {
+  password: string;
 }
 </code></pre>
     </div>

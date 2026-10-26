@@ -19,8 +19,51 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/* Dark mode palettes */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* ==========================================================================
+   SWISS CORPORATE BENTO GRID DESIGN SYSTEM
+   ========================================================================== */
+
+ion-content.page-content {
+  --background: #f8fafc;
+  color: #0f172a;
+}
+
+.bento-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 14px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 12px 24px -2px rgba(15, 23, 42, 0.05);
+  }
+}
+
+.bento-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bento-body {
+  padding: 1.5rem;
+}
+
+.text-swiss-navy {
+  color: #0f172a !important;
+}
+
+.text-swiss-slate {
+  color: #334155 !important;
+}
+
+.text-swiss-muted {
+  color: #475569 !important; /* Ratio 5.9:1 en fondo blanco - WCAG AAA */
+}
 
 /* ==========================================================================
    WCAG 2.1 AA/AAA ACCESSIBILITY & UNIVERSAL DESIGN (RA 4)

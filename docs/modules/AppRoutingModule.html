@@ -186,8 +186,7 @@ const routes: Routes &#x3D; [
   },
   {
     path: &#x27;dashboard&#x27;,
-    canActivate: [authGuard],
-    canMatch: [roleGuard],
+    canActivate: [authGuard, roleGuard],
     data: { requiredRole: &#x27;ADMIN&#x27; },
     loadComponent: () &#x3D;&gt;
       &quot;import(&#x27;./features/dashboard/pages/dashboard/dashboard.page&#x27;).then(\r\n\
@@ -206,8 +205,7 @@ const routes: Routes &#x3D; [
   },
   {
     path: &#x27;reports&#x27;,
-    canActivate: [authGuard],
-    canMatch: [roleGuard],
+    canActivate: [authGuard, roleGuard],
     data: { requiredRole: &#x27;ADMIN&#x27; },
     loadComponent: () &#x3D;&gt;
       &quot;import(&#x27;./features/reports/pages/report-viewer/report-viewer.page&#x27;).then(\r\n\

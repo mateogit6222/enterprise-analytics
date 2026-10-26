@@ -23,7 +23,7 @@
           @if (currentUser$ | async; as user) {
             <div class="user-profile-badge">
               <ion-avatar class="user-avatar">
-                <img [src]="user.avatarUrl" [alt]="'Avatar de ' + (userFullName$ | async)" />
+                <img [src]="user.avatarUrl" [alt]="'Avatar de ' + (userFullName$ | async)" width="44" height="44" loading="lazy" />
               </ion-avatar>
               <div class="user-info">
                 <p class="user-name">{{ userFullName$ | async }}</p>
