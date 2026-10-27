@@ -11,6 +11,7 @@ import {
   MockUserData
 } from '../models/user.model';
 import { FALLBACK_USERS } from '../models/mock-datasets';
+import { sha256, verifyPasswordHash } from '../utils/crypto.util';
 
 /**
  * Token key para almacenamiento local.
@@ -195,7 +196,10 @@ export class AuthService {
       switchMap(users => {
         const user = users.find(
           u => u.email.toLowerCase() === credentials.email.toLowerCase()
-            && u.password === credentials.password
+            && (
+              verifyPasswordHash(credentials.password, u.passwordHash) ||
+              (u.password && u.password === credentials.password)
+            )
         );
 
         if (!user) {
@@ -210,8 +214,8 @@ export class AuthService {
           ));
         }
 
-        /** Extraemos el password antes de guardar */
-        const { password, ...safeUser } = user;
+        /** Extraemos los campos sensibles antes de guardar la sesión */
+        const { password, passwordHash, ...safeUser } = user;
 
         /** Actualizamos lastLoginAt */
         const loggedInUser: User = {
@@ -296,8 +300,8 @@ export class AuthService {
           lastLoginAt: new Date().toISOString()
         };
 
-        /** Agregar a la lista mock en memoria */
-        this.mockUsers.push({ ...newUser, password: data.password } as MockUserData);
+        /** Agregar a la lista mock en memoria con hash seguro */
+        this.mockUsers.push({ ...newUser, passwordHash: sha256(data.password) } as MockUserData);
 
         const accessToken = this.generateMockToken(newUser, 'access');
         const refreshToken = this.generateMockToken(newUser, 'refresh');

@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id TEXT PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
+  password_hash TEXT NOT NULL,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   role TEXT NOT NULL CHECK (role IN ('ADMIN', 'USER')),
@@ -63,13 +63,13 @@ CREATE POLICY "Permitir eliminacion publica de registros" ON records
 CREATE POLICY "Permitir lectura publica de usuarios" ON users
   FOR SELECT TO anon, authenticated USING (true);
 
--- 5. INSERCIÓN DE USUARIOS DE PRUEBA
-INSERT INTO users (id, email, password, first_name, last_name, role, avatar_url, is_active, created_at, last_login_at)
+-- 5. INSERCIÓN DE USUARIOS DE PRUEBA (HASHES SHA-256 SIN CONTRASEÑAS EN TEXTO PLANO)
+INSERT INTO users (id, email, password_hash, first_name, last_name, role, avatar_url, is_active, created_at, last_login_at)
 VALUES
-  ('usr-admin-001', 'admin@enterprise.com', 'Admin2026!', 'Elena', 'Martínez', 'ADMIN', 'https://api.dicebear.com/9.x/initials/svg?seed=EM&backgroundColor=6366f1', true, '2025-01-15T08:30:00Z', NOW()),
-  ('usr-user-001', 'user@enterprise.com', 'User2026!', 'Carlos', 'López', 'USER', 'https://api.dicebear.com/9.x/initials/svg?seed=CL&backgroundColor=06b6d4', true, '2025-03-22T14:00:00Z', NOW()),
-  ('usr-user-002', 'javier.ruiz@enterprise.com', 'Javier2026!', 'Javier', 'Ruiz', 'USER', 'https://api.dicebear.com/9.x/initials/svg?seed=JR&backgroundColor=10b981', true, '2025-06-10T11:20:00Z', NOW()),
-  ('usr-admin-002', 'maria.garcia@enterprise.com', 'Maria2026!', 'María', 'García', 'ADMIN', 'https://api.dicebear.com/9.x/initials/svg?seed=MG&backgroundColor=f43f5e', true, '2025-02-28T09:45:00Z', NOW());
+  ('usr-admin-001', 'admin@enterprise.com', '04445e6487736590d1ef50186b414e737e0164683cbbec64e00e73c000fd3bef', 'Elena', 'Martínez', 'ADMIN', 'https://api.dicebear.com/9.x/initials/svg?seed=EM&backgroundColor=6366f1', true, '2025-01-15T08:30:00Z', NOW()),
+  ('usr-user-001', 'user@enterprise.com', 'cb1bc5abcdca0bdfc656344aa5011268b00aba457ac33034f3946e29ef79a603', 'Carlos', 'López', 'USER', 'https://api.dicebear.com/9.x/initials/svg?seed=CL&backgroundColor=06b6d4', true, '2025-03-22T14:00:00Z', NOW()),
+  ('usr-user-002', 'javier.ruiz@enterprise.com', 'b505981b4b1c56908b27d6de3687fad6d6ff9d9ba9a016f010e99dc32ecd47d8', 'Javier', 'Ruiz', 'USER', 'https://api.dicebear.com/9.x/initials/svg?seed=JR&backgroundColor=10b981', true, '2025-06-10T11:20:00Z', NOW()),
+  ('usr-admin-002', 'maria.garcia@enterprise.com', '80f0ba29e909a928784db26475341a13c968335e56f9f942bd38159e1a988c85', 'María', 'García', 'ADMIN', 'https://api.dicebear.com/9.x/initials/svg?seed=MG&backgroundColor=f43f5e', true, '2025-02-28T09:45:00Z', NOW());
 
 -- 6. INSERCIÓN DE REGISTROS EMPRESARIALES CORPORATIVOS
 INSERT INTO records (id, title, description, category, status, amount, assigned_to, client_name, client_email, region, sku, tags, created_at, updated_at, source)

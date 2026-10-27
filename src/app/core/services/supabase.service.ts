@@ -3,6 +3,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
 import { Record } from '../models/record.model';
 import { User, UserRole } from '../models/user.model';
+import { verifyPasswordHash } from '../utils/crypto.util';
 
 /**
  * @class SupabaseService
@@ -202,6 +203,47 @@ export class SupabaseService {
         createdAt: u.created_at || u.createdAt || new Date().toISOString(),
         lastLoginAt: u.last_login_at || u.lastLoginAt || new Date().toISOString()
       }));
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Valida credenciales contra Supabase (PostgreSQL) usando hash SHA-256.
+   * Si la tabla no está disponible o falla la consulta, devuelve null para fallback en memoria.
+   */
+  async authenticateUser(email: string, plainPassword: string): Promise<User | null> {
+    if (!this.isConfigured() || !this.client) {
+      return null;
+    }
+
+    try {
+      const { data, error } = await this.client
+        .from('users')
+        .select('*')
+        .eq('email', email.trim().toLowerCase())
+        .limit(1)
+        .maybeSingle();
+
+      if (error || !data) {
+        return null;
+      }
+
+      const hash = data.password_hash || data.passwordHash || data.password;
+      if (verifyPasswordHash(plainPassword, hash)) {
+        return {
+          id: data.id,
+          email: data.email,
+          firstName: data.first_name || data.firstName,
+          lastName: data.last_name || data.lastName,
+          role: (data.role as UserRole) || UserRole.USER,
+          avatarUrl: data.avatar_url || data.avatarUrl || 'https://api.dicebear.com/9.x/initials/svg?seed=EM',
+          isActive: data.is_active ?? data.isActive ?? true,
+          createdAt: data.created_at || data.createdAt || new Date().toISOString(),
+          lastLoginAt: new Date().toISOString()
+        };
+      }
+      return null;
     } catch {
       return null;
     }
