@@ -1118,58 +1118,58 @@ export class ProfilePage {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border header-glass&quot;&gt;
-  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border header-taste&quot;&gt;
+  &lt;ion-toolbar class&#x3D;&quot;toolbar-taste&quot;&gt;
     &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
-      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot;&gt;&lt;/ion-menu-button&gt;
+      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot; class&#x3D;&quot;menu-btn-taste&quot;&gt;&lt;/ion-menu-button&gt;
     &lt;/ion-buttons&gt;
-    &lt;ion-title&gt;Mi Perfil y Preferencias&lt;/ion-title&gt;
+    &lt;ion-title class&#x3D;&quot;page-title-taste&quot;&gt;Perfil y Preferencias&lt;/ion-title&gt;
   &lt;/ion-toolbar&gt;
 &lt;/ion-header&gt;
 
 &lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;page-content&quot; id&#x3D;&quot;profile-content&quot;&gt;
-  &lt;div class&#x3D;&quot;container-fluid px-3 px-lg-4 py-4&quot;&gt;
+  &lt;main class&#x3D;&quot;container-fluid px-3 px-lg-4 py-3&quot; aria-label&#x3D;&quot;Perfil de usuario y accesibilidad&quot;&gt;
 
     @if (currentUser$ | async; as user) {
       &lt;!-- Tarjeta Principal de Perfil del Usuario en Bento Card --&gt;
-      &lt;section class&#x3D;&quot;bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm&quot; aria-label&#x3D;&quot;Información de la cuenta de usuario&quot;&gt;
-        &lt;div class&#x3D;&quot;d-flex flex-column flex-sm-row align-items-center gap-4&quot;&gt;
+      &lt;section class&#x3D;&quot;bento-card p-3 p-md-4 mb-3&quot; aria-label&#x3D;&quot;Información de la cuenta de usuario&quot;&gt;
+        &lt;div class&#x3D;&quot;d-flex flex-column flex-sm-row align-items-center gap-3&quot;&gt;
           &lt;div class&#x3D;&quot;position-relative&quot;&gt;
             &lt;img
               [src]&#x3D;&quot;user.avatarUrl&quot;
               [alt]&#x3D;&quot;&#x27;Fotografía de perfil de &#x27; + (userFullName$ | async)&quot;
-              width&#x3D;&quot;88&quot;
-              height&#x3D;&quot;88&quot;
+              width&#x3D;&quot;80&quot;
+              height&#x3D;&quot;80&quot;
               loading&#x3D;&quot;lazy&quot;
-              class&#x3D;&quot;rounded-circle border border-2 shadow-sm&quot;
+              class&#x3D;&quot;rounded-circle profile-avatar&quot;
             /&gt;
-            &lt;span class&#x3D;&quot;position-absolute bottom-0 end-0 p-2 bg-success border border-white rounded-circle&quot; title&#x3D;&quot;Sesión activa&quot;&gt;
+            &lt;span class&#x3D;&quot;avatar-online-dot&quot; title&#x3D;&quot;Sesión activa&quot;&gt;
               &lt;span class&#x3D;&quot;visually-hidden&quot;&gt;En línea&lt;/span&gt;
             &lt;/span&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;text-center text-sm-start flex-grow-1&quot;&gt;
             &lt;div class&#x3D;&quot;d-flex flex-column flex-sm-row align-items-center align-items-sm-baseline gap-2 mb-1&quot;&gt;
-              &lt;h1 class&#x3D;&quot;h4 fw-bold text-dark mb-0&quot;&gt;{{ userFullName$ | async }}&lt;/h1&gt;
-              &lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bg-primary&#x27; : &#x27;bg-secondary&#x27;&quot;&gt;
-                &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;shield-checkmark-outline&#x27; : &#x27;person-outline&#x27;&quot; class&#x3D;&quot;me-1&quot;&gt;&lt;/ion-icon&gt;
+              &lt;h1 class&#x3D;&quot;screen-title mb-0&quot;&gt;{{ userFullName$ | async }}&lt;/h1&gt;
+              &lt;span class&#x3D;&quot;pill&quot; [class.pill-accent]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot; [class.pill-neutral]&#x3D;&quot;user.role !&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+                &lt;i [class]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bi bi-shield-check me-1&#x27; : &#x27;bi bi-person me-1&#x27;&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                 {{ userRoleLabel$ | async }}
               &lt;/span&gt;
             &lt;/div&gt;
 
-            &lt;p class&#x3D;&quot;text-secondary small mb-2 d-inline-flex align-items-center gap-1&quot;&gt;
-              &lt;ion-icon name&#x3D;&quot;mail-outline&quot;&gt;&lt;/ion-icon&gt;
+            &lt;p class&#x3D;&quot;taste-caption mb-2 d-inline-flex align-items-center gap-1.5&quot;&gt;
+              &lt;i class&#x3D;&quot;bi bi-envelope text-muted&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
               &lt;span&gt;{{ user.email }}&lt;/span&gt;
             &lt;/p&gt;
 
             &lt;div class&#x3D;&quot;d-flex flex-wrap gap-2 justify-content-center justify-content-sm-start&quot;&gt;
-              &lt;span class&#x3D;&quot;badge bg-light text-secondary border small fw-normal&quot;&gt;
+              &lt;span class&#x3D;&quot;pill pill-neutral&quot;&gt;
                 ID: &lt;code&gt;{{ user.id }}&lt;/code&gt;
               &lt;/span&gt;
-              &lt;span class&#x3D;&quot;badge bg-light text-secondary border small fw-normal&quot;&gt;
+              &lt;span class&#x3D;&quot;pill pill-neutral&quot;&gt;
                 Último acceso: {{ user.lastLoginAt | date:&#x27;medium&#x27; }}
               &lt;/span&gt;
-              &lt;span class&#x3D;&quot;badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small fw-normal&quot;&gt;
+              &lt;span class&#x3D;&quot;pill pill-success&quot;&gt;
                 Cuenta Activa
               &lt;/span&gt;
             &lt;/div&gt;
@@ -1178,49 +1178,47 @@ export class ProfilePage {
       &lt;/section&gt;
 
       &lt;!-- Grid con Permisos de Rol y Panel de Accesibilidad --&gt;
-      &lt;div class&#x3D;&quot;row g-4&quot;&gt;
+      &lt;div class&#x3D;&quot;row g-3&quot;&gt;
         
         &lt;!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA) --&gt;
         &lt;div class&#x3D;&quot;col-12 col-lg-6&quot;&gt;
-          &lt;section class&#x3D;&quot;bento-card p-4 bg-white rounded-3 border shadow-sm h-100&quot; aria-label&#x3D;&quot;Preferencias de accesibilidad y visualización&quot;&gt;
-            &lt;div class&#x3D;&quot;d-flex align-items-center gap-3 mb-4 pb-3 border-bottom&quot;&gt;
-              &lt;div class&#x3D;&quot;rounded-3 p-2 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center&quot; style&#x3D;&quot;width: 42px; height: 42px;&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;accessibility-outline&quot; class&#x3D;&quot;fs-5&quot;&gt;&lt;/ion-icon&gt;
-              &lt;/div&gt;
+          &lt;section class&#x3D;&quot;bento-card p-3 p-md-4 h-100&quot; aria-label&#x3D;&quot;Preferencias de accesibilidad y visualización&quot;&gt;
+            &lt;div class&#x3D;&quot;d-flex align-items-center gap-2 mb-3 pb-2 border-bottom&quot;&gt;
+              &lt;i class&#x3D;&quot;bi bi-universal-access text-muted fs-5&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
               &lt;div&gt;
-                &lt;h2 class&#x3D;&quot;h6 fw-bold text-dark mb-0&quot;&gt;Accesibilidad &amp; Experiencia Universal&lt;/h2&gt;
-                &lt;p class&#x3D;&quot;small text-secondary mb-0&quot;&gt;Personaliza la visualización conforme a WCAG 2.1 AA/AAA&lt;/p&gt;
+                &lt;h2 class&#x3D;&quot;card-section-title mb-0&quot;&gt;Accesibilidad &amp; Experiencia Universal&lt;/h2&gt;
+                &lt;p class&#x3D;&quot;taste-caption mb-0&quot;&gt;Personalización conforme a directrices WCAG 2.1 AA/AAA&lt;/p&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 
-            &lt;div *ngIf&#x3D;&quot;accessibilityPrefs$ | async as prefs&quot; class&#x3D;&quot;d-flex flex-column gap-4&quot;&gt;
+            &lt;div *ngIf&#x3D;&quot;accessibilityPrefs$ | async as prefs&quot; class&#x3D;&quot;d-flex flex-column gap-3&quot;&gt;
               
               &lt;!-- 1. Escala de Tipografía --&gt;
               &lt;div&gt;
-                &lt;label class&#x3D;&quot;form-label fw-semibold text-dark small mb-1&quot;&gt;Tamaño de Tipografía&lt;/label&gt;
-                &lt;p class&#x3D;&quot;text-secondary small mb-2&quot;&gt;Aumenta el tamaño del texto en toda la interfaz sin desbordamientos.&lt;/p&gt;
+                &lt;label class&#x3D;&quot;taste-form-label mb-1&quot;&gt;Tamaño de Tipografía&lt;/label&gt;
+                &lt;p class&#x3D;&quot;taste-caption mb-2&quot;&gt;Ajusta la escala tipográfica sin romper proporciones visuales.&lt;/p&gt;
                 
-                &lt;div class&#x3D;&quot;btn-group w-100&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Selector de tamaño de texto&quot;&gt;
+                &lt;div class&#x3D;&quot;filter-rail w-100 d-flex&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Selector de tamaño de texto&quot;&gt;
                   &lt;button
                     type&#x3D;&quot;button&quot;
-                    class&#x3D;&quot;btn btn-sm&quot;
-                    [ngClass]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-outline-secondary&#x27;&quot;
+                    class&#x3D;&quot;filter-btn flex-fill text-center&quot;
+                    [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;normal&#x27;&quot;
                     (click)&#x3D;&quot;onFontSizeChanged(&#x27;normal&#x27;)&quot;&gt;
                     Normal (100%)
                   &lt;/button&gt;
 
                   &lt;button
                     type&#x3D;&quot;button&quot;
-                    class&#x3D;&quot;btn btn-sm&quot;
-                    [ngClass]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-outline-secondary&#x27;&quot;
+                    class&#x3D;&quot;filter-btn flex-fill text-center&quot;
+                    [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;large&#x27;&quot;
                     (click)&#x3D;&quot;onFontSizeChanged(&#x27;large&#x27;)&quot;&gt;
                     Grande (115%)
                   &lt;/button&gt;
 
                   &lt;button
                     type&#x3D;&quot;button&quot;
-                    class&#x3D;&quot;btn btn-sm&quot;
-                    [ngClass]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-outline-secondary&#x27;&quot;
+                    class&#x3D;&quot;filter-btn flex-fill text-center&quot;
+                    [class.active]&#x3D;&quot;prefs.fontSize &#x3D;&#x3D;&#x3D; &#x27;xl&#x27;&quot;
                     (click)&#x3D;&quot;onFontSizeChanged(&#x27;xl&#x27;)&quot;&gt;
                     Extra (130%)
                   &lt;/button&gt;
@@ -1230,14 +1228,13 @@ export class ProfilePage {
               &lt;!-- 2. Modo Alto Contraste --&gt;
               &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center pt-2 border-top&quot;&gt;
                 &lt;div class&#x3D;&quot;pe-3&quot;&gt;
-                  &lt;label for&#x3D;&quot;high-contrast-toggle&quot; class&#x3D;&quot;fw-semibold text-dark small mb-0 d-block&quot;&gt;Modo Alto Contraste (WCAG AAA)&lt;/label&gt;
-                  &lt;span class&#x3D;&quot;text-secondary small&quot;&gt;Fondo negro puro con contraste superior a 7:1.&lt;/span&gt;
+                  &lt;label for&#x3D;&quot;high-contrast-toggle&quot; class&#x3D;&quot;taste-control-label mb-0 d-block&quot;&gt;Modo Alto Contraste (WCAG AAA)&lt;/label&gt;
+                  &lt;span class&#x3D;&quot;taste-caption&quot;&gt;Contraste cromático estricto superior a 7:1.&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;ion-toggle
                   id&#x3D;&quot;high-contrast-toggle&quot;
                   [checked]&#x3D;&quot;prefs.highContrast&quot;
                   (ionChange)&#x3D;&quot;onHighContrastToggled($event.detail.checked)&quot;
-                  color&#x3D;&quot;warning&quot;
                   aria-label&#x3D;&quot;Activar o desactivar modo de alto contraste WCAG AAA&quot;&gt;
                 &lt;/ion-toggle&gt;
               &lt;/div&gt;
@@ -1245,22 +1242,21 @@ export class ProfilePage {
               &lt;!-- 3. Reducción de Movimiento --&gt;
               &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center pt-2 border-top&quot;&gt;
                 &lt;div class&#x3D;&quot;pe-3&quot;&gt;
-                  &lt;label for&#x3D;&quot;reduced-motion-toggle&quot; class&#x3D;&quot;fw-semibold text-dark small mb-0 d-block&quot;&gt;Reducción de Movimiento&lt;/label&gt;
-                  &lt;span class&#x3D;&quot;text-secondary small&quot;&gt;Desactiva animaciones complejas y transiciones CSS.&lt;/span&gt;
+                  &lt;label for&#x3D;&quot;reduced-motion-toggle&quot; class&#x3D;&quot;taste-control-label mb-0 d-block&quot;&gt;Reducción de Movimiento&lt;/label&gt;
+                  &lt;span class&#x3D;&quot;taste-caption&quot;&gt;Desactiva micro-interacciones y transiciones continuas.&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;ion-toggle
                   id&#x3D;&quot;reduced-motion-toggle&quot;
                   [checked]&#x3D;&quot;prefs.reducedMotion&quot;
                   (ionChange)&#x3D;&quot;onReducedMotionToggled($event.detail.checked)&quot;
-                  color&#x3D;&quot;secondary&quot;
                   aria-label&#x3D;&quot;Activar o desactivar reducción de movimiento&quot;&gt;
                 &lt;/ion-toggle&gt;
               &lt;/div&gt;
 
               &lt;!-- Botón de Restablecer --&gt;
-              &lt;div class&#x3D;&quot;pt-3 border-top&quot;&gt;
-                &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm w-100 d-inline-flex align-items-center justify-content-center gap-2&quot; (click)&#x3D;&quot;resetAccessibilityDefaults()&quot;&gt;
-                  &lt;ion-icon name&#x3D;&quot;refresh-outline&quot;&gt;&lt;/ion-icon&gt;
+              &lt;div class&#x3D;&quot;pt-2 border-top&quot;&gt;
+                &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-subtle-taste w-100 d-inline-flex align-items-center justify-content-center gap-1.5&quot; (click)&#x3D;&quot;resetAccessibilityDefaults()&quot;&gt;
+                  &lt;i class&#x3D;&quot;bi bi-arrow-counterclockwise&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                   &lt;span&gt;Restablecer Opciones Predeterminadas&lt;/span&gt;
                 &lt;/button&gt;
               &lt;/div&gt;
@@ -1271,89 +1267,87 @@ export class ProfilePage {
 
         &lt;!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad --&gt;
         &lt;div class&#x3D;&quot;col-12 col-lg-6&quot;&gt;
-          &lt;section class&#x3D;&quot;bento-card p-4 bg-white rounded-3 border shadow-sm h-100&quot; aria-label&#x3D;&quot;Permisos asignados según el rol del usuario&quot;&gt;
-            &lt;div class&#x3D;&quot;d-flex align-items-center gap-3 mb-4 pb-3 border-bottom&quot;&gt;
-              &lt;div class&#x3D;&quot;rounded-3 p-2 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center&quot; style&#x3D;&quot;width: 42px; height: 42px;&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;shield-outline&quot; class&#x3D;&quot;fs-5&quot;&gt;&lt;/ion-icon&gt;
-              &lt;/div&gt;
+          &lt;section class&#x3D;&quot;bento-card p-3 p-md-4 h-100&quot; aria-label&#x3D;&quot;Permisos asignados según el rol del usuario&quot;&gt;
+            &lt;div class&#x3D;&quot;d-flex align-items-center gap-2 mb-3 pb-2 border-bottom&quot;&gt;
+              &lt;i class&#x3D;&quot;bi bi-shield-lock text-muted fs-5&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
               &lt;div&gt;
-                &lt;h2 class&#x3D;&quot;h6 fw-bold text-dark mb-0&quot;&gt;Permisos del Rol (RBAC)&lt;/h2&gt;
-                &lt;p class&#x3D;&quot;small text-secondary mb-0&quot;&gt;Capacidades autorizadas para tu perfil&lt;/p&gt;
+                &lt;h2 class&#x3D;&quot;card-section-title mb-0&quot;&gt;Permisos del Rol (RBAC)&lt;/h2&gt;
+                &lt;p class&#x3D;&quot;taste-caption mb-0&quot;&gt;Capacidades asignadas por directiva de seguridad&lt;/p&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 
-            &lt;div class&#x3D;&quot;list-group list-group-flush mb-4&quot;&gt;
-              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+            &lt;div class&#x3D;&quot;d-flex flex-column gap-2 mb-3&quot;&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border&quot;&gt;
                 &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
-                  &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;text-success&#x27; : &#x27;text-secondary&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;i [class]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bi bi-check-circle-fill text-success&#x27; : &#x27;bi bi-lock-fill text-muted&#x27;&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                   &lt;div&gt;
-                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Dashboard Analítico&lt;/strong&gt;
-                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Visualización de métricas y gráficos spline.&lt;/span&gt;
+                    &lt;strong class&#x3D;&quot;d-block text-ink small&quot;&gt;Dashboard Analítico&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;taste-caption&quot;&gt;Visualización de métricas y gráficos spline.&lt;/span&gt;
                   &lt;/div&gt;
                 &lt;/div&gt;
-                &lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bg-primary&#x27; : &#x27;bg-light text-secondary border&#x27;&quot;&gt;
+                &lt;span class&#x3D;&quot;pill&quot; [class.pill-accent]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot; [class.pill-neutral]&#x3D;&quot;user.role !&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
                   {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Admin&#x27; }}
                 &lt;/span&gt;
               &lt;/div&gt;
 
-              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border&quot;&gt;
                 &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
-                  &lt;ion-icon [name]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;checkmark-circle&#x27; : &#x27;lock-closed-outline&#x27;&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;text-success&#x27; : &#x27;text-secondary&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;i [class]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bi bi-check-circle-fill text-success&#x27; : &#x27;bi bi-lock-fill text-muted&#x27;&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                   &lt;div&gt;
-                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Generador de Informes&lt;/strong&gt;
-                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Previsualización y exportación en PDF.&lt;/span&gt;
+                    &lt;strong class&#x3D;&quot;d-block text-ink small&quot;&gt;Generador de Informes&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;taste-caption&quot;&gt;Previsualización y exportación en PDF.&lt;/span&gt;
                   &lt;/div&gt;
                 &lt;/div&gt;
-                &lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;bg-primary&#x27; : &#x27;bg-light text-secondary border&#x27;&quot;&gt;
+                &lt;span class&#x3D;&quot;pill&quot; [class.pill-accent]&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot; [class.pill-neutral]&#x3D;&quot;user.role !&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
                   {{ user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27; ? &#x27;Habilitado&#x27; : &#x27;Admin&#x27; }}
                 &lt;/span&gt;
               &lt;/div&gt;
 
-              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border&quot;&gt;
                 &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
-                  &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;text-success&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;i class&#x3D;&quot;bi bi-check-circle-fill text-success&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                   &lt;div&gt;
-                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Gestión de Registros (CRUD)&lt;/strong&gt;
-                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Búsqueda, ordenación y alta de registros.&lt;/span&gt;
+                    &lt;strong class&#x3D;&quot;d-block text-ink small&quot;&gt;Gestión de Registros (CRUD)&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;taste-caption&quot;&gt;Búsqueda, ordenación y alta de registros.&lt;/span&gt;
                   &lt;/div&gt;
                 &lt;/div&gt;
-                &lt;span class&#x3D;&quot;badge bg-success bg-opacity-10 text-success border border-success border-opacity-25&quot;&gt;Habilitado&lt;/span&gt;
+                &lt;span class&#x3D;&quot;pill pill-success&quot;&gt;Habilitado&lt;/span&gt;
               &lt;/div&gt;
 
-              &lt;div class&#x3D;&quot;list-group-item px-0 d-flex justify-content-between align-items-center&quot;&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border&quot;&gt;
                 &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot;&gt;
-                  &lt;ion-icon name&#x3D;&quot;checkmark-circle&quot; class&#x3D;&quot;text-success&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;i class&#x3D;&quot;bi bi-check-circle-fill text-success&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                   &lt;div&gt;
-                    &lt;strong class&#x3D;&quot;d-block small text-dark&quot;&gt;Exportación a CSV (Excel UTF-8)&lt;/strong&gt;
-                    &lt;span class&#x3D;&quot;small text-secondary&quot;&gt;Descarga estructurada del dataset.&lt;/span&gt;
+                    &lt;strong class&#x3D;&quot;d-block text-ink small&quot;&gt;Exportación a CSV (Excel UTF-8)&lt;/strong&gt;
+                    &lt;span class&#x3D;&quot;taste-caption&quot;&gt;Descarga estructurada del dataset.&lt;/span&gt;
                   &lt;/div&gt;
                 &lt;/div&gt;
-                &lt;span class&#x3D;&quot;badge bg-success bg-opacity-10 text-success border border-success border-opacity-25&quot;&gt;Habilitado&lt;/span&gt;
+                &lt;span class&#x3D;&quot;pill pill-success&quot;&gt;Habilitado&lt;/span&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 
             &lt;!-- Detalles Técnicos de la Sesión --&gt;
-            &lt;div class&#x3D;&quot;p-3 bg-light rounded-3 border&quot;&gt;
-              &lt;h3 class&#x3D;&quot;h6 fw-bold text-dark mb-2 d-flex align-items-center gap-2&quot;&gt;
-                &lt;ion-icon name&#x3D;&quot;terminal-outline&quot; class&#x3D;&quot;text-primary&quot;&gt;&lt;/ion-icon&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-rail rounded-2 border&quot;&gt;
+              &lt;h3 class&#x3D;&quot;card-section-title mb-2 d-flex align-items-center gap-2&quot;&gt;
+                &lt;i class&#x3D;&quot;bi bi-cpu text-muted&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
                 &lt;span&gt;Detalles Técnicos de Sesión&lt;/span&gt;
               &lt;/h3&gt;
-              &lt;div class&#x3D;&quot;row g-2 small text-secondary&quot;&gt;
+              &lt;div class&#x3D;&quot;row g-2 taste-caption&quot;&gt;
                 &lt;div class&#x3D;&quot;col-6&quot;&gt;
-                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Base de Datos:&lt;/span&gt;
-                  &lt;span&gt;Supabase Cloud PostgreSQL&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-ink&quot;&gt;Base de Datos:&lt;/span&gt;
+                  &lt;span&gt;Supabase PostgreSQL Cloud&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;col-6&quot;&gt;
-                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Manejador Estado:&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-ink&quot;&gt;Manejador Estado:&lt;/span&gt;
                   &lt;span&gt;NgRx Store v22&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;col-6&quot;&gt;
-                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Detección Cambios:&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-ink&quot;&gt;Detección Cambios:&lt;/span&gt;
                   &lt;span&gt;OnPush Reactivo&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;col-6&quot;&gt;
-                  &lt;span class&#x3D;&quot;d-block fw-semibold text-dark&quot;&gt;Diseño:&lt;/span&gt;
-                  &lt;span&gt;Bootstrap 5 Bento Grid&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;d-block fw-semibold text-ink&quot;&gt;Diseño:&lt;/span&gt;
+                  &lt;span&gt;Taste Framed Sheet&lt;/span&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -1364,7 +1358,7 @@ export class ProfilePage {
       &lt;/div&gt;
     }
 
-  &lt;/div&gt;
+  &lt;/main&gt;
 &lt;/ion-content&gt;
 </code></pre>
     </div>
@@ -1373,14 +1367,130 @@ export class ProfilePage {
                 <p class="comment">
                     <code>./profile.page.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.page-content {
-  --background: #f8fafc;
-  color: #0f172a;
+                <pre class="line-numbers"><code class="language-scss">.header-taste {
+  border-bottom: 1px solid var(--border, #e8eaec);
+  background: var(--surface, #ffffff);
 }
 
-.bento-card {
-  border-color: #e2e8f0 !important;
-  border-radius: 14px;
+.toolbar-taste {
+  --background: var(--surface, #ffffff);
+  --color: var(--ink, #131416);
+  --min-height: 52px;
+}
+
+.menu-btn-taste {
+  color: var(--ink, #131416);
+}
+
+.page-title-taste {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ink, #131416);
+}
+
+.page-content {
+  --background: var(--ground, #f9fbfc);
+  color: var(--ink, #131416);
+}
+
+.screen-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink, #131416);
+}
+
+.card-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink, #131416);
+}
+
+.taste-caption {
+  font-size: 12px;
+  color: var(--muted, #52555a);
+}
+
+.taste-form-label,
+.taste-control-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink, #131416);
+}
+
+.profile-avatar {
+  border: 1px solid var(--border, #e8eaec);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--success, #1e7b4f);
+  border: 2px solid #ffffff;
+}
+
+.filter-rail {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--rail, #f4f6f8);
+  border-radius: 6px;
+  border: 1px solid var(--border, #e8eaec);
+}
+
+.filter-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted, #52555a);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &amp;:hover {
+    color: var(--ink, #131416);
+  }
+
+  &amp;.active {
+    background: #ffffff;
+    color: var(--ink, #131416);
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.btn-subtle-taste {
+  height: 32px;
+  padding: 0 11px;
+  background: var(--surface, #ffffff);
+  color: var(--ink, #131416);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &amp;:hover {
+    background: var(--rail, #f4f6f8);
+    border-color: #b8bac0;
+  }
+}
+
+.bg-rail-subtle {
+  background-color: #fafbfc;
+}
+
+.bg-rail {
+  background-color: var(--rail, #f4f6f8);
 }
 </code></pre>
     </div>
@@ -1410,7 +1520,7 @@ export class ProfilePage {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Mi Perfil y Preferencias</ion-title>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content" id="profile-content">  <div class="container-fluid px-3 px-lg-4 py-4">    @if (currentUser$ | async; as user) {      <!-- Tarjeta Principal de Perfil del Usuario en Bento Card -->      <section class="bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm" aria-label="Información de la cuenta de usuario">        <div class="d-flex flex-column flex-sm-row align-items-center gap-4">          <div class="position-relative">            <img              [src]="user.avatarUrl"              [alt]="\'Fotografía de perfil de \' + (userFullName$ | async)"              width="88"              height="88"              loading="lazy"              class="rounded-circle border border-2 shadow-sm"            />            <span class="position-absolute bottom-0 end-0 p-2 bg-success border border-white rounded-circle" title="Sesión activa">              <span class="visually-hidden">En línea</span>            </span>          </div>          <div class="text-center text-sm-start flex-grow-1">            <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-baseline gap-2 mb-1">              <h1 class="h4 fw-bold text-dark mb-0">{{ userFullName$ | async }}</h1>              <span class="badge" [ngClass]="user.role === \'ADMIN\' ? \'bg-primary\' : \'bg-secondary\'">                <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'" class="me-1"></ion-icon>                {{ userRoleLabel$ | async }}              </span>            </div>            <p class="text-secondary small mb-2 d-inline-flex align-items-center gap-1">              <ion-icon name="mail-outline"></ion-icon>              <span>{{ user.email }}</span>            </p>            <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-sm-start">              <span class="badge bg-light text-secondary border small fw-normal">                ID: <code>{{ user.id }}</code>              </span>              <span class="badge bg-light text-secondary border small fw-normal">                Último acceso: {{ user.lastLoginAt | date:\'medium\' }}              </span>              <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small fw-normal">                Cuenta Activa              </span>            </div>          </div>        </div>      </section>      <!-- Grid con Permisos de Rol y Panel de Accesibilidad -->      <div class="row g-4">                <!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA) -->        <div class="col-12 col-lg-6">          <section class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100" aria-label="Preferencias de accesibilidad y visualización">            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">              <div class="rounded-3 p-2 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">                <ion-icon name="accessibility-outline" class="fs-5"></ion-icon>              </div>              <div>                <h2 class="h6 fw-bold text-dark mb-0">Accesibilidad & Experiencia Universal</h2>                <p class="small text-secondary mb-0">Personaliza la visualización conforme a WCAG 2.1 AA/AAA</p>              </div>            </div>            <div *ngIf="accessibilityPrefs$ | async as prefs" class="d-flex flex-column gap-4">                            <!-- 1. Escala de Tipografía -->              <div>                <label class="form-label fw-semibold text-dark small mb-1">Tamaño de Tipografía</label>                <p class="text-secondary small mb-2">Aumenta el tamaño del texto en toda la interfaz sin desbordamientos.</p>                                <div class="btn-group w-100" role="group" aria-label="Selector de tamaño de texto">                  <button                    type="button"                    class="btn btn-sm"                    [ngClass]="prefs.fontSize === \'normal\' ? \'btn-primary\' : \'btn-outline-secondary\'"                    (click)="onFontSizeChanged(\'normal\')">                    Normal (100%)                  </button>                  <button                    type="button"                    class="btn btn-sm"                    [ngClass]="prefs.fontSize === \'large\' ? \'btn-primary\' : \'btn-outline-secondary\'"                    (click)="onFontSizeChanged(\'large\')">                    Grande (115%)                  </button>                  <button                    type="button"                    class="btn btn-sm"                    [ngClass]="prefs.fontSize === \'xl\' ? \'btn-primary\' : \'btn-outline-secondary\'"                    (click)="onFontSizeChanged(\'xl\')">                    Extra (130%)                  </button>                </div>              </div>              <!-- 2. Modo Alto Contraste -->              <div class="d-flex justify-content-between align-items-center pt-2 border-top">                <div class="pe-3">                  <label for="high-contrast-toggle" class="fw-semibold text-dark small mb-0 d-block">Modo Alto Contraste (WCAG AAA)</label>                  <span class="text-secondary small">Fondo negro puro con contraste superior a 7:1.</span>                </div>                <ion-toggle                  id="high-contrast-toggle"                  [checked]="prefs.highContrast"                  (ionChange)="onHighContrastToggled($event.detail.checked)"                  color="warning"                  aria-label="Activar o desactivar modo de alto contraste WCAG AAA">                </ion-toggle>              </div>              <!-- 3. Reducción de Movimiento -->              <div class="d-flex justify-content-between align-items-center pt-2 border-top">                <div class="pe-3">                  <label for="reduced-motion-toggle" class="fw-semibold text-dark small mb-0 d-block">Reducción de Movimiento</label>                  <span class="text-secondary small">Desactiva animaciones complejas y transiciones CSS.</span>                </div>                <ion-toggle                  id="reduced-motion-toggle"                  [checked]="prefs.reducedMotion"                  (ionChange)="onReducedMotionToggled($event.detail.checked)"                  color="secondary"                  aria-label="Activar o desactivar reducción de movimiento">                </ion-toggle>              </div>              <!-- Botón de Restablecer -->              <div class="pt-3 border-top">                <button type="button" class="btn btn-outline-secondary btn-sm w-100 d-inline-flex align-items-center justify-content-center gap-2" (click)="resetAccessibilityDefaults()">                  <ion-icon name="refresh-outline"></ion-icon>                  <span>Restablecer Opciones Predeterminadas</span>                </button>              </div>            </div>          </section>        </div>        <!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad -->        <div class="col-12 col-lg-6">          <section class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100" aria-label="Permisos asignados según el rol del usuario">            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">              <div class="rounded-3 p-2 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">                <ion-icon name="shield-outline" class="fs-5"></ion-icon>              </div>              <div>                <h2 class="h6 fw-bold text-dark mb-0">Permisos del Rol (RBAC)</h2>                <p class="small text-secondary mb-0">Capacidades autorizadas para tu perfil</p>              </div>            </div>            <div class="list-group list-group-flush mb-4">              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" [ngClass]="user.role === \'ADMIN\' ? \'text-success\' : \'text-secondary\'"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Dashboard Analítico</strong>                    <span class="small text-secondary">Visualización de métricas y gráficos spline.</span>                  </div>                </div>                <span class="badge" [ngClass]="user.role === \'ADMIN\' ? \'bg-primary\' : \'bg-light text-secondary border\'">                  {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Admin\' }}                </span>              </div>              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'checkmark-circle\' : \'lock-closed-outline\'" [ngClass]="user.role === \'ADMIN\' ? \'text-success\' : \'text-secondary\'"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Generador de Informes</strong>                    <span class="small text-secondary">Previsualización y exportación en PDF.</span>                  </div>                </div>                <span class="badge" [ngClass]="user.role === \'ADMIN\' ? \'bg-primary\' : \'bg-light text-secondary border\'">                  {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Admin\' }}                </span>              </div>              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon name="checkmark-circle" class="text-success"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Gestión de Registros (CRUD)</strong>                    <span class="small text-secondary">Búsqueda, ordenación y alta de registros.</span>                  </div>                </div>                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">Habilitado</span>              </div>              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">                <div class="d-flex align-items-center gap-2">                  <ion-icon name="checkmark-circle" class="text-success"></ion-icon>                  <div>                    <strong class="d-block small text-dark">Exportación a CSV (Excel UTF-8)</strong>                    <span class="small text-secondary">Descarga estructurada del dataset.</span>                  </div>                </div>                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">Habilitado</span>              </div>            </div>            <!-- Detalles Técnicos de la Sesión -->            <div class="p-3 bg-light rounded-3 border">              <h3 class="h6 fw-bold text-dark mb-2 d-flex align-items-center gap-2">                <ion-icon name="terminal-outline" class="text-primary"></ion-icon>                <span>Detalles Técnicos de Sesión</span>              </h3>              <div class="row g-2 small text-secondary">                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Base de Datos:</span>                  <span>Supabase Cloud PostgreSQL</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Manejador Estado:</span>                  <span>NgRx Store v22</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Detección Cambios:</span>                  <span>OnPush Reactivo</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-dark">Diseño:</span>                  <span>Bootstrap 5 Bento Grid</span>                </div>              </div>            </div>          </section>        </div>      </div>    }  </div></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-taste">  <ion-toolbar class="toolbar-taste">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación" class="menu-btn-taste"></ion-menu-button>    </ion-buttons>    <ion-title class="page-title-taste">Perfil y Preferencias</ion-title>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content" id="profile-content">  <main class="container-fluid px-3 px-lg-4 py-3" aria-label="Perfil de usuario y accesibilidad">    @if (currentUser$ | async; as user) {      <!-- Tarjeta Principal de Perfil del Usuario en Bento Card -->      <section class="bento-card p-3 p-md-4 mb-3" aria-label="Información de la cuenta de usuario">        <div class="d-flex flex-column flex-sm-row align-items-center gap-3">          <div class="position-relative">            <img              [src]="user.avatarUrl"              [alt]="\'Fotografía de perfil de \' + (userFullName$ | async)"              width="80"              height="80"              loading="lazy"              class="rounded-circle profile-avatar"            />            <span class="avatar-online-dot" title="Sesión activa">              <span class="visually-hidden">En línea</span>            </span>          </div>          <div class="text-center text-sm-start flex-grow-1">            <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-baseline gap-2 mb-1">              <h1 class="screen-title mb-0">{{ userFullName$ | async }}</h1>              <span class="pill" [class.pill-accent]="user.role === \'ADMIN\'" [class.pill-neutral]="user.role !== \'ADMIN\'">                <i [class]="user.role === \'ADMIN\' ? \'bi bi-shield-check me-1\' : \'bi bi-person me-1\'" aria-hidden="true"></i>                {{ userRoleLabel$ | async }}              </span>            </div>            <p class="taste-caption mb-2 d-inline-flex align-items-center gap-1.5">              <i class="bi bi-envelope text-muted" aria-hidden="true"></i>              <span>{{ user.email }}</span>            </p>            <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-sm-start">              <span class="pill pill-neutral">                ID: <code>{{ user.id }}</code>              </span>              <span class="pill pill-neutral">                Último acceso: {{ user.lastLoginAt | date:\'medium\' }}              </span>              <span class="pill pill-success">                Cuenta Activa              </span>            </div>          </div>        </div>      </section>      <!-- Grid con Permisos de Rol y Panel de Accesibilidad -->      <div class="row g-3">                <!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA) -->        <div class="col-12 col-lg-6">          <section class="bento-card p-3 p-md-4 h-100" aria-label="Preferencias de accesibilidad y visualización">            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">              <i class="bi bi-universal-access text-muted fs-5" aria-hidden="true"></i>              <div>                <h2 class="card-section-title mb-0">Accesibilidad & Experiencia Universal</h2>                <p class="taste-caption mb-0">Personalización conforme a directrices WCAG 2.1 AA/AAA</p>              </div>            </div>            <div *ngIf="accessibilityPrefs$ | async as prefs" class="d-flex flex-column gap-3">                            <!-- 1. Escala de Tipografía -->              <div>                <label class="taste-form-label mb-1">Tamaño de Tipografía</label>                <p class="taste-caption mb-2">Ajusta la escala tipográfica sin romper proporciones visuales.</p>                                <div class="filter-rail w-100 d-flex" role="group" aria-label="Selector de tamaño de texto">                  <button                    type="button"                    class="filter-btn flex-fill text-center"                    [class.active]="prefs.fontSize === \'normal\'"                    (click)="onFontSizeChanged(\'normal\')">                    Normal (100%)                  </button>                  <button                    type="button"                    class="filter-btn flex-fill text-center"                    [class.active]="prefs.fontSize === \'large\'"                    (click)="onFontSizeChanged(\'large\')">                    Grande (115%)                  </button>                  <button                    type="button"                    class="filter-btn flex-fill text-center"                    [class.active]="prefs.fontSize === \'xl\'"                    (click)="onFontSizeChanged(\'xl\')">                    Extra (130%)                  </button>                </div>              </div>              <!-- 2. Modo Alto Contraste -->              <div class="d-flex justify-content-between align-items-center pt-2 border-top">                <div class="pe-3">                  <label for="high-contrast-toggle" class="taste-control-label mb-0 d-block">Modo Alto Contraste (WCAG AAA)</label>                  <span class="taste-caption">Contraste cromático estricto superior a 7:1.</span>                </div>                <ion-toggle                  id="high-contrast-toggle"                  [checked]="prefs.highContrast"                  (ionChange)="onHighContrastToggled($event.detail.checked)"                  aria-label="Activar o desactivar modo de alto contraste WCAG AAA">                </ion-toggle>              </div>              <!-- 3. Reducción de Movimiento -->              <div class="d-flex justify-content-between align-items-center pt-2 border-top">                <div class="pe-3">                  <label for="reduced-motion-toggle" class="taste-control-label mb-0 d-block">Reducción de Movimiento</label>                  <span class="taste-caption">Desactiva micro-interacciones y transiciones continuas.</span>                </div>                <ion-toggle                  id="reduced-motion-toggle"                  [checked]="prefs.reducedMotion"                  (ionChange)="onReducedMotionToggled($event.detail.checked)"                  aria-label="Activar o desactivar reducción de movimiento">                </ion-toggle>              </div>              <!-- Botón de Restablecer -->              <div class="pt-2 border-top">                <button type="button" class="btn-subtle-taste w-100 d-inline-flex align-items-center justify-content-center gap-1.5" (click)="resetAccessibilityDefaults()">                  <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>                  <span>Restablecer Opciones Predeterminadas</span>                </button>              </div>            </div>          </section>        </div>        <!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad -->        <div class="col-12 col-lg-6">          <section class="bento-card p-3 p-md-4 h-100" aria-label="Permisos asignados según el rol del usuario">            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">              <i class="bi bi-shield-lock text-muted fs-5" aria-hidden="true"></i>              <div>                <h2 class="card-section-title mb-0">Permisos del Rol (RBAC)</h2>                <p class="taste-caption mb-0">Capacidades asignadas por directiva de seguridad</p>              </div>            </div>            <div class="d-flex flex-column gap-2 mb-3">              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">                <div class="d-flex align-items-center gap-2">                  <i [class]="user.role === \'ADMIN\' ? \'bi bi-check-circle-fill text-success\' : \'bi bi-lock-fill text-muted\'" aria-hidden="true"></i>                  <div>                    <strong class="d-block text-ink small">Dashboard Analítico</strong>                    <span class="taste-caption">Visualización de métricas y gráficos spline.</span>                  </div>                </div>                <span class="pill" [class.pill-accent]="user.role === \'ADMIN\'" [class.pill-neutral]="user.role !== \'ADMIN\'">                  {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Admin\' }}                </span>              </div>              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">                <div class="d-flex align-items-center gap-2">                  <i [class]="user.role === \'ADMIN\' ? \'bi bi-check-circle-fill text-success\' : \'bi bi-lock-fill text-muted\'" aria-hidden="true"></i>                  <div>                    <strong class="d-block text-ink small">Generador de Informes</strong>                    <span class="taste-caption">Previsualización y exportación en PDF.</span>                  </div>                </div>                <span class="pill" [class.pill-accent]="user.role === \'ADMIN\'" [class.pill-neutral]="user.role !== \'ADMIN\'">                  {{ user.role === \'ADMIN\' ? \'Habilitado\' : \'Admin\' }}                </span>              </div>              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">                <div class="d-flex align-items-center gap-2">                  <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>                  <div>                    <strong class="d-block text-ink small">Gestión de Registros (CRUD)</strong>                    <span class="taste-caption">Búsqueda, ordenación y alta de registros.</span>                  </div>                </div>                <span class="pill pill-success">Habilitado</span>              </div>              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">                <div class="d-flex align-items-center gap-2">                  <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>                  <div>                    <strong class="d-block text-ink small">Exportación a CSV (Excel UTF-8)</strong>                    <span class="taste-caption">Descarga estructurada del dataset.</span>                  </div>                </div>                <span class="pill pill-success">Habilitado</span>              </div>            </div>            <!-- Detalles Técnicos de la Sesión -->            <div class="p-3 bg-rail rounded-2 border">              <h3 class="card-section-title mb-2 d-flex align-items-center gap-2">                <i class="bi bi-cpu text-muted" aria-hidden="true"></i>                <span>Detalles Técnicos de Sesión</span>              </h3>              <div class="row g-2 taste-caption">                <div class="col-6">                  <span class="d-block fw-semibold text-ink">Base de Datos:</span>                  <span>Supabase PostgreSQL Cloud</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-ink">Manejador Estado:</span>                  <span>NgRx Store v22</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-ink">Detección Cambios:</span>                  <span>OnPush Reactivo</span>                </div>                <div class="col-6">                  <span class="d-block fw-semibold text-ink">Diseño:</span>                  <span>Taste Framed Sheet</span>                </div>              </div>            </div>          </section>        </div>      </div>    }  </main></ion-content></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
     var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'ProfilePage'};

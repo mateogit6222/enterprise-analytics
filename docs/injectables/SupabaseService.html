@@ -223,6 +223,11 @@ recurrir de manera transparente al dataset en memoria de respaldo.</li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Async</span>
+                                <a href="#authenticateUser" >authenticateUser</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#createRecord" >createRecord</a>
                             </li>
                             <li>
@@ -282,7 +287,7 @@ recurrir de manera transparente al dataset en memoria de respaldo.</li>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/core/services/supabase.service.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/core/services/supabase.service.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -295,6 +300,90 @@ recurrir de manera transparente al dataset en memoria de respaldo.</li>
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authenticateUser"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>authenticateUser</b></span>
+                        <a href="#authenticateUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>authenticateUser(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, plainPassword: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valida credenciales contra Supabase (PostgreSQL) usando hash SHA-256.
+Si la tabla no está disponible o falla la consulta, devuelve null para fallback en memoria.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>plainPassword</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Promise&lt;User | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -317,8 +406,8 @@ recurrir de manera transparente al dataset en memoria de respaldo.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -388,8 +477,8 @@ recurrir de manera transparente al dataset en memoria de respaldo.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="154"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:154</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:155</a></div>
                         </td>
                     </tr>
 
@@ -459,8 +548,8 @@ recurrir de manera transparente al dataset en memoria de respaldo.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:64</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -501,8 +590,8 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:181</a></div>
                         </td>
                     </tr>
 
@@ -540,8 +629,8 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -581,8 +670,8 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="213"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:213</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="255"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:255</a></div>
                         </td>
                     </tr>
 
@@ -652,8 +741,8 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="236"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:236</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="278"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:278</a></div>
                         </td>
                     </tr>
 
@@ -723,8 +812,8 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/core/services/supabase.service.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/core/services/supabase.service.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -816,7 +905,7 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/core/services/supabase.service.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/core/services/supabase.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -849,7 +938,7 @@ Si la tabla está vacía o hay error, devuelve null para activar el fallback en 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/core/services/supabase.service.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/core/services/supabase.service.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -867,6 +956,7 @@ import { createClient, SupabaseClient } from &#x27;@supabase/supabase-js&#x27;;
 import { environment } from &#x27;../../../environments/environment&#x27;;
 import { Record } from &#x27;../models/record.model&#x27;;
 import { User, UserRole } from &#x27;../models/user.model&#x27;;
+import { verifyPasswordHash } from &#x27;../utils/crypto.util&#x27;;
 
 /**
  * @class SupabaseService
@@ -1066,6 +1156,47 @@ export class SupabaseService {
         createdAt: u.created_at || u.createdAt || new Date().toISOString(),
         lastLoginAt: u.last_login_at || u.lastLoginAt || new Date().toISOString()
       }));
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Valida credenciales contra Supabase (PostgreSQL) usando hash SHA-256.
+   * Si la tabla no está disponible o falla la consulta, devuelve null para fallback en memoria.
+   */
+  async authenticateUser(email: string, plainPassword: string): Promise&lt;User | null&gt; {
+    if (!this.isConfigured() || !this.client) {
+      return null;
+    }
+
+    try {
+      const { data, error } &#x3D; await this.client
+        .from(&#x27;users&#x27;)
+        .select(&#x27;*&#x27;)
+        .eq(&#x27;email&#x27;, email.trim().toLowerCase())
+        .limit(1)
+        .maybeSingle();
+
+      if (error || !data) {
+        return null;
+      }
+
+      const hash &#x3D; data.password_hash || data.passwordHash || data.password;
+      if (verifyPasswordHash(plainPassword, hash)) {
+        return {
+          id: data.id,
+          email: data.email,
+          firstName: data.first_name || data.firstName,
+          lastName: data.last_name || data.lastName,
+          role: (data.role as UserRole) || UserRole.USER,
+          avatarUrl: data.avatar_url || data.avatarUrl || &#x27;https://api.dicebear.com/9.x/initials/svg?seed&#x3D;EM&#x27;,
+          isActive: data.is_active ?? data.isActive ?? true,
+          createdAt: data.created_at || data.createdAt || new Date().toISOString(),
+          lastLoginAt: new Date().toISOString()
+        };
+      }
+      return null;
     } catch {
       return null;
     }

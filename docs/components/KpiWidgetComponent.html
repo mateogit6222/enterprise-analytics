@@ -738,29 +738,21 @@ export class KpiWidgetComponent {
     &lt;!-- Estado de carga interno --&gt;
     &lt;div class&#x3D;&quot;kpi-loading-state&quot;&gt;
       &lt;div class&#x3D;&quot;loading-top&quot;&gt;
-        &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 60%; height: 16px; border-radius: 4px;&quot;&gt;&lt;/ion-skeleton-text&gt;
-        &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 36px; height: 36px; border-radius: 10px;&quot;&gt;&lt;/ion-skeleton-text&gt;
+        &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 60%; height: 14px; border-radius: 4px;&quot;&gt;&lt;/ion-skeleton-text&gt;
       &lt;/div&gt;
-      &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 75%; height: 32px; margin: 12px 0; border-radius: 6px;&quot;&gt;&lt;/ion-skeleton-text&gt;
+      &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 75%; height: 28px; margin: 8px 0; border-radius: 4px;&quot;&gt;&lt;/ion-skeleton-text&gt;
       &lt;ion-skeleton-text [animated]&#x3D;&quot;true&quot; style&#x3D;&quot;width: 45%; height: 14px; border-radius: 4px;&quot;&gt;&lt;/ion-skeleton-text&gt;
     &lt;/div&gt;
   } @else {
-    &lt;!-- Cabecera: Título e Icono temático --&gt;
+    &lt;!-- Cabecera: Título y meta sutil (Taste-Skill §5: type, not tiles) --&gt;
     &lt;div class&#x3D;&quot;kpi-top&quot;&gt;
       &lt;span class&#x3D;&quot;kpi-label&quot;&gt;{{ kpi.label }}&lt;/span&gt;
-      &lt;div
-        class&#x3D;&quot;kpi-icon-container&quot;
-        [style.background]&#x3D;&quot;kpi.color ? kpi.color + &#x27;22&#x27; : &#x27;rgba(99, 102, 241, 0.15)&#x27;&quot;
-        [style.color]&#x3D;&quot;kpi.color || &#x27;#818cf8&#x27;&quot;
-        aria-hidden&#x3D;&quot;true&quot;
-      &gt;
-        &lt;ion-icon [name]&#x3D;&quot;kpi.icon || &#x27;stats-chart-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
-      &lt;/div&gt;
+      &lt;ion-icon [name]&#x3D;&quot;kpi.icon || &#x27;stats-chart-outline&#x27;&quot; class&#x3D;&quot;kpi-meta-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
     &lt;/div&gt;
 
-    &lt;!-- Valor Principal --&gt;
+    &lt;!-- Valor Principal en Cifras Tabulares --&gt;
     &lt;div class&#x3D;&quot;kpi-value-row&quot;&gt;
-      &lt;span class&#x3D;&quot;kpi-value&quot;&gt;
+      &lt;span class&#x3D;&quot;kpi-value num&quot;&gt;
         @if (isCurrency) {
           {{ kpi.value | currencyFormat }}
         } @else {
@@ -769,32 +761,21 @@ export class KpiWidgetComponent {
       &lt;/span&gt;
     &lt;/div&gt;
 
-    &lt;!-- Pie: Indicador de Tendencia y Comparación --&gt;
+    &lt;!-- Pie: Indicador de Tendencia con delta honesto --&gt;
     &lt;div class&#x3D;&quot;kpi-footer&quot;&gt;
-      &lt;div
-        class&#x3D;&quot;trend-badge&quot;
+      &lt;span
+        class&#x3D;&quot;delta&quot;
         [ngClass]&#x3D;&quot;{
           &#x27;trend-up&#x27;: kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP,
           &#x27;trend-down&#x27;: kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.DOWN,
           &#x27;trend-stable&#x27;: kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.STABLE
         }&quot;
       &gt;
-        &lt;ion-icon
-          [name]&#x3D;&quot;
-            kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP
-              ? &#x27;trending-up-outline&#x27;
-              : kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.DOWN
-              ? &#x27;trending-down-outline&#x27;
-              : &#x27;remove-outline&#x27;
-          &quot;
-          aria-hidden&#x3D;&quot;true&quot;
-        &gt;&lt;/ion-icon&gt;
-        &lt;span class&#x3D;&quot;trend-text&quot;&gt;
-          {{ kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP ? &#x27;+&#x27; : &#x27;&#x27; }}{{ kpi.changePercent }}%
+        &lt;span class&#x3D;&quot;delta-mark&quot;&gt;
+          {{ kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.UP ? &#x27;↑ +&#x27; : kpi.trend &#x3D;&#x3D;&#x3D; KpiTrend.DOWN ? &#x27;↓ &#x27; : &#x27;— &#x27; }}{{ kpi.changePercent }}%
         &lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;span class&#x3D;&quot;comparison-text&quot;&gt;vs período anterior&lt;/span&gt;
+        &lt;span class&#x3D;&quot;comparison-text&quot;&gt;vs período anterior&lt;/span&gt;
+      &lt;/span&gt;
     &lt;/div&gt;
   }
 &lt;/div&gt;
@@ -807,7 +788,7 @@ export class KpiWidgetComponent {
                 </p>
                 <pre class="line-numbers"><code class="language-scss">/**
  * KPI Widget Component Styles
- * Swiss Corporate Bento Grid Clean Light Aesthetic
+ * Taste-Skill v2: Type over tiles, tabular figures, no loud colored icon circles
  */
 
 :host {
@@ -816,26 +797,24 @@ export class KpiWidgetComponent {
 }
 
 .kpi-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 1.25rem 1.35rem;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.15rem 1.25rem;
+  transition: border-color var(--t-hover) ease;
+  box-shadow: none; /* Flat surface by Taste-Skill rule */
   outline: none;
 
   &amp;.interactive {
     cursor: pointer;
 
     &amp;:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
       border-color: #cbd5e1;
     }
 
     &amp;:focus-visible {
-      border-color: #0284c7;
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(27, 108, 128, 0.2);
     }
   }
 
@@ -843,42 +822,37 @@ export class KpiWidgetComponent {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 
     .kpi-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #475569;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--muted);
       letter-spacing: 0.01em;
-      text-transform: capitalize;
+      text-transform: none; /* Sentence case by Taste-Skill rule */
     }
 
-    .kpi-icon-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      font-size: 1.25rem;
-      border: 1px solid rgba(15, 23, 42, 0.06);
+    .kpi-meta-icon {
+      font-size: 1rem;
+      color: var(--faint);
+      opacity: 0.7;
     }
   }
 
   .kpi-value-row {
-    margin: 0.35rem 0 0.85rem 0;
+    margin: 0.2rem 0 0.5rem 0;
 
     .kpi-value {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.03em;
+      font-size: 1.625rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
       line-height: 1.2;
 
       .kpi-unit {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #64748b;
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--muted);
         margin-left: 0.25rem;
       }
     }
@@ -887,44 +861,35 @@ export class KpiWidgetComponent {
   .kpi-footer {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
 
-    .trend-badge {
+    .delta {
       display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
+      align-items: baseline;
+      gap: 0.4rem;
       font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-
-      ion-icon {
-        font-size: 0.9rem;
-      }
-
-      &amp;.trend-up {
-        background: #ecfdf5;
-        color: #047857;
-        border: 1px solid #a7f3d0;
-      }
-
-      &amp;.trend-down {
-        background: #fff1f2;
-        color: #be123c;
-        border: 1px solid #fecdd3;
-      }
-
-      &amp;.trend-stable {
-        background: #f1f5f9;
-        color: #475569;
-        border: 1px solid #e2e8f0;
-      }
-    }
-
-    .comparison-text {
-      font-size: 0.75rem;
-      color: #64748b;
+      color: var(--muted);
       font-weight: 500;
+
+      .delta-mark {
+        font-weight: 600;
+      }
+
+      &amp;.trend-up .delta-mark {
+        color: var(--positive);
+      }
+
+      &amp;.trend-down .delta-mark {
+        color: var(--negative);
+      }
+
+      &amp;.trend-stable .delta-mark {
+        color: var(--muted);
+      }
+
+      .comparison-text {
+        font-size: 0.75rem;
+        color: var(--faint);
+      }
     }
   }
 }
@@ -956,7 +921,7 @@ export class KpiWidgetComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  class="kpi-card"  [class.interactive]="kpiClick.observed"  [class.loading]="loading"  (click)="onClick()"  [attr.tabindex]="kpiClick.observed ? 0 : null"  [attr.role]="kpiClick.observed ? \'button\' : \'region\'"  [attr.aria-label]="ariaDescription"  (keydown.enter)="onClick()"  (keydown.space)="onClick()">  @if (loading) {    <!-- Estado de carga interno -->    <div class="kpi-loading-state">      <div class="loading-top">        <ion-skeleton-text [animated]="true" style="width: 60%; height: 16px; border-radius: 4px;"></ion-skeleton-text>        <ion-skeleton-text [animated]="true" style="width: 36px; height: 36px; border-radius: 10px;"></ion-skeleton-text>      </div>      <ion-skeleton-text [animated]="true" style="width: 75%; height: 32px; margin: 12px 0; border-radius: 6px;"></ion-skeleton-text>      <ion-skeleton-text [animated]="true" style="width: 45%; height: 14px; border-radius: 4px;"></ion-skeleton-text>    </div>  } @else {    <!-- Cabecera: Título e Icono temático -->    <div class="kpi-top">      <span class="kpi-label">{{ kpi.label }}</span>      <div        class="kpi-icon-container"        [style.background]="kpi.color ? kpi.color + \'22\' : \'rgba(99, 102, 241, 0.15)\'"        [style.color]="kpi.color || \'#818cf8\'"        aria-hidden="true"      >        <ion-icon [name]="kpi.icon || \'stats-chart-outline\'"></ion-icon>      </div>    </div>    <!-- Valor Principal -->    <div class="kpi-value-row">      <span class="kpi-value">        @if (isCurrency) {          {{ kpi.value | currencyFormat }}        } @else {          {{ kpi.value | number:\'1.0-2\':\'es-ES\' }} <small class="kpi-unit">{{ kpi.unit }}</small>        }      </span>    </div>    <!-- Pie: Indicador de Tendencia y Comparación -->    <div class="kpi-footer">      <div        class="trend-badge"        [ngClass]="{          \'trend-up\': kpi.trend === KpiTrend.UP,          \'trend-down\': kpi.trend === KpiTrend.DOWN,          \'trend-stable\': kpi.trend === KpiTrend.STABLE        }"      >        <ion-icon          [name]="            kpi.trend === KpiTrend.UP              ? \'trending-up-outline\'              : kpi.trend === KpiTrend.DOWN              ? \'trending-down-outline\'              : \'remove-outline\'          "          aria-hidden="true"        ></ion-icon>        <span class="trend-text">          {{ kpi.trend === KpiTrend.UP ? \'+\' : \'\' }}{{ kpi.changePercent }}%        </span>      </div>      <span class="comparison-text">vs período anterior</span>    </div>  }</div></div>'
+        var COMPONENT_TEMPLATE = '<div><div  class="kpi-card"  [class.interactive]="kpiClick.observed"  [class.loading]="loading"  (click)="onClick()"  [attr.tabindex]="kpiClick.observed ? 0 : null"  [attr.role]="kpiClick.observed ? \'button\' : \'region\'"  [attr.aria-label]="ariaDescription"  (keydown.enter)="onClick()"  (keydown.space)="onClick()">  @if (loading) {    <!-- Estado de carga interno -->    <div class="kpi-loading-state">      <div class="loading-top">        <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; border-radius: 4px;"></ion-skeleton-text>      </div>      <ion-skeleton-text [animated]="true" style="width: 75%; height: 28px; margin: 8px 0; border-radius: 4px;"></ion-skeleton-text>      <ion-skeleton-text [animated]="true" style="width: 45%; height: 14px; border-radius: 4px;"></ion-skeleton-text>    </div>  } @else {    <!-- Cabecera: Título y meta sutil (Taste-Skill §5: type, not tiles) -->    <div class="kpi-top">      <span class="kpi-label">{{ kpi.label }}</span>      <ion-icon [name]="kpi.icon || \'stats-chart-outline\'" class="kpi-meta-icon" aria-hidden="true"></ion-icon>    </div>    <!-- Valor Principal en Cifras Tabulares -->    <div class="kpi-value-row">      <span class="kpi-value num">        @if (isCurrency) {          {{ kpi.value | currencyFormat }}        } @else {          {{ kpi.value | number:\'1.0-2\':\'es-ES\' }} <small class="kpi-unit">{{ kpi.unit }}</small>        }      </span>    </div>    <!-- Pie: Indicador de Tendencia con delta honesto -->    <div class="kpi-footer">      <span        class="delta"        [ngClass]="{          \'trend-up\': kpi.trend === KpiTrend.UP,          \'trend-down\': kpi.trend === KpiTrend.DOWN,          \'trend-stable\': kpi.trend === KpiTrend.STABLE        }"      >        <span class="delta-mark">          {{ kpi.trend === KpiTrend.UP ? \'↑ +\' : kpi.trend === KpiTrend.DOWN ? \'↓ \' : \'— \' }}{{ kpi.changePercent }}%        </span>        <span class="comparison-text">vs período anterior</span>      </span>    </div>  }</div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
     var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'KpiWidgetComponent'};

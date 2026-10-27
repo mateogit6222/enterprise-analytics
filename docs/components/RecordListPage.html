@@ -1660,68 +1660,75 @@ export class RecordListPage implements OnInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border header-glass&quot;&gt;
-  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border header-taste&quot;&gt;
+  &lt;ion-toolbar class&#x3D;&quot;toolbar-taste&quot;&gt;
     &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
-      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot;&gt;&lt;/ion-menu-button&gt;
+      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot; class&#x3D;&quot;menu-btn-taste&quot;&gt;&lt;/ion-menu-button&gt;
     &lt;/ion-buttons&gt;
-    &lt;ion-title&gt;Gestión Integral de Registros&lt;/ion-title&gt;
+    &lt;ion-title class&#x3D;&quot;page-title-taste&quot;&gt;Registros Operativos&lt;/ion-title&gt;
     &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
-      &lt;ion-button (click)&#x3D;&quot;openCreateModal()&quot; color&#x3D;&quot;light&quot; class&#x3D;&quot;create-btn&quot; aria-label&#x3D;&quot;Crear nuevo registro empresarial&quot;&gt;
-        &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;add-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        class&#x3D;&quot;btn-primary-taste d-flex align-items-center gap-1&quot;
+        (click)&#x3D;&quot;openCreateModal()&quot;
+        aria-label&#x3D;&quot;Crear nuevo registro empresarial&quot;
+      &gt;
+        &lt;i class&#x3D;&quot;bi bi-plus-lg&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
         &lt;span class&#x3D;&quot;btn-text&quot;&gt;Nuevo Registro&lt;/span&gt;
-      &lt;/ion-button&gt;
+      &lt;/button&gt;
     &lt;/ion-buttons&gt;
   &lt;/ion-toolbar&gt;
 &lt;/ion-header&gt;
 
 &lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;page-content&quot;&gt;
-  &lt;div class&#x3D;&quot;container-fluid px-3 px-lg-4 py-4&quot;&gt;
+  &lt;main class&#x3D;&quot;container-fluid px-3 px-lg-4 py-3&quot; aria-label&#x3D;&quot;Gestor de registros corporativos&quot;&gt;
 
-    &lt;!-- Encabezado de la Sección con Bento Grid y Bootstrap 5 --&gt;
-    &lt;header class&#x3D;&quot;bento-header p-4 mb-4 bg-white rounded-3 border shadow-sm&quot;&gt;
+    &lt;!-- Encabezado de la Sección con Bootstrap 5 Grid y Directrices Taste-Skill --&gt;
+    &lt;header class&#x3D;&quot;bento-card p-3 p-md-4 mb-3&quot; aria-label&#x3D;&quot;Cabecera de registros empresariales&quot;&gt;
       &lt;div class&#x3D;&quot;d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3&quot;&gt;
         &lt;div class&#x3D;&quot;header-titles&quot;&gt;
-          &lt;div class&#x3D;&quot;d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-2 rounded-2 bg-light border text-primary small fw-semibold&quot;&gt;
-            &lt;ion-icon name&#x3D;&quot;server-outline&quot;&gt;&lt;/ion-icon&gt;
-            &lt;span&gt;Supabase Cloud &amp; REST Pipeline&lt;/span&gt;
+          &lt;div class&#x3D;&quot;d-inline-flex align-items-center gap-2 mb-2&quot;&gt;
+            &lt;span class&#x3D;&quot;pill pill-neutral d-flex align-items-center gap-1.5&quot;&gt;
+              &lt;span class&#x3D;&quot;status-dot dot-success&quot;&gt;&lt;/span&gt;
+              &lt;span&gt;Supabase Cloud PostgreSQL&lt;/span&gt;
+            &lt;/span&gt;
           &lt;/div&gt;
-          &lt;h1 class&#x3D;&quot;h3 fw-bold text-dark mb-1&quot;&gt;Directorio de Registros Corporativos&lt;/h1&gt;
-          &lt;p class&#x3D;&quot;text-secondary mb-0 small&quot; style&#x3D;&quot;max-width: 720px;&quot;&gt;
-            Administración unificada de operaciones empresariales sincronizadas directamente con Supabase PostgreSQL Cloud y almacenamiento de alta disponibilidad.
+          &lt;h1 class&#x3D;&quot;screen-title mb-1&quot;&gt;Directorio de Operaciones&lt;/h1&gt;
+          &lt;p class&#x3D;&quot;screen-subtitle mb-0&quot; style&#x3D;&quot;max-width: 680px;&quot;&gt;
+            Auditoría y administración transaccional sincronizada en tiempo real con respaldo seguro en memoria.
           &lt;/p&gt;
         &lt;/div&gt;
 
-        &lt;!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 --&gt;
+        &lt;!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 Refinados --&gt;
         &lt;div class&#x3D;&quot;d-flex align-items-center gap-2 flex-wrap&quot; aria-label&#x3D;&quot;Acciones de exportación de registros&quot;&gt;
           &lt;button
             type&#x3D;&quot;button&quot;
-            class&#x3D;&quot;btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2&quot;
+            class&#x3D;&quot;btn btn-sm btn-subtle-taste d-inline-flex align-items-center gap-1.5&quot;
             (click)&#x3D;&quot;exportToPdf()&quot;
             [disabled]&#x3D;&quot;exporting$ | async&quot;
             aria-label&#x3D;&quot;Exportar todos los registros a documento PDF profesional&quot;&gt;
-            &lt;ion-icon name&#x3D;&quot;document-text-outline&quot; class&#x3D;&quot;fs-6&quot;&gt;&lt;/ion-icon&gt;
+            &lt;i class&#x3D;&quot;bi bi-file-earmark-pdf text-muted&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
             &lt;span&gt;Exportar PDF&lt;/span&gt;
           &lt;/button&gt;
 
           &lt;button
             type&#x3D;&quot;button&quot;
-            class&#x3D;&quot;btn btn-outline-success btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2&quot;
+            class&#x3D;&quot;btn btn-sm btn-subtle-taste d-inline-flex align-items-center gap-1.5&quot;
             (click)&#x3D;&quot;exportToCsv()&quot;
             [disabled]&#x3D;&quot;exporting$ | async&quot;
             aria-label&#x3D;&quot;Exportar datos a formato CSV con codificación UTF-8 para Excel&quot;&gt;
-            &lt;ion-icon name&#x3D;&quot;download-outline&quot; class&#x3D;&quot;fs-6&quot;&gt;&lt;/ion-icon&gt;
+            &lt;i class&#x3D;&quot;bi bi-file-earmark-spreadsheet text-muted&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
             &lt;span&gt;Exportar CSV&lt;/span&gt;
           &lt;/button&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/header&gt;
 
-    &lt;!-- Indicador de carga asíncrona --&gt;
+    &lt;!-- Indicador de sincronización sutil --&gt;
     @if (loading$ | async) {
-      &lt;div class&#x3D;&quot;alert alert-info d-flex align-items-center gap-3 py-2 px-3 mb-4 rounded-3 shadow-sm border-0&quot; role&#x3D;&quot;status&quot;&gt;
-        &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-spinner&gt;
-        &lt;span class&#x3D;&quot;small fw-semibold text-primary&quot;&gt;Sincronizando registros con Supabase PostgreSQL Cloud...&lt;/span&gt;
+      &lt;div class&#x3D;&quot;sync-banner d-flex align-items-center gap-2 py-2 px-3 mb-3&quot; role&#x3D;&quot;status&quot;&gt;
+        &lt;ion-spinner name&#x3D;&quot;crescent&quot; class&#x3D;&quot;sync-spinner&quot;&gt;&lt;/ion-spinner&gt;
+        &lt;span class&#x3D;&quot;sync-text&quot;&gt;Sincronizando registros con Supabase PostgreSQL Cloud...&lt;/span&gt;
       &lt;/div&gt;
     }
 
@@ -1739,7 +1746,7 @@ export class RecordListPage implements OnInit, OnDestroy {
       &lt;/app-data-table&gt;
     &lt;/div&gt;
 
-  &lt;/div&gt;
+  &lt;/main&gt;
 &lt;/ion-content&gt;
 </code></pre>
     </div>
@@ -1748,21 +1755,64 @@ export class RecordListPage implements OnInit, OnDestroy {
                 <p class="comment">
                     <code>./record-list.page.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.page-content {
-  --background: #f8fafc;
-  color: #0f172a;
+                <pre class="line-numbers"><code class="language-scss">.header-taste {
+  border-bottom: 1px solid var(--border, #e8eaec);
+  background: var(--surface, #ffffff);
 }
 
-.bento-header {
-  border-color: #e2e8f0 !important;
-  border-radius: 14px;
+.toolbar-taste {
+  --background: var(--surface, #ffffff);
+  --color: var(--ink, #131416);
+  --min-height: 52px;
 }
 
-.create-btn {
+.menu-btn-taste {
+  color: var(--ink, #131416);
+}
+
+.page-title-taste {
+  font-size: 15px;
   font-weight: 600;
-  --background: #0284c7;
-  --color: #ffffff;
-  border-radius: 8px;
+  letter-spacing: -0.2px;
+  color: var(--ink, #131416);
+}
+
+.page-content {
+  --background: var(--ground, #f9fbfc);
+  color: var(--ink, #131416);
+}
+
+.screen-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink, #131416);
+}
+
+.screen-subtitle {
+  font-size: 13px;
+  color: var(--muted, #52555a);
+}
+
+.btn-primary-taste {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  background: var(--ink, #131416);
+  color: #ffffff;
+  border: 1px solid var(--ink, #131416);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+
+  &amp;:hover {
+    background: #232528;
+    border-color: #232528;
+  }
 
   .btn-text {
     @media (max-width: 500px) {
@@ -1771,8 +1821,56 @@ export class RecordListPage implements OnInit, OnDestroy {
   }
 }
 
-.bento-table-card {
-  border-radius: 14px;
+.btn-subtle-taste {
+  height: 32px;
+  padding: 0 11px;
+  background: var(--surface, #ffffff);
+  color: var(--ink, #131416);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+
+  &amp;:hover:not(:disabled) {
+    background: var(--rail, #f4f6f8);
+    border-color: #b8bac0;
+    color: var(--ink, #131416);
+  }
+
+  &amp;:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.sync-banner {
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e8eaec);
+  border-radius: 6px;
+
+  .sync-spinner {
+    width: 16px;
+    height: 16px;
+    color: var(--accent, #1b6c80);
+  }
+
+  .sync-text {
+    font-size: 12px;
+    color: var(--muted, #52555a);
+    font-weight: 500;
+  }
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  &amp;.dot-success {
+    background-color: var(--success, #1e7b4f);
+  }
 }
 </code></pre>
     </div>
@@ -1802,7 +1900,7 @@ export class RecordListPage implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-glass">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Gestión Integral de Registros</ion-title>    <ion-buttons slot="end">      <ion-button (click)="openCreateModal()" color="light" class="create-btn" aria-label="Crear nuevo registro empresarial">        <ion-icon slot="start" name="add-circle-outline"></ion-icon>        <span class="btn-text">Nuevo Registro</span>      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content">  <div class="container-fluid px-3 px-lg-4 py-4">    <!-- Encabezado de la Sección con Bento Grid y Bootstrap 5 -->    <header class="bento-header p-4 mb-4 bg-white rounded-3 border shadow-sm">      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">        <div class="header-titles">          <div class="d-inline-flex align-items-center gap-2 px-2.5 py-1 mb-2 rounded-2 bg-light border text-primary small fw-semibold">            <ion-icon name="server-outline"></ion-icon>            <span>Supabase Cloud & REST Pipeline</span>          </div>          <h1 class="h3 fw-bold text-dark mb-1">Directorio de Registros Corporativos</h1>          <p class="text-secondary mb-0 small" style="max-width: 720px;">            Administración unificada de operaciones empresariales sincronizadas directamente con Supabase PostgreSQL Cloud y almacenamiento de alta disponibilidad.          </p>        </div>        <!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 -->        <div class="d-flex align-items-center gap-2 flex-wrap" aria-label="Acciones de exportación de registros">          <button            type="button"            class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2"            (click)="exportToPdf()"            [disabled]="exporting$ | async"            aria-label="Exportar todos los registros a documento PDF profesional">            <ion-icon name="document-text-outline" class="fs-6"></ion-icon>            <span>Exportar PDF</span>          </button>          <button            type="button"            class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2"            (click)="exportToCsv()"            [disabled]="exporting$ | async"            aria-label="Exportar datos a formato CSV con codificación UTF-8 para Excel">            <ion-icon name="download-outline" class="fs-6"></ion-icon>            <span>Exportar CSV</span>          </button>        </div>      </div>    </header>    <!-- Indicador de carga asíncrona -->    @if (loading$ | async) {      <div class="alert alert-info d-flex align-items-center gap-3 py-2 px-3 mb-4 rounded-3 shadow-sm border-0" role="status">        <ion-spinner name="crescent" color="primary"></ion-spinner>        <span class="small fw-semibold text-primary">Sincronizando registros con Supabase PostgreSQL Cloud...</span>      </div>    }    <!-- Componente DataTable Reutilizable en Bento Card -->    <div class="bento-table-card">      <app-data-table        [data]="(records$ | async) ?? []"        [loading]="(loading$ | async) ?? false"        [columns]="columns"        [actions]="actions"        [pageSize]="10"        [pageSizeOptions]="[5, 10, 25, 50]"        (actionTriggered)="onActionTriggered($event)"        (exportCsv)="exportToCsv()">      </app-data-table>    </div>  </div></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-taste">  <ion-toolbar class="toolbar-taste">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación" class="menu-btn-taste"></ion-menu-button>    </ion-buttons>    <ion-title class="page-title-taste">Registros Operativos</ion-title>    <ion-buttons slot="end">      <button        type="button"        class="btn-primary-taste d-flex align-items-center gap-1"        (click)="openCreateModal()"        aria-label="Crear nuevo registro empresarial"      >        <i class="bi bi-plus-lg" aria-hidden="true"></i>        <span class="btn-text">Nuevo Registro</span>      </button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content">  <main class="container-fluid px-3 px-lg-4 py-3" aria-label="Gestor de registros corporativos">    <!-- Encabezado de la Sección con Bootstrap 5 Grid y Directrices Taste-Skill -->    <header class="bento-card p-3 p-md-4 mb-3" aria-label="Cabecera de registros empresariales">      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">        <div class="header-titles">          <div class="d-inline-flex align-items-center gap-2 mb-2">            <span class="pill pill-neutral d-flex align-items-center gap-1.5">              <span class="status-dot dot-success"></span>              <span>Supabase Cloud PostgreSQL</span>            </span>          </div>          <h1 class="screen-title mb-1">Directorio de Operaciones</h1>          <p class="screen-subtitle mb-0" style="max-width: 680px;">            Auditoría y administración transaccional sincronizada en tiempo real con respaldo seguro en memoria.          </p>        </div>        <!-- Barra de Acciones Globales de Exportación con Botones Bootstrap 5 Refinados -->        <div class="d-flex align-items-center gap-2 flex-wrap" aria-label="Acciones de exportación de registros">          <button            type="button"            class="btn btn-sm btn-subtle-taste d-inline-flex align-items-center gap-1.5"            (click)="exportToPdf()"            [disabled]="exporting$ | async"            aria-label="Exportar todos los registros a documento PDF profesional">            <i class="bi bi-file-earmark-pdf text-muted" aria-hidden="true"></i>            <span>Exportar PDF</span>          </button>          <button            type="button"            class="btn btn-sm btn-subtle-taste d-inline-flex align-items-center gap-1.5"            (click)="exportToCsv()"            [disabled]="exporting$ | async"            aria-label="Exportar datos a formato CSV con codificación UTF-8 para Excel">            <i class="bi bi-file-earmark-spreadsheet text-muted" aria-hidden="true"></i>            <span>Exportar CSV</span>          </button>        </div>      </div>    </header>    <!-- Indicador de sincronización sutil -->    @if (loading$ | async) {      <div class="sync-banner d-flex align-items-center gap-2 py-2 px-3 mb-3" role="status">        <ion-spinner name="crescent" class="sync-spinner"></ion-spinner>        <span class="sync-text">Sincronizando registros con Supabase PostgreSQL Cloud...</span>      </div>    }    <!-- Componente DataTable Reutilizable en Bento Card -->    <div class="bento-table-card">      <app-data-table        [data]="(records$ | async) ?? []"        [loading]="(loading$ | async) ?? false"        [columns]="columns"        [actions]="actions"        [pageSize]="10"        [pageSizeOptions]="[5, 10, 25, 50]"        (actionTriggered)="onActionTriggered($event)"        (exportCsv)="exportToCsv()">      </app-data-table>    </div>  </main></ion-content></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
     var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'RecordListPage'};
