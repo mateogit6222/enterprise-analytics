@@ -1,9 +1,244 @@
-.page-content {
-  --background: #f8fafc;
-  color: #0f172a;
+.header-taste {
+  border-bottom: 1px solid var(--border, #e8eaec);
+  background: var(--surface, #ffffff);
 }
 
-.bento-card {
-  border-color: #e2e8f0 !important;
-  border-radius: 14px;
+.toolbar-taste {
+  --background: var(--surface, #ffffff);
+  --color: var(--ink, #131416);
+  --min-height: 52px;
+}
+
+.menu-btn-taste {
+  color: var(--ink, #131416);
+}
+
+.page-title-taste {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ink, #131416);
+}
+
+.page-content {
+  --background: var(--ground, #f9fbfc);
+  color: var(--ink, #131416);
+}
+
+.screen-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink, #131416);
+}
+
+.screen-subtitle {
+  font-size: 13px;
+  color: var(--muted, #52555a);
+}
+
+.card-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ink, #131416);
+}
+
+.taste-tile-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted, #52555a);
+}
+
+.taste-tile-value {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink, #131416);
+}
+
+.taste-caption {
+  font-size: 12px;
+  color: var(--muted, #52555a);
+}
+
+.taste-form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted, #52555a);
+  margin-bottom: 4px;
+}
+
+.search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .search-icon-taste {
+    position: absolute;
+    left: 10px;
+    color: var(--muted, #52555a);
+    font-size: 12px;
+    pointer-events: none;
+  }
+}
+
+.form-control-taste,
+.form-select-taste {
+  height: 34px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  color: var(--ink, #131416);
+  font-size: 13px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.15s ease;
+
+  &:focus {
+    border-color: var(--accent, #1b6c80);
+    box-shadow: 0 0 0 1px var(--accent, #1b6c80);
+  }
+}
+
+.form-control-taste {
+  padding-left: 28px;
+
+  &::placeholder {
+    color: #8a8f98;
+  }
+}
+
+.btn-primary-taste {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  background: var(--ink, #131416);
+  color: #ffffff;
+  border: 1px solid var(--ink, #131416);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+
+  &:hover:not(:disabled) {
+    background: #232528;
+    border-color: #232528;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.btn-subtle-taste {
+  height: 32px;
+  padding: 0 11px;
+  background: var(--surface, #ffffff);
+  color: var(--ink, #131416);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--rail, #f4f6f8);
+    border-color: #b8bac0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.btn-link-taste {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--accent, #1b6c80);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.btn-spinner {
+  width: 14px;
+  height: 14px;
+}
+
+/* Taste Report Table */
+.table-taste {
+  width: 100%;
+  font-size: 13px;
+  margin-bottom: 0;
+  border-collapse: collapse;
+
+  thead tr th {
+    background: var(--rail, #f4f6f8);
+    color: var(--muted, #52555a);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: none;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border, #e8eaec);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border-subtle, #f0f1f2);
+    transition: background 0.1s ease;
+
+    &:hover {
+      background: #f9fbfc;
+    }
+
+    td {
+      padding: 8px 12px;
+      color: var(--ink, #131416);
+      vertical-align: middle;
+    }
+  }
+}
+
+.sku-code {
+  display: inline-block;
+  padding: 2px 6px;
+  background: var(--rail, #f4f6f8);
+  border: 1px solid var(--border, #e8eaec);
+  border-radius: 4px;
+  color: var(--accent, #1b6c80);
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.category-name-badge {
+  font-weight: 500;
+  color: var(--ink, #131416);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  &.dot-accent {
+    background-color: var(--accent, #1b6c80);
+  }
 }

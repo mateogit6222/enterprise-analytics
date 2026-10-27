@@ -1,70 +1,98 @@
 /**
- * Enterprise Analytics — Swiss Corporate Bento Grid Theme
- * Identidad visual editorial con Bootstrap 5 y paleta de alto contraste (WCAG AAA)
+ * Enterprise Analytics — Taste-Skill v2 High-Taste Design Tokens
+ * Distilled from 247 curated gallery sites & 23 real enterprise product screens (Framed Sheet style)
  */
 
 :root {
-  /** Primary - Swiss Corporate Blue */
-  --ion-color-primary: #1d4ed8;
-  --ion-color-primary-rgb: 29, 78, 216;
+  /* Taste-Skill Framed Sheet tokens */
+  --ground: #f9fbfc;          /* the app chrome and canvas ground */
+  --surface: #ffffff;         /* panels, cards and the work sheet */
+  --raised: #f4f6f8;          /* filled inner wells, segmented tracks, hover rows */
+  --active: #ebedee;          /* the active nav pill */
+  --border: #e8eaec;          /* panel edges: about 1.2:1 on white */
+  --rule: #f0f1f2;            /* row rules inside tables */
+  --control: #cdced1;         /* inputs, selects and outlined buttons */
+  --text: #131416;            /* primary ink - high contrast */
+  --muted: #52555a;           /* secondary text, labels (> 4.5:1 WCAG AA / > 7:1 AAA) */
+  --faint: #6b6b6b;           /* meta and placeholders: lightest grey holding 4.5:1 on white */
+  --accent: #1b6c80;          /* one hue: data, focus, selected thing (deep petroleum teal) */
+  --primary: #131416;         /* near-black primary button fill */
+  --primary-ink: #ffffff;
+  
+  /* Status Semantics: pale tint with dark ink of the same hue */
+  --positive: #1e7b4f;
+  --negative: #c4242a;
+  --warning: #92400e;
+  --pill-positive-bg: #dcfae5;
+  --pill-positive-ink: #04250e;
+  --pill-negative-bg: #ffedea;
+  --pill-negative-ink: #831c1e;
+  --pill-warning-bg: #fffbeb;
+  --pill-warning-ink: #92400e;
+  --pill-neutral-bg: #ebedee;
+  --pill-neutral-ink: #353736;
+  
+  /* Chart Data Hues: one hue per chart, max 4 on a screen */
+  --chart-1: #1b6c80;
+  --chart-2: #2f70bb;
+  --chart-3: #a86f0c;
+  --chart-4: #1e7b4f;
+  --chart-5: #6366f1;
+  --chart-span: 0.08;
+  --grid: #f0f1f2;
+  --axis-ink: #52555a;
+
+  /* Typography scale */
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --fs-title: 22px;
+  --fs-section: 16px;
+  --fs-kpi: 28px;
+  --fs-body: 14px;
+  --fs-small: 12px;
+
+  /* Geometry & Grid */
+  --radius-card: 10px;
+  --radius-control: 6px;
+  --radius-chip: 999px;
+  --control-height: 34px;
+  --row-height: 48px;
+  --nav-row: 34px;
+  --sidebar-width: 240px;
+  --gap: 20px;
+  --card-pad: 20px;
+  --pad: 24px;
+
+  /* Micro-interactions */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-press: 120ms;
+  --t-hover: 150ms;
+  --t-ui: 200ms;
+
+  /* Ionic Theme Overrides mapped cleanly to Taste-Skill */
+  --ion-color-primary: #1b6c80;
+  --ion-color-primary-rgb: 27, 108, 128;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #1e40af;
-  --ion-color-primary-tint: #3b82f6;
+  --ion-color-primary-shade: #155767;
+  --ion-color-primary-tint: #327b8d;
 
-  /** Secondary - Corporate Navy */
-  --ion-color-secondary: #0f172a;
-  --ion-color-secondary-rgb: 15, 23, 42;
+  --ion-color-secondary: #131416;
+  --ion-color-secondary-rgb: 19, 20, 22;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #090d16;
-  --ion-color-secondary-tint: #1e293b;
 
-  /** Tertiary - Slate Blue */
-  --ion-color-tertiary: #475569;
-  --ion-color-tertiary-rgb: 71, 85, 105;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #334155;
-  --ion-color-tertiary-tint: #64748b;
-
-  /** Success - Emerald Corporate */
-  --ion-color-success: #059669;
-  --ion-color-success-rgb: 5, 150, 105;
+  --ion-color-success: #1e7b4f;
+  --ion-color-success-rgb: 30, 123, 79;
   --ion-color-success-contrast: #ffffff;
-  --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: #047857;
-  --ion-color-success-tint: #10b981;
 
-  /** Warning - Amber Corporate */
-  --ion-color-warning: #b45309;
-  --ion-color-warning-rgb: 180, 83, 9;
+  --ion-color-warning: #92400e;
+  --ion-color-warning-rgb: 146, 64, 14;
   --ion-color-warning-contrast: #ffffff;
-  --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: #92400e;
-  --ion-color-warning-tint: #d97706;
 
-  /** Danger - Crimson Corporate */
-  --ion-color-danger: #be123c;
-  --ion-color-danger-rgb: 190, 18, 60;
+  --ion-color-danger: #c4242a;
+  --ion-color-danger-rgb: 196, 36, 42;
   --ion-color-danger-contrast: #ffffff;
-  --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #9f1239;
-  --ion-color-danger-tint: #e11d48;
 
-  /** Swiss Corporate Bento Design Tokens */
-  --ea-bg-base: #f8fafc;
-  --ea-bg-surface: #ffffff;
-  --ea-bg-card: #ffffff;
-  --ea-border-color: #e2e8f0;
-  --ea-border-subtle: #f1f5f9;
-  --ea-text-primary: #0f172a;
-  --ea-text-secondary: #334155;
-  --ea-text-muted: #475569;
-  --ea-bento-radius: 14px;
-  --ea-bento-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 6px 16px rgba(15, 23, 42, 0.03);
-  --ea-bento-shadow-hover: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 12px 24px -2px rgba(15, 23, 42, 0.06);
-
-  /** Typography */
-  --ion-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ion-font-family: var(--font);
 }

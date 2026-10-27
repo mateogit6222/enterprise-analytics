@@ -1,50 +1,50 @@
 /**
  * Shell styles for Enterprise Analytics
+ * Taste-Skill v2 Framed Sheet Sidebar & Navigation
  */
 
 ion-menu {
-  --background: #0f172a;
-  --width: 290px;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  --background: var(--ground);
+  --width: 256px;
+  border-right: 1px solid var(--border);
 
   .menu-header-toolbar {
-    --background: #0f172a;
+    --background: var(--ground);
     --padding-top: 1.25rem;
     --padding-bottom: 0.5rem;
-    --padding-start: 1.25rem;
-    --padding-end: 1.25rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
   }
 
   .menu-brand {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.75rem;
 
     .brand-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 0.75rem;
-      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-control);
+      background: var(--accent);
       color: #ffffff;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+      font-size: 1.25rem;
     }
 
     .brand-text {
       h2 {
         margin: 0;
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #ffffff;
-        letter-spacing: -0.02em;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: -0.01em;
       }
 
       span {
-        font-size: 0.75rem;
-        color: #94a3b8;
+        font-size: 0.725rem;
+        color: var(--muted);
         text-transform: uppercase;
         letter-spacing: 0.05em;
         font-weight: 500;
@@ -53,30 +53,30 @@ ion-menu {
   }
 
   .user-profile-badge {
-    margin: 1rem 1.25rem 0.5rem 1.25rem;
-    padding: 0.85rem;
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.85rem;
+    margin: 1rem 1rem 0.5rem 1rem;
+    padding: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
     display: flex;
     align-items: center;
     gap: 0.75rem;
 
     .user-avatar {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      border: 2px solid #6366f1;
+      border: 1px solid var(--border);
     }
 
     .user-info {
       overflow: hidden;
 
       .user-name {
-        margin: 0 0 0.25rem 0;
-        font-size: 0.9rem;
+        margin: 0 0 0.2rem 0;
+        font-size: 0.85rem;
         font-weight: 600;
-        color: #f8fafc;
+        color: var(--text);
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -85,93 +85,95 @@ ion-menu {
       .role-pill {
         display: inline-flex;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.25rem;
         font-size: 0.7rem;
         font-weight: 600;
-        padding: 0.15rem 0.5rem;
-        border-radius: 1rem;
-        background: rgba(56, 189, 248, 0.15);
-        color: #38bdf8;
-        border: 1px solid rgba(56, 189, 248, 0.3);
+        padding: 0.1rem 0.45rem;
+        border-radius: var(--radius-chip);
+        background: var(--pill-neutral-bg);
+        color: var(--pill-neutral-ink);
+        border: 1px solid var(--border);
 
         &.admin {
-          background: rgba(129, 140, 248, 0.15);
-          color: #a5b4fc;
-          border-color: rgba(129, 140, 248, 0.3);
+          background: #e0f2fe;
+          color: #0369a1;
+          border-color: rgba(3, 105, 161, 0.2);
         }
 
         ion-icon {
-          font-size: 0.8rem;
+          font-size: 0.75rem;
         }
       }
     }
   }
 
   .menu-content {
-    --background: #0f172a;
+    --background: var(--ground);
 
     .menu-list-title {
-      font-size: 0.75rem;
+      font-size: 0.725rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #64748b;
-      font-weight: 700;
-      padding-left: 1.5rem;
+      color: var(--faint);
+      font-weight: 600;
+      padding-left: 1.25rem;
       margin-top: 1rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
     .nav-item {
       --background: transparent;
-      --color: #94a3b8;
-      --border-radius: 0.65rem;
-      --padding-start: 1rem;
-      margin: 0.25rem 0.75rem;
-      font-size: 0.9rem;
+      --color: var(--muted);
+      --border-radius: var(--radius-control);
+      --padding-start: 0.75rem;
+      margin: 0.15rem 0.75rem;
+      font-size: 0.875rem;
       font-weight: 500;
-      transition: all 0.2s ease;
+      height: var(--nav-row);
+      transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
 
       ion-icon {
-        color: #94a3b8;
-        font-size: 1.25rem;
-        margin-right: 0.75rem;
-        transition: color 0.2s ease;
+        color: var(--muted);
+        font-size: 1.15rem;
+        margin-right: 0.65rem;
+        transition: color var(--t-hover) ease;
       }
 
       &:hover {
-        --background: rgba(255, 255, 255, 0.04);
-        --color: #ffffff;
+        --background: var(--raised);
+        --color: var(--text);
 
         ion-icon {
-          color: #ffffff;
+          color: var(--text);
         }
       }
 
       &.selected {
-        --background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.05) 100%);
-        --color: #818cf8;
-        border-left: 3px solid #6366f1;
+        --background: var(--active);
+        --color: var(--text);
+        font-weight: 600;
 
         ion-icon {
-          color: #818cf8;
+          color: var(--accent);
         }
       }
     }
   }
 
   .menu-footer {
-    --background: #0f172a;
-    padding: 0.75rem 1rem 1.25rem 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    --background: var(--ground);
+    padding: 0.75rem 1rem 1rem 1rem;
+    border-top: 1px solid var(--border);
 
     .logout-btn {
-      --color: #f87171;
-      font-size: 0.9rem;
-      font-weight: 600;
+      --color: var(--negative);
+      font-size: 0.85rem;
+      font-weight: 500;
       text-transform: none;
+      height: 34px;
 
       &:hover {
-        --background: rgba(239, 68, 68, 0.1);
+        --background: var(--pill-negative-bg);
       }
     }
   }

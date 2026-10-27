@@ -1,55 +1,55 @@
-<ion-header [translucent]="true" class="ion-no-border header-glass">
-  <ion-toolbar color="primary">
+<ion-header [translucent]="true" class="ion-no-border header-taste">
+  <ion-toolbar class="toolbar-taste">
     <ion-buttons slot="start">
-      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
+      <ion-menu-button aria-label="Abrir menú de navegación" class="menu-btn-taste"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Mi Perfil y Preferencias</ion-title>
+    <ion-title class="page-title-taste">Perfil y Preferencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="page-content" id="profile-content">
-  <div class="container-fluid px-3 px-lg-4 py-4">
+  <main class="container-fluid px-3 px-lg-4 py-3" aria-label="Perfil de usuario y accesibilidad">
 
     @if (currentUser$ | async; as user) {
       <!-- Tarjeta Principal de Perfil del Usuario en Bento Card -->
-      <section class="bento-card p-4 mb-4 bg-white rounded-3 border shadow-sm" aria-label="Información de la cuenta de usuario">
-        <div class="d-flex flex-column flex-sm-row align-items-center gap-4">
+      <section class="bento-card p-3 p-md-4 mb-3" aria-label="Información de la cuenta de usuario">
+        <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
           <div class="position-relative">
             <img
               [src]="user.avatarUrl"
               [alt]="'Fotografía de perfil de ' + (userFullName$ | async)"
-              width="88"
-              height="88"
+              width="80"
+              height="80"
               loading="lazy"
-              class="rounded-circle border border-2 shadow-sm"
+              class="rounded-circle profile-avatar"
             />
-            <span class="position-absolute bottom-0 end-0 p-2 bg-success border border-white rounded-circle" title="Sesión activa">
+            <span class="avatar-online-dot" title="Sesión activa">
               <span class="visually-hidden">En línea</span>
             </span>
           </div>
 
           <div class="text-center text-sm-start flex-grow-1">
             <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-baseline gap-2 mb-1">
-              <h1 class="h4 fw-bold text-dark mb-0">{{ userFullName$ | async }}</h1>
-              <span class="badge" [ngClass]="user.role === 'ADMIN' ? 'bg-primary' : 'bg-secondary'">
-                <ion-icon [name]="user.role === 'ADMIN' ? 'shield-checkmark-outline' : 'person-outline'" class="me-1"></ion-icon>
+              <h1 class="screen-title mb-0">{{ userFullName$ | async }}</h1>
+              <span class="pill" [class.pill-accent]="user.role === 'ADMIN'" [class.pill-neutral]="user.role !== 'ADMIN'">
+                <i [class]="user.role === 'ADMIN' ? 'bi bi-shield-check me-1' : 'bi bi-person me-1'" aria-hidden="true"></i>
                 {{ userRoleLabel$ | async }}
               </span>
             </div>
 
-            <p class="text-secondary small mb-2 d-inline-flex align-items-center gap-1">
-              <ion-icon name="mail-outline"></ion-icon>
+            <p class="taste-caption mb-2 d-inline-flex align-items-center gap-1.5">
+              <i class="bi bi-envelope text-muted" aria-hidden="true"></i>
               <span>{{ user.email }}</span>
             </p>
 
             <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-sm-start">
-              <span class="badge bg-light text-secondary border small fw-normal">
+              <span class="pill pill-neutral">
                 ID: <code>{{ user.id }}</code>
               </span>
-              <span class="badge bg-light text-secondary border small fw-normal">
+              <span class="pill pill-neutral">
                 Último acceso: {{ user.lastLoginAt | date:'medium' }}
               </span>
-              <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small fw-normal">
+              <span class="pill pill-success">
                 Cuenta Activa
               </span>
             </div>
@@ -58,49 +58,47 @@
       </section>
 
       <!-- Grid con Permisos de Rol y Panel de Accesibilidad -->
-      <div class="row g-4">
+      <div class="row g-3">
         
         <!-- Columna 1: Panel de Accesibilidad y Experiencia Universal (WCAG 2.1 AAA) -->
         <div class="col-12 col-lg-6">
-          <section class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100" aria-label="Preferencias de accesibilidad y visualización">
-            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
-              <div class="rounded-3 p-2 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
-                <ion-icon name="accessibility-outline" class="fs-5"></ion-icon>
-              </div>
+          <section class="bento-card p-3 p-md-4 h-100" aria-label="Preferencias de accesibilidad y visualización">
+            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+              <i class="bi bi-universal-access text-muted fs-5" aria-hidden="true"></i>
               <div>
-                <h2 class="h6 fw-bold text-dark mb-0">Accesibilidad & Experiencia Universal</h2>
-                <p class="small text-secondary mb-0">Personaliza la visualización conforme a WCAG 2.1 AA/AAA</p>
+                <h2 class="card-section-title mb-0">Accesibilidad & Experiencia Universal</h2>
+                <p class="taste-caption mb-0">Personalización conforme a directrices WCAG 2.1 AA/AAA</p>
               </div>
             </div>
 
-            <div *ngIf="accessibilityPrefs$ | async as prefs" class="d-flex flex-column gap-4">
+            <div *ngIf="accessibilityPrefs$ | async as prefs" class="d-flex flex-column gap-3">
               
               <!-- 1. Escala de Tipografía -->
               <div>
-                <label class="form-label fw-semibold text-dark small mb-1">Tamaño de Tipografía</label>
-                <p class="text-secondary small mb-2">Aumenta el tamaño del texto en toda la interfaz sin desbordamientos.</p>
+                <label class="taste-form-label mb-1">Tamaño de Tipografía</label>
+                <p class="taste-caption mb-2">Ajusta la escala tipográfica sin romper proporciones visuales.</p>
                 
-                <div class="btn-group w-100" role="group" aria-label="Selector de tamaño de texto">
+                <div class="filter-rail w-100 d-flex" role="group" aria-label="Selector de tamaño de texto">
                   <button
                     type="button"
-                    class="btn btn-sm"
-                    [ngClass]="prefs.fontSize === 'normal' ? 'btn-primary' : 'btn-outline-secondary'"
+                    class="filter-btn flex-fill text-center"
+                    [class.active]="prefs.fontSize === 'normal'"
                     (click)="onFontSizeChanged('normal')">
                     Normal (100%)
                   </button>
 
                   <button
                     type="button"
-                    class="btn btn-sm"
-                    [ngClass]="prefs.fontSize === 'large' ? 'btn-primary' : 'btn-outline-secondary'"
+                    class="filter-btn flex-fill text-center"
+                    [class.active]="prefs.fontSize === 'large'"
                     (click)="onFontSizeChanged('large')">
                     Grande (115%)
                   </button>
 
                   <button
                     type="button"
-                    class="btn btn-sm"
-                    [ngClass]="prefs.fontSize === 'xl' ? 'btn-primary' : 'btn-outline-secondary'"
+                    class="filter-btn flex-fill text-center"
+                    [class.active]="prefs.fontSize === 'xl'"
                     (click)="onFontSizeChanged('xl')">
                     Extra (130%)
                   </button>
@@ -110,14 +108,13 @@
               <!-- 2. Modo Alto Contraste -->
               <div class="d-flex justify-content-between align-items-center pt-2 border-top">
                 <div class="pe-3">
-                  <label for="high-contrast-toggle" class="fw-semibold text-dark small mb-0 d-block">Modo Alto Contraste (WCAG AAA)</label>
-                  <span class="text-secondary small">Fondo negro puro con contraste superior a 7:1.</span>
+                  <label for="high-contrast-toggle" class="taste-control-label mb-0 d-block">Modo Alto Contraste (WCAG AAA)</label>
+                  <span class="taste-caption">Contraste cromático estricto superior a 7:1.</span>
                 </div>
                 <ion-toggle
                   id="high-contrast-toggle"
                   [checked]="prefs.highContrast"
                   (ionChange)="onHighContrastToggled($event.detail.checked)"
-                  color="warning"
                   aria-label="Activar o desactivar modo de alto contraste WCAG AAA">
                 </ion-toggle>
               </div>
@@ -125,22 +122,21 @@
               <!-- 3. Reducción de Movimiento -->
               <div class="d-flex justify-content-between align-items-center pt-2 border-top">
                 <div class="pe-3">
-                  <label for="reduced-motion-toggle" class="fw-semibold text-dark small mb-0 d-block">Reducción de Movimiento</label>
-                  <span class="text-secondary small">Desactiva animaciones complejas y transiciones CSS.</span>
+                  <label for="reduced-motion-toggle" class="taste-control-label mb-0 d-block">Reducción de Movimiento</label>
+                  <span class="taste-caption">Desactiva micro-interacciones y transiciones continuas.</span>
                 </div>
                 <ion-toggle
                   id="reduced-motion-toggle"
                   [checked]="prefs.reducedMotion"
                   (ionChange)="onReducedMotionToggled($event.detail.checked)"
-                  color="secondary"
                   aria-label="Activar o desactivar reducción de movimiento">
                 </ion-toggle>
               </div>
 
               <!-- Botón de Restablecer -->
-              <div class="pt-3 border-top">
-                <button type="button" class="btn btn-outline-secondary btn-sm w-100 d-inline-flex align-items-center justify-content-center gap-2" (click)="resetAccessibilityDefaults()">
-                  <ion-icon name="refresh-outline"></ion-icon>
+              <div class="pt-2 border-top">
+                <button type="button" class="btn-subtle-taste w-100 d-inline-flex align-items-center justify-content-center gap-1.5" (click)="resetAccessibilityDefaults()">
+                  <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
                   <span>Restablecer Opciones Predeterminadas</span>
                 </button>
               </div>
@@ -151,89 +147,87 @@
 
         <!-- Columna 2: Permisos Activos del Rol y Detalles de Seguridad -->
         <div class="col-12 col-lg-6">
-          <section class="bento-card p-4 bg-white rounded-3 border shadow-sm h-100" aria-label="Permisos asignados según el rol del usuario">
-            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
-              <div class="rounded-3 p-2 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
-                <ion-icon name="shield-outline" class="fs-5"></ion-icon>
-              </div>
+          <section class="bento-card p-3 p-md-4 h-100" aria-label="Permisos asignados según el rol del usuario">
+            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+              <i class="bi bi-shield-lock text-muted fs-5" aria-hidden="true"></i>
               <div>
-                <h2 class="h6 fw-bold text-dark mb-0">Permisos del Rol (RBAC)</h2>
-                <p class="small text-secondary mb-0">Capacidades autorizadas para tu perfil</p>
+                <h2 class="card-section-title mb-0">Permisos del Rol (RBAC)</h2>
+                <p class="taste-caption mb-0">Capacidades asignadas por directiva de seguridad</p>
               </div>
             </div>
 
-            <div class="list-group list-group-flush mb-4">
-              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-column gap-2 mb-3">
+              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">
                 <div class="d-flex align-items-center gap-2">
-                  <ion-icon [name]="user.role === 'ADMIN' ? 'checkmark-circle' : 'lock-closed-outline'" [ngClass]="user.role === 'ADMIN' ? 'text-success' : 'text-secondary'"></ion-icon>
+                  <i [class]="user.role === 'ADMIN' ? 'bi bi-check-circle-fill text-success' : 'bi bi-lock-fill text-muted'" aria-hidden="true"></i>
                   <div>
-                    <strong class="d-block small text-dark">Dashboard Analítico</strong>
-                    <span class="small text-secondary">Visualización de métricas y gráficos spline.</span>
+                    <strong class="d-block text-ink small">Dashboard Analítico</strong>
+                    <span class="taste-caption">Visualización de métricas y gráficos spline.</span>
                   </div>
                 </div>
-                <span class="badge" [ngClass]="user.role === 'ADMIN' ? 'bg-primary' : 'bg-light text-secondary border'">
+                <span class="pill" [class.pill-accent]="user.role === 'ADMIN'" [class.pill-neutral]="user.role !== 'ADMIN'">
                   {{ user.role === 'ADMIN' ? 'Habilitado' : 'Admin' }}
                 </span>
               </div>
 
-              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">
                 <div class="d-flex align-items-center gap-2">
-                  <ion-icon [name]="user.role === 'ADMIN' ? 'checkmark-circle' : 'lock-closed-outline'" [ngClass]="user.role === 'ADMIN' ? 'text-success' : 'text-secondary'"></ion-icon>
+                  <i [class]="user.role === 'ADMIN' ? 'bi bi-check-circle-fill text-success' : 'bi bi-lock-fill text-muted'" aria-hidden="true"></i>
                   <div>
-                    <strong class="d-block small text-dark">Generador de Informes</strong>
-                    <span class="small text-secondary">Previsualización y exportación en PDF.</span>
+                    <strong class="d-block text-ink small">Generador de Informes</strong>
+                    <span class="taste-caption">Previsualización y exportación en PDF.</span>
                   </div>
                 </div>
-                <span class="badge" [ngClass]="user.role === 'ADMIN' ? 'bg-primary' : 'bg-light text-secondary border'">
+                <span class="pill" [class.pill-accent]="user.role === 'ADMIN'" [class.pill-neutral]="user.role !== 'ADMIN'">
                   {{ user.role === 'ADMIN' ? 'Habilitado' : 'Admin' }}
                 </span>
               </div>
 
-              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">
                 <div class="d-flex align-items-center gap-2">
-                  <ion-icon name="checkmark-circle" class="text-success"></ion-icon>
+                  <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
                   <div>
-                    <strong class="d-block small text-dark">Gestión de Registros (CRUD)</strong>
-                    <span class="small text-secondary">Búsqueda, ordenación y alta de registros.</span>
+                    <strong class="d-block text-ink small">Gestión de Registros (CRUD)</strong>
+                    <span class="taste-caption">Búsqueda, ordenación y alta de registros.</span>
                   </div>
                 </div>
-                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">Habilitado</span>
+                <span class="pill pill-success">Habilitado</span>
               </div>
 
-              <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+              <div class="p-2.5 rounded-2 d-flex justify-content-between align-items-center bg-rail-subtle border">
                 <div class="d-flex align-items-center gap-2">
-                  <ion-icon name="checkmark-circle" class="text-success"></ion-icon>
+                  <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
                   <div>
-                    <strong class="d-block small text-dark">Exportación a CSV (Excel UTF-8)</strong>
-                    <span class="small text-secondary">Descarga estructurada del dataset.</span>
+                    <strong class="d-block text-ink small">Exportación a CSV (Excel UTF-8)</strong>
+                    <span class="taste-caption">Descarga estructurada del dataset.</span>
                   </div>
                 </div>
-                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">Habilitado</span>
+                <span class="pill pill-success">Habilitado</span>
               </div>
             </div>
 
             <!-- Detalles Técnicos de la Sesión -->
-            <div class="p-3 bg-light rounded-3 border">
-              <h3 class="h6 fw-bold text-dark mb-2 d-flex align-items-center gap-2">
-                <ion-icon name="terminal-outline" class="text-primary"></ion-icon>
+            <div class="p-3 bg-rail rounded-2 border">
+              <h3 class="card-section-title mb-2 d-flex align-items-center gap-2">
+                <i class="bi bi-cpu text-muted" aria-hidden="true"></i>
                 <span>Detalles Técnicos de Sesión</span>
               </h3>
-              <div class="row g-2 small text-secondary">
+              <div class="row g-2 taste-caption">
                 <div class="col-6">
-                  <span class="d-block fw-semibold text-dark">Base de Datos:</span>
-                  <span>Supabase Cloud PostgreSQL</span>
+                  <span class="d-block fw-semibold text-ink">Base de Datos:</span>
+                  <span>Supabase PostgreSQL Cloud</span>
                 </div>
                 <div class="col-6">
-                  <span class="d-block fw-semibold text-dark">Manejador Estado:</span>
+                  <span class="d-block fw-semibold text-ink">Manejador Estado:</span>
                   <span>NgRx Store v22</span>
                 </div>
                 <div class="col-6">
-                  <span class="d-block fw-semibold text-dark">Detección Cambios:</span>
+                  <span class="d-block fw-semibold text-ink">Detección Cambios:</span>
                   <span>OnPush Reactivo</span>
                 </div>
                 <div class="col-6">
-                  <span class="d-block fw-semibold text-dark">Diseño:</span>
-                  <span>Bootstrap 5 Bento Grid</span>
+                  <span class="d-block fw-semibold text-ink">Diseño:</span>
+                  <span>Taste Framed Sheet</span>
                 </div>
               </div>
             </div>
@@ -244,5 +238,5 @@
       </div>
     }
 
-  </div>
+  </main>
 </ion-content>

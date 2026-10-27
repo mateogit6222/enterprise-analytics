@@ -1,13 +1,13 @@
-<ion-header [translucent]="true" class="ion-no-border border-bottom border-light-subtle bg-white">
-  <ion-toolbar color="light">
+<ion-header [translucent]="true" class="ion-no-border header-taste">
+  <ion-toolbar class="toolbar-taste">
     <ion-buttons slot="start">
-      <ion-menu-button aria-label="Abrir menú de navegación" class="text-swiss-navy"></ion-menu-button>
+      <ion-menu-button aria-label="Abrir menú de navegación" class="menu-btn-taste"></ion-menu-button>
     </ion-buttons>
-    <ion-title class="fw-bold text-swiss-navy">Dashboard Analítico Ejecutivo</ion-title>
+    <ion-title class="page-title-taste">Rendimiento Operativo</ion-title>
     <ion-buttons slot="end">
       <button
         type="button"
-        class="btn btn-outline-secondary btn-sm me-2 d-flex align-items-center gap-1"
+        class="btn-subtle d-flex align-items-center gap-1"
         (click)="refreshData()"
         aria-label="Recargar datos desde Supabase"
       >
@@ -21,47 +21,49 @@
 <ion-content [fullscreen]="true" class="page-content">
   <main class="container-fluid py-3 px-md-4" aria-label="Panel de control estratégico">
 
-    <!-- Banner Editorial Hero con SVG Corporativo -->
-    <div class="mb-4 text-center">
-      <img
-        src="assets/images/dashboard-banner.svg"
-        alt="Banner analítico ejecutivo de Enterprise Analytics con Supabase Cloud y arquitectura PostgreSQL"
-        width="900"
-        height="180"
-        class="img-fluid w-100 rounded-3 shadow-xs"
-        fetchpriority="high"
-        style="max-height: 140px; object-fit: cover;"
-      />
+    <!-- Banner Editorial Hero con SVG Corporativo (Preserva requisitos del profesor) -->
+    <div class="mb-4">
+      <div class="banner-frame">
+        <img
+          src="assets/images/dashboard-banner.svg"
+          alt="Banner analítico corporativo de Enterprise Analytics conectado a Supabase Cloud PostgreSQL"
+          width="900"
+          height="180"
+          class="img-fluid w-100 banner-img"
+          fetchpriority="high"
+        />
+      </div>
     </div>
 
-    <!-- Encabezado del Dashboard con controles de filtrado -->
+    <!-- Encabezado del Dashboard: Noun Title (22px) + Muted Subtitle -->
     <header class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom border-light-subtle">
       <div>
-        <h1 class="h3 fw-bold text-swiss-navy mb-1" style="letter-spacing: -0.5px;">Panel Estratégico de Rendimiento</h1>
-        <p class="text-swiss-muted small mb-0">
-          Monitorización en tiempo real conectada a base de datos relacional Supabase (PostgreSQL Cloud).
+        <h1 class="screen-title mb-1">Métricas Clave de Facturación</h1>
+        <p class="screen-subtitle mb-0">
+          Monitorización transaccional continua sobre infraestructura relacional Supabase Cloud.
         </p>
       </div>
 
       <div class="d-flex align-items-center gap-2" *ngIf="activeCategory$ | async as cat">
-        <span class="badge bg-primary text-white d-flex align-items-center gap-1 px-3 py-2 rounded-pill fw-semibold">
+        <span class="pill pill-accent d-flex align-items-center gap-1">
           Filtro: {{ cat }}
-          <button type="button" class="btn-close btn-close-white ms-1" style="font-size: 0.65rem;" (click)="setCategoryFilter(null)" aria-label="Eliminar filtro de categoría"></button>
+          <button type="button" class="btn-clear-filter ms-1" (click)="setCategoryFilter(null)" aria-label="Eliminar filtro de categoría">
+            <i class="bi bi-x" aria-hidden="true"></i>
+          </button>
         </span>
       </div>
     </header>
 
-    <!-- Barra de Filtros Rápidos por Categoría (Bento Pill Bar) -->
-    <nav class="bento-card p-2 px-3 mb-4 d-flex align-items-center gap-2 flex-wrap" aria-label="Filtro rápido por categoría de negocio">
-      <span class="text-swiss-muted small fw-bold text-uppercase d-flex align-items-center gap-1 me-2" style="font-size: 0.75rem;">
-        <i class="bi bi-funnel text-primary" aria-hidden="true"></i> Categoría:
+    <!-- Barra de Filtros Rápidos por Categoría (Segmented Control Rail) -->
+    <nav class="bento-card p-2 px-3 mb-4 d-flex align-items-center gap-3 flex-wrap" aria-label="Filtro rápido por categoría de negocio">
+      <span class="category-label d-flex align-items-center gap-1">
+        <i class="bi bi-funnel text-muted" aria-hidden="true"></i> Categoría:
       </span>
-      <div class="d-flex gap-2 flex-wrap">
+      <div class="filter-rail d-flex gap-1 flex-wrap" role="group" aria-label="Filtros por unidad operativa">
         <button
           type="button"
-          class="btn btn-sm rounded-pill fw-semibold px-3"
-          [class.btn-primary]="(activeCategory$ | async) === null"
-          [class.btn-outline-secondary]="(activeCategory$ | async) !== null"
+          class="filter-btn"
+          [class.active]="(activeCategory$ | async) === null"
           (click)="setCategoryFilter(null)"
           aria-label="Ver todas las categorías">
           Todas
@@ -69,9 +71,8 @@
         @for (category of availableCategories; track category.value) {
           <button
             type="button"
-            class="btn btn-sm rounded-pill fw-semibold px-3"
-            [class.btn-primary]="(activeCategory$ | async) === category.value"
-            [class.btn-outline-secondary]="(activeCategory$ | async) !== category.value"
+            class="filter-btn"
+            [class.active]="(activeCategory$ | async) === category.value"
             (click)="setCategoryFilter(category.value)"
             [attr.aria-label]="'Filtrar por ' + category.label">
             {{ category.label }}
@@ -80,7 +81,7 @@
       </div>
     </nav>
 
-    <!-- Grid de KPIs Dinámicos con Bootstrap 5 Grid -->
+    <!-- Grid de KPIs Dinámicos con Bootstrap 5 Grid (Type over Tiles) -->
     <section class="row g-3 mb-4" aria-label="Indicadores Clave de Rendimiento">
       @for (kpi of kpis$ | async; track kpi.id) {
         <div class="col-12 col-sm-6 col-xl-3">
@@ -94,24 +95,24 @@
       }
     </section>
 
-    <!-- Sección de Gráficos Analíticos Interactivos (Chart.js sin gráficos de barras) -->
+    <!-- Sección de Gráficos Analíticos Interactivos (Spline Area y Polar Area) -->
     <section class="row g-3 mb-4" aria-label="Gráficos analíticos">
       
-      <!-- Gráfico 1: Evolución Temporal Spline Area Chart (type: 'line') -->
+      <!-- Gráfico 1: Evolución Temporal Spline Area Chart (type: 'line', fill: true) -->
       <div class="col-12 col-xl-8">
         <app-chart-card
           title="Evolución de Ingresos y Facturación"
-          subtitle="Área suavizada de facturación acumulada (€) y volumen transaccional (Spline Chart)"
+          subtitle="Área suavizada de facturación (€) y registros operativos (Spline)"
           [timeRanges]="['7D', '30D', '90D', '1A']"
           [selectedTimeRange]="(selectedTimeRange$ | async) ?? '30D'"
           [loading]="(loading$ | async) ?? false"
           actionIcon="analytics-outline"
           actionTooltip="Información estadística"
           (timeRangeChange)="onTimeRangeChanged($event)">
-          <div class="chart-canvas-container" style="height: 320px; position: relative;">
+          <div class="chart-canvas-container">
             <canvas
               #evolutionChartCanvas
-              aria-label="Gráfico de evolución temporal de facturación económica y volumen de registros con Spline Area Chart"
+              aria-label="Gráfico de evolución temporal de facturación económica y volumen con Spline Area Chart"
               role="img"
               tabindex="0">
             </canvas>
@@ -123,12 +124,12 @@
       <div class="col-12 col-xl-4">
         <app-chart-card
           title="Distribución Departamental"
-          subtitle="Gráfico Polar Area de actividad económica por unidad de negocio"
+          subtitle="Volumen económico por unidad de negocio (Polar Area)"
           [showTimeFilter]="false"
           [loading]="(loading$ | async) ?? false"
           actionIcon="pie-chart-outline"
           actionTooltip="Distribución porcentual">
-          <div class="chart-canvas-container" style="height: 320px; position: relative;">
+          <div class="chart-canvas-container">
             <canvas
               #categoryChartCanvas
               aria-label="Gráfico Polar Area de distribución de facturación por categoría corporativa"
@@ -141,30 +142,30 @@
 
     </section>
 
-    <!-- Resumen de Arquitectura y Base de Datos (Supabase PostgreSQL Cloud) -->
-    <footer class="bento-card p-3 p-md-4 mb-3 border border-light-subtle" aria-label="Información de base de datos y arquitectura cloud">
+    <!-- Resumen de Arquitectura y Base de Datos (Framed Sheet Footnote) -->
+    <footer class="bento-card p-3 p-md-4 mb-3" aria-label="Información de base de datos y arquitectura cloud">
       <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
         <div class="d-flex align-items-center gap-3">
-          <div class="bg-primary-subtle text-primary p-3 rounded-circle d-flex align-items-center justify-content-center">
-            <i class="bi bi-database-check fs-4" aria-hidden="true"></i>
+          <div class="architecture-badge d-flex align-items-center justify-content-center">
+            <i class="bi bi-database-check fs-5" aria-hidden="true"></i>
           </div>
           <div>
-            <h2 class="h6 fw-bold text-swiss-navy mb-1">Arquitectura Relacional Supabase Cloud</h2>
-            <p class="text-swiss-muted small mb-0">Base de datos PostgreSQL corporativa con fallback inteligente en memoria (Zero-Downtime).</p>
+            <h2 class="h6 fw-semibold text-ink mb-1">Arquitectura Relacional Supabase Cloud</h2>
+            <p class="text-muted small mb-0">Base de datos PostgreSQL con fallback inteligente en memoria (Zero-Downtime).</p>
           </div>
         </div>
 
         <div class="d-flex align-items-center gap-2 flex-wrap">
-          <span class="badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1">
-            <span class="p-1 bg-success rounded-circle me-1"></span>
+          <span class="pill pill-neutral d-flex align-items-center gap-1">
+            <span class="status-dot dot-success me-1"></span>
             PostgreSQL 15+
           </span>
-          <span class="badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1">
-            <span class="p-1 bg-primary rounded-circle me-1"></span>
+          <span class="pill pill-neutral d-flex align-items-center gap-1">
+            <span class="status-dot dot-accent me-1"></span>
             NgRx Data Store
           </span>
-          <span class="badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1">
-            <span class="p-1 bg-info rounded-circle me-1"></span>
+          <span class="pill pill-neutral d-flex align-items-center gap-1">
+            <span class="status-dot dot-neutral me-1"></span>
             Vercel Ready
           </span>
         </div>

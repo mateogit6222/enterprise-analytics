@@ -13,29 +13,21 @@
     <!-- Estado de carga interno -->
     <div class="kpi-loading-state">
       <div class="loading-top">
-        <ion-skeleton-text [animated]="true" style="width: 60%; height: 16px; border-radius: 4px;"></ion-skeleton-text>
-        <ion-skeleton-text [animated]="true" style="width: 36px; height: 36px; border-radius: 10px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; border-radius: 4px;"></ion-skeleton-text>
       </div>
-      <ion-skeleton-text [animated]="true" style="width: 75%; height: 32px; margin: 12px 0; border-radius: 6px;"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 75%; height: 28px; margin: 8px 0; border-radius: 4px;"></ion-skeleton-text>
       <ion-skeleton-text [animated]="true" style="width: 45%; height: 14px; border-radius: 4px;"></ion-skeleton-text>
     </div>
   } @else {
-    <!-- Cabecera: Título e Icono temático -->
+    <!-- Cabecera: Título y meta sutil (Taste-Skill §5: type, not tiles) -->
     <div class="kpi-top">
       <span class="kpi-label">{{ kpi.label }}</span>
-      <div
-        class="kpi-icon-container"
-        [style.background]="kpi.color ? kpi.color + '22' : 'rgba(99, 102, 241, 0.15)'"
-        [style.color]="kpi.color || '#818cf8'"
-        aria-hidden="true"
-      >
-        <ion-icon [name]="kpi.icon || 'stats-chart-outline'"></ion-icon>
-      </div>
+      <ion-icon [name]="kpi.icon || 'stats-chart-outline'" class="kpi-meta-icon" aria-hidden="true"></ion-icon>
     </div>
 
-    <!-- Valor Principal -->
+    <!-- Valor Principal en Cifras Tabulares -->
     <div class="kpi-value-row">
-      <span class="kpi-value">
+      <span class="kpi-value num">
         @if (isCurrency) {
           {{ kpi.value | currencyFormat }}
         } @else {
@@ -44,32 +36,21 @@
       </span>
     </div>
 
-    <!-- Pie: Indicador de Tendencia y Comparación -->
+    <!-- Pie: Indicador de Tendencia con delta honesto -->
     <div class="kpi-footer">
-      <div
-        class="trend-badge"
+      <span
+        class="delta"
         [ngClass]="{
           'trend-up': kpi.trend === KpiTrend.UP,
           'trend-down': kpi.trend === KpiTrend.DOWN,
           'trend-stable': kpi.trend === KpiTrend.STABLE
         }"
       >
-        <ion-icon
-          [name]="
-            kpi.trend === KpiTrend.UP
-              ? 'trending-up-outline'
-              : kpi.trend === KpiTrend.DOWN
-              ? 'trending-down-outline'
-              : 'remove-outline'
-          "
-          aria-hidden="true"
-        ></ion-icon>
-        <span class="trend-text">
-          {{ kpi.trend === KpiTrend.UP ? '+' : '' }}{{ kpi.changePercent }}%
+        <span class="delta-mark">
+          {{ kpi.trend === KpiTrend.UP ? '↑ +' : kpi.trend === KpiTrend.DOWN ? '↓ ' : '— ' }}{{ kpi.changePercent }}%
         </span>
-      </div>
-
-      <span class="comparison-text">vs período anterior</span>
+        <span class="comparison-text">vs período anterior</span>
+      </span>
     </div>
   }
 </div>

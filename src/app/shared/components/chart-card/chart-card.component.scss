@@ -1,6 +1,6 @@
 /**
  * Chart Card Component Styles
- * Swiss Corporate Bento Grid Aesthetic
+ * Taste-Skill v2: Framed Sheet quiet borders, segmented control, clear data presentation
  */
 
 :host {
@@ -9,34 +9,34 @@
 }
 
 .chart-container-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.25rem 1.5rem;
+  box-shadow: none;
 
   .chart-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     gap: 1rem;
     flex-wrap: wrap;
 
     .title-group {
       .chart-title {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #0f172a;
+        font-size: var(--fs-section);
+        font-weight: 600;
+        color: var(--text);
         margin: 0;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.01em;
       }
 
       .chart-subtitle {
-        font-size: 0.85rem;
-        color: #475569;
-        margin: 0.25rem 0 0 0;
-        font-weight: 500;
+        font-size: var(--fs-small);
+        color: var(--muted);
+        margin: 0.2rem 0 0 0;
+        font-weight: 400;
       }
     }
 
@@ -46,48 +46,48 @@
       gap: 0.5rem;
 
       .time-range-pills {
-        display: flex;
-        background: #f1f5f9;
-        padding: 0.2rem;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
+        display: inline-flex;
+        background: var(--raised);
+        padding: 2px;
+        border-radius: var(--radius-control);
+        border: 1px solid var(--border);
 
         .range-pill {
           background: transparent;
           border: none;
-          color: #475569;
+          color: var(--muted);
           font-size: 0.75rem;
-          font-weight: 600;
-          padding: 0.25rem 0.65rem;
-          border-radius: 6px;
+          font-weight: 500;
+          padding: 0.2rem 0.6rem;
+          border-radius: 4px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
           outline: none;
 
           &:hover {
-            color: #0f172a;
+            color: var(--text);
           }
 
           &.active {
-            background: #ffffff;
-            color: #0284c7;
-            font-weight: 700;
-            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 600;
+            box-shadow: 0 1px 2px rgba(19, 20, 22, 0.05);
           }
 
           &:focus-visible {
-            box-shadow: 0 0 0 2px #0284c7;
+            box-shadow: 0 0 0 2px var(--accent);
           }
         }
       }
 
       .action-btn {
-        --color: #64748b;
-        --padding-start: 0.5rem;
-        --padding-end: 0.5rem;
+        --color: var(--faint);
+        --padding-start: 0.4rem;
+        --padding-end: 0.4rem;
 
         &:hover {
-          --color: #0f172a;
+          --color: var(--text);
         }
       }
     }
@@ -96,7 +96,7 @@
   .chart-body {
     position: relative;
     width: 100%;
-    min-height: 280px;
+    min-height: 270px;
 
     .chart-content {
       width: 100%;
@@ -106,7 +106,7 @@
       justify-content: center;
 
       ::ng-deep canvas {
-        max-height: 320px;
+        max-height: 300px;
         width: 100% !important;
       }
     }
