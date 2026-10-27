@@ -40,10 +40,10 @@
 
 El evaluador dispone de dos perfiles con diferentes niveles de autorización para verificar el sistema de permisos y guardias de ruta (`AuthGuard` y `RoleGuard`):
 
-| Perfil / Rol | Correo Electrónico | Contraseña | Rutas Autorizadas |
-| :--- | :--- | :--- | :--- |
-| **Administrador** | `admin@enterprise.com` | `Admin123!` | `/dashboard`, `/records`, `/reports`, `/profile`, `/help` |
-| **Usuario Estándar** | `user@enterprise.com` | `User123!` | `/records`, `/profile`, `/help` *(Redirección automática si intenta acceder a `/dashboard` o `/reports`)* |
+| Perfil / Rol | Cuenta Demo | Clave Demo | Almacenamiento Seguro | Rutas Autorizadas |
+| :--- | :--- | :--- | :--- | :--- |
+| **Administrador** | `admin@enterprise.com` | `Admin123!` o `Admin2026!` | Hash SHA-256 (Sin texto plano) | `/dashboard`, `/records`, `/reports`, `/profile`, `/help` |
+| **Usuario Estándar** | `user@enterprise.com` | `User123!` o `User2026!` | Hash SHA-256 (Sin texto plano) | `/records`, `/profile`, `/help` *(Redirección automática si intenta acceder a `/dashboard` o `/reports`)* |
 
 ---
 
@@ -54,7 +54,7 @@ La aplicación ha sido auditada y optimizada para superar holgadamente el criter
 ### Pasos para realizar la auditoría en Google Chrome:
 1. Abre Google Chrome en una ventana de **Incógnito** (para evitar que las extensiones interfieran en la puntuación).
 2. Navega a la URL de producción o a `http://localhost:8100/login`.
-3. Inicia sesión con la cuenta de Administrador (`admin@enterprise.com` / `Admin123!`).
+3. Inicia sesión con la cuenta de Administrador (botón rápido *Demo Admin* o `admin@enterprise.com`).
 4. Ve al **Dashboard Analítico** (`/dashboard`).
 5. Abre las Herramientas de Desarrollador pulsando <kbd>F12</kbd> (o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>).
 6. Selecciona la pestaña **Lighthouse**.

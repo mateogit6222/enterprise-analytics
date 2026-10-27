@@ -322,7 +322,7 @@ export const FALLBACK_USERS: MockUserData[] = [
   {
     id: "usr-admin-001",
     email: "admin@enterprise.com",
-    password: "Admin2026!",
+    passwordHash: "04445e6487736590d1ef50186b414e737e0164683cbbec64e00e73c000fd3bef",
     firstName: "Elena",
     lastName: "Martínez",
     role: UserRole.ADMIN,
@@ -334,7 +334,7 @@ export const FALLBACK_USERS: MockUserData[] = [
   {
     id: "usr-user-001",
     email: "user@enterprise.com",
-    password: "User2026!",
+    passwordHash: "cb1bc5abcdca0bdfc656344aa5011268b00aba457ac33034f3946e29ef79a603",
     firstName: "Carlos",
     lastName: "López",
     role: UserRole.USER,
@@ -346,7 +346,7 @@ export const FALLBACK_USERS: MockUserData[] = [
   {
     id: "usr-user-002",
     email: "javier.ruiz@enterprise.com",
-    password: "Javier2026!",
+    passwordHash: "b505981b4b1c56908b27d6de3687fad6d6ff9d9ba9a016f010e99dc32ecd47d8",
     firstName: "Javier",
     lastName: "Ruiz",
     role: UserRole.USER,
@@ -358,7 +358,7 @@ export const FALLBACK_USERS: MockUserData[] = [
   {
     id: "usr-admin-002",
     email: "maria.garcia@enterprise.com",
-    password: "Maria2026!",
+    passwordHash: "80f0ba29e909a928784db26475341a13c968335e56f9f942bd38159e1a988c85",
     firstName: "María",
     lastName: "García",
     role: UserRole.ADMIN,

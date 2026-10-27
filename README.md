@@ -65,10 +65,10 @@ forkJoin({
 
 El sistema cuenta con **Control de Acceso Basado en Roles (RBAC)** con rutas protegidas mediante `AuthGuard` y `RoleGuard`:
 
-| Rol de Usuario | Correo Electrónico | Contraseña | Permisos y Alcance de Navegación |
-| :--- | :--- | :--- | :--- |
-| **Administrador** | `admin@enterprise.com` | `Admin123!` | **Acceso Total**: Dashboard Analítico (Chart.js), CRUD de Registros, Generador de Informes (PDF/CSV), Centro de Ayuda, Perfil. |
-| **Usuario Estándar** | `user@enterprise.com` | `User123!` | **Operativa**: CRUD de Registros (lectura/alta/edición), Centro de Ayuda y Manual, Perfil con preferencias de accesibilidad. *(Rutas `/dashboard` y `/reports` restringidas).* |
+| Rol de Usuario | Cuenta Demo | Clave Demo | Almacenamiento Seguro | Permisos y Alcance de Navegación |
+| :--- | :--- | :--- | :--- | :--- |
+| **Administrador** | `admin@enterprise.com` | `Admin123!` o `Admin2026!` | Hash SHA-256 (Sin texto plano) | **Acceso Total**: Dashboard Analítico (Chart.js), CRUD de Registros, Generador de Informes (PDF/CSV), Centro de Ayuda, Perfil. |
+| **Usuario Estándar** | `user@enterprise.com` | `User123!` o `User2026!` | Hash SHA-256 (Sin texto plano) | **Operativa**: CRUD de Registros (lectura/alta/edición), Centro de Ayuda y Manual, Perfil con preferencias de accesibilidad. *(Rutas `/dashboard` y `/reports` restringidas).* |
 
 ---
 
