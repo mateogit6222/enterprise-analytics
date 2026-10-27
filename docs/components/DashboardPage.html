@@ -859,8 +859,8 @@ por hardware, filtrado en tiempo real y ciclo de vida seguro para prevenir fugas
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="306"
-                                    class="link-to-prism">src/app/features/dashboard/pages/dashboard/dashboard.page.ts:306</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="307"
+                                    class="link-to-prism">src/app/features/dashboard/pages/dashboard/dashboard.page.ts:307</a></div>
                         </td>
                     </tr>
 
@@ -1658,16 +1658,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      // Gradientes corporativos suizos para Spline Area Chart (RA 2 y RA 5)
-      const gradientRev &#x3D; ctx.createLinearGradient(0, 0, 0, 320);
-      gradientRev.addColorStop(0, &#x27;rgba(29, 78, 216, 0.40)&#x27;);
-      gradientRev.addColorStop(1, &#x27;rgba(29, 78, 216, 0.0)&#x27;);
+      // Gradientes sobrios de alta fidelidad según Taste-Skill v2
+      const gradientRev &#x3D; ctx.createLinearGradient(0, 0, 0, 300);
+      gradientRev.addColorStop(0, &#x27;rgba(27, 108, 128, 0.12)&#x27;);
+      gradientRev.addColorStop(1, &#x27;rgba(27, 108, 128, 0.0)&#x27;);
 
-      const gradientVol &#x3D; ctx.createLinearGradient(0, 0, 0, 320);
-      gradientVol.addColorStop(0, &#x27;rgba(5, 150, 105, 0.25)&#x27;);
-      gradientVol.addColorStop(1, &#x27;rgba(5, 150, 105, 0.0)&#x27;);
+      const gradientVol &#x3D; ctx.createLinearGradient(0, 0, 0, 300);
+      gradientVol.addColorStop(0, &#x27;rgba(47, 112, 187, 0.08)&#x27;);
+      gradientVol.addColorStop(1, &#x27;rgba(47, 112, 187, 0.0)&#x27;);
 
-      // Spline Area Chart (100% libre de gráficos de barras por especificación del profesor)
+      // Spline Area Chart (100% libre de gráficos de barras según rúbrica del profesor)
       const config: ChartConfiguration&lt;&#x27;line&#x27;&gt; &#x3D; {
         type: &#x27;line&#x27;,
         data: {
@@ -1677,33 +1677,33 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
               type: &#x27;line&#x27;,
               label: &#x27;Facturación Económica (€)&#x27;,
               data: timeline.revenues,
-              borderColor: &#x27;#1d4ed8&#x27;,
+              borderColor: &#x27;#1b6c80&#x27;,
               backgroundColor: gradientRev,
               fill: true,
               tension: 0.4,
-              borderWidth: 3,
-              pointBackgroundColor: &#x27;#1d4ed8&#x27;,
+              borderWidth: 2,
+              pointBackgroundColor: &#x27;#1b6c80&#x27;,
               pointBorderColor: &#x27;#ffffff&#x27;,
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              pointHoverRadius: 7,
+              pointBorderWidth: 1.5,
+              pointRadius: 3,
+              pointHoverRadius: 6,
               yAxisID: &#x27;y&#x27;
             },
             {
               type: &#x27;line&#x27;,
               label: &#x27;Volumen Operaciones&#x27;,
               data: timeline.counts,
-              borderColor: &#x27;#059669&#x27;,
+              borderColor: &#x27;#2f70bb&#x27;,
               backgroundColor: gradientVol,
               fill: true,
               tension: 0.4,
-              borderWidth: 2.5,
-              borderDash: [5, 5],
-              pointBackgroundColor: &#x27;#059669&#x27;,
+              borderWidth: 1.5,
+              borderDash: [4, 4],
+              pointBackgroundColor: &#x27;#2f70bb&#x27;,
               pointBorderColor: &#x27;#ffffff&#x27;,
-              pointBorderWidth: 2,
-              pointRadius: 3,
-              pointHoverRadius: 6,
+              pointBorderWidth: 1.5,
+              pointRadius: 2.5,
+              pointHoverRadius: 5,
               yAxisID: &#x27;y1&#x27;
             }
           ]
@@ -1719,19 +1719,20 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
             legend: {
               position: &#x27;top&#x27;,
               labels: {
-                color: &#x27;#334155&#x27;,
-                font: { family: &#x27;inherit&#x27;, size: 12, weight: &#x27;bold&#x27; },
-                usePointStyle: true
+                color: &#x27;#52555a&#x27;,
+                font: { family: &#x27;inherit&#x27;, size: 12, weight: &#x27;normal&#x27; },
+                usePointStyle: true,
+                boxWidth: 8
               }
             },
             tooltip: {
-              backgroundColor: &#x27;rgba(15, 23, 42, 0.95)&#x27;,
-              titleColor: &#x27;#f8fafc&#x27;,
-              bodyColor: &#x27;#e2e8f0&#x27;,
-              borderColor: &#x27;#e2e8f0&#x27;,
+              backgroundColor: &#x27;#131416&#x27;,
+              titleColor: &#x27;#ffffff&#x27;,
+              bodyColor: &#x27;#e8eaec&#x27;,
+              borderColor: &#x27;#e8eaec&#x27;,
               borderWidth: 1,
-              padding: 12,
-              boxPadding: 6,
+              padding: 10,
+              boxPadding: 4,
               callbacks: {
                 label: (context) &#x3D;&gt; {
                   if (context.datasetIndex &#x3D;&#x3D;&#x3D; 0) {
@@ -1744,16 +1745,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
           },
           scales: {
             x: {
-              grid: { color: &#x27;rgba(226, 232, 240, 0.6)&#x27; },
-              ticks: { color: &#x27;#64748b&#x27;, font: { size: 11 } }
+              grid: { color: &#x27;rgba(240, 241, 242, 0.8)&#x27; },
+              ticks: { color: &#x27;#52555a&#x27;, font: { size: 11 } }
             },
             y: {
               type: &#x27;linear&#x27;,
               display: true,
               position: &#x27;left&#x27;,
-              grid: { color: &#x27;rgba(226, 232, 240, 0.6)&#x27; },
+              grid: { color: &#x27;rgba(240, 241, 242, 0.8)&#x27; },
               ticks: {
-                color: &#x27;#1d4ed8&#x27;,
+                color: &#x27;#1b6c80&#x27;,
                 callback: (val) &#x3D;&gt; &#x60;${Number(val) / 1000}k €&#x60;
               }
             },
@@ -1762,7 +1763,7 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
               display: true,
               position: &#x27;right&#x27;,
               grid: { drawOnChartArea: false },
-              ticks: { color: &#x27;#059669&#x27;, stepSize: 2 }
+              ticks: { color: &#x27;#2f70bb&#x27;, stepSize: 2 }
             }
           }
         }
@@ -1796,7 +1797,7 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      // Gráfico Polar Area con paleta editorial suiza
+      // Gráfico Polar Area con paleta Framed Sheet refinada (sin colores estridentes)
       const config: ChartConfiguration&lt;&#x27;polarArea&#x27;&gt; &#x3D; {
         type: &#x27;polarArea&#x27;,
         data: {
@@ -1805,14 +1806,14 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
             {
               data: catData.amounts,
               backgroundColor: [
-                &#x27;rgba(29, 78, 216, 0.75)&#x27;,
-                &#x27;rgba(2, 132, 199, 0.75)&#x27;,
-                &#x27;rgba(5, 150, 105, 0.75)&#x27;,
-                &#x27;rgba(180, 83, 9, 0.75)&#x27;,
-                &#x27;rgba(190, 18, 60, 0.75)&#x27;
+                &#x27;rgba(27, 108, 128, 0.82)&#x27;,
+                &#x27;rgba(47, 112, 187, 0.82)&#x27;,
+                &#x27;rgba(168, 111, 12, 0.82)&#x27;,
+                &#x27;rgba(30, 123, 79, 0.82)&#x27;,
+                &#x27;rgba(99, 102, 241, 0.80)&#x27;
               ],
               borderColor: &#x27;#ffffff&#x27;,
-              borderWidth: 2
+              borderWidth: 1.5
             }
           ]
         },
@@ -1823,19 +1824,21 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
             legend: {
               position: &#x27;bottom&#x27;,
               labels: {
-                color: &#x27;#334155&#x27;,
-                font: { family: &#x27;inherit&#x27;, size: 11, weight: &#x27;bold&#x27; },
-                padding: 12,
-                usePointStyle: true
+                color: &#x27;#52555a&#x27;,
+                font: { family: &#x27;inherit&#x27;, size: 11, weight: 500 },
+                padding: 14,
+                usePointStyle: true,
+                boxWidth: 8
               }
             },
             tooltip: {
-              backgroundColor: &#x27;rgba(15, 23, 42, 0.95)&#x27;,
-              titleColor: &#x27;#f8fafc&#x27;,
-              bodyColor: &#x27;#e2e8f0&#x27;,
-              borderColor: &#x27;#e2e8f0&#x27;,
+              backgroundColor: &#x27;#131416&#x27;,
+              titleColor: &#x27;#ffffff&#x27;,
+              bodyColor: &#x27;#e8eaec&#x27;,
+              borderColor: &#x27;#232528&#x27;,
               borderWidth: 1,
-              padding: 12,
+              padding: 10,
+              boxPadding: 4,
               callbacks: {
                 label: (context) &#x3D;&gt; {
                   const val &#x3D; Number(context.raw) || 0;
@@ -1848,8 +1851,8 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
           },
           scales: {
             r: {
-              grid: { color: &#x27;rgba(226, 232, 240, 0.8)&#x27; },
-              ticks: { display: false }
+              grid: { color: &#x27;rgba(232, 234, 236, 0.8)&#x27; },
+              ticks: { backdropColor: &#x27;transparent&#x27;, color: &#x27;#8a8f98&#x27;, font: { size: 10 } }
             }
           }
         }
@@ -1863,16 +1866,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border border-bottom border-light-subtle bg-white&quot;&gt;
-  &lt;ion-toolbar color&#x3D;&quot;light&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-no-border header-taste&quot;&gt;
+  &lt;ion-toolbar class&#x3D;&quot;toolbar-taste&quot;&gt;
     &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
-      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot; class&#x3D;&quot;text-swiss-navy&quot;&gt;&lt;/ion-menu-button&gt;
+      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot; class&#x3D;&quot;menu-btn-taste&quot;&gt;&lt;/ion-menu-button&gt;
     &lt;/ion-buttons&gt;
-    &lt;ion-title class&#x3D;&quot;fw-bold text-swiss-navy&quot;&gt;Dashboard Analítico Ejecutivo&lt;/ion-title&gt;
+    &lt;ion-title class&#x3D;&quot;page-title-taste&quot;&gt;Rendimiento Operativo&lt;/ion-title&gt;
     &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
       &lt;button
         type&#x3D;&quot;button&quot;
-        class&#x3D;&quot;btn btn-outline-secondary btn-sm me-2 d-flex align-items-center gap-1&quot;
+        class&#x3D;&quot;btn-subtle d-flex align-items-center gap-1&quot;
         (click)&#x3D;&quot;refreshData()&quot;
         aria-label&#x3D;&quot;Recargar datos desde Supabase&quot;
       &gt;
@@ -1886,47 +1889,49 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
 &lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;page-content&quot;&gt;
   &lt;main class&#x3D;&quot;container-fluid py-3 px-md-4&quot; aria-label&#x3D;&quot;Panel de control estratégico&quot;&gt;
 
-    &lt;!-- Banner Editorial Hero con SVG Corporativo --&gt;
-    &lt;div class&#x3D;&quot;mb-4 text-center&quot;&gt;
-      &lt;img
-        src&#x3D;&quot;assets/images/dashboard-banner.svg&quot;
-        alt&#x3D;&quot;Banner analítico ejecutivo de Enterprise Analytics con Supabase Cloud y arquitectura PostgreSQL&quot;
-        width&#x3D;&quot;900&quot;
-        height&#x3D;&quot;180&quot;
-        class&#x3D;&quot;img-fluid w-100 rounded-3 shadow-xs&quot;
-        fetchpriority&#x3D;&quot;high&quot;
-        style&#x3D;&quot;max-height: 140px; object-fit: cover;&quot;
-      /&gt;
+    &lt;!-- Banner Editorial Hero con SVG Corporativo (Preserva requisitos del profesor) --&gt;
+    &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+      &lt;div class&#x3D;&quot;banner-frame&quot;&gt;
+        &lt;img
+          src&#x3D;&quot;assets/images/dashboard-banner.svg&quot;
+          alt&#x3D;&quot;Banner analítico corporativo de Enterprise Analytics conectado a Supabase Cloud PostgreSQL&quot;
+          width&#x3D;&quot;900&quot;
+          height&#x3D;&quot;180&quot;
+          class&#x3D;&quot;img-fluid w-100 banner-img&quot;
+          fetchpriority&#x3D;&quot;high&quot;
+        /&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;!-- Encabezado del Dashboard con controles de filtrado --&gt;
+    &lt;!-- Encabezado del Dashboard: Noun Title (22px) + Muted Subtitle --&gt;
     &lt;header class&#x3D;&quot;d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom border-light-subtle&quot;&gt;
       &lt;div&gt;
-        &lt;h1 class&#x3D;&quot;h3 fw-bold text-swiss-navy mb-1&quot; style&#x3D;&quot;letter-spacing: -0.5px;&quot;&gt;Panel Estratégico de Rendimiento&lt;/h1&gt;
-        &lt;p class&#x3D;&quot;text-swiss-muted small mb-0&quot;&gt;
-          Monitorización en tiempo real conectada a base de datos relacional Supabase (PostgreSQL Cloud).
+        &lt;h1 class&#x3D;&quot;screen-title mb-1&quot;&gt;Métricas Clave de Facturación&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;screen-subtitle mb-0&quot;&gt;
+          Monitorización transaccional continua sobre infraestructura relacional Supabase Cloud.
         &lt;/p&gt;
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;d-flex align-items-center gap-2&quot; *ngIf&#x3D;&quot;activeCategory$ | async as cat&quot;&gt;
-        &lt;span class&#x3D;&quot;badge bg-primary text-white d-flex align-items-center gap-1 px-3 py-2 rounded-pill fw-semibold&quot;&gt;
+        &lt;span class&#x3D;&quot;pill pill-accent d-flex align-items-center gap-1&quot;&gt;
           Filtro: {{ cat }}
-          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close btn-close-white ms-1&quot; style&#x3D;&quot;font-size: 0.65rem;&quot; (click)&#x3D;&quot;setCategoryFilter(null)&quot; aria-label&#x3D;&quot;Eliminar filtro de categoría&quot;&gt;&lt;/button&gt;
+          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-clear-filter ms-1&quot; (click)&#x3D;&quot;setCategoryFilter(null)&quot; aria-label&#x3D;&quot;Eliminar filtro de categoría&quot;&gt;
+            &lt;i class&#x3D;&quot;bi bi-x&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
+          &lt;/button&gt;
         &lt;/span&gt;
       &lt;/div&gt;
     &lt;/header&gt;
 
-    &lt;!-- Barra de Filtros Rápidos por Categoría (Bento Pill Bar) --&gt;
-    &lt;nav class&#x3D;&quot;bento-card p-2 px-3 mb-4 d-flex align-items-center gap-2 flex-wrap&quot; aria-label&#x3D;&quot;Filtro rápido por categoría de negocio&quot;&gt;
-      &lt;span class&#x3D;&quot;text-swiss-muted small fw-bold text-uppercase d-flex align-items-center gap-1 me-2&quot; style&#x3D;&quot;font-size: 0.75rem;&quot;&gt;
-        &lt;i class&#x3D;&quot;bi bi-funnel text-primary&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt; Categoría:
+    &lt;!-- Barra de Filtros Rápidos por Categoría (Segmented Control Rail) --&gt;
+    &lt;nav class&#x3D;&quot;bento-card p-2 px-3 mb-4 d-flex align-items-center gap-3 flex-wrap&quot; aria-label&#x3D;&quot;Filtro rápido por categoría de negocio&quot;&gt;
+      &lt;span class&#x3D;&quot;category-label d-flex align-items-center gap-1&quot;&gt;
+        &lt;i class&#x3D;&quot;bi bi-funnel text-muted&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt; Categoría:
       &lt;/span&gt;
-      &lt;div class&#x3D;&quot;d-flex gap-2 flex-wrap&quot;&gt;
+      &lt;div class&#x3D;&quot;filter-rail d-flex gap-1 flex-wrap&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Filtros por unidad operativa&quot;&gt;
         &lt;button
           type&#x3D;&quot;button&quot;
-          class&#x3D;&quot;btn btn-sm rounded-pill fw-semibold px-3&quot;
-          [class.btn-primary]&#x3D;&quot;(activeCategory$ | async) &#x3D;&#x3D;&#x3D; null&quot;
-          [class.btn-outline-secondary]&#x3D;&quot;(activeCategory$ | async) !&#x3D;&#x3D; null&quot;
+          class&#x3D;&quot;filter-btn&quot;
+          [class.active]&#x3D;&quot;(activeCategory$ | async) &#x3D;&#x3D;&#x3D; null&quot;
           (click)&#x3D;&quot;setCategoryFilter(null)&quot;
           aria-label&#x3D;&quot;Ver todas las categorías&quot;&gt;
           Todas
@@ -1934,9 +1939,8 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
         @for (category of availableCategories; track category.value) {
           &lt;button
             type&#x3D;&quot;button&quot;
-            class&#x3D;&quot;btn btn-sm rounded-pill fw-semibold px-3&quot;
-            [class.btn-primary]&#x3D;&quot;(activeCategory$ | async) &#x3D;&#x3D;&#x3D; category.value&quot;
-            [class.btn-outline-secondary]&#x3D;&quot;(activeCategory$ | async) !&#x3D;&#x3D; category.value&quot;
+            class&#x3D;&quot;filter-btn&quot;
+            [class.active]&#x3D;&quot;(activeCategory$ | async) &#x3D;&#x3D;&#x3D; category.value&quot;
             (click)&#x3D;&quot;setCategoryFilter(category.value)&quot;
             [attr.aria-label]&#x3D;&quot;&#x27;Filtrar por &#x27; + category.label&quot;&gt;
             {{ category.label }}
@@ -1945,7 +1949,7 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
       &lt;/div&gt;
     &lt;/nav&gt;
 
-    &lt;!-- Grid de KPIs Dinámicos con Bootstrap 5 Grid --&gt;
+    &lt;!-- Grid de KPIs Dinámicos con Bootstrap 5 Grid (Type over Tiles) --&gt;
     &lt;section class&#x3D;&quot;row g-3 mb-4&quot; aria-label&#x3D;&quot;Indicadores Clave de Rendimiento&quot;&gt;
       @for (kpi of kpis$ | async; track kpi.id) {
         &lt;div class&#x3D;&quot;col-12 col-sm-6 col-xl-3&quot;&gt;
@@ -1959,24 +1963,24 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
       }
     &lt;/section&gt;
 
-    &lt;!-- Sección de Gráficos Analíticos Interactivos (Chart.js sin gráficos de barras) --&gt;
+    &lt;!-- Sección de Gráficos Analíticos Interactivos (Spline Area y Polar Area) --&gt;
     &lt;section class&#x3D;&quot;row g-3 mb-4&quot; aria-label&#x3D;&quot;Gráficos analíticos&quot;&gt;
       
-      &lt;!-- Gráfico 1: Evolución Temporal Spline Area Chart (type: &#x27;line&#x27;) --&gt;
+      &lt;!-- Gráfico 1: Evolución Temporal Spline Area Chart (type: &#x27;line&#x27;, fill: true) --&gt;
       &lt;div class&#x3D;&quot;col-12 col-xl-8&quot;&gt;
         &lt;app-chart-card
           title&#x3D;&quot;Evolución de Ingresos y Facturación&quot;
-          subtitle&#x3D;&quot;Área suavizada de facturación acumulada (€) y volumen transaccional (Spline Chart)&quot;
+          subtitle&#x3D;&quot;Área suavizada de facturación (€) y registros operativos (Spline)&quot;
           [timeRanges]&#x3D;&quot;[&#x27;7D&#x27;, &#x27;30D&#x27;, &#x27;90D&#x27;, &#x27;1A&#x27;]&quot;
           [selectedTimeRange]&#x3D;&quot;(selectedTimeRange$ | async) ?? &#x27;30D&#x27;&quot;
           [loading]&#x3D;&quot;(loading$ | async) ?? false&quot;
           actionIcon&#x3D;&quot;analytics-outline&quot;
           actionTooltip&#x3D;&quot;Información estadística&quot;
           (timeRangeChange)&#x3D;&quot;onTimeRangeChanged($event)&quot;&gt;
-          &lt;div class&#x3D;&quot;chart-canvas-container&quot; style&#x3D;&quot;height: 320px; position: relative;&quot;&gt;
+          &lt;div class&#x3D;&quot;chart-canvas-container&quot;&gt;
             &lt;canvas
               #evolutionChartCanvas
-              aria-label&#x3D;&quot;Gráfico de evolución temporal de facturación económica y volumen de registros con Spline Area Chart&quot;
+              aria-label&#x3D;&quot;Gráfico de evolución temporal de facturación económica y volumen con Spline Area Chart&quot;
               role&#x3D;&quot;img&quot;
               tabindex&#x3D;&quot;0&quot;&gt;
             &lt;/canvas&gt;
@@ -1988,12 +1992,12 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
       &lt;div class&#x3D;&quot;col-12 col-xl-4&quot;&gt;
         &lt;app-chart-card
           title&#x3D;&quot;Distribución Departamental&quot;
-          subtitle&#x3D;&quot;Gráfico Polar Area de actividad económica por unidad de negocio&quot;
+          subtitle&#x3D;&quot;Volumen económico por unidad de negocio (Polar Area)&quot;
           [showTimeFilter]&#x3D;&quot;false&quot;
           [loading]&#x3D;&quot;(loading$ | async) ?? false&quot;
           actionIcon&#x3D;&quot;pie-chart-outline&quot;
           actionTooltip&#x3D;&quot;Distribución porcentual&quot;&gt;
-          &lt;div class&#x3D;&quot;chart-canvas-container&quot; style&#x3D;&quot;height: 320px; position: relative;&quot;&gt;
+          &lt;div class&#x3D;&quot;chart-canvas-container&quot;&gt;
             &lt;canvas
               #categoryChartCanvas
               aria-label&#x3D;&quot;Gráfico Polar Area de distribución de facturación por categoría corporativa&quot;
@@ -2006,30 +2010,30 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
 
     &lt;/section&gt;
 
-    &lt;!-- Resumen de Arquitectura y Base de Datos (Supabase PostgreSQL Cloud) --&gt;
-    &lt;footer class&#x3D;&quot;bento-card p-3 p-md-4 mb-3 border border-light-subtle&quot; aria-label&#x3D;&quot;Información de base de datos y arquitectura cloud&quot;&gt;
+    &lt;!-- Resumen de Arquitectura y Base de Datos (Framed Sheet Footnote) --&gt;
+    &lt;footer class&#x3D;&quot;bento-card p-3 p-md-4 mb-3&quot; aria-label&#x3D;&quot;Información de base de datos y arquitectura cloud&quot;&gt;
       &lt;div class&#x3D;&quot;d-flex flex-wrap align-items-center justify-content-between gap-3&quot;&gt;
         &lt;div class&#x3D;&quot;d-flex align-items-center gap-3&quot;&gt;
-          &lt;div class&#x3D;&quot;bg-primary-subtle text-primary p-3 rounded-circle d-flex align-items-center justify-content-center&quot;&gt;
-            &lt;i class&#x3D;&quot;bi bi-database-check fs-4&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
+          &lt;div class&#x3D;&quot;architecture-badge d-flex align-items-center justify-content-center&quot;&gt;
+            &lt;i class&#x3D;&quot;bi bi-database-check fs-5&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
           &lt;/div&gt;
           &lt;div&gt;
-            &lt;h2 class&#x3D;&quot;h6 fw-bold text-swiss-navy mb-1&quot;&gt;Arquitectura Relacional Supabase Cloud&lt;/h2&gt;
-            &lt;p class&#x3D;&quot;text-swiss-muted small mb-0&quot;&gt;Base de datos PostgreSQL corporativa con fallback inteligente en memoria (Zero-Downtime).&lt;/p&gt;
+            &lt;h2 class&#x3D;&quot;h6 fw-semibold text-ink mb-1&quot;&gt;Arquitectura Relacional Supabase Cloud&lt;/h2&gt;
+            &lt;p class&#x3D;&quot;text-muted small mb-0&quot;&gt;Base de datos PostgreSQL con fallback inteligente en memoria (Zero-Downtime).&lt;/p&gt;
           &lt;/div&gt;
         &lt;/div&gt;
 
         &lt;div class&#x3D;&quot;d-flex align-items-center gap-2 flex-wrap&quot;&gt;
-          &lt;span class&#x3D;&quot;badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1&quot;&gt;
-            &lt;span class&#x3D;&quot;p-1 bg-success rounded-circle me-1&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;pill pill-neutral d-flex align-items-center gap-1&quot;&gt;
+            &lt;span class&#x3D;&quot;status-dot dot-success me-1&quot;&gt;&lt;/span&gt;
             PostgreSQL 15+
           &lt;/span&gt;
-          &lt;span class&#x3D;&quot;badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1&quot;&gt;
-            &lt;span class&#x3D;&quot;p-1 bg-primary rounded-circle me-1&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;pill pill-neutral d-flex align-items-center gap-1&quot;&gt;
+            &lt;span class&#x3D;&quot;status-dot dot-accent me-1&quot;&gt;&lt;/span&gt;
             NgRx Data Store
           &lt;/span&gt;
-          &lt;span class&#x3D;&quot;badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1&quot;&gt;
-            &lt;span class&#x3D;&quot;p-1 bg-info rounded-circle me-1&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;pill pill-neutral d-flex align-items-center gap-1&quot;&gt;
+            &lt;span class&#x3D;&quot;status-dot dot-neutral me-1&quot;&gt;&lt;/span&gt;
             Vercel Ready
           &lt;/span&gt;
         &lt;/div&gt;
@@ -2045,21 +2049,157 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
                 <p class="comment">
                     <code>./dashboard.page.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.page-content {
-  --background: #f8fafc;
-  color: #0f172a;
+                <pre class="line-numbers"><code class="language-scss">.header-taste {
+  border-bottom: 1px solid var(--border, #e8eaec);
+  background: var(--surface, #ffffff);
+}
+
+.toolbar-taste {
+  --background: var(--surface, #ffffff);
+  --color: var(--ink, #131416);
+  --min-height: 52px;
+}
+
+.menu-btn-taste {
+  color: var(--ink, #131416);
+}
+
+.page-title-taste {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ink, #131416);
+}
+
+.page-content {
+  --background: var(--ground, #f9fbfc);
+  color: var(--ink, #131416);
+}
+
+.banner-frame {
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e8eaec);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.banner-img {
+  max-height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.screen-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  color: var(--ink, #131416);
+}
+
+.screen-subtitle {
+  font-size: 13px;
+  color: var(--muted, #52555a);
+}
+
+.category-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted, #52555a);
+}
+
+.filter-rail {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  background: var(--rail, #f4f6f8);
+  border-radius: 6px;
+  border: 1px solid var(--border, #e8eaec);
+}
+
+.filter-btn {
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted, #52555a);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+
+  &amp;:hover {
+    color: var(--ink, #131416);
+  }
+
+  &amp;.active {
+    background: #ffffff;
+    color: var(--ink, #131416);
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.btn-subtle {
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  height: 32px;
+  color: var(--ink, #131416);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &amp;:hover {
+    background: var(--rail, #f4f6f8);
+    border-color: #b8bac0;
+  }
+}
+
+.btn-clear-filter {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
 }
 
 .chart-canvas-container {
   position: relative;
   width: 100%;
-  height: 320px;
-  padding: 0.5rem 0;
+  height: 300px;
+  padding: 4px 0;
 
   canvas {
     width: 100% !important;
     height: 100% !important;
   }
+}
+
+.architecture-badge {
+  width: 40px;
+  height: 40px;
+  background: var(--rail, #f4f6f8);
+  color: var(--accent, #1b6c80);
+  border: 1px solid var(--border, #e8eaec);
+  border-radius: 8px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  &amp;.dot-success { background-color: var(--success, #1e7b4f); }
+  &amp;.dot-accent  { background-color: var(--accent, #1b6c80); }
+  &amp;.dot-neutral { background-color: #8a8f98; }
 }
 </code></pre>
     </div>
@@ -2089,7 +2229,7 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border border-bottom border-light-subtle bg-white">  <ion-toolbar color="light">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación" class="text-swiss-navy"></ion-menu-button>    </ion-buttons>    <ion-title class="fw-bold text-swiss-navy">Dashboard Analítico Ejecutivo</ion-title>    <ion-buttons slot="end">      <button        type="button"        class="btn btn-outline-secondary btn-sm me-2 d-flex align-items-center gap-1"        (click)="refreshData()"        aria-label="Recargar datos desde Supabase"      >        <i class="bi bi-arrow-repeat" aria-hidden="true"></i>        <span class="d-none d-sm-inline">Actualizar</span>      </button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content">  <main class="container-fluid py-3 px-md-4" aria-label="Panel de control estratégico">    <!-- Banner Editorial Hero con SVG Corporativo -->    <div class="mb-4 text-center">      <img        src="assets/images/dashboard-banner.svg"        alt="Banner analítico ejecutivo de Enterprise Analytics con Supabase Cloud y arquitectura PostgreSQL"        width="900"        height="180"        class="img-fluid w-100 rounded-3 shadow-xs"        fetchpriority="high"        style="max-height: 140px; object-fit: cover;"      />    </div>    <!-- Encabezado del Dashboard con controles de filtrado -->    <header class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom border-light-subtle">      <div>        <h1 class="h3 fw-bold text-swiss-navy mb-1" style="letter-spacing: -0.5px;">Panel Estratégico de Rendimiento</h1>        <p class="text-swiss-muted small mb-0">          Monitorización en tiempo real conectada a base de datos relacional Supabase (PostgreSQL Cloud).        </p>      </div>      <div class="d-flex align-items-center gap-2" *ngIf="activeCategory$ | async as cat">        <span class="badge bg-primary text-white d-flex align-items-center gap-1 px-3 py-2 rounded-pill fw-semibold">          Filtro: {{ cat }}          <button type="button" class="btn-close btn-close-white ms-1" style="font-size: 0.65rem;" (click)="setCategoryFilter(null)" aria-label="Eliminar filtro de categoría"></button>        </span>      </div>    </header>    <!-- Barra de Filtros Rápidos por Categoría (Bento Pill Bar) -->    <nav class="bento-card p-2 px-3 mb-4 d-flex align-items-center gap-2 flex-wrap" aria-label="Filtro rápido por categoría de negocio">      <span class="text-swiss-muted small fw-bold text-uppercase d-flex align-items-center gap-1 me-2" style="font-size: 0.75rem;">        <i class="bi bi-funnel text-primary" aria-hidden="true"></i> Categoría:      </span>      <div class="d-flex gap-2 flex-wrap">        <button          type="button"          class="btn btn-sm rounded-pill fw-semibold px-3"          [class.btn-primary]="(activeCategory$ | async) === null"          [class.btn-outline-secondary]="(activeCategory$ | async) !== null"          (click)="setCategoryFilter(null)"          aria-label="Ver todas las categorías">          Todas        </button>        @for (category of availableCategories; track category.value) {          <button            type="button"            class="btn btn-sm rounded-pill fw-semibold px-3"            [class.btn-primary]="(activeCategory$ | async) === category.value"            [class.btn-outline-secondary]="(activeCategory$ | async) !== category.value"            (click)="setCategoryFilter(category.value)"            [attr.aria-label]="\'Filtrar por \' + category.label">            {{ category.label }}          </button>        }      </div>    </nav>    <!-- Grid de KPIs Dinámicos con Bootstrap 5 Grid -->    <section class="row g-3 mb-4" aria-label="Indicadores Clave de Rendimiento">      @for (kpi of kpis$ | async; track kpi.id) {        <div class="col-12 col-sm-6 col-xl-3">          <app-kpi-widget            [kpi]="kpi"            [isCurrency]="kpi.unit === \'EUR\'"            [loading]="(loading$ | async) ?? false"            (kpiClick)="onKpiSelected($event)">          </app-kpi-widget>        </div>      }    </section>    <!-- Sección de Gráficos Analíticos Interactivos (Chart.js sin gráficos de barras) -->    <section class="row g-3 mb-4" aria-label="Gráficos analíticos">            <!-- Gráfico 1: Evolución Temporal Spline Area Chart (type: \'line\') -->      <div class="col-12 col-xl-8">        <app-chart-card          title="Evolución de Ingresos y Facturación"          subtitle="Área suavizada de facturación acumulada (€) y volumen transaccional (Spline Chart)"          [timeRanges]="[\'7D\', \'30D\', \'90D\', \'1A\']"          [selectedTimeRange]="(selectedTimeRange$ | async) ?? \'30D\'"          [loading]="(loading$ | async) ?? false"          actionIcon="analytics-outline"          actionTooltip="Información estadística"          (timeRangeChange)="onTimeRangeChanged($event)">          <div class="chart-canvas-container" style="height: 320px; position: relative;">            <canvas              #evolutionChartCanvas              aria-label="Gráfico de evolución temporal de facturación económica y volumen de registros con Spline Area Chart"              role="img"              tabindex="0">            </canvas>          </div>        </app-chart-card>      </div>      <!-- Gráfico 2: Desglose Departamental Polar Area Chart (type: \'polarArea\') -->      <div class="col-12 col-xl-4">        <app-chart-card          title="Distribución Departamental"          subtitle="Gráfico Polar Area de actividad económica por unidad de negocio"          [showTimeFilter]="false"          [loading]="(loading$ | async) ?? false"          actionIcon="pie-chart-outline"          actionTooltip="Distribución porcentual">          <div class="chart-canvas-container" style="height: 320px; position: relative;">            <canvas              #categoryChartCanvas              aria-label="Gráfico Polar Area de distribución de facturación por categoría corporativa"              role="img"              tabindex="0">            </canvas>          </div>        </app-chart-card>      </div>    </section>    <!-- Resumen de Arquitectura y Base de Datos (Supabase PostgreSQL Cloud) -->    <footer class="bento-card p-3 p-md-4 mb-3 border border-light-subtle" aria-label="Información de base de datos y arquitectura cloud">      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">        <div class="d-flex align-items-center gap-3">          <div class="bg-primary-subtle text-primary p-3 rounded-circle d-flex align-items-center justify-content-center">            <i class="bi bi-database-check fs-4" aria-hidden="true"></i>          </div>          <div>            <h2 class="h6 fw-bold text-swiss-navy mb-1">Arquitectura Relacional Supabase Cloud</h2>            <p class="text-swiss-muted small mb-0">Base de datos PostgreSQL corporativa con fallback inteligente en memoria (Zero-Downtime).</p>          </div>        </div>        <div class="d-flex align-items-center gap-2 flex-wrap">          <span class="badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1">            <span class="p-1 bg-success rounded-circle me-1"></span>            PostgreSQL 15+          </span>          <span class="badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1">            <span class="p-1 bg-primary rounded-circle me-1"></span>            NgRx Data Store          </span>          <span class="badge bg-light text-dark border px-3 py-2 fw-semibold d-flex align-items-center gap-1">            <span class="p-1 bg-info rounded-circle me-1"></span>            Vercel Ready          </span>        </div>      </div>    </footer>  </main></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true" class="ion-no-border header-taste">  <ion-toolbar class="toolbar-taste">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación" class="menu-btn-taste"></ion-menu-button>    </ion-buttons>    <ion-title class="page-title-taste">Rendimiento Operativo</ion-title>    <ion-buttons slot="end">      <button        type="button"        class="btn-subtle d-flex align-items-center gap-1"        (click)="refreshData()"        aria-label="Recargar datos desde Supabase"      >        <i class="bi bi-arrow-repeat" aria-hidden="true"></i>        <span class="d-none d-sm-inline">Actualizar</span>      </button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="page-content">  <main class="container-fluid py-3 px-md-4" aria-label="Panel de control estratégico">    <!-- Banner Editorial Hero con SVG Corporativo (Preserva requisitos del profesor) -->    <div class="mb-4">      <div class="banner-frame">        <img          src="assets/images/dashboard-banner.svg"          alt="Banner analítico corporativo de Enterprise Analytics conectado a Supabase Cloud PostgreSQL"          width="900"          height="180"          class="img-fluid w-100 banner-img"          fetchpriority="high"        />      </div>    </div>    <!-- Encabezado del Dashboard: Noun Title (22px) + Muted Subtitle -->    <header class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom border-light-subtle">      <div>        <h1 class="screen-title mb-1">Métricas Clave de Facturación</h1>        <p class="screen-subtitle mb-0">          Monitorización transaccional continua sobre infraestructura relacional Supabase Cloud.        </p>      </div>      <div class="d-flex align-items-center gap-2" *ngIf="activeCategory$ | async as cat">        <span class="pill pill-accent d-flex align-items-center gap-1">          Filtro: {{ cat }}          <button type="button" class="btn-clear-filter ms-1" (click)="setCategoryFilter(null)" aria-label="Eliminar filtro de categoría">            <i class="bi bi-x" aria-hidden="true"></i>          </button>        </span>      </div>    </header>    <!-- Barra de Filtros Rápidos por Categoría (Segmented Control Rail) -->    <nav class="bento-card p-2 px-3 mb-4 d-flex align-items-center gap-3 flex-wrap" aria-label="Filtro rápido por categoría de negocio">      <span class="category-label d-flex align-items-center gap-1">        <i class="bi bi-funnel text-muted" aria-hidden="true"></i> Categoría:      </span>      <div class="filter-rail d-flex gap-1 flex-wrap" role="group" aria-label="Filtros por unidad operativa">        <button          type="button"          class="filter-btn"          [class.active]="(activeCategory$ | async) === null"          (click)="setCategoryFilter(null)"          aria-label="Ver todas las categorías">          Todas        </button>        @for (category of availableCategories; track category.value) {          <button            type="button"            class="filter-btn"            [class.active]="(activeCategory$ | async) === category.value"            (click)="setCategoryFilter(category.value)"            [attr.aria-label]="\'Filtrar por \' + category.label">            {{ category.label }}          </button>        }      </div>    </nav>    <!-- Grid de KPIs Dinámicos con Bootstrap 5 Grid (Type over Tiles) -->    <section class="row g-3 mb-4" aria-label="Indicadores Clave de Rendimiento">      @for (kpi of kpis$ | async; track kpi.id) {        <div class="col-12 col-sm-6 col-xl-3">          <app-kpi-widget            [kpi]="kpi"            [isCurrency]="kpi.unit === \'EUR\'"            [loading]="(loading$ | async) ?? false"            (kpiClick)="onKpiSelected($event)">          </app-kpi-widget>        </div>      }    </section>    <!-- Sección de Gráficos Analíticos Interactivos (Spline Area y Polar Area) -->    <section class="row g-3 mb-4" aria-label="Gráficos analíticos">            <!-- Gráfico 1: Evolución Temporal Spline Area Chart (type: \'line\', fill: true) -->      <div class="col-12 col-xl-8">        <app-chart-card          title="Evolución de Ingresos y Facturación"          subtitle="Área suavizada de facturación (€) y registros operativos (Spline)"          [timeRanges]="[\'7D\', \'30D\', \'90D\', \'1A\']"          [selectedTimeRange]="(selectedTimeRange$ | async) ?? \'30D\'"          [loading]="(loading$ | async) ?? false"          actionIcon="analytics-outline"          actionTooltip="Información estadística"          (timeRangeChange)="onTimeRangeChanged($event)">          <div class="chart-canvas-container">            <canvas              #evolutionChartCanvas              aria-label="Gráfico de evolución temporal de facturación económica y volumen con Spline Area Chart"              role="img"              tabindex="0">            </canvas>          </div>        </app-chart-card>      </div>      <!-- Gráfico 2: Desglose Departamental Polar Area Chart (type: \'polarArea\') -->      <div class="col-12 col-xl-4">        <app-chart-card          title="Distribución Departamental"          subtitle="Volumen económico por unidad de negocio (Polar Area)"          [showTimeFilter]="false"          [loading]="(loading$ | async) ?? false"          actionIcon="pie-chart-outline"          actionTooltip="Distribución porcentual">          <div class="chart-canvas-container">            <canvas              #categoryChartCanvas              aria-label="Gráfico Polar Area de distribución de facturación por categoría corporativa"              role="img"              tabindex="0">            </canvas>          </div>        </app-chart-card>      </div>    </section>    <!-- Resumen de Arquitectura y Base de Datos (Framed Sheet Footnote) -->    <footer class="bento-card p-3 p-md-4 mb-3" aria-label="Información de base de datos y arquitectura cloud">      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">        <div class="d-flex align-items-center gap-3">          <div class="architecture-badge d-flex align-items-center justify-content-center">            <i class="bi bi-database-check fs-5" aria-hidden="true"></i>          </div>          <div>            <h2 class="h6 fw-semibold text-ink mb-1">Arquitectura Relacional Supabase Cloud</h2>            <p class="text-muted small mb-0">Base de datos PostgreSQL con fallback inteligente en memoria (Zero-Downtime).</p>          </div>        </div>        <div class="d-flex align-items-center gap-2 flex-wrap">          <span class="pill pill-neutral d-flex align-items-center gap-1">            <span class="status-dot dot-success me-1"></span>            PostgreSQL 15+          </span>          <span class="pill pill-neutral d-flex align-items-center gap-1">            <span class="status-dot dot-accent me-1"></span>            NgRx Data Store          </span>          <span class="pill pill-neutral d-flex align-items-center gap-1">            <span class="status-dot dot-neutral me-1"></span>            Vercel Ready          </span>        </div>      </div>    </footer>  </main></ion-content></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
     var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'DashboardPage'};

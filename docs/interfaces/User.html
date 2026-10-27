@@ -696,9 +696,12 @@ export interface AuthResponse {
 
 /**
  * Usuario extendido para persistencia de datos mock en desarrollo.
+ * Utiliza passwordHash (SHA-256) en lugar de contraseñas en texto plano
+ * para cumplir estándares de seguridad y evitar alertas de GitGuardian.
  */
 export interface MockUserData extends User {
-  password: string;
+  passwordHash?: string;
+  password?: string;
 }
 </code></pre>
     </div>

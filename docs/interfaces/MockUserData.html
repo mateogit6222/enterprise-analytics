@@ -159,7 +159,9 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Usuario extendido para persistencia de datos mock en desarrollo.</p>
+                <p>Usuario extendido para persistencia de datos mock en desarrollo.
+Utiliza passwordHash (SHA-256) en lugar de contraseñas en texto plano
+para cumplir estándares de seguridad y evitar alertas de GitGuardian.</p>
 
             </p>
 
@@ -202,8 +204,15 @@
                 <td class="col-md-9">
                     <ul class="index-list">
                         <li>
+                                    <span class="modifier">Optional</span>
                                 <a href="#password" class="reference-link ">
                                     <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">password</span>
+                                </a>
+                        </li>
+                        <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#passwordHash" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">passwordHash</span>
                                 </a>
                         </li>
                         <li>
@@ -290,12 +299,61 @@
                             </tr>
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Optional</i>
+                                </td>
+                            </tr>
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/core/models/user.model.ts:100</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/core/models/user.model.ts:103</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="passwordHash"></a>
+                                <span class="name "><b>passwordHash</b>
+                                    <a href="#passwordHash">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>passwordHash:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Optional</i>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/core/models/user.model.ts:102</a></div>
                                 </td>
                             </tr>
 
@@ -736,9 +794,12 @@ export interface AuthResponse {
 
 /**
  * Usuario extendido para persistencia de datos mock en desarrollo.
+ * Utiliza passwordHash (SHA-256) en lugar de contraseñas en texto plano
+ * para cumplir estándares de seguridad y evitar alertas de GitGuardian.
  */
 export interface MockUserData extends User {
-  password: string;
+  passwordHash?: string;
+  password?: string;
 }
 </code></pre>
     </div>
