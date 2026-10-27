@@ -184,16 +184,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      // Gradientes corporativos suizos para Spline Area Chart (RA 2 y RA 5)
-      const gradientRev = ctx.createLinearGradient(0, 0, 0, 320);
-      gradientRev.addColorStop(0, 'rgba(29, 78, 216, 0.40)');
-      gradientRev.addColorStop(1, 'rgba(29, 78, 216, 0.0)');
+      // Gradientes sobrios de alta fidelidad según Taste-Skill v2
+      const gradientRev = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientRev.addColorStop(0, 'rgba(27, 108, 128, 0.12)');
+      gradientRev.addColorStop(1, 'rgba(27, 108, 128, 0.0)');
 
-      const gradientVol = ctx.createLinearGradient(0, 0, 0, 320);
-      gradientVol.addColorStop(0, 'rgba(5, 150, 105, 0.25)');
-      gradientVol.addColorStop(1, 'rgba(5, 150, 105, 0.0)');
+      const gradientVol = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientVol.addColorStop(0, 'rgba(47, 112, 187, 0.08)');
+      gradientVol.addColorStop(1, 'rgba(47, 112, 187, 0.0)');
 
-      // Spline Area Chart (100% libre de gráficos de barras por especificación del profesor)
+      // Spline Area Chart (100% libre de gráficos de barras según rúbrica del profesor)
       const config: ChartConfiguration<'line'> = {
         type: 'line',
         data: {
@@ -203,33 +203,33 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
               type: 'line',
               label: 'Facturación Económica (€)',
               data: timeline.revenues,
-              borderColor: '#1d4ed8',
+              borderColor: '#1b6c80',
               backgroundColor: gradientRev,
               fill: true,
               tension: 0.4,
-              borderWidth: 3,
-              pointBackgroundColor: '#1d4ed8',
+              borderWidth: 2,
+              pointBackgroundColor: '#1b6c80',
               pointBorderColor: '#ffffff',
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              pointHoverRadius: 7,
+              pointBorderWidth: 1.5,
+              pointRadius: 3,
+              pointHoverRadius: 6,
               yAxisID: 'y'
             },
             {
               type: 'line',
               label: 'Volumen Operaciones',
               data: timeline.counts,
-              borderColor: '#059669',
+              borderColor: '#2f70bb',
               backgroundColor: gradientVol,
               fill: true,
               tension: 0.4,
-              borderWidth: 2.5,
-              borderDash: [5, 5],
-              pointBackgroundColor: '#059669',
+              borderWidth: 1.5,
+              borderDash: [4, 4],
+              pointBackgroundColor: '#2f70bb',
               pointBorderColor: '#ffffff',
-              pointBorderWidth: 2,
-              pointRadius: 3,
-              pointHoverRadius: 6,
+              pointBorderWidth: 1.5,
+              pointRadius: 2.5,
+              pointHoverRadius: 5,
               yAxisID: 'y1'
             }
           ]
@@ -245,19 +245,20 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
             legend: {
               position: 'top',
               labels: {
-                color: '#334155',
-                font: { family: 'inherit', size: 12, weight: 'bold' },
-                usePointStyle: true
+                color: '#52555a',
+                font: { family: 'inherit', size: 12, weight: 'normal' },
+                usePointStyle: true,
+                boxWidth: 8
               }
             },
             tooltip: {
-              backgroundColor: 'rgba(15, 23, 42, 0.95)',
-              titleColor: '#f8fafc',
-              bodyColor: '#e2e8f0',
-              borderColor: '#e2e8f0',
+              backgroundColor: '#131416',
+              titleColor: '#ffffff',
+              bodyColor: '#e8eaec',
+              borderColor: '#e8eaec',
               borderWidth: 1,
-              padding: 12,
-              boxPadding: 6,
+              padding: 10,
+              boxPadding: 4,
               callbacks: {
                 label: (context) => {
                   if (context.datasetIndex === 0) {
@@ -270,16 +271,16 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
           },
           scales: {
             x: {
-              grid: { color: 'rgba(226, 232, 240, 0.6)' },
-              ticks: { color: '#64748b', font: { size: 11 } }
+              grid: { color: 'rgba(240, 241, 242, 0.8)' },
+              ticks: { color: '#52555a', font: { size: 11 } }
             },
             y: {
               type: 'linear',
               display: true,
               position: 'left',
-              grid: { color: 'rgba(226, 232, 240, 0.6)' },
+              grid: { color: 'rgba(240, 241, 242, 0.8)' },
               ticks: {
-                color: '#1d4ed8',
+                color: '#1b6c80',
                 callback: (val) => `${Number(val) / 1000}k €`
               }
             },
@@ -288,7 +289,7 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
               display: true,
               position: 'right',
               grid: { drawOnChartArea: false },
-              ticks: { color: '#059669', stepSize: 2 }
+              ticks: { color: '#2f70bb', stepSize: 2 }
             }
           }
         }
@@ -322,7 +323,7 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      // Gráfico Polar Area con paleta editorial suiza
+      // Gráfico Polar Area con paleta Framed Sheet refinada (sin colores estridentes)
       const config: ChartConfiguration<'polarArea'> = {
         type: 'polarArea',
         data: {
@@ -331,14 +332,14 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
             {
               data: catData.amounts,
               backgroundColor: [
-                'rgba(29, 78, 216, 0.75)',
-                'rgba(2, 132, 199, 0.75)',
-                'rgba(5, 150, 105, 0.75)',
-                'rgba(180, 83, 9, 0.75)',
-                'rgba(190, 18, 60, 0.75)'
+                'rgba(27, 108, 128, 0.82)',
+                'rgba(47, 112, 187, 0.82)',
+                'rgba(168, 111, 12, 0.82)',
+                'rgba(30, 123, 79, 0.82)',
+                'rgba(99, 102, 241, 0.80)'
               ],
               borderColor: '#ffffff',
-              borderWidth: 2
+              borderWidth: 1.5
             }
           ]
         },
@@ -349,19 +350,21 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
             legend: {
               position: 'bottom',
               labels: {
-                color: '#334155',
-                font: { family: 'inherit', size: 11, weight: 'bold' },
-                padding: 12,
-                usePointStyle: true
+                color: '#52555a',
+                font: { family: 'inherit', size: 11, weight: 500 },
+                padding: 14,
+                usePointStyle: true,
+                boxWidth: 8
               }
             },
             tooltip: {
-              backgroundColor: 'rgba(15, 23, 42, 0.95)',
-              titleColor: '#f8fafc',
-              bodyColor: '#e2e8f0',
-              borderColor: '#e2e8f0',
+              backgroundColor: '#131416',
+              titleColor: '#ffffff',
+              bodyColor: '#e8eaec',
+              borderColor: '#232528',
               borderWidth: 1,
-              padding: 12,
+              padding: 10,
+              boxPadding: 4,
               callbacks: {
                 label: (context) => {
                   const val = Number(context.raw) || 0;
@@ -374,8 +377,8 @@ export class DashboardPage implements OnInit, AfterViewInit, OnDestroy {
           },
           scales: {
             r: {
-              grid: { color: 'rgba(226, 232, 240, 0.8)' },
-              ticks: { display: false }
+              grid: { color: 'rgba(232, 234, 236, 0.8)' },
+              ticks: { backdropColor: 'transparent', color: '#8a8f98', font: { size: 10 } }
             }
           }
         }

@@ -1,18 +1,61 @@
-.page-content {
-  --background: #f8fafc;
-  color: #0f172a;
+.header-taste {
+  border-bottom: 1px solid var(--border, #e8eaec);
+  background: var(--surface, #ffffff);
 }
 
-.bento-header {
-  border-color: #e2e8f0 !important;
-  border-radius: 14px;
+.toolbar-taste {
+  --background: var(--surface, #ffffff);
+  --color: var(--ink, #131416);
+  --min-height: 52px;
 }
 
-.create-btn {
+.menu-btn-taste {
+  color: var(--ink, #131416);
+}
+
+.page-title-taste {
+  font-size: 15px;
   font-weight: 600;
-  --background: #0284c7;
-  --color: #ffffff;
-  border-radius: 8px;
+  letter-spacing: -0.2px;
+  color: var(--ink, #131416);
+}
+
+.page-content {
+  --background: var(--ground, #f9fbfc);
+  color: var(--ink, #131416);
+}
+
+.screen-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink, #131416);
+}
+
+.screen-subtitle {
+  font-size: 13px;
+  color: var(--muted, #52555a);
+}
+
+.btn-primary-taste {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  background: var(--ink, #131416);
+  color: #ffffff;
+  border: 1px solid var(--ink, #131416);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+
+  &:hover {
+    background: #232528;
+    border-color: #232528;
+  }
 
   .btn-text {
     @media (max-width: 500px) {
@@ -21,6 +64,54 @@
   }
 }
 
-.bento-table-card {
-  border-radius: 14px;
+.btn-subtle-taste {
+  height: 32px;
+  padding: 0 11px;
+  background: var(--surface, #ffffff);
+  color: var(--ink, #131416);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--rail, #f4f6f8);
+    border-color: #b8bac0;
+    color: var(--ink, #131416);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.sync-banner {
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e8eaec);
+  border-radius: 6px;
+
+  .sync-spinner {
+    width: 16px;
+    height: 16px;
+    color: var(--accent, #1b6c80);
+  }
+
+  .sync-text {
+    font-size: 12px;
+    color: var(--muted, #52555a);
+    font-weight: 500;
+  }
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  &.dot-success {
+    background-color: var(--success, #1e7b4f);
+  }
 }

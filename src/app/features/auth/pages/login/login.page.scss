@@ -1,5 +1,5 @@
 /**
- * Enterprise Analytics — Swiss Corporate Bento Login Styles
+ * Enterprise Analytics — Framed Sheet High-Taste Login Styles
  */
 
 :host {
@@ -8,76 +8,183 @@
 }
 
 .login-content {
-  --background: #f8fafc;
-  color: #0f172a;
+  --background: var(--ground, #f9fbfc);
+  color: var(--ink, #131416);
 }
 
 .bento-card {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+  background: var(--surface, #ffffff);
+  border-radius: 8px;
+  border: 1px solid var(--border, #e8eaec);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-.form-control {
-  border-color: #cbd5e1;
-  color: #0f172a;
-  font-size: 0.95rem;
-  padding: 0.65rem 0.85rem;
-  border-radius: 8px;
+.login-side-rail {
+  background-color: var(--rail, #f4f6f8);
+  border-color: var(--border, #e8eaec) !important;
+}
+
+.screen-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink, #131416);
+}
+
+.screen-subtitle {
+  font-size: 13px;
+  color: var(--muted, #52555a);
+}
+
+.card-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink, #131416);
+}
+
+.taste-caption {
+  font-size: 12px;
+  color: var(--muted, #52555a);
+}
+
+.taste-form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink, #131416);
+}
+
+.hero-svg {
+  max-height: 230px;
+  width: auto;
+}
+
+.input-group-text-taste {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--control, #cdced1);
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  color: var(--muted, #52555a);
+  font-size: 13px;
+}
+
+.form-control-taste {
+  height: 38px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 0 6px 6px 0;
+  color: var(--ink, #131416);
+  font-size: 13px;
+  outline: none;
+  transition: all 0.15s ease;
 
   &:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    outline: none;
+    border-color: var(--accent, #1b6c80);
+    box-shadow: 0 0 0 1px var(--accent, #1b6c80);
   }
 
   &::placeholder {
-    color: #64748b;
+    color: #8a8f98;
   }
 }
 
-.input-group-text {
-  border-color: #cbd5e1;
-  border-radius: 8px 0 0 8px;
-  color: #475569;
-}
+.btn-toggle-pwd {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--control, #cdced1);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  color: var(--muted, #52555a);
+  cursor: pointer;
+  transition: color 0.15s ease;
 
-.btn-primary {
-  background-color: #1d4ed8;
-  border-color: #1d4ed8;
-  border-radius: 8px;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease-in-out;
-
-  &:hover, &:focus {
-    background-color: #1e40af;
-    border-color: #1e40af;
-    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+  &:hover {
+    color: var(--ink, #131416);
   }
 }
 
-.btn-outline-primary {
-  border-color: #2563eb;
-  color: #1d4ed8;
-  border-radius: 8px;
+.form-error-msg {
+  color: var(--danger, #831c1e);
+  font-size: 11px;
+}
 
-  &:hover, &:focus {
-    background-color: #eff6ff;
-    color: #1e40af;
-    border-color: #1d4ed8;
+/* Near-Black Taste Primary Button */
+.btn-login-submit {
+  height: 38px;
+  background-color: var(--ink, #131416);
+  color: #ffffff;
+  border: 1px solid var(--ink, #131416);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+
+  &:hover:not(:disabled) {
+    background-color: #232528;
+    border-color: #232528;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
-.btn-outline-secondary {
-  border-color: #cbd5e1;
-  color: #334155;
-  border-radius: 8px;
+.btn-subtle-taste {
+  height: 32px;
+  padding: 0 11px;
+  background: var(--surface, #ffffff);
+  color: var(--ink, #131416);
+  border: 1px solid var(--control, #cdced1);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
 
-  &:hover, &:focus {
-    background-color: #f1f5f9;
-    color: #0f172a;
-    border-color: #94a3b8;
+  &:hover {
+    background: var(--rail, #f4f6f8);
+    border-color: #b8bac0;
+  }
+}
+
+.alert-taste {
+  border-radius: 6px;
+  font-size: 12px;
+
+  &.alert-taste-warning {
+    background: #fffbeb;
+    color: #92400e;
+    border: 1px solid rgba(146, 64, 14, 0.15);
+  }
+
+  &.alert-taste-danger {
+    background: #ffedea;
+    color: #831c1e;
+    border: 1px solid rgba(131, 28, 30, 0.15);
+  }
+}
+
+.bg-rail {
+  background-color: var(--rail, #f4f6f8);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  &.dot-success {
+    background-color: var(--success, #1e7b4f);
+  }
+  &.dot-accent {
+    background-color: var(--accent, #1b6c80);
   }
 }
