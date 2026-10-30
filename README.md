@@ -13,7 +13,7 @@
 
 ## 🏛️ 1. Arquitectura 100% Standalone y NgRx Reactive Store
 
-La aplicación implementa una arquitectura moderna **100% Standalone** en Angular 22 e Ionic 9 (sin `app.module.ts` ni `app-routing.module.ts`), configurada mediante `src/app/app.config.ts` y arrancada con `bootstrapApplication(AppComponent, appConfig)`:
+La aplicación implementa una arquitectura moderna **100% Standalone pura** en Angular 22 e Ionic 9 (sin `app.module.ts`, sin `app-routing.module.ts` y sin importaciones monolíticas de `IonicModule`), configurada mediante `src/app/app.config.ts` y arrancada con `bootstrapApplication(AppComponent, appConfig)` en `src/main.ts`:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -42,6 +42,26 @@ La aplicación implementa una arquitectura moderna **100% Standalone** en Angula
 │   ExportService (jsPDF + CSV)        ──► AutoTable UTF-8 BOM│
 │   AccessibilityService (WCAG)        ──► Escala y Contraste │
 └─────────────────────────────────────────────────────────────┘
+```
+
+### 📂 Estructura de Directorios Standalone Pura
+```
+src/
+├── main.ts                               # Bootstrap Standalone: bootstrapApplication(AppComponent, appConfig)
+├── index.html                            # Punto de entrada HTML
+├── app/
+│   ├── app.config.ts                     # ApplicationConfig unificado (Router, Interceptors, NgRx, Ionic)
+│   ├── app.routes.ts                     # Rutas Standalone con lazy-loading (loadComponent)
+│   ├── app.component.ts                  # Standalone Shell con IonSplitPane y directiva *appHasRole
+│   ├── app.component.html                # Plantilla shell con directiva *appHasRole
+│   ├── core/
+│   │   ├── guards/                       # authGuard, authMatchGuard, roleGuard, roleMatchGuard, unsavedChangesGuard
+│   │   ├── interceptors/                 # authInterceptor, errorInterceptor (con refreshToken y switchMap)
+│   │   ├── models/                       # User, Record, Kpi, Permission, ROLE_PERMISSIONS, JwtPayload
+│   │   └── services/                     # AuthService (Signals), SupabaseService, ApiRestService, ExportService
+│   ├── features/                         # Vistas Standalone (auth, dashboard, records, reports, help, profile)
+│   ├── shared/                           # Componentes, directivas (*appHasRole) y pipes reutilizables
+│   └── state/                            # NgRx Store, Reducers, Actions, Selectors, Effects
 ```
 
 ---

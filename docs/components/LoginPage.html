@@ -230,7 +230,7 @@ Ruta con retorno: /auth/login?returnUrl=/dashboard&lt;/code&gt;&lt;/pre&gt;&lt;/
 </div>
                         <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
 </div>
-                        <div>    <code>IonicModule</code>
+                        <div>    <code>IonContent</code>
 </div>
                 </td>
             </tr>
@@ -281,7 +281,7 @@ Ruta con retorno: /auth/login?returnUrl=/dashboard&lt;/code&gt;&lt;/pre&gt;&lt;/
                                             <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
                                 </li>
                                 <li>
-                                        <code>IonicModule</code>
+                                        <code>IonContent</code>
                                 </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
@@ -1109,7 +1109,7 @@ si el usuario intenta enviar un formulario incompleto.</p>
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import { RouterModule, ActivatedRoute } from &#x27;@angular/router&#x27;;
-import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { IonContent } from &#x27;@ionic/angular&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
@@ -1143,7 +1143,7 @@ import {
 @Component({
   selector: &#x27;app-login&#x27;,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonicModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonContent],
   templateUrl: &#x27;./login.page.html&#x27;,
   styleUrls: [&#x27;./login.page.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

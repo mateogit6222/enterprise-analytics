@@ -1,7 +1,18 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular/lazy';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonAccordionGroup,
+  IonAccordion,
+  IonItem,
+  IonLabel
+} from '@ionic/angular';
 
 /**
  * @component HelpCenterPage
@@ -17,7 +28,20 @@ import { IonicModule } from '@ionic/angular/lazy';
 @Component({
   selector: 'app-help-center',
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonAccordionGroup,
+    IonAccordion,
+    IonItem,
+    IonLabel
+  ],
   templateUrl: './help-center.page.html',
   styleUrls: ['./help-center.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular/lazy';
+import { IonSkeletonText, IonIcon } from '@ionic/angular';
 import { Kpi, KpiTrend } from '../../../core/models/kpi.model';
 import { CurrencyFormatPipe } from '../../pipes/currency-format.pipe';
 
@@ -27,7 +27,7 @@ import { CurrencyFormatPipe } from '../../pipes/currency-format.pipe';
 @Component({
   selector: 'app-kpi-widget',
   standalone: true,
-  imports: [CommonModule, IonicModule, CurrencyFormatPipe],
+  imports: [CommonModule, IonSkeletonText, IonIcon, CurrencyFormatPipe],
   templateUrl: './kpi-widget.component.html',
   styleUrls: ['./kpi-widget.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

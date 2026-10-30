@@ -1,6 +1,15 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ToastController } from '@ionic/angular/lazy';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonToggle,
+  ToastController
+} from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -30,7 +39,16 @@ import {
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonToggle
+  ],
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -7,7 +7,17 @@ import {
   inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ModalController, ToastController } from '@ionic/angular/lazy';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  ModalController,
+  ToastController
+} from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -45,7 +55,17 @@ import { HasUnsavedChanges } from '../../../../core/guards/unsaved-changes.guard
 @Component({
   selector: 'app-record-list',
   standalone: true,
-  imports: [CommonModule, IonicModule, DataTableComponent],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonSpinner,
+    DataTableComponent
+  ],
   templateUrl: './record-list.page.html',
   styleUrls: ['./record-list.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

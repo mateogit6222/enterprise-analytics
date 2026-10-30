@@ -105,22 +105,23 @@
 
 
 <h1>📊 Enterprise Analytics — Plataforma de Gestión y Analítica Empresarial</h1>
-<p><a href="https://angular.dev/"><img src="https://img.shields.io/badge/Angular-22.1-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" class="img-responsive"></a>
-<a href="https://ionicframework.com/"><img src="https://img.shields.io/badge/Ionic-9.0-3880FF?style=for-the-badge&logo=ionic&logoColor=white" alt="Ionic" class="img-responsive"></a>
+<p><a href="https://angular.dev/"><img src="https://img.shields.io/badge/Angular-22.1%20Standalone-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" class="img-responsive"></a>
+<a href="https://ionicframework.com/"><img src="https://img.shields.io/badge/Ionic-9.0%20Pure-3880FF?style=for-the-badge&logo=ionic&logoColor=white" alt="Ionic" class="img-responsive"></a>
 <a href="https://ngrx.io/"><img src="https://img.shields.io/badge/NgRx-Store%2022-BA68C8?style=for-the-badge&logo=ngrx&logoColor=white" alt="NgRx" class="img-responsive"></a>
 <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" class="img-responsive"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" class="img-responsive"></a>
 <a href="https://www.w3.org/WAI/WCAG21/quickref/"><img src="https://img.shields.io/badge/Accessibility-WCAG%202.1%20AAA-blue?style=for-the-badge" alt="WCAG AAA" class="img-responsive"></a></p>
 <blockquote>
-<p>Sistema corporativo integral de gestión, monitorización analítica y reporting empresarial multiplataforma (PWA/Híbrida), desarrollado como Proyecto Final del Módulo <strong>Desarrollo de Interfaces (DAM)</strong>, cumpliendo con la máxima calificación (10 / Sobresaliente) en todos los Resultados de Aprendizaje (RA 1 a RA 7).</p>
+<p>Sistema corporativo integral de gestión, monitorización analítica y reporting empresarial multiplataforma (PWA/Híbrida), desarrollado como Proyecto Final del Módulo <strong>Desarrollo de Interfaces (DAM - Código 0488)</strong> por <strong>Mateo García Carrasco</strong>, cumpliendo con la máxima calificación (10 / Sobresaliente) en todos los Resultados de Aprendizaje (RA 1 a RA 7).</p>
 </blockquote>
 <hr>
-<h2>🏛️ 1. Arquitectura del Sistema (MVVM + NgRx Store)</h2>
-<p>La aplicación implementa una arquitectura desacoplada basada en el patrón <strong>Model-View-ViewModel (MVVM)</strong> combinado con el flujo unidireccional y predecible de <strong>NgRx Store (Redux Pattern)</strong>:</p>
+<h2>🏛️ 1. Arquitectura 100% Standalone y NgRx Reactive Store</h2>
+<p>La aplicación implementa una arquitectura moderna <strong>100% Standalone</strong> en Angular 22 e Ionic 9 (sin <code>app.module.ts</code> ni <code>app-routing.module.ts</code>), configurada mediante <code>src/app/app.config.ts</code> y arrancada con <code>bootstrapApplication(AppComponent, appConfig)</code>:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-none">┌─────────────────────────────────────────────────────────────┐
 │                       PRESENTATION LAYER                    │
-│   Smart Pages (OnPush) ◄──► Reusable Dumb Components       │
+│   Standalone Smart Pages (OnPush) ◄──► Reusable Components   │
 │   (Dashboard, Records, Reports, HelpCenter, Profile)        │
+│   Directiva Estructural *appHasRole con Angular Signals      │
 └──────────────────────────────▲──────────────────────────────┘
                                │
                 Selectores     │     Dispatch
@@ -129,7 +130,7 @@
 ┌──────────────────────────────▼──────────────────────────────┐
 │                    NGRX REACTIVE STATE LAYER                │
 │   Store Root ───► Feature States (Auth, Data)               │
-│   Reducers Inmutables ◄─── Effects (forkJoin, CRUD, Export) │
+│   Reducers Inmutables ◄─── Effects (Supabase, CRUD, Export) │
 └──────────────────────────────▲──────────────────────────────┘
                                │
                 Invocación de  │  Observables
@@ -137,65 +138,75 @@
                                │
 ┌──────────────────────────────▼──────────────────────────────┐
 │                      DATA ACCESS LAYER                      │
-│   ApiRestService (PostgreSQL SQL) ──► Latencia 600-1200ms   │
-│   FirestoreMockService (NoSQL)    ──► BehaviorSubject Real  │
-│   ExportService (jsPDF + CSV)     ──► AutoTable &amp; UTF-8 BOM │
-│   AccessibilityService (WCAG)     ──► Escala &amp; Alto Contraste│
-└─────────────────────────────────────────────────────────────┘</code></pre></div><h3>🌟 Orquestación Concurrente con RxJS <code>forkJoin</code> (RA 5 - Criterio Sobresaliente)</h3>
-<p>Para alimentar el Dashboard ejecutivo y la consolidación de datos corporativos, el efecto <code>loadAllData$</code> en <a href="file:///src/app/state/data/data.effects.ts">data.effects.ts</a> orquesta de forma estrictamente paralela ambas fuentes:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">forkJoin({
-  sqlRecords: this.apiRest.getRecords(),
-  nosqlRecords: this.firestoreMock.getRecordsSnapshot()
-}).pipe(
-  map(({ sqlRecords, nosqlRecords }) =&gt; {
-    const combinedRecords = [...sqlRecords, ...nosqlRecords];
-    const kpis = this.calculateInitialKpis(combinedRecords);
-    return DataActions.loadAllDataSuccess({ records: combinedRecords, kpis });
-  }),
-  catchError(err =&gt; of(DataActions.loadAllDataFailure({ error: err.message })))
-);</code></pre></div><hr>
-<h2>🔐 2. Credenciales de Acceso para Pruebas (RBAC)</h2>
-<p>El sistema cuenta con <strong>Control de Acceso Basado en Roles (RBAC)</strong> con rutas protegidas mediante <code>AuthGuard</code> y <code>RoleGuard</code>:</p>
+│   SupabaseService (PostgreSQL Cloud) ──► Conexión Real      │
+│   ApiRestService (Mock de Respaldo) ──► Carga Ultrarrápida  │
+│   ExportService (jsPDF + CSV)        ──► AutoTable UTF-8 BOM│
+│   AccessibilityService (WCAG)        ──► Escala y Contraste │
+└─────────────────────────────────────────────────────────────┘</code></pre></div><hr>
+<h2>🛡️ 2. Arquitectura de Seguridad y Control de Acceso (Lab_Guards)</h2>
+<p>El sistema integra una arquitectura de seguridad por capas conforme a las directrices de la cátedra:</p>
+<ul>
+<li><strong>Memoria Técnica Oficial en Markdown:</strong> <a href="docs/security-architecture.md"><code>docs/security-architecture.md</code></a></li>
+<li><strong>Documento PDF Oficial:</strong> <a href="Memoria_Seguridad_Ionic_Garcia_Carrasco.pdf"><code>Memoria_Seguridad_Ionic_Garcia_Carrasco.pdf</code></a></li>
+</ul>
+<h3>Características de Seguridad Implementadas:</h3>
+<ol>
+<li><strong>Guards Funcionales del Router:</strong><ul>
+<li><code>authGuard</code> (<code>CanActivateFn</code>) y <code>authMatchGuard</code> (<code>CanMatchFn</code>): Bloquean rutas no autenticadas preservando <code>returnUrl</code>.</li>
+<li><code>roleGuard</code> (<code>CanActivateFn</code>) y <code>roleMatchGuard</code> (<code>CanMatchFn</code>): Bloquean el emparejamiento de rutas administrativas (<code>/dashboard</code>, <code>/reports</code>) antes de descargar los chunks JavaScript perezosos por la red.</li>
+<li><code>unsavedChangesGuard</code> (<code>CanDeactivateFn</code>): Intercepta la salida de formularios si el componente implementa <code>HasUnsavedChanges</code>.</li>
+</ul>
+</li>
+<li><strong>Pipeline de Interceptores HTTP Funcionales:</strong><ul>
+<li><code>authInterceptor</code>: Inyección inmutable del header <code>Authorization: Bearer &lt;token&gt;</code>.</li>
+<li><code>errorInterceptor</code>: Captura centralizada de 401 con invocación a <code>authService.refreshToken()</code>, reintentando la petición original con <code>switchMap</code> sin interrumpir la sesión del operador. Manejo seguro de 403.</li>
+</ul>
+</li>
+<li><strong>RBAC Formal y Angular Signals:</strong><ul>
+<li>Tipado estricto de roles (<code>ADMIN</code>, <code>USER</code>, <code>AUDITOR</code>) y permisos (<code>dashboard:view</code>, <code>records:delete</code>, etc.) en <code>user.model.ts</code>.</li>
+<li>Tokens JWT estructurados según la especificación <strong>RFC 7519</strong>.</li>
+<li>Signals reactivas computadas en <code>AuthService</code> (<code>userRoleSignal</code>, <code>userPermissionsSignal</code>, <code>isAdminSignal</code>).</li>
+<li>Directiva estructural reactiva <code>*appHasRole</code> para control visual a nivel de plantilla DOM mediante <code>effect()</code>.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>🔐 3. Credenciales de Acceso para Pruebas (RBAC)</h2>
+<p>Las contraseñas se almacenan mediante hashes SHA-256 (sin texto plano):</p>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr><th style="text-align: left">Rol de Usuario</th><th style="text-align: left">Cuenta Demo</th><th style="text-align: left">Clave Demo</th><th style="text-align: left">Almacenamiento Seguro</th><th style="text-align: left">Permisos y Alcance de Navegación</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align: left"><strong>Administrador</strong></td><td style="text-align: left"><code>admin@enterprise.com</code></td><td style="text-align: left"><code>Admin123!</code> o <code>Admin2026!</code></td><td style="text-align: left">Hash SHA-256 (Sin texto plano)</td><td style="text-align: left"><strong>Acceso Total</strong>: Dashboard Analítico (Chart.js), CRUD de Registros, Generador de Informes (PDF/CSV), Centro de Ayuda, Perfil.</td></tr>
-<tr><td style="text-align: left"><strong>Usuario Estándar</strong></td><td style="text-align: left"><code>user@enterprise.com</code></td><td style="text-align: left"><code>User123!</code> o <code>User2026!</code></td><td style="text-align: left">Hash SHA-256 (Sin texto plano)</td><td style="text-align: left"><strong>Operativa</strong>: CRUD de Registros (lectura/alta/edición), Centro de Ayuda y Manual, Perfil con preferencias de accesibilidad. <em>(Rutas <code>/dashboard</code> y <code>/reports</code> restringidas).</em></td></tr>
+<tr><td style="text-align: left"><strong>Administrador</strong></td><td style="text-align: left"><code>admin@enterprise.com</code></td><td style="text-align: left"><code>Admin123!</code> o <code>Admin2026!</code></td><td style="text-align: left">Hash SHA-256</td><td style="text-align: left"><strong>Acceso Total</strong>: Dashboard Analítico (Spline/Polar), CRUD de Registros, Generador de Informes (PDF/CSV), Centro de Ayuda, Perfil.</td></tr>
+<tr><td style="text-align: left"><strong>Usuario Estándar</strong></td><td style="text-align: left"><code>user@enterprise.com</code></td><td style="text-align: left"><code>User123!</code> o <code>User2026!</code></td><td style="text-align: left">Hash SHA-256</td><td style="text-align: left"><strong>Operativa</strong>: CRUD de Registros (lectura/alta/edición), Centro de Ayuda, Perfil. <em>(Rutas <code>/dashboard</code> y <code>/reports</code> bloqueadas con redirección segura).</em></td></tr>
 </tbody>
 </table>
 <hr>
-<h2>🚀 3. Instrucciones de Instalación y Ejecución</h2>
+<h2>🚀 4. Instrucciones de Instalación y Ejecución</h2>
 <h3>Prerrequisitos</h3>
 <ul>
-<li><strong>Node.js</strong>: v18.x o v20.x LTS (Recomendado).</li>
+<li><strong>Node.js</strong>: v18.x, v20.x o v24.x LTS.</li>
 <li><strong>npm</strong>: v9.x o superior.</li>
 </ul>
-<h3>Instalación</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># 1. Clonar el repositorio
-git clone &lt;URL_REPOSITORIO&gt;
-cd enterprise-analytics
-
-# 2. Instalar dependencias limpias
-npm install</code></pre></div><h3>Comandos Disponibles</h3>
+<h3>Comandos Disponibles</h3>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr><th style="text-align: left">Comando</th><th style="text-align: left">Descripción</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align: left"><code>npm start</code> o <code>npx ionic serve</code></td><td style="text-align: left">Inicia el servidor de desarrollo local en <code>http://localhost:8100/</code> con hot reload.</td></tr>
-<tr><td style="text-align: left"><code>npm run build</code></td><td style="text-align: left">Compila la aplicación para producción en la carpeta <code>/www</code> con tree-shaking y minificación.</td></tr>
-<tr><td style="text-align: left"><code>npx tsc --noEmit</code></td><td style="text-align: left">Ejecuta la verificación estricta de tipos de TypeScript sin emitir archivos.</td></tr>
-<tr><td style="text-align: left"><code>npm run compodoc</code></td><td style="text-align: left">Genera la documentación técnica HTML estática en la carpeta <code>/docs</code>.</td></tr>
-<tr><td style="text-align: left"><code>npm run docs:serve</code></td><td style="text-align: left">Sirve la documentación Compodoc en servidor local (<code>http://localhost:8080/</code>).</td></tr>
+<tr><td style="text-align: left"><code>npm start</code></td><td style="text-align: left">Inicia el servidor de desarrollo local en <code>http://localhost:8100/</code> con hot reload.</td></tr>
+<tr><td style="text-align: left"><code>npm run build</code></td><td style="text-align: left">Compila la aplicación Standalone para producción en <code>/www</code>.</td></tr>
+<tr><td style="text-align: left"><code>npx tsc --noEmit</code></td><td style="text-align: left">Ejecuta la verificación estricta de tipos de TypeScript.</td></tr>
+<tr><td style="text-align: left"><code>npm run compodoc</code></td><td style="text-align: left">Genera la documentación técnica HTML estática en <code>/docs</code>.</td></tr>
+<tr><td style="text-align: left"><code>npm run docs:serve</code></td><td style="text-align: left">Sirve la documentación Compodoc en <code>http://localhost:8080/</code>.</td></tr>
+<tr><td style="text-align: left"><code>node scripts/generate-pdf.js</code></td><td style="text-align: left">Genera el documento PDF <code>Memoria_Seguridad_Ionic_Garcia_Carrasco.pdf</code>.</td></tr>
 </tbody>
 </table>
 <hr>
-<h2>♿ 4. Accesibilidad Universal WCAG 2.1 AA/AAA (RA 4)</h2>
-<p>La aplicación ha sido blindada para garantizar un score <strong>&gt;95/100 en Google Lighthouse</strong>:</p>
+<h2>♿ 5. Accesibilidad Universal WCAG 2.1 AAA (RA 4)</h2>
 <ul>
-<li><strong>Enlace de Salto (Bypass Blocks - WCAG 2.4.1)</strong>: Botón <em>&quot;Saltar al contenido principal&quot;</em> accesible mediante la tecla <kbd>Tab</kbd>.</li>
+<li><strong>Enlace de Salto (Bypass Blocks - WCAG 2.4.1)</strong>: Botón <em>&quot;Saltar al contenido principal&quot;</em> accesible mediante <kbd>Tab</kbd>.</li>
 <li><strong>Foco Visible (WCAG 2.4.7)</strong>: Contorno cian de 3px (<code>:focus-visible</code>) en todos los elementos interactivos.</li>
 <li><strong>Modo Alto Contraste (WCAG 2.1 AAA)</strong>: Fondos negros puros (<code>#000000</code>) con contraste superior a 7:1 configurable en Mi Perfil.</li>
 <li><strong>Escalado Tipográfico Fluido (WCAG 1.4.4)</strong>: Selector de 3 niveles (Normal 100%, Grande 115%, Extra Grande 130%).</li>
@@ -209,64 +220,14 @@ npm install</code></pre></div><h3>Comandos Disponibles</h3>
 </li>
 </ul>
 <hr>
-<h2>📖 5. Manual de Usuario del Sistema (Embebido)</h2>
-<h3>5.1. Inicio de Sesión y Roles</h3>
-<ol>
-<li>Accede a la pantalla de Login e introduce las credenciales deseadas (ver tabla de credenciales arriba).</li>
-<li>Si eres Administrador, tendrás acceso al <strong>Dashboard Analítico</strong> e <strong>Informes</strong>. Si eres Usuario Estándar, entrarás directamente al directorio de <strong>Registros</strong>.</li>
-<li>El menú lateral adaptativo mostrará u ocultará las opciones según los permisos asignados.</li>
-</ol>
-<h3>5.2. Dashboard Analítico</h3>
-<ol>
-<li><strong>Widgets KPI</strong>: Visualiza en tiempo real los ingresos totales facturados, el volumen de operaciones, los proyectos activos y el ticket promedio.</li>
-<li><strong>Gráfico de Evolución</strong>: Consulta la tendencia mensual con doble eje Y (línea de facturación y barras de operaciones).</li>
-<li><strong>Gráfico Donut</strong>: Analiza la distribución económica entre los 5 departamentos (Ventas, Marketing, Finanzas, Operaciones, RRHH).</li>
-<li><strong>Filtros Temporales</strong>: Cambia el período activo mediante el selector (<code>7D</code>, <code>30D</code>, <code>90D</code>, <code>1A</code>) o pulsa sobre una píldora de departamento para recalcular instantáneamente todas las métricas.</li>
-</ol>
-<h3>5.3. Gestión de Registros (CRUD) y Validación de SKU</h3>
-<ol>
-<li><strong>Navegación en Tabla</strong>: Utiliza la barra de búsqueda para filtrar instantáneamente por título, cliente, SKU o región.</li>
-<li><strong>Alta de Nuevo Registro</strong>:<ul>
-<li>Pulsa sobre <strong>&quot;Nuevo Registro&quot;</strong> en la cabecera.</li>
-<li>Introduce el código <strong>SKU</strong> (ej: <code>SAL-CRM-999</code>). Observarás que el sistema verifica asíncronamente en tiempo real si el SKU ya existe en la base de datos, mostrando un indicador de carga azul y validación verde.</li>
-<li>Completa los campos obligatorios y pulsa <strong>&quot;Crear Registro&quot;</strong>.</li>
-</ul>
-</li>
-<li><strong>Edición</strong>: Pulsa sobre el icono de lápiz en cualquier fila de la tabla para abrir el modal precargado.</li>
-<li><strong>Eliminación Segura</strong>: Pulsa el icono de papelera. Se abrirá el modal de confirmación <code>ConfirmDialog</code> para evitar borrados accidentales.</li>
-</ol>
-<h3>5.4. Centro de Informes y Descargas</h3>
-<ol>
-<li>Accede a <strong>Informes y Exportación</strong> desde el menú lateral.</li>
-<li>Aplica los filtros deseados (departamento, estado de flujo, fuente SQL vs NoSQL).</li>
-<li>Previsualiza el desglose tabulado con porcentajes de volumen y facturación por categoría.</li>
-<li>Pulsa <strong>&quot;Descargar Informe PDF&quot;</strong> para obtener un documento en formato horizontal (A4 landscape) con diseño corporativo y tabla autoTable.</li>
-<li>Pulsa <strong>&quot;Exportar a CSV&quot;</strong> para descargar los datos con delimitador <code>;</code> y prefijo UTF-8 BOM para apertura nativa en Microsoft Excel.</li>
-</ol>
-<h3>5.5. Preferencias de Accesibilidad</h3>
-<ol>
-<li>Accede a <strong>Mi Perfil</strong>.</li>
-<li>Selecciona la escala de texto adecuada a tu agudeza visual (Normal, Grande, Extra Grande).</li>
-<li>Activa el toggle <strong>Modo Alto Contraste</strong> para entornos con baja luminosidad o fotofobia.</li>
-<li>Las preferencias se guardan automáticamente en tu navegador para futuras sesiones.</li>
-</ol>
-<hr>
-<h2>🛠️ 6. Pipeline CI/CD y Despliegue en la Nube (RA 7)</h2>
+<h2>🛠️ 6. Despliegue en Producción (Cloud Vercel)</h2>
 <ul>
-<li><strong>GitHub Actions</strong> (<code>.github/workflows/ci-cd.yml</code>): Pipeline automático en cada push y PR hacia <code>main</code> y <code>develop</code> que ejecuta:<ol>
-<li>Verificación estricta de tipos TypeScript (<code>tsc --noEmit</code>).</li>
-<li>Generación automática de documentación Compodoc.</li>
-<li>Compilación de producción del artefacto PWA en <code>/www</code>.</li>
-</ol>
-</li>
-<li><strong>Despliegue Cloud (Vercel &amp; Netlify)</strong>:<ul>
-<li>Archivos de configuración <a href="file:///vercel.json">vercel.json</a> y <a href="file:///netlify.toml">netlify.toml</a> con reglas de reescritura hacia <code>/index.html</code> para evitar errores 404 en rutas con Lazy Loading.</li>
-</ul>
-</li>
+<li><strong>URL de Producción:</strong> <a href="https://enterprise-analytics-eight.vercel.app">https://enterprise-analytics-eight.vercel.app</a></li>
+<li><strong>Configuración SPA Anti-404:</strong> Reglas en <a href="file:///vercel.json">vercel.json</a> redirigen todas las rutas <code>/dashboard</code>, <code>/records</code>, <code>/reports</code>, <code>/profile</code>, <code>/help</code> hacia <code>/index.html</code>.</li>
 </ul>
 <hr>
 <h2>📄 7. Licencia y Créditos</h2>
-<p>Proyecto desarrollado para el módulo de <strong>Desarrollo de Interfaces</strong> del ciclo formativo de grado superior en <strong>Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>. Licencia MIT.</p>
+<p>Proyecto desarrollado por <strong>Mateo García Carrasco</strong> para el módulo de <strong>Desarrollo de Interfaces</strong> del ciclo formativo de grado superior en <strong>Desarrollo de Aplicaciones Multiplataforma (DAM 2)</strong>. Licencia MIT.</p>
 
 
 

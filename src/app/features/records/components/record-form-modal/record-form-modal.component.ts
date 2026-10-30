@@ -16,7 +16,17 @@ import {
   ValidationErrors,
   AsyncValidatorFn
 } from '@angular/forms';
-import { IonicModule, ModalController } from '@ionic/angular/lazy';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonContent,
+  IonSpinner,
+  ModalController
+} from '@ionic/angular';
 import { Observable, of, timer } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
@@ -59,7 +69,18 @@ export function skuAsyncValidator(apiRest: ApiRestService, excludeId?: string): 
 @Component({
   selector: 'app-record-form-modal',
   standalone: true,
-  imports: [CommonModule, IonicModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonContent,
+    IonSpinner
+  ],
   templateUrl: './record-form-modal.component.html',
   styleUrls: ['./record-form-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

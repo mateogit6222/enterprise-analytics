@@ -210,9 +210,27 @@ de teclado globales y guía visual de flujo de trabajo en 4 pasos.</p>
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
 </div>
-                        <div>    <code>IonicModule</code>
-</div>
                         <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonMenuButton</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonAccordionGroup</code>
+</div>
+                        <div>    <code>IonAccordion</code>
+</div>
+                        <div>    <code>IonItem</code>
+</div>
+                        <div>    <code>IonLabel</code>
 </div>
                 </td>
             </tr>
@@ -257,10 +275,37 @@ de teclado globales y guía visual de flujo de trabajo en 4 pasos.</p>
                                             <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                                 </li>
                                 <li>
-                                        <code>IonicModule</code>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
                                 </li>
                                 <li>
-                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonMenuButton</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonAccordionGroup</code>
+                                </li>
+                                <li>
+                                        <code>IonAccordion</code>
+                                </li>
+                                <li>
+                                        <code>IonItem</code>
+                                </li>
+                                <li>
+                                        <code>IonLabel</code>
                                 </li>
                         </ul>
                 </div>
@@ -350,8 +395,8 @@ de teclado globales y guía visual de flujo de trabajo en 4 pasos.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -389,8 +434,8 @@ de teclado globales y guía visual de flujo de trabajo en 4 pasos.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -467,8 +512,8 @@ Si no hay término de búsqueda, retorna <code>true</code> para mostrar todo el 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -517,7 +562,7 @@ Si no hay término de búsqueda, retorna <code>true</code> para mostrar todo el 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/help/pages/help-center/help-center.page.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -539,7 +584,18 @@ Si no hay término de búsqueda, retorna <code>true</code> para mostrar todo el 
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonAccordionGroup,
+  IonAccordion,
+  IonItem,
+  IonLabel
+} from &#x27;@ionic/angular&#x27;;
 
 /**
  * @component HelpCenterPage
@@ -555,7 +611,20 @@ import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
 @Component({
   selector: &#x27;app-help-center&#x27;,
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonAccordionGroup,
+    IonAccordion,
+    IonItem,
+    IonLabel
+  ],
   templateUrl: &#x27;./help-center.page.html&#x27;,
   styleUrls: [&#x27;./help-center.page.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

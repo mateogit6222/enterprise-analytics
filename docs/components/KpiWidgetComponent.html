@@ -215,7 +215,9 @@ detección de cambios OnPush, indicador visual de tendencia y accesibilidad ARIA
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
 </div>
-                        <div>    <code>IonicModule</code>
+                        <div>    <code>IonSkeletonText</code>
+</div>
+                        <div>    <code>IonIcon</code>
 </div>
                         <div>    <code>CurrencyFormatPipe</code>
 </div>
@@ -266,7 +268,10 @@ detección de cambios OnPush, indicador visual de tendencia y accesibilidad ARIA
                                             <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                                 </li>
                                 <li>
-                                        <code>IonicModule</code>
+                                        <code>IonSkeletonText</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
                                 </li>
                                 <li>
                                         <code>CurrencyFormatPipe</code>
@@ -652,7 +657,7 @@ detección de cambios OnPush, indicador visual de tendencia y accesibilidad ARIA
   ChangeDetectionStrategy
 } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { IonSkeletonText, IonIcon } from &#x27;@ionic/angular&#x27;;
 import { Kpi, KpiTrend } from &#x27;../../../core/models/kpi.model&#x27;;
 import { CurrencyFormatPipe } from &#x27;../../pipes/currency-format.pipe&#x27;;
 
@@ -673,7 +678,7 @@ import { CurrencyFormatPipe } from &#x27;../../pipes/currency-format.pipe&#x27;;
 @Component({
   selector: &#x27;app-kpi-widget&#x27;,
   standalone: true,
-  imports: [CommonModule, IonicModule, CurrencyFormatPipe],
+  imports: [CommonModule, IonSkeletonText, IonIcon, CurrencyFormatPipe],
   templateUrl: &#x27;./kpi-widget.component.html&#x27;,
   styleUrls: [&#x27;./kpi-widget.component.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

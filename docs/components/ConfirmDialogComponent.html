@@ -233,7 +233,9 @@ if (data?.confirmed) {
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
 </div>
-                        <div>    <code>IonicModule</code>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonButton</code>
 </div>
                 </td>
             </tr>
@@ -278,7 +280,10 @@ if (data?.confirmed) {
                                             <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                                 </li>
                                 <li>
-                                        <code>IonicModule</code>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
                                 </li>
                         </ul>
                 </div>
@@ -918,8 +923,8 @@ if (data?.confirmed) {
   inject
 } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
-import { ModalController } from &#x27;@ionic/angular/lazy&#x27;;
+import { IonIcon, IonButton, ModalController } from &#x27;@ionic/angular&#x27;;
+
 
 /**
  * Variantes visuales para el diálogo de confirmación.
@@ -952,7 +957,7 @@ export type DialogVariant &#x3D; &#x27;danger&#x27; | &#x27;warning&#x27; | &#x2
 @Component({
   selector: &#x27;app-confirm-dialog&#x27;,
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonIcon, IonButton],
   templateUrl: &#x27;./confirm-dialog.component.html&#x27;,
   styleUrls: [&#x27;./confirm-dialog.component.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

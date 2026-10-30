@@ -10,7 +10,7 @@ import {
   AsyncValidatorFn
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular/lazy';
+import { IonContent } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, of } from 'rxjs';
 import { takeUntil, map, catchError, first } from 'rxjs/operators';
@@ -96,7 +96,7 @@ export function emailAvailableValidator(authService: AuthService): AsyncValidato
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonicModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonContent],
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

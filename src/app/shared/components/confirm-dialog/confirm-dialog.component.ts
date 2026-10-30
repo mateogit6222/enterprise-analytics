@@ -8,8 +8,8 @@ import {
   inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular/lazy';
-import { ModalController } from '@ionic/angular/lazy';
+import { IonIcon, IonButton, ModalController } from '@ionic/angular';
+
 
 /**
  * Variantes visuales para el diálogo de confirmación.
@@ -42,7 +42,7 @@ export type DialogVariant = 'danger' | 'warning' | 'primary';
 @Component({
   selector: 'app-confirm-dialog',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonIcon, IonButton],
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

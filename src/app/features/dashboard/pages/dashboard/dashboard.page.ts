@@ -10,7 +10,14 @@ import {
   inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular/lazy';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent
+} from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { takeUntil, map, filter } from 'rxjs/operators';
@@ -52,7 +59,17 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, IonicModule, KpiWidgetComponent, ChartCardComponent],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    KpiWidgetComponent,
+    ChartCardComponent
+  ],
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

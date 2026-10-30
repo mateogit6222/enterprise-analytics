@@ -221,7 +221,9 @@ configurable, selector de rango temporal interactivo, estado de carga skeleton y
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
 </div>
-                        <div>    <code>IonicModule</code>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonIcon</code>
 </div>
                         <div>        <code><a href="../components/LoadingSkeletonComponent.html" target="_self" >LoadingSkeletonComponent</a></code>
 </div>
@@ -272,7 +274,10 @@ configurable, selector de rango temporal interactivo, estado de carga skeleton y
                                             <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                                 </li>
                                 <li>
-                                        <code>IonicModule</code>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
                                 </li>
                                 <li>
                                             <code><a href="../components/LoadingSkeletonComponent.html" target="_self" >LoadingSkeletonComponent</a></code>
@@ -816,7 +821,7 @@ configurable, selector de rango temporal interactivo, estado de carga skeleton y
   ChangeDetectionStrategy
 } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { IonButton, IonIcon } from &#x27;@ionic/angular&#x27;;
 import { LoadingSkeletonComponent } from &#x27;../loading-skeleton/loading-skeleton.component&#x27;;
 
 /**
@@ -839,7 +844,7 @@ import { LoadingSkeletonComponent } from &#x27;../loading-skeleton/loading-skele
 @Component({
   selector: &#x27;app-chart-card&#x27;,
   standalone: true,
-  imports: [CommonModule, IonicModule, LoadingSkeletonComponent],
+  imports: [CommonModule, IonButton, IonIcon, LoadingSkeletonComponent],
   templateUrl: &#x27;./chart-card.component.html&#x27;,
   styleUrls: [&#x27;./chart-card.component.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

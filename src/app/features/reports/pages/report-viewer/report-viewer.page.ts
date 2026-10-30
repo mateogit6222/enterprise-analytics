@@ -8,7 +8,16 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, ToastController } from '@ionic/angular/lazy';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  ToastController
+} from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable, BehaviorSubject, Subject, combineLatest } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
@@ -58,7 +67,18 @@ export interface ReportMetrics {
 @Component({
   selector: 'app-report-viewer',
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule, CurrencyFormatPipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CurrencyFormatPipe,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonSpinner
+  ],
   templateUrl: './report-viewer.page.html',
   styleUrls: ['./report-viewer.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
