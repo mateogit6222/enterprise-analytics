@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular/lazy';
+import { IonIcon, IonButton } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CurrencyFormatPipe } from '../../pipes/currency-format.pipe';
@@ -81,7 +81,8 @@ export type SortDirection = 'asc' | 'desc' | 'none';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonIcon,
+    IonButton,
     CurrencyFormatPipe,
     RelativeTimePipe,
     HighlightDirective,

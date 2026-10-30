@@ -2188,8 +2188,8 @@ sin requerir conexión externa obligatoria a Supabase.</p>
     canActivate: [authGuard, roleGuard],
     data: { requiredRole: &#x27;ADMIN&#x27; },
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/dashboard/pages/dashboard/dashboard.page&#x27;).then(\n\
-        m &#x3D;&gt; m.DashboardPage\n\
+      &quot;import(&#x27;./features/dashboard/pages/dashboard/dashboard.page&#x27;).then(\r\n\
+        m &#x3D;&gt; m.DashboardPage\r\n\
       )&quot;,
     title: &#x27;Dashboard Analítico | Enterprise Analytics&#x27;
   },
@@ -2199,8 +2199,8 @@ sin requerir conexión externa obligatoria a Supabase.</p>
     canActivate: [authGuard],
     canDeactivate: [unsavedChangesGuard],
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/records/pages/record-list/record-list.page&#x27;).then(\n\
-        m &#x3D;&gt; m.RecordListPage\n\
+      &quot;import(&#x27;./features/records/pages/record-list/record-list.page&#x27;).then(\r\n\
+        m &#x3D;&gt; m.RecordListPage\r\n\
       )&quot;,
     title: &#x27;Gestión de Registros | Enterprise Analytics&#x27;
   },
@@ -2210,8 +2210,8 @@ sin requerir conexión externa obligatoria a Supabase.</p>
     canActivate: [authGuard, roleGuard],
     data: { requiredRole: &#x27;ADMIN&#x27; },
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/reports/pages/report-viewer/report-viewer.page&#x27;).then(\n\
-        m &#x3D;&gt; m.ReportViewerPage\n\
+      &quot;import(&#x27;./features/reports/pages/report-viewer/report-viewer.page&#x27;).then(\r\n\
+        m &#x3D;&gt; m.ReportViewerPage\r\n\
       )&quot;,
     title: &#x27;Informes y Exportación | Enterprise Analytics&#x27;
   },
@@ -2220,8 +2220,8 @@ sin requerir conexión externa obligatoria a Supabase.</p>
     canMatch: [authMatchGuard],
     canActivate: [authGuard],
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/help/pages/help-center/help-center.page&#x27;).then(\n\
-        m &#x3D;&gt; m.HelpCenterPage\n\
+      &quot;import(&#x27;./features/help/pages/help-center/help-center.page&#x27;).then(\r\n\
+        m &#x3D;&gt; m.HelpCenterPage\r\n\
       )&quot;,
     title: &#x27;Centro de Ayuda | Enterprise Analytics&#x27;
   },
@@ -2230,8 +2230,8 @@ sin requerir conexión externa obligatoria a Supabase.</p>
     canMatch: [authMatchGuard],
     canActivate: [authGuard],
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/profile/pages/profile/profile.page&#x27;).then(\n\
-        m &#x3D;&gt; m.ProfilePage\n\
+      &quot;import(&#x27;./features/profile/pages/profile/profile.page&#x27;).then(\r\n\
+        m &#x3D;&gt; m.ProfilePage\r\n\
       )&quot;,
     title: &#x27;Mi Perfil | Enterprise Analytics&#x27;
   },

@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular/lazy';
+import { IonButton, IonIcon } from '@ionic/angular';
 import { LoadingSkeletonComponent } from '../loading-skeleton/loading-skeleton.component';
 
 /**
@@ -29,7 +29,7 @@ import { LoadingSkeletonComponent } from '../loading-skeleton/loading-skeleton.c
 @Component({
   selector: 'app-chart-card',
   standalone: true,
-  imports: [CommonModule, IonicModule, LoadingSkeletonComponent],
+  imports: [CommonModule, IonButton, IonIcon, LoadingSkeletonComponent],
   templateUrl: './chart-card.component.html',
   styleUrls: ['./chart-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -42,20 +42,20 @@ Se ha elaborado y adjuntado la documentación técnica exhaustiva requerida por 
 - **Documento Markdown Oficial:** [`docs/security-architecture.md`](docs/security-architecture.md)
 - **Documento PDF Oficial:** [`Memoria_Seguridad_Ionic_Garcia_Carrasco.pdf`](Memoria_Seguridad_Ionic_Garcia_Carrasco.pdf)
 
-### Resumen de la Implementación de Seguridad:
-1. **Arquitectura 100% Standalone:** Eliminación total de `app.module.ts` y `app-routing.module.ts`. Arranque moderno con `bootstrapApplication(AppComponent, appConfig)`.
+### Resumen de la Implementación de Seguridad y Standalone Puro:
+1. **Arquitectura 100% Standalone Pura:** Eliminación total de `app.module.ts`, `app-routing.module.ts` y erradicación del paquete monolítico `IonicModule`. Cada vista importa atómicamente sus componentes de `@ionic/angular`. Arranque moderno con `bootstrapApplication(AppComponent, appConfig)` en `main.ts` optimizando el *tree-shaking* en Esbuild.
 2. **Guards Funcionales de Enrutamiento:**
    - `authGuard` (`CanActivateFn`) y `authMatchGuard` (`CanMatchFn`) con preservación de `returnUrl`.
    - `roleGuard` (`CanActivateFn`) y `roleMatchGuard` (`CanMatchFn`) impidiendo la descarga de chunks perezosos por la red a perfiles no autorizados.
-   - `unsavedChangesGuard` (`CanDeactivateFn`) con interfaz `HasUnsavedChanges` para evitar pérdida accidental de datos.
-3. **Pipeline de Interceptores HTTP:**
-   - `authInterceptor`: Inyección inmutable de cabecera `Authorization: Bearer <token>`.
-   - `errorInterceptor`: Captura centralizada de 401 con invocación a `authService.refreshToken()` y reintento reactivo transparente (`switchMap`); captura de 403 con redirección segura.
+   - `unsavedChangesGuard` (`CanDeactivateFn`) con interfaz `HasUnsavedChanges` implementada en `RecordListPage` para evitar pérdida accidental de datos.
+3. **Pipeline de Interceptores HTTP Funcionales:**
+   - `authInterceptor`: Inyección inmutable de cabecera `Authorization: Bearer <token>` mediante `req.clone()`.
+   - `errorInterceptor`: Captura centralizada de 401 con invocación a `authService.refreshToken()` y reintento reactivo transparente (`switchMap`); captura de 403 con redirección segura a `/records`.
 4. **Control de Acceso Basado en Roles (RBAC Granular) y Signals:**
    - Definición formal en `user.model.ts` con enum `Permission` y matriz `ROLE_PERMISSIONS`.
-   - Tokens JWT estructurados según el estándar **RFC 7519**.
-   - Reactividad moderna en `AuthService` mediante Angular Signals (`currentUserSignal`, `userRoleSignal`, `userPermissionsSignal`, `isAdminSignal`).
-   - Directiva estructural `*appHasRole` con manipulación directa del `ViewContainerRef` mediante `effect()`.
+   - Tokens JWT estructurados según la especificación estándar **RFC 7519**.
+   - Reactividad moderna en `AuthService` mediante Angular Signals computadas en tiempo constante $O(1)$ (`currentUserSignal`, `userRoleSignal`, `userPermissionsSignal`, `isAdminSignal`).
+   - Directiva estructural `*appHasRole` con destrucción física del nodo en el `ViewContainerRef` mediante `effect()` (evitando vulnerabilidades de inspección en DevTools propias de `[hidden]`).
 
 ---
 

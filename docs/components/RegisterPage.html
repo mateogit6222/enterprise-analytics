@@ -214,7 +214,7 @@ Página de registro de nuevo usuario con validación compleja y asíncrona.</p>
 </div>
                         <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
 </div>
-                        <div>    <code>IonicModule</code>
+                        <div>    <code>IonContent</code>
 </div>
                 </td>
             </tr>
@@ -265,7 +265,7 @@ Página de registro de nuevo usuario con validación compleja y asíncrona.</p>
                                             <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
                                 </li>
                                 <li>
-                                        <code>IonicModule</code>
+                                        <code>IonContent</code>
                                 </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
@@ -970,7 +970,7 @@ import {
   AsyncValidatorFn
 } from &#x27;@angular/forms&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
-import { IonicModule } from &#x27;@ionic/angular/lazy&#x27;;
+import { IonContent } from &#x27;@ionic/angular&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { Observable, Subject, of } from &#x27;rxjs&#x27;;
 import { takeUntil, map, catchError, first } from &#x27;rxjs/operators&#x27;;
@@ -1056,7 +1056,7 @@ export function emailAvailableValidator(authService: AuthService): AsyncValidato
 @Component({
   selector: &#x27;app-register&#x27;,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonicModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, IonContent],
   templateUrl: &#x27;./register.page.html&#x27;,
   styleUrls: [&#x27;./register.page.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

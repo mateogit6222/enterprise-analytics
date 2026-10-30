@@ -240,7 +240,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:51</a></div>
                                 </td>
                             </tr>
 
@@ -279,7 +279,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:52</a></div>
                                 </td>
                             </tr>
 
@@ -318,7 +318,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:49</a></div>
                                 </td>
                             </tr>
 
@@ -357,7 +357,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/reports/pages/report-viewer/report-viewer.page.ts:50</a></div>
                                 </td>
                             </tr>
 
@@ -378,7 +378,16 @@
 } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { IonicModule, ToastController } from &#x27;@ionic/angular/lazy&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  ToastController
+} from &#x27;@ionic/angular&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { Observable, BehaviorSubject, Subject, combineLatest } from &#x27;rxjs&#x27;;
 import { map, take, takeUntil } from &#x27;rxjs/operators&#x27;;
@@ -428,7 +437,18 @@ export interface ReportMetrics {
 @Component({
   selector: &#x27;app-report-viewer&#x27;,
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule, CurrencyFormatPipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CurrencyFormatPipe,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonSpinner
+  ],
   templateUrl: &#x27;./report-viewer.page.html&#x27;,
   styleUrls: [&#x27;./report-viewer.page.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular/lazy';
+import { IonSkeletonText } from '@ionic/angular';
 
 /**
  * Tipos de layout soportados por el skeleton loader.
@@ -20,7 +20,7 @@ export type SkeletonType = 'table' | 'kpi' | 'chart' | 'card' | 'list';
 @Component({
   selector: 'app-loading-skeleton',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonSkeletonText],
   templateUrl: './loading-skeleton.component.html',
   styleUrls: ['./loading-skeleton.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
