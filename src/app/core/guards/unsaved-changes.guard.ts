@@ -39,3 +39,4 @@ export const unsavedChangesGuard: CanDeactivateFn<HasUnsavedChanges> = (
   // Si devuelve un Observable, mapeamos la confirmación
   return hasChanges;
 };
+

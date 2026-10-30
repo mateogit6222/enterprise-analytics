@@ -551,3 +551,4 @@ export class HasRoleDirective {
 
 ---
 *Documento redactado y firmado por Mateo García Carrasco — Noviembre 2026.*
+
