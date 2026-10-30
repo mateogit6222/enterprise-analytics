@@ -157,7 +157,8 @@
     <p class="comment">
         <p>AppComponent
 Shell principal de la aplicación con Split Pane, Side Menu adaptativo por roles,
-soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.</p>
+arquitectura 100% Standalone (Angular 22 / Ionic 9), soporte de atajos de teclado globales
+y enlace de salto para accesibilidad WCAG 2.1 AAA.</p>
 
     </p>
 
@@ -200,7 +201,56 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 <td class="col-md-9"><code>app-root</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterLinkActive" target="_blank" >RouterLinkActive</a></code>
+</div>
+                        <div>    <code>IonApp</code>
+</div>
+                        <div>    <code>IonSplitPane</code>
+</div>
+                        <div>    <code>IonMenu</code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonAvatar</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonList</code>
+</div>
+                        <div>    <code>IonListHeader</code>
+</div>
+                        <div>    <code>IonItem</code>
+</div>
+                        <div>    <code>IonLabel</code>
+</div>
+                        <div>    <code>IonFooter</code>
+</div>
+                        <div>    <code>IonMenuToggle</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonRouterOutlet</code>
+</div>
+                        <div>        <code><a href="../directives/HasRoleDirective.html" target="_self" >HasRoleDirective</a></code>
+</div>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -232,16 +282,72 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
             <div class="row pt-3">
                 <div class="col-sm-6">
                     <h4>Used by</h4>
-                        <ul class="list-unstyled relationships-list">
-                                <li>
-                                            <code><a href="../modules/AppModule.html" target="_self" >AppModule</a></code>
-                                </li>
-                        </ul>
+                        <p class="comment"><i>No results matching.</i></p>
                 </div>
 
                 <div class="col-sm-6">
                     <h4>Depends on</h4>
                         <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterLinkActive" target="_blank" >RouterLinkActive</a></code>
+                                </li>
+                                <li>
+                                        <code>IonApp</code>
+                                </li>
+                                <li>
+                                        <code>IonSplitPane</code>
+                                </li>
+                                <li>
+                                        <code>IonMenu</code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonAvatar</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonList</code>
+                                </li>
+                                <li>
+                                        <code>IonListHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonItem</code>
+                                </li>
+                                <li>
+                                        <code>IonLabel</code>
+                                </li>
+                                <li>
+                                        <code>IonFooter</code>
+                                </li>
+                                <li>
+                                        <code>IonMenuToggle</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonRouterOutlet</code>
+                                </li>
+                                <li>
+                                            <code><a href="../directives/HasRoleDirective.html" target="_self" >HasRoleDirective</a></code>
+                                </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
                                 </li>
@@ -370,6 +476,24 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
 
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/app.component.ts:114</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -400,8 +524,8 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/app.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/app.component.ts:156</a></div>
                         </td>
                     </tr>
 
@@ -488,8 +612,8 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/app.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/app.component.ts:156</a></div>
                         </td>
                     </tr>
 
@@ -571,8 +695,8 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/app.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/app.component.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -608,8 +732,8 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/app.component.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/app.component.ts:141</a></div>
                         </td>
                     </tr>
 
@@ -660,7 +784,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/app.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/app.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -698,7 +822,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/app.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/app.component.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -737,7 +861,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/app.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/app.component.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -769,7 +893,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/app.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/app.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -807,7 +931,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/app.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/app.component.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -839,7 +963,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/app.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/app.component.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -872,7 +996,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/app.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/app.component.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -905,7 +1029,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/app.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/app.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -937,7 +1061,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/app.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/app.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -969,7 +1093,7 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/app.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/app.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -983,7 +1107,38 @@ soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ChangeDetectionStrategy, HostListener, inject } from &#x27;@angular/core&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router, RouterLink, RouterLinkActive } from &#x27;@angular/router&#x27;;
+import {
+  IonApp,
+  IonSplitPane,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonIcon,
+  IonAvatar,
+  IonContent,
+  IonList,
+  IonListHeader,
+  IonItem,
+  IonLabel,
+  IonFooter,
+  IonMenuToggle,
+  IonButton,
+  IonRouterOutlet
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  analyticsOutline,
+  shieldCheckmarkOutline,
+  personOutline,
+  barChartOutline,
+  gridOutline,
+  documentTextOutline,
+  helpCircleOutline,
+  personCircleOutline,
+  logOutOutline
+} from &#x27;ionicons/icons&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { AppState } from &#x27;./state/app.state&#x27;;
 import { AuthActions } from &#x27;./state/auth/auth.actions&#x27;;
@@ -996,6 +1151,7 @@ import {
 } from &#x27;./state/auth/auth.selectors&#x27;;
 import { AuthService } from &#x27;./core/services/auth.service&#x27;;
 import { AccessibilityService } from &#x27;./core/services/accessibility.service&#x27;;
+import { HasRoleDirective } from &#x27;./shared/directives/has-role.directive&#x27;;
 
 /**
  * @interface NavigationItem
@@ -1011,13 +1167,36 @@ interface NavigationItem {
 /**
  * @component AppComponent
  * @description Shell principal de la aplicación con Split Pane, Side Menu adaptativo por roles,
- * soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
+ * arquitectura 100% Standalone (Angular 22 / Ionic 9), soporte de atajos de teclado globales
+ * y enlace de salto para accesibilidad WCAG 2.1 AAA.
  */
 @Component({
   selector: &#x27;app-root&#x27;,
   templateUrl: &#x27;app.component.html&#x27;,
   styleUrls: [&#x27;app.component.scss&#x27;],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    IonApp,
+    IonSplitPane,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonIcon,
+    IonAvatar,
+    IonContent,
+    IonList,
+    IonListHeader,
+    IonItem,
+    IonLabel,
+    IonFooter,
+    IonMenuToggle,
+    IonButton,
+    IonRouterOutlet,
+    HasRoleDirective
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
@@ -1041,6 +1220,20 @@ export class AppComponent implements OnInit {
     { title: &#x27;Centro de Ayuda&#x27;, url: &#x27;/help&#x27;, icon: &#x27;help-circle-outline&#x27; },
     { title: &#x27;Mi Perfil&#x27;, url: &#x27;/profile&#x27;, icon: &#x27;person-circle-outline&#x27; }
   ];
+
+  constructor() {
+    addIcons({
+      &#x27;analytics-outline&#x27;: analyticsOutline,
+      &#x27;shield-checkmark-outline&#x27;: shieldCheckmarkOutline,
+      &#x27;person-outline&#x27;: personOutline,
+      &#x27;bar-chart-outline&#x27;: barChartOutline,
+      &#x27;grid-outline&#x27;: gridOutline,
+      &#x27;document-text-outline&#x27;: documentTextOutline,
+      &#x27;help-circle-outline&#x27;: helpCircleOutline,
+      &#x27;person-circle-outline&#x27;: personCircleOutline,
+      &#x27;log-out-outline&#x27;: logOutOutline
+    });
+  }
 
   ngOnInit(): void {
     /** Restaurar sesión previa si existe en almacenamiento local */
@@ -1133,6 +1326,12 @@ export class AppComponent implements OnInit {
                   &lt;span&gt;{{ userRoleLabel$ | async }}&lt;/span&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;!-- Indicador reactivo RBAC mediante directiva estructural *appHasRole --&gt;
+            &lt;div *appHasRole&#x3D;&quot;&#x27;ADMIN&#x27;&quot; class&#x3D;&quot;px-3 pt-2 pb-1&quot;&gt;
+              &lt;span class&#x3D;&quot;badge bg-primary-subtle text-primary border border-primary-subtle text-xs w-100 py-1 text-center font-monospace&quot;&gt;
+                🛡️ Modo Administrador Activado
+              &lt;/span&gt;
             &lt;/div&gt;
           }
         &lt;/ion-header&gt;
@@ -1398,9 +1597,9 @@ ion-menu {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-app>  <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>  <ion-split-pane contentId="main-content" [disabled]="!(isAuthenticated$ | async)">    <!-- Side Menu (Solo visible si hay sesión autenticada) -->    @if (isAuthenticated$ | async) {      <ion-menu contentId="main-content" type="overlay" menuId="main-menu">        <ion-header class="ion-no-border">          <ion-toolbar class="menu-header-toolbar">            <div class="menu-brand">              <div class="brand-icon">                <ion-icon name="analytics-outline"></ion-icon>              </div>              <div class="brand-text">                <h2>Enterprise</h2>                <span>Analytics Platform</span>              </div>            </div>          </ion-toolbar>          <!-- Perfil del usuario activo en el menú -->          @if (currentUser$ | async; as user) {            <div class="user-profile-badge">              <ion-avatar class="user-avatar">                <img [src]="user.avatarUrl" [alt]="\'Avatar de \' + (userFullName$ | async)" width="44" height="44" loading="lazy" />              </ion-avatar>              <div class="user-info">                <p class="user-name">{{ userFullName$ | async }}</p>                <div class="role-pill" [class.admin]="user.role === \'ADMIN\'">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'"></ion-icon>                  <span>{{ userRoleLabel$ | async }}</span>                </div>              </div>            </div>          }        </ion-header>        <ion-content class="menu-content">          <ion-list id="inbox-list" lines="none">            <ion-list-header class="menu-list-title">Navegación</ion-list-header>            @for (p of appPages; track p.url) {              <!-- Ocultar items de Admin si el usuario no tiene rol ADMIN -->              @if (!p.adminOnly || (isAdmin$ | async)) {                <ion-menu-toggle auto-hide="false">                  <ion-item                    routerDirection="root"                    [routerLink]="[p.url]"                    routerLinkActive="selected"                    detail="false"                    class="nav-item"                  >                    <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>                    <ion-label>{{ p.title }}</ion-label>                  </ion-item>                </ion-menu-toggle>              }            }          </ion-list>        </ion-content>        <ion-footer class="ion-no-border menu-footer">          <ion-menu-toggle auto-hide="false">            <ion-button              expand="block"              fill="clear"              color="danger"              class="logout-btn"              (click)="onLogout()"              aria-label="Cerrar sesión"            >              <ion-icon slot="start" name="log-out-outline"></ion-icon>              <span>Cerrar Sesión</span>            </ion-button>          </ion-menu-toggle>        </ion-footer>      </ion-menu>    }    <!-- Main Content Area -->    <ion-router-outlet id="main-content"></ion-router-outlet>  </ion-split-pane></ion-app></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-app>  <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>  <ion-split-pane contentId="main-content" [disabled]="!(isAuthenticated$ | async)">    <!-- Side Menu (Solo visible si hay sesión autenticada) -->    @if (isAuthenticated$ | async) {      <ion-menu contentId="main-content" type="overlay" menuId="main-menu">        <ion-header class="ion-no-border">          <ion-toolbar class="menu-header-toolbar">            <div class="menu-brand">              <div class="brand-icon">                <ion-icon name="analytics-outline"></ion-icon>              </div>              <div class="brand-text">                <h2>Enterprise</h2>                <span>Analytics Platform</span>              </div>            </div>          </ion-toolbar>          <!-- Perfil del usuario activo en el menú -->          @if (currentUser$ | async; as user) {            <div class="user-profile-badge">              <ion-avatar class="user-avatar">                <img [src]="user.avatarUrl" [alt]="\'Avatar de \' + (userFullName$ | async)" width="44" height="44" loading="lazy" />              </ion-avatar>              <div class="user-info">                <p class="user-name">{{ userFullName$ | async }}</p>                <div class="role-pill" [class.admin]="user.role === \'ADMIN\'">                  <ion-icon [name]="user.role === \'ADMIN\' ? \'shield-checkmark-outline\' : \'person-outline\'"></ion-icon>                  <span>{{ userRoleLabel$ | async }}</span>                </div>              </div>            </div>            <!-- Indicador reactivo RBAC mediante directiva estructural *appHasRole -->            <div *appHasRole="\'ADMIN\'" class="px-3 pt-2 pb-1">              <span class="badge bg-primary-subtle text-primary border border-primary-subtle text-xs w-100 py-1 text-center font-monospace">                🛡️ Modo Administrador Activado              </span>            </div>          }        </ion-header>        <ion-content class="menu-content">          <ion-list id="inbox-list" lines="none">            <ion-list-header class="menu-list-title">Navegación</ion-list-header>            @for (p of appPages; track p.url) {              <!-- Ocultar items de Admin si el usuario no tiene rol ADMIN -->              @if (!p.adminOnly || (isAdmin$ | async)) {                <ion-menu-toggle auto-hide="false">                  <ion-item                    routerDirection="root"                    [routerLink]="[p.url]"                    routerLinkActive="selected"                    detail="false"                    class="nav-item"                  >                    <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>                    <ion-label>{{ p.title }}</ion-label>                  </ion-item>                </ion-menu-toggle>              }            }          </ion-list>        </ion-content>        <ion-footer class="ion-no-border menu-footer">          <ion-menu-toggle auto-hide="false">            <ion-button              expand="block"              fill="clear"              color="danger"              class="logout-btn"              (click)="onLogout()"              aria-label="Cerrar sesión"            >              <ion-icon slot="start" name="log-out-outline"></ion-icon>              <span>Cerrar Sesión</span>            </ion-button>          </ion-menu-toggle>        </ion-footer>      </ion-menu>    }    <!-- Main Content Area -->    <ion-router-outlet id="main-content"></ion-router-outlet>  </ion-split-pane></ion-app></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpCenterPage', 'selector': 'app-help-center'},{'name': 'KpiWidgetComponent', 'selector': 'app-kpi-widget'},{'name': 'LoadingSkeletonComponent', 'selector': 'app-loading-skeleton'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProfilePage', 'selector': 'app-profile'},{'name': 'RecordFormModalComponent', 'selector': 'app-record-form-modal'},{'name': 'RecordListPage', 'selector': 'app-record-list'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'ReportViewerPage', 'selector': 'app-report-viewer'}];
-    var DIRECTIVES = [{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
+    var DIRECTIVES = [{'name': 'HasRoleDirective', 'selector': '[appHasRole]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
 <script src="../js/tree.js"></script>

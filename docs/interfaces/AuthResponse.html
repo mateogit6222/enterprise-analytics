@@ -161,9 +161,9 @@
             <p class="comment">
                 <p>Respuesta del servidor tras una autenticación exitosa.</p>
 <p>AuthResponse
-{User} user - Datos del usuario autenticado.
-{string} accessToken - Token JWT de acceso (mock).
-{string} refreshToken - Token JWT de refresco (mock).
+{User} user - Datos del usuario autenticado con permisos adjuntos.
+{string} accessToken - Token JWT de acceso con claims de autorización.
+{string} refreshToken - Token JWT de refresco con mayor vida útil.
 {number} expiresIn - Tiempo de expiración en segundos.</p>
 
             </p>
@@ -245,7 +245,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/core/models/user.model.ts:91</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/core/models/user.model.ts:158</a></div>
                                 </td>
                             </tr>
 
@@ -284,7 +284,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/core/models/user.model.ts:93</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/core/models/user.model.ts:160</a></div>
                                 </td>
                             </tr>
 
@@ -323,7 +323,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/core/models/user.model.ts:92</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/app/core/models/user.model.ts:159</a></div>
                                 </td>
                             </tr>
 
@@ -362,7 +362,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/core/models/user.model.ts:90</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/core/models/user.model.ts:157</a></div>
                                 </td>
                             </tr>
 
@@ -379,6 +379,71 @@
 }
 
 /**
+ * Catálogo granular de permisos del sistema para el modelo formal RBAC.
+ *
+ * @enum {string}
+ */
+export enum Permission {
+  VIEW_DASHBOARD &#x3D; &#x27;VIEW_DASHBOARD&#x27;,
+  VIEW_RECORDS &#x3D; &#x27;VIEW_RECORDS&#x27;,
+  CREATE_RECORDS &#x3D; &#x27;CREATE_RECORDS&#x27;,
+  EDIT_RECORDS &#x3D; &#x27;EDIT_RECORDS&#x27;,
+  DELETE_RECORDS &#x3D; &#x27;DELETE_RECORDS&#x27;,
+  VIEW_REPORTS &#x3D; &#x27;VIEW_REPORTS&#x27;,
+  EXPORT_REPORTS &#x3D; &#x27;EXPORT_REPORTS&#x27;,
+  MANAGE_USERS &#x3D; &#x27;MANAGE_USERS&#x27;,
+  ACCESS_HELP &#x3D; &#x27;ACCESS_HELP&#x27;,
+  ACCESS_PROFILE &#x3D; &#x27;ACCESS_PROFILE&#x27;
+}
+
+/**
+ * Matriz canónica de asignación de permisos por rol (Role-to-Permissions Mapping).
+ */
+export const ROLE_PERMISSIONS: Record&lt;UserRole, Permission[]&gt; &#x3D; {
+  [UserRole.ADMIN]: [
+    Permission.VIEW_DASHBOARD,
+    Permission.VIEW_RECORDS,
+    Permission.CREATE_RECORDS,
+    Permission.EDIT_RECORDS,
+    Permission.DELETE_RECORDS,
+    Permission.VIEW_REPORTS,
+    Permission.EXPORT_REPORTS,
+    Permission.MANAGE_USERS,
+    Permission.ACCESS_HELP,
+    Permission.ACCESS_PROFILE
+  ],
+  [UserRole.USER]: [
+    Permission.VIEW_RECORDS,
+    Permission.CREATE_RECORDS,
+    Permission.EDIT_RECORDS,
+    Permission.ACCESS_HELP,
+    Permission.ACCESS_PROFILE
+  ]
+};
+
+/**
+ * Payload formal simulado del token JWT con claims estándar RFC 7519 y claims de autorización.
+ *
+ * @interface JwtPayload
+ * @property {string} sub - Subject identifier (ID único del usuario).
+ * @property {string} email - Dirección de correo electrónico del usuario.
+ * @property {UserRole} role - Rol principal asignado (claim de rol).
+ * @property {Permission[]} permissions - Permisos granulares asignados en el momento de emisión.
+ * @property {&#x27;access&#x27; | &#x27;refresh&#x27;} type - Propósito del token (acceso vs refresco).
+ * @property {number} iat - Timestamp de emisión (Issued At).
+ * @property {number} exp - Timestamp de expiración (Expiration Time).
+ */
+export interface JwtPayload {
+  sub: string;
+  email: string;
+  role: UserRole;
+  permissions: Permission[];
+  type: &#x27;access&#x27; | &#x27;refresh&#x27;;
+  iat: number;
+  exp: number;
+}
+
+/**
  * Interfaz que representa un usuario del sistema.
  *
  * @interface User
@@ -387,6 +452,7 @@
  * @property {string} firstName - Nombre del usuario.
  * @property {string} lastName - Apellido del usuario.
  * @property {UserRole} role - Rol asignado al usuario.
+ * @property {Permission[]} permissions - Conjunto granular de permisos del usuario.
  * @property {string} avatarUrl - URL del avatar del usuario.
  * @property {boolean} isActive - Indica si la cuenta está activa.
  * @property {string} createdAt - Fecha de creación de la cuenta (ISO 8601).
@@ -398,6 +464,7 @@ export interface User {
   firstName: string;
   lastName: string;
   role: UserRole;
+  permissions?: Permission[];
   avatarUrl: string;
   isActive: boolean;
   createdAt: string;
@@ -409,7 +476,7 @@ export interface User {
  *
  * @interface LoginCredentials
  * @property {string} email - Correo electrónico del usuario.
- * @property {string} password - Contraseña del usuario.
+ * @property {string} password - Contraseña del usuario en texto plano ingresada en formulario.
  */
 export interface LoginCredentials {
   email: string;
@@ -438,9 +505,9 @@ export interface RegisterData {
  * Respuesta del servidor tras una autenticación exitosa.
  *
  * @interface AuthResponse
- * @property {User} user - Datos del usuario autenticado.
- * @property {string} accessToken - Token JWT de acceso (mock).
- * @property {string} refreshToken - Token JWT de refresco (mock).
+ * @property {User} user - Datos del usuario autenticado con permisos adjuntos.
+ * @property {string} accessToken - Token JWT de acceso con claims de autorización.
+ * @property {string} refreshToken - Token JWT de refresco con mayor vida útil.
  * @property {number} expiresIn - Tiempo de expiración en segundos.
  */
 export interface AuthResponse {

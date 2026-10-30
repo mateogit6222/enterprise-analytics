@@ -1,35 +1,20 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, CanMatchFn, Route, UrlSegment, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 /**
- * Guard funcional de autenticación.
+ * Guard funcional de autenticación para activación de vistas (CanActivateFn).
  *
- * Protege rutas que requieren que el usuario esté autenticado.
- * Si el usuario no tiene sesión activa, redirige a la página de login.
- *
- * @description
- * Implementado como `CanActivateFn` (patrón funcional de Angular 15+)
- * en lugar de una clase con interfaz `CanActivate`, siguiendo las
- * mejores prácticas modernas de Angular.
- *
- * @param {ActivatedRouteSnapshot} route - Snapshot de la ruta activada.
- * @param {RouterStateSnapshot} state - Estado actual del router.
- * @returns {Observable<boolean | UrlTree>} Observable que emite `true` si
- *   el usuario está autenticado, o un `UrlTree` hacia `/auth/login` si no lo está.
- *
- * @example
- * ```typescript
- * // En app.routes.ts
- * {
- *   path: 'dashboard',
- *   canActivate: [authGuard],
- *   loadComponent: () => import('./features/dashboard/...')
- * }
- * ```
+ * Protege rutas que requieren una sesión autenticada activa.
+ * Si el usuario no ha iniciado sesión, redirige a /auth/login preservando
+ * la URL original en el query parameter `returnUrl` para redirección post-login.
  */
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): Observable<boolean | UrlTree> => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -40,9 +25,37 @@ export const authGuard: CanActivateFn = (route, state) => {
         return true;
       }
 
-      /** Redirigir a login preservando la URL de retorno */
       return router.createUrlTree(['/auth/login'], {
         queryParams: { returnUrl: state.url }
+      });
+    })
+  );
+};
+
+/**
+ * Guard funcional de autenticación para coincidencia de rutas (CanMatchFn).
+ *
+ * Se evalúa antes de descargar los chunks perezosos (lazy-loaded modules/components).
+ * Evita la transferencia innecesaria de scripts y previene filtración de bundles a
+ * usuarios no autenticados en el navegador.
+ */
+export const authMatchGuard: CanMatchFn = (
+  route: Route,
+  segments: UrlSegment[]
+): Observable<boolean | UrlTree> => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  const targetUrl = '/' + segments.map(s => s.path).join('/');
+
+  return authService.isAuthenticated$.pipe(
+    take(1),
+    map(isAuthenticated => {
+      if (isAuthenticated) {
+        return true;
+      }
+
+      return router.createUrlTree(['/auth/login'], {
+        queryParams: targetUrl !== '/' ? { returnUrl: targetUrl } : undefined
       });
     })
   );
