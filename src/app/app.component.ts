@@ -1,5 +1,36 @@
 import { Component, OnInit, ChangeDetectionStrategy, HostListener, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  IonApp,
+  IonSplitPane,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonIcon,
+  IonAvatar,
+  IonContent,
+  IonList,
+  IonListHeader,
+  IonItem,
+  IonLabel,
+  IonFooter,
+  IonMenuToggle,
+  IonButton,
+  IonRouterOutlet
+} from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {
+  analyticsOutline,
+  shieldCheckmarkOutline,
+  personOutline,
+  barChartOutline,
+  gridOutline,
+  documentTextOutline,
+  helpCircleOutline,
+  personCircleOutline,
+  logOutOutline
+} from 'ionicons/icons';
 import { Store } from '@ngrx/store';
 import { AppState } from './state/app.state';
 import { AuthActions } from './state/auth/auth.actions';
@@ -12,6 +43,7 @@ import {
 } from './state/auth/auth.selectors';
 import { AuthService } from './core/services/auth.service';
 import { AccessibilityService } from './core/services/accessibility.service';
+import { HasRoleDirective } from './shared/directives/has-role.directive';
 
 /**
  * @interface NavigationItem
@@ -27,13 +59,36 @@ interface NavigationItem {
 /**
  * @component AppComponent
  * @description Shell principal de la aplicación con Split Pane, Side Menu adaptativo por roles,
- * soporte de atajos de teclado globales y enlace de salto para accesibilidad WCAG.
+ * arquitectura 100% Standalone (Angular 22 / Ionic 9), soporte de atajos de teclado globales
+ * y enlace de salto para accesibilidad WCAG 2.1 AAA.
  */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    IonApp,
+    IonSplitPane,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonIcon,
+    IonAvatar,
+    IonContent,
+    IonList,
+    IonListHeader,
+    IonItem,
+    IonLabel,
+    IonFooter,
+    IonMenuToggle,
+    IonButton,
+    IonRouterOutlet,
+    HasRoleDirective
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
@@ -57,6 +112,20 @@ export class AppComponent implements OnInit {
     { title: 'Centro de Ayuda', url: '/help', icon: 'help-circle-outline' },
     { title: 'Mi Perfil', url: '/profile', icon: 'person-circle-outline' }
   ];
+
+  constructor() {
+    addIcons({
+      'analytics-outline': analyticsOutline,
+      'shield-checkmark-outline': shieldCheckmarkOutline,
+      'person-outline': personOutline,
+      'bar-chart-outline': barChartOutline,
+      'grid-outline': gridOutline,
+      'document-text-outline': documentTextOutline,
+      'help-circle-outline': helpCircleOutline,
+      'person-circle-outline': personCircleOutline,
+      'log-out-outline': logOutOutline
+    });
+  }
 
   ngOnInit(): void {
     /** Restaurar sesión previa si existe en almacenamiento local */

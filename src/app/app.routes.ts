@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
-import { roleGuard } from './core/guards/role.guard';
+import { Routes } from '@angular/router';
+import { authGuard, authMatchGuard } from './core/guards/auth.guard';
+import { roleGuard, roleMatchGuard } from './core/guards/role.guard';
+import { unsavedChangesGuard } from './core/guards/unsaved-changes.guard';
 import { UserRole } from './core/models/user.model';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
@@ -12,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canMatch: [authMatchGuard, roleMatchGuard],
     canActivate: [authGuard, roleGuard],
     data: { requiredRole: UserRole.ADMIN },
     loadComponent: () =>
@@ -22,7 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'records',
+    canMatch: [authMatchGuard],
     canActivate: [authGuard],
+    canDeactivate: [unsavedChangesGuard],
     loadComponent: () =>
       import('./features/records/pages/record-list/record-list.page').then(
         m => m.RecordListPage
@@ -31,6 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'reports',
+    canMatch: [authMatchGuard, roleMatchGuard],
     canActivate: [authGuard, roleGuard],
     data: { requiredRole: UserRole.ADMIN },
     loadComponent: () =>
@@ -41,6 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'help',
+    canMatch: [authMatchGuard],
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/help/pages/help-center/help-center.page').then(
@@ -50,6 +55,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    canMatch: [authMatchGuard],
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/profile/pages/profile/profile.page').then(
@@ -67,11 +73,3 @@ const routes: Routes = [
     redirectTo: 'auth/login'
   }
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}

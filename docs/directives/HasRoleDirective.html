@@ -1,0 +1,966 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>enterprise-analytics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">enterprise-analytics documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content directive">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Directives</li>
+  <li class="breadcrumb-item" >HasRoleDirective</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/shared/directives/has-role.directive.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Directiva estructural reactiva para control de acceso RBAC a nivel de plantilla HTML (<code>*appHasRole</code>).</p>
+<p>Evalúa los roles y permisos del usuario activo contra los requerimientos especificados
+utilizando Angular Signals y <code>effect()</code>. Si el usuario no cumple los criterios,
+el elemento del DOM ni siquiera se renderiza (a diferencia de un simple <code>[hidden]</code>,
+lo cual impide la inspección visual en las herramientas de desarrollo).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Solo visible para administradores --&gt;
+&lt;button *appHasRole=&quot;&#39;ADMIN&#39;&quot; (click)=&quot;deleteRecord()&quot;&gt;Eliminar&lt;/button&gt;
+
+
+&lt;!-- Visible para ADMIN o AUDITOR --&gt;
+&lt;div *appHasRole=&quot;[&#39;ADMIN&#39;, &#39;AUDITOR&#39;]&quot;&gt;Panel de Auditoría&lt;/div&gt;
+
+
+&lt;!-- Con plantilla alternativa (else) --&gt;
+&lt;section *appHasRole=&quot;&#39;ADMIN&#39;; else userNotice&quot;&gt;
+  &lt;p&gt;Opciones avanzadas&lt;/p&gt;
+&lt;/section&gt;
+&lt;ng-template #userNotice&gt;
+  &lt;p&gt;Modo solo lectura&lt;/p&gt;
+&lt;/ng-template&gt;</code></pre></div>
+            </p>
+
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+                        <div>
+                            <pre class="line-numbers"><code class="language-html">&lt;b&gt;Example :&lt;/b&gt;&lt;div&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;!-- Solo visible para administradores --&amp;gt;
+&amp;lt;button *appHasRole=&amp;quot;&amp;#39;ADMIN&amp;#39;&amp;quot; (click)=&amp;quot;deleteRecord()&amp;quot;&amp;gt;Eliminar&amp;lt;/button&amp;gt;
+
+&amp;lt;!-- Visible para ADMIN o AUDITOR --&amp;gt;
+&amp;lt;div *appHasRole=&amp;quot;[&amp;#39;ADMIN&amp;#39;, &amp;#39;AUDITOR&amp;#39;]&amp;quot;&amp;gt;Panel de Auditoría&amp;lt;/div&amp;gt;
+
+&amp;lt;!-- Con plantilla alternativa (else) --&amp;gt;
+&amp;lt;section *appHasRole=&amp;quot;&amp;#39;ADMIN&amp;#39;; else userNotice&amp;quot;&amp;gt;
+  &amp;lt;p&amp;gt;Opciones avanzadas&amp;lt;/p&amp;gt;
+&amp;lt;/section&amp;gt;
+&amp;lt;ng-template #userNotice&amp;gt;
+  &amp;lt;p&amp;gt;Modo solo lectura&amp;lt;/p&amp;gt;
+&amp;lt;/ng-template&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</code></pre>
+                        </div>
+            </div>
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+
+                    <tr>
+                        <td class="col-md-3">Selector</td>
+                        <td class="col-md-9"><code>[appHasRole]</code></td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-3">Standalone</td>
+                        <td class="col-md-9"><code>true</code></td>
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+        </section>
+
+                <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/AppComponent.html" target="_self" >AppComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="tab-pane fade " id="api">
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#hasView" >hasView</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#requiredPermissionsSignal" >requiredPermissionsSignal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#requiredRolesSignal" >requiredRolesSignal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#templateRef" >templateRef</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#viewContainer" >viewContainer</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#appHasRole" >appHasRole</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#appHasRoleElse" >appHasRoleElse</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#appHasRolePermission" >appHasRolePermission</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Accessors</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#appHasRole" >appHasRole</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#appHasRolePermission" >appHasRolePermission</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:66</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appHasRole"></a>
+                        <b>appHasRole</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >UserRole | [] | string | [] | undefined | null</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appHasRoleElse"></a>
+                        <b>appHasRoleElse</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>TemplateRef&lt;unknown&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:66</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appHasRolePermission"></a>
+                        <b>appHasRolePermission</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#Permission" target="_self" >Permission | [] | undefined | null</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:55</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasView"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>hasView</b></span>
+                        <a href="#hasView"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requiredPermissionsSignal"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>requiredPermissionsSignal</b></span>
+                        <a href="#requiredPermissionsSignal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Permission[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requiredRolesSignal"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>requiredRolesSignal</b></span>
+                        <a href="#requiredRolesSignal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;(UserRole | string)[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="templateRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>templateRef</b></span>
+                        <a href="#templateRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TemplateRef&lt;unknown&gt;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewContainer"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>viewContainer</b></span>
+                        <a href="#viewContainer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ViewContainerRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appHasRole"></a>
+                        <span class="name"><b>appHasRole</b><a href="#appHasRole"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>appHasRole(roles: <a href="../interfaces/User.html" target="_self">UserRole | UserRole[] | string | string[] | undefined | null</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:44</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>roles</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../interfaces/User.html" target="_self" >UserRole | UserRole[] | string | string[] | undefined | null</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appHasRolePermission"></a>
+                        <span class="name"><b>appHasRolePermission</b><a href="#appHasRolePermission"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>appHasRolePermission(perms: <a href="../miscellaneous/enumerations.html#Permission" target="_self">Permission | Permission[] | undefined | null</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/shared/directives/has-role.directive.ts:55</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>perms</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../miscellaneous/enumerations.html#Permission" target="_self" >Permission | Permission[] | undefined | null</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, Input, TemplateRef, ViewContainerRef, inject, effect, signal } from &#x27;@angular/core&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { UserRole, Permission } from &#x27;../../core/models/user.model&#x27;;
+
+/**
+ * Directiva estructural reactiva para control de acceso RBAC a nivel de plantilla HTML (&#x60;*appHasRole&#x60;).
+ *
+ * Evalúa los roles y permisos del usuario activo contra los requerimientos especificados
+ * utilizando Angular Signals y &#x60;effect()&#x60;. Si el usuario no cumple los criterios,
+ * el elemento del DOM ni siquiera se renderiza (a diferencia de un simple &#x60;[hidden]&#x60;,
+ * lo cual impide la inspección visual en las herramientas de desarrollo).
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Solo visible para administradores --&gt;
+ * &lt;button *appHasRole&#x3D;&quot;&#x27;ADMIN&#x27;&quot; (click)&#x3D;&quot;deleteRecord()&quot;&gt;Eliminar&lt;/button&gt;
+ *
+ * &lt;!-- Visible para ADMIN o AUDITOR --&gt;
+ * &lt;div *appHasRole&#x3D;&quot;[&#x27;ADMIN&#x27;, &#x27;AUDITOR&#x27;]&quot;&gt;Panel de Auditoría&lt;/div&gt;
+ *
+ * &lt;!-- Con plantilla alternativa (else) --&gt;
+ * &lt;section *appHasRole&#x3D;&quot;&#x27;ADMIN&#x27;; else userNotice&quot;&gt;
+ *   &lt;p&gt;Opciones avanzadas&lt;/p&gt;
+ * &lt;/section&gt;
+ * &lt;ng-template #userNotice&gt;
+ *   &lt;p&gt;Modo solo lectura&lt;/p&gt;
+ * &lt;/ng-template&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Directive({
+  selector: &#x27;[appHasRole]&#x27;,
+  standalone: true
+})
+export class HasRoleDirective {
+  private readonly templateRef &#x3D; inject(TemplateRef&lt;unknown&gt;);
+  private readonly viewContainer &#x3D; inject(ViewContainerRef);
+  private readonly authService &#x3D; inject(AuthService);
+
+  private readonly requiredRolesSignal &#x3D; signal&lt;(UserRole | string)[]&gt;([]);
+  private readonly requiredPermissionsSignal &#x3D; signal&lt;Permission[]&gt;([]);
+  private hasView &#x3D; false;
+
+  @Input(&#x27;appHasRole&#x27;)
+  set appHasRole(roles: UserRole | UserRole[] | string | string[] | undefined | null) {
+    if (!roles) {
+      this.requiredRolesSignal.set([]);
+    } else if (Array.isArray(roles)) {
+      this.requiredRolesSignal.set(roles);
+    } else {
+      this.requiredRolesSignal.set([roles]);
+    }
+  }
+
+  @Input(&#x27;appHasRolePermission&#x27;)
+  set appHasRolePermission(perms: Permission | Permission[] | undefined | null) {
+    if (!perms) {
+      this.requiredPermissionsSignal.set([]);
+    } else if (Array.isArray(perms)) {
+      this.requiredPermissionsSignal.set(perms);
+    } else {
+      this.requiredPermissionsSignal.set([perms]);
+    }
+  }
+
+  @Input(&#x27;appHasRoleElse&#x27;)
+  elseTemplate?: TemplateRef&lt;unknown&gt;;
+
+  constructor() {
+    effect(() &#x3D;&gt; {
+      const user &#x3D; this.authService.currentUserSignal();
+      const roles &#x3D; this.requiredRolesSignal();
+      const perms &#x3D; this.requiredPermissionsSignal();
+
+      let isAuthorized &#x3D; false;
+
+      if (user) {
+        const matchesRole &#x3D; roles.length &#x3D;&#x3D;&#x3D; 0 || roles.some(
+          r &#x3D;&gt; r.toString().toUpperCase() &#x3D;&#x3D;&#x3D; (user.role || &#x27;&#x27;).toUpperCase()
+        );
+        const matchesPerms &#x3D; perms.length &#x3D;&#x3D;&#x3D; 0 || this.authService.hasPermission(perms);
+        isAuthorized &#x3D; matchesRole &amp;&amp; matchesPerms;
+      }
+
+      if (isAuthorized &amp;&amp; !this.hasView) {
+        this.viewContainer.clear();
+        this.viewContainer.createEmbeddedView(this.templateRef);
+        this.hasView &#x3D; true;
+      } else if (!isAuthorized &amp;&amp; this.hasView) {
+        this.viewContainer.clear();
+        if (this.elseTemplate) {
+          this.viewContainer.createEmbeddedView(this.elseTemplate);
+        }
+        this.hasView &#x3D; false;
+      } else if (!isAuthorized &amp;&amp; !this.hasView &amp;&amp; this.elseTemplate) {
+        this.viewContainer.clear();
+        this.viewContainer.createEmbeddedView(this.elseTemplate);
+      }
+    });
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
+            var COMPODOC_CURRENT_PAGE_URL = 'HasRoleDirective.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

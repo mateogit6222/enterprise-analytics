@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError, timer } from 'rxjs';
 import { map, switchMap, tap, catchError, delay, take } from 'rxjs/operators';
@@ -8,16 +9,19 @@ import {
   LoginCredentials,
   RegisterData,
   AuthResponse,
-  MockUserData
+  MockUserData,
+  Permission,
+  ROLE_PERMISSIONS,
+  JwtPayload
 } from '../models/user.model';
 import { FALLBACK_USERS } from '../models/mock-datasets';
 import { sha256, verifyPasswordHash } from '../utils/crypto.util';
 
 /**
- * Token key para almacenamiento local.
+ * Claves de almacenamiento para tokens y sesión en localStorage.
  * @constant
  */
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   ACCESS_TOKEN: 'ea_access_token',
   REFRESH_TOKEN: 'ea_refresh_token',
   CURRENT_USER: 'ea_current_user'
@@ -25,36 +29,22 @@ const STORAGE_KEYS = {
 
 /**
  * @class AuthService
- * @description Servicio singleton de autenticación y autorización.
+ * @description Servicio singleton de autenticación y autorización RBAC (Role-Based Access Control).
  *
- * Gestiona el ciclo completo de autenticación:
- * - Login con credenciales contra datos mock (simula API REST).
- * - Registro de nuevos usuarios con validación de email único.
- * - Gestión de tokens JWT mock (access + refresh).
- * - Persistencia de sesión en localStorage.
- * - Emisión reactiva del estado de autenticación via BehaviorSubject.
- *
- * @remarks
- * Todos los datos son sintéticos y simulados localmente.
- * No se realizan llamadas HTTP reales a servicios externos.
- * El delay artificial simula latencia de red realista.
- *
- * @example
- * ```typescript
- * // En un componente
- * constructor(private authService: AuthService) {
- *   this.authService.currentUser$.subscribe(user => {
- *     console.log('Usuario actual:', user);
- *   });
- * }
- * ```
+ * Implementa:
+ * - Login con credenciales contra base de datos / mock seguro (hash SHA-256).
+ * - Generación e inspección de tokens JWT simulados (RFC 7519) con claims `sub`, `email`, `role`, `permissions`.
+ * - Renovación reactiva de tokens (`refreshToken()`) para tolerancia a fallos 401.
+ * - Gestión reactiva híbrida mediante RxJS (`currentUser$`, `isAuthenticated$`) y Angular Signals
+ *   (`currentUserSignal`, `userRoleSignal`, `userPermissionsSignal`, `isAuthenticatedSignal`, `isAdminSignal`).
+ * - Métodos de autorización granular: `hasRole()` y `hasPermission()`.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  /** @private Inyección del HttpClient para cargar datos mock */
+  /** @private Inyección del HttpClient para cargar datos mock o sincronizaciones */
   private readonly http = inject(HttpClient);
 
   /** @private Cache de usuarios mock cargados desde JSON */
@@ -62,19 +52,6 @@ export class AuthService {
 
   /** @private Indica si los datos mock ya fueron cargados */
   private mockDataLoaded = true;
-
-  constructor() {
-    // Sincronización en segundo plano con el archivo JSON si está disponible
-    this.http.get<MockUserData[]>('assets/mock-data/users.mock.json').pipe(
-      catchError(() => this.http.get<MockUserData[]>('/assets/mock-data/users.mock.json')),
-      catchError(() => of([] as MockUserData[])),
-      take(1)
-    ).subscribe((users: MockUserData[]) => {
-      if (users && users.length > 0) {
-        this.mockUsers = users;
-      }
-    });
-  }
 
   /**
    * BehaviorSubject que emite el usuario actual o null si no hay sesión.
@@ -90,25 +67,23 @@ export class AuthService {
    */
   private readonly isLoadingSubject = new BehaviorSubject<boolean>(false);
 
+  // -------------------------------------------------------------------------
+  // OBSERVABLES REACTIVOS (RxJS)
+  // -------------------------------------------------------------------------
+
   /**
    * Observable público del usuario actual.
    * Emite `null` cuando no hay sesión activa.
-   *
-   * @type {Observable<User | null>}
    */
   readonly currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
   /**
    * Observable público del estado de carga.
-   *
-   * @type {Observable<boolean>}
    */
   readonly isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
 
   /**
    * Observable derivado que indica si el usuario está autenticado.
-   *
-   * @type {Observable<boolean>}
    */
   readonly isAuthenticated$: Observable<boolean> = this.currentUser$.pipe(
     map(user => !!user)
@@ -116,19 +91,67 @@ export class AuthService {
 
   /**
    * Observable derivado que indica si el usuario tiene rol ADMIN.
-   *
-   * @type {Observable<boolean>}
    */
   readonly isAdmin$: Observable<boolean> = this.currentUser$.pipe(
     map(user => user?.role === UserRole.ADMIN)
   );
 
+  // -------------------------------------------------------------------------
+  // ANGULAR SIGNALS (Reactivity Model Moderno Angular 22)
+  // -------------------------------------------------------------------------
+
   /**
-   * Carga los datos mock de usuarios desde el archivo JSON.
-   * Solo carga una vez (lazy loading con cache).
-   *
+   * Señal reactiva del usuario actual con sincronización automática desde RxJS.
+   */
+  readonly currentUserSignal = toSignal(this.currentUser$, {
+    initialValue: this.getStoredUser()
+  });
+
+  /**
+   * Señal computada del rol del usuario autenticado.
+   */
+  readonly userRoleSignal = computed<UserRole | null>(() => {
+    return this.currentUserSignal()?.role ?? null;
+  });
+
+  /**
+   * Señal computada del conjunto de permisos del usuario autenticado.
+   */
+  readonly userPermissionsSignal = computed<readonly Permission[]>(() => {
+    const role = this.userRoleSignal();
+    return role ? ROLE_PERMISSIONS[role] : [];
+  });
+
+  /**
+   * Señal computada que indica si hay una sesión activa válida.
+   */
+  readonly isAuthenticatedSignal = computed<boolean>(() => {
+    return !!this.currentUserSignal();
+  });
+
+  /**
+   * Señal computada que indica si el usuario activo tiene privilegios de ADMIN.
+   */
+  readonly isAdminSignal = computed<boolean>(() => {
+    return this.userRoleSignal() === UserRole.ADMIN;
+  });
+
+  constructor() {
+    // Sincronización en segundo plano con el archivo JSON si está disponible
+    this.http.get<MockUserData[]>('assets/mock-data/users.mock.json').pipe(
+      catchError(() => this.http.get<MockUserData[]>('/assets/mock-data/users.mock.json')),
+      catchError(() => of([] as MockUserData[])),
+      take(1)
+    ).subscribe((users: MockUserData[]) => {
+      if (users && users.length > 0) {
+        this.mockUsers = users;
+      }
+    });
+  }
+
+  /**
+   * Carga los datos mock de usuarios desde el archivo JSON si aún no se han cargado.
    * @private
-   * @returns {Observable<MockUserData[]>} Lista de usuarios mock.
    */
   private loadMockUsers(): Observable<MockUserData[]> {
     if (this.mockDataLoaded) {
@@ -149,20 +172,56 @@ export class AuthService {
   }
 
   /**
-   * Genera un token JWT mock (base64 codificado, no criptográficamente seguro).
+   * Decodifica un token JWT estructurado según el estándar RFC 7519.
+   *
+   * @param {string} token - Token JWT en formato header.payload.signature
+   * @returns {JwtPayload | null} Payload deserializado o null si el token es inválido o corrupto.
+   */
+  decodeToken(token: string): JwtPayload | null {
+    try {
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        return null;
+      }
+      const base64Url = parts[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload) as JwtPayload;
+    } catch {
+      try {
+        const parts = token.split('.');
+        if (parts.length === 3) {
+          return JSON.parse(atob(parts[1])) as JwtPayload;
+        }
+      } catch {
+        // Ignorar fallos de decodificación
+      }
+      return null;
+    }
+  }
+
+  /**
+   * Genera un token JWT mock estructurado con cabecera HS256 y payload RFC 7519.
    *
    * @private
    * @param {User} user - Usuario para el cual generar el token.
-   * @param {'access' | 'refresh'} type - Tipo de token.
+   * @param {'access' | 'refresh'} type - Tipo de token ('access' de 1h o 'refresh' de 24h).
    * @returns {string} Token JWT mock.
    */
   private generateMockToken(user: User, type: 'access' | 'refresh'): string {
     const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
     const now = Math.floor(Date.now() / 1000);
+    const permissions = ROLE_PERMISSIONS[user.role] || [];
     const payload = btoa(JSON.stringify({
       sub: user.id,
       email: user.email,
       role: user.role,
+      permissions,
       type,
       iat: now,
       exp: now + (type === 'access' ? 3600 : 86400)
@@ -176,22 +235,11 @@ export class AuthService {
    *
    * @param {LoginCredentials} credentials - Email y contraseña del usuario.
    * @returns {Observable<AuthResponse>} Respuesta con usuario y tokens.
-   * @throws {Error} Si las credenciales son inválidas o la cuenta está inactiva.
-   *
-   * @example
-   * ```typescript
-   * this.authService.login({ email: 'admin@enterprise.com', password: 'Admin2026!' })
-   *   .subscribe({
-   *     next: (response) => console.log('Login exitoso', response.user),
-   *     error: (err) => console.error('Error de login', err.message)
-   *   });
-   * ```
    */
   login(credentials: LoginCredentials): Observable<AuthResponse> {
     this.isLoadingSubject.next(true);
 
     return this.loadMockUsers().pipe(
-      /** Simula latencia de red ultrarrápida */
       delay(100),
       switchMap(users => {
         const user = users.find(
@@ -214,12 +262,11 @@ export class AuthService {
           ));
         }
 
-        /** Extraemos los campos sensibles antes de guardar la sesión */
         const { password, passwordHash, ...safeUser } = user;
 
-        /** Actualizamos lastLoginAt */
         const loggedInUser: User = {
           ...safeUser,
+          permissions: ROLE_PERMISSIONS[safeUser.role],
           lastLoginAt: new Date().toISOString()
         };
 
@@ -233,10 +280,7 @@ export class AuthService {
           expiresIn: 3600
         };
 
-        /** Persistir en localStorage */
         this.storeSession(response);
-
-        /** Emitir usuario en el BehaviorSubject */
         this.currentUserSubject.next(loggedInUser);
 
         return of(response);
@@ -250,33 +294,17 @@ export class AuthService {
   }
 
   /**
-   * Registra un nuevo usuario en el sistema.
+   * Registra un nuevo usuario en el sistema con rol USER por defecto.
    *
    * @param {RegisterData} data - Datos de registro del nuevo usuario.
    * @returns {Observable<AuthResponse>} Respuesta con el usuario creado y tokens.
-   * @throws {Error} Si el email ya existe en el sistema.
-   *
-   * @example
-   * ```typescript
-   * this.authService.register({
-   *   email: 'nuevo@enterprise.com',
-   *   password: 'Segura2026!',
-   *   confirmPassword: 'Segura2026!',
-   *   firstName: 'Ana',
-   *   lastName: 'Torres'
-   * }).subscribe({
-   *   next: (response) => console.log('Registro exitoso'),
-   *   error: (err) => console.error(err.message)
-   * });
-   * ```
    */
   register(data: RegisterData): Observable<AuthResponse> {
     this.isLoadingSubject.next(true);
 
     return this.loadMockUsers().pipe(
-      delay(1000 + Math.random() * 500),
+      delay(300),
       switchMap(users => {
-        /** Verificar que el email no existe */
         const exists = users.some(
           u => u.email.toLowerCase() === data.email.toLowerCase()
         );
@@ -287,20 +315,19 @@ export class AuthService {
           ));
         }
 
-        /** Crear el nuevo usuario */
         const newUser: User = {
           id: crypto.randomUUID(),
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
           role: UserRole.USER,
+          permissions: ROLE_PERMISSIONS[UserRole.USER],
           avatarUrl: `https://api.dicebear.com/9.x/initials/svg?seed=${data.firstName[0]}${data.lastName[0]}&backgroundColor=6366f1`,
           isActive: true,
           createdAt: new Date().toISOString(),
           lastLoginAt: new Date().toISOString()
         };
 
-        /** Agregar a la lista mock en memoria con hash seguro */
         this.mockUsers.push({ ...newUser, passwordHash: sha256(data.password) } as MockUserData);
 
         const accessToken = this.generateMockToken(newUser, 'access');
@@ -327,25 +354,62 @@ export class AuthService {
   }
 
   /**
-   * Verifica si un email ya está registrado en el sistema.
-   * Diseñado para ser usado como validador asíncrono en formularios reactivos.
+   * Renueva el Access Token utilizando el Refresh Token almacenado.
+   * Permite reintentar de forma transparente las peticiones que retornen HTTP 401.
    *
-   * @param {string} email - Email a verificar.
-   * @returns {Observable<boolean>} `true` si el email ya existe, `false` si está disponible.
-   *
-   * @example
-   * ```typescript
-   * // Como validador asíncrono en un FormControl
-   * emailControl = new FormControl('', [], [
-   *   (control) => this.authService.checkEmailExists(control.value).pipe(
-   *     map(exists => exists ? { emailTaken: true } : null)
-   *   )
-   * ]);
-   * ```
+   * @returns {Observable<AuthResponse>} Nueva sesión con tokens actualizados.
+   */
+  refreshToken(): Observable<AuthResponse> {
+    const refreshToken = this.getRefreshToken();
+    if (!refreshToken) {
+      this.logout();
+      return throwError(() => new Error('No refresh token available'));
+    }
+
+    const payload = this.decodeToken(refreshToken);
+    const now = Math.floor(Date.now() / 1000);
+
+    if (!payload || payload.exp < now || payload.type !== 'refresh') {
+      this.logout();
+      return throwError(() => new Error('Refresh token invalid or expired'));
+    }
+
+    const currentUser = this.getCurrentUser();
+    const user: User = currentUser ?? {
+      id: payload.sub,
+      email: payload.email,
+      firstName: 'Usuario',
+      lastName: 'Sesión',
+      role: (payload.role as UserRole) || UserRole.USER,
+      permissions: ROLE_PERMISSIONS[(payload.role as UserRole) || UserRole.USER],
+      avatarUrl: `https://api.dicebear.com/9.x/initials/svg?seed=${payload.email}&backgroundColor=6366f1`,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString()
+    };
+
+    const newAccessToken = this.generateMockToken(user, 'access');
+    const newRefreshToken = this.generateMockToken(user, 'refresh');
+
+    const response: AuthResponse = {
+      user,
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+      expiresIn: 3600
+    };
+
+    this.storeSession(response);
+    this.currentUserSubject.next(user);
+
+    return of(response).pipe(delay(50));
+  }
+
+  /**
+   * Verifica si un email ya está registrado en el sistema (asynchronous validator).
    */
   checkEmailExists(email: string): Observable<boolean> {
     return this.loadMockUsers().pipe(
-      delay(500 + Math.random() * 300),
+      delay(200),
       map(users => users.some(
         u => u.email.toLowerCase() === email.toLowerCase()
       ))
@@ -353,9 +417,7 @@ export class AuthService {
   }
 
   /**
-   * Cierra la sesión actual: limpia tokens, storage y emite null.
-   *
-   * @returns {void}
+   * Cierra la sesión actual: elimina tokens y emite null.
    */
   logout(): void {
     localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
@@ -366,38 +428,59 @@ export class AuthService {
 
   /**
    * Obtiene el token de acceso actual del storage.
-   *
-   * @returns {string | null} Token de acceso o null si no hay sesión.
    */
   getAccessToken(): string | null {
     return localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
   }
 
   /**
+   * Obtiene el token de refresco del storage.
+   */
+  getRefreshToken(): string | null {
+    return localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN);
+  }
+
+  /**
    * Obtiene el usuario actual de forma síncrona (snapshot).
-   *
-   * @returns {User | null} Usuario actual o null.
    */
   getCurrentUser(): User | null {
     return this.currentUserSubject.getValue();
   }
 
   /**
-   * Verifica si el usuario actual tiene un rol específico.
+   * Comprueba si el usuario autenticado posee uno o varios roles requeridos.
    *
-   * @param {UserRole} role - Rol a verificar.
-   * @returns {boolean} `true` si el usuario tiene el rol indicado.
+   * @param {UserRole | UserRole[]} roles - Rol o array de roles autorizados.
+   * @returns {boolean} `true` si el usuario posee al menos uno de los roles.
    */
-  hasRole(role: UserRole): boolean {
+  hasRole(roles: UserRole | readonly UserRole[] | UserRole[]): boolean {
     const user = this.getCurrentUser();
-    return user?.role === role;
+    if (!user) {
+      return false;
+    }
+    const roleList = Array.isArray(roles) ? roles : [roles];
+    return roleList.includes(user.role);
+  }
+
+  /**
+   * Comprueba si el usuario autenticado cuenta con todos los permisos requeridos (RBAC granular).
+   *
+   * @param {Permission | Permission[]} permissions - Permiso o array de permisos necesarios.
+   * @returns {boolean} `true` si el usuario tiene todos los permisos especificados.
+   */
+  hasPermission(permissions: Permission | readonly Permission[] | Permission[]): boolean {
+    const user = this.getCurrentUser();
+    if (!user) {
+      return false;
+    }
+    const userPerms: readonly Permission[] = ROLE_PERMISSIONS[user.role] || [];
+    const permList: readonly Permission[] = Array.isArray(permissions) ? permissions : [permissions as Permission];
+    return permList.every(p => userPerms.includes(p));
   }
 
   /**
    * Persiste la sesión en localStorage.
-   *
    * @private
-   * @param {AuthResponse} response - Respuesta de autenticación a almacenar.
    */
   private storeSession(response: AuthResponse): void {
     localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, response.accessToken);
@@ -407,9 +490,7 @@ export class AuthService {
 
   /**
    * Recupera el usuario almacenado en localStorage.
-   *
    * @private
-   * @returns {User | null} Usuario almacenado o null si no hay sesión guardada.
    */
   private getStoredUser(): User | null {
     try {
