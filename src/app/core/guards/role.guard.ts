@@ -1,45 +1,117 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, CanMatchFn, Router, ActivatedRouteSnapshot, Route, UrlSegment, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn, CanMatchFn, Router, ActivatedRouteSnapshot, Route, UrlSegment, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { UserRole } from '../models/user.model';
+import { UserRole, Permission } from '../models/user.model';
 
 /**
- * Guard funcional de autorización por rol.
+ * Guard funcional de autorización basado en roles y permisos para activación (CanActivateFn).
  *
- * Protege rutas que requieren un rol específico (normalmente ADMIN).
- * Compatible tanto con `canActivate` como con `canMatch`.
- *
- * @param {ActivatedRouteSnapshot | Route} route - Definición de la ruta que se intenta activar.
- * @returns {Observable<boolean>} Observable que emite `true` si el usuario tiene el rol requerido.
+ * Lee `data.requiredRole` (o `data.requiredRoles`, `data.requiredPermissions`) en la ruta activa.
+ * - Si no hay sesión: redirige a `/auth/login` con `returnUrl`.
+ * - Si la sesión carece de los privilegios requeridos: redirige a `/records` (área autorizada general).
  */
 export const roleGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot | Route,
-  state?: RouterStateSnapshot
-) => {
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): Observable<boolean | UrlTree> => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  /** Obtener el rol requerido desde la configuración de la ruta */
-  const requiredRole = route.data?.['requiredRole'] as UserRole;
+  const rawRole = route.data?.['requiredRole'] ?? route.data?.['requiredRoles'];
+  const requiredRoles: UserRole[] = rawRole
+    ? (Array.isArray(rawRole) ? rawRole : [rawRole])
+    : [];
+
+  const rawPerms = route.data?.['requiredPermissions'] ?? route.data?.['requiredPermission'];
+  const requiredPermissions: Permission[] = rawPerms
+    ? (Array.isArray(rawPerms) ? rawPerms : [rawPerms])
+    : [];
 
   return authService.currentUser$.pipe(
     take(1),
     map(user => {
-      /** Si no hay usuario autenticado, denegar y enviar a login */
       if (!user) {
-        router.navigate(['/auth/login']);
-        return false;
+        return router.createUrlTree(['/auth/login'], {
+          queryParams: { returnUrl: state.url }
+        });
       }
 
-      /** Comparación insensible a mayúsculas/minúsculas para robustez total */
-      const userRole = (user.role || '').toString().toUpperCase();
-      const targetRole = (requiredRole || '').toString().toUpperCase();
+      if (requiredRoles.length > 0) {
+        const hasMatchingRole = requiredRoles.some(r => r.toUpperCase() === (user.role || '').toUpperCase());
+        if (!hasMatchingRole) {
+          return router.createUrlTree(['/records'], {
+            queryParams: { forbidden: 'role_required' }
+          });
+        }
+      }
 
-      if (targetRole && userRole !== targetRole) {
-        /** Redirigir a la vista por defecto del usuario (registros) */
-        router.navigate(['/records']);
-        return false;
+      if (requiredPermissions.length > 0) {
+        const hasAllPerms = authService.hasPermission(requiredPermissions);
+        if (!hasAllPerms) {
+          return router.createUrlTree(['/records'], {
+            queryParams: { forbidden: 'permission_required' }
+          });
+        }
+      }
+
+      return true;
+    })
+  );
+};
+
+/**
+ * Guard funcional de autorización basado en roles para coincidencia de rutas (CanMatchFn).
+ *
+ * Se ejecuta en fase de emparejamiento de ruta (antes de descargar el bundle JS perezoso).
+ * Si el usuario no tiene el rol necesario, cancela la coincidencia o redirige a la ruta segura,
+ * impidiendo la descarga de código restringido.
+ */
+export const roleMatchGuard: CanMatchFn = (
+  route: Route,
+  segments: UrlSegment[]
+): Observable<boolean | UrlTree> => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  const rawRole = route.data?.['requiredRole'] ?? route.data?.['requiredRoles'];
+  const requiredRoles: UserRole[] = rawRole
+    ? (Array.isArray(rawRole) ? rawRole : [rawRole])
+    : [];
+
+  const rawPerms = route.data?.['requiredPermissions'] ?? route.data?.['requiredPermission'];
+  const requiredPermissions: Permission[] = rawPerms
+    ? (Array.isArray(rawPerms) ? rawPerms : [rawPerms])
+    : [];
+
+  const targetUrl = '/' + segments.map(s => s.path).join('/');
+
+  return authService.currentUser$.pipe(
+    take(1),
+    map(user => {
+      if (!user) {
+        return router.createUrlTree(['/auth/login'], {
+          queryParams: targetUrl !== '/' ? { returnUrl: targetUrl } : undefined
+        });
+      }
+
+      if (requiredRoles.length > 0) {
+        const hasMatchingRole = requiredRoles.some(r => r.toUpperCase() === (user.role || '').toUpperCase());
+        if (!hasMatchingRole) {
+          return router.createUrlTree(['/records'], {
+            queryParams: { forbidden: 'role_required' }
+          });
+        }
+      }
+
+      if (requiredPermissions.length > 0) {
+        const hasAllPerms = authService.hasPermission(requiredPermissions);
+        if (!hasAllPerms) {
+          return router.createUrlTree(['/records'], {
+            queryParams: { forbidden: 'permission_required' }
+          });
+        }
       }
 
       return true;

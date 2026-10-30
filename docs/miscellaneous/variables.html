@@ -137,6 +137,9 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
+                            <a href="#appConfig" title="src/app/app.config.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</span></a>
+                        </li>
+                        <li>
                             <a href="#AUTH_ROUTES" title="src/app/features/auth/auth.routes.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>AUTH_ROUTES</b>&nbsp;&nbsp;&nbsp;(src/.../auth.routes.ts)</span></a>
                         </li>
                         <li>
@@ -210,6 +213,12 @@
                         </li>
                         <li>
                             <a href="#loadAllDataSuccess" title="src/app/state/data/data.actions.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>loadAllDataSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../data.actions.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#ROLE_PERMISSIONS" title="src/app/core/models/user.model.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>ROLE_PERMISSIONS</b>&nbsp;&nbsp;&nbsp;(src/.../user.model.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#routes" title="src/app/app.routes.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>routes</b>&nbsp;&nbsp;&nbsp;(src/.../app.routes.ts)</span></a>
                         </li>
                         <li>
                             <a href="#selectAllRecords" title="src/app/state/data/data.selectors.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>selectAllRecords</b>&nbsp;&nbsp;&nbsp;(src/.../data.selectors.ts)</span></a>
@@ -299,6 +308,70 @@
     </table>
 </section>
 
+    <h3>src/app/app.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appConfig"></a>
+                    <span class="name">
+                        <span ><b>appConfig</b></span>
+                        <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/ApplicationConfig" target="_blank" >ApplicationConfig</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: LOCALE_ID, useValue: &#x27;es&#x27; },
+    provideIonicAngular(),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideHttpClient(
+      withInterceptors([authInterceptor, errorInterceptor])
+    ),
+    provideStore({
+      auth: authReducer,
+      data: dataReducer
+    }),
+    provideEffects([AuthEffects, DataEffects]),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      name: &#x27;Enterprise Analytics NgRx Store&#x27;
+    })
+  ]
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuración unificada de proveedores para la arquitectura 100% Standalone (Angular 22 / Ionic 9).</p>
+<p>Registra:</p>
+<ul>
+<li>Estrategia de reciclado de rutas optimizada para Ionic (<code>IonicRouteStrategy</code>).</li>
+<li>Configuración regional española (<code>LOCALE_ID = &#39;es&#39;</code>).</li>
+<li>Proveedores de Ionic Angular (<code>provideIonicAngular</code>).</li>
+<li>Enrutamiento con precarga proactiva (<code>PreloadAllModules</code>).</li>
+<li>Cliente HTTP con interceptores funcionales inmutables (<code>authInterceptor</code>, <code>errorInterceptor</code>).</li>
+<li>Almacén global reactivo NgRx (<code>provideStore</code>, <code>provideEffects</code>, <code>provideStoreDevtools</code>).</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
     <h3>src/app/features/auth/auth.routes.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -1501,55 +1574,77 @@ Gestiona el estado inmutable de registros, KPIs, filtros y operaciones CRUD.</p>
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) &#x3D;&gt; {
+      // 1. Manejo reactivo de token expirado (401)
+      if (error.status &#x3D;&#x3D;&#x3D; 401) {
+        // Evitar bucles infinitos si la petición fallida ya era de autenticación o refresh
+        const isAuthRequest &#x3D; req.url.includes(&#x27;/auth/&#x27;) || req.url.includes(&#x27;users.mock.json&#x27;);
+        const hasRefreshToken &#x3D; !!authService.getRefreshToken();
 
-      /** Mensajes de error legibles para el usuario */
+        if (!isAuthRequest &amp;&amp; hasRefreshToken) {
+          console.warn(&#x27;[ErrorInterceptor] 401 detectado. Intentando renovación transparente via Refresh Token...&#x27;);
+          return authService.refreshToken().pipe(
+            switchMap(response &#x3D;&gt; {
+              console.info(&#x27;[ErrorInterceptor] Token renovado exitosamente. Reintentando petición original:&#x27;, req.url);
+              const retryReq &#x3D; req.clone({
+                setHeaders: {
+                  Authorization: &#x60;Bearer ${response.accessToken}&#x60;
+                }
+              });
+              return next(retryReq);
+            }),
+            catchError(refreshError &#x3D;&gt; {
+              console.error(&#x27;[ErrorInterceptor] Falló la renovación del token. Sesión finalizada.&#x27;, refreshError);
+              authService.logout();
+              router.navigate([&#x27;/auth/login&#x27;], {
+                queryParams: { sessionExpired: &#x27;true&#x27;, returnUrl: router.url }
+              });
+              return throwError(() &#x3D;&gt; refreshError);
+            })
+          );
+        }
+
+        // Si no se puede renovar o ya es una petición de autenticación
+        authService.logout();
+        router.navigate([&#x27;/auth/login&#x27;], {
+          queryParams: { sessionExpired: &#x27;true&#x27;, returnUrl: router.url }
+        });
+      }
+
+      // 2. Manejo de acceso no autorizado por rol/permisos (403 Forbidden)
+      if (error.status &#x3D;&#x3D;&#x3D; 403) {
+        console.warn(&#x27;[ErrorInterceptor] 403 Forbidden para recurso:&#x27;, req.url);
+        router.navigate([&#x27;/records&#x27;], {
+          queryParams: { forbidden: &#x27;insufficient_privileges&#x27; }
+        });
+      }
+
       let userMessage &#x3D; &#x27;Ha ocurrido un error inesperado. Inténtalo de nuevo.&#x27;;
-
       switch (error.status) {
         case 0:
-          userMessage &#x3D; &#x27;No se puede conectar con el servidor. Verifica tu conexión a internet.&#x27;;
-          console.error(&#x27;[ErrorInterceptor] Error de conexión:&#x27;, req.url);
+          userMessage &#x3D; &#x27;No se puede conectar con el servidor. Verifica tu conexión de red.&#x27;;
           break;
-
         case 401:
-          userMessage &#x3D; &#x27;Tu sesión ha expirado. Por favor, inicia sesión de nuevo.&#x27;;
-          console.warn(&#x27;[ErrorInterceptor] 401 Unauthorized:&#x27;, req.url);
-          authService.logout();
-          router.navigate([&#x27;/auth/login&#x27;], {
-            queryParams: { sessionExpired: &#x27;true&#x27; }
-          });
+          userMessage &#x3D; &#x27;Tu sesión ha expirado o no es válida. Por favor, identifícate de nuevo.&#x27;;
           break;
-
         case 403:
-          userMessage &#x3D; &#x27;No tienes permisos para acceder a este recurso.&#x27;;
-          console.warn(&#x27;[ErrorInterceptor] 403 Forbidden:&#x27;, req.url);
-          router.navigate([&#x27;/records&#x27;]);
+          userMessage &#x3D; &#x27;Acceso denegado: tu rol actual no cuenta con los permisos necesarios.&#x27;;
           break;
-
         case 404:
-          userMessage &#x3D; &#x27;El recurso solicitado no fue encontrado.&#x27;;
-          console.warn(&#x27;[ErrorInterceptor] 404 Not Found:&#x27;, req.url);
+          userMessage &#x3D; &#x27;El recurso solicitado no fue encontrado en el servidor.&#x27;;
           break;
-
         case 422:
-          userMessage &#x3D; &#x27;Los datos enviados no son válidos. Revisa el formulario.&#x27;;
-          console.warn(&#x27;[ErrorInterceptor] 422 Unprocessable:&#x27;, req.url);
+          userMessage &#x3D; &#x27;Los datos enviados no superaron las validaciones requeridas.&#x27;;
           break;
-
         case 429:
-          userMessage &#x3D; &#x27;Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.&#x27;;
-          console.warn(&#x27;[ErrorInterceptor] 429 Too Many Requests:&#x27;, req.url);
+          userMessage &#x3D; &#x27;Demasiadas solicitudes simultáneas. Por favor, espera unos instantes.&#x27;;
           break;
-
         default:
           if (error.status &gt;&#x3D; 500) {
-            userMessage &#x3D; &#x27;Error del servidor. Nuestro equipo ha sido notificado.&#x27;;
-            console.error(&#x27;[ErrorInterceptor] Server Error:&#x27;, error.status, req.url);
+            userMessage &#x3D; &#x27;Error interno en el servidor. El incidente ha quedado registrado.&#x27;;
           }
           break;
       }
 
-      /** Re-lanzar el error con mensaje user-friendly adjunto */
       return throwError(() &#x3D;&gt; ({
         ...error,
         userMessage,
@@ -1563,13 +1658,15 @@ Gestiona el estado inmutable de registros, KPIs, filtros y operaciones CRUD.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Interceptor funcional de gestión global de errores HTTP.</p>
-<p>Captura errores HTTP de las respuestas y aplica lógica
-de manejo según el código de estado:</p>
+                    <div class="io-description"><p>Interceptor funcional de gestión global de errores HTTP y recuperación de sesión.</p>
+<p>Captura códigos de estado HTTP y aplica la política de seguridad correspondiente:</p>
 <ul>
-<li><strong>401 Unauthorized</strong>: Cierra sesión y redirige a login.</li>
-<li><strong>403 Forbidden</strong>: Redirige a la página principal del usuario.</li>
-<li><strong>500+ Server Error</strong>: Logea el error para debugging.</li>
+<li><strong>401 Unauthorized</strong>: Intenta renovar el token mediante <code>authService.refreshToken()</code>.
+Si la renovación tiene éxito, clona la petición original con el nuevo <code>Bearer token</code>
+y la reintenta sin interrumpir la experiencia de usuario. Si falla la renovación,
+cierra la sesión y redirige a <code>/auth/login</code> con <code>returnUrl</code> y <code>sessionExpired=true</code>.</li>
+<li><strong>403 Forbidden</strong>: Bloqueo de privilegios insuficientes; redirige al espacio seguro <code>/records</code>.</li>
+<li><strong>500+ Server Error</strong>: Registro unificado para diagnóstico y telemetría.</li>
 </ul>
 </div>
                 </td>
@@ -1999,6 +2096,158 @@ sin requerir conexión externa obligatoria a Supabase.</p>
 </div>
                 </td>
             </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/models/user.model.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ROLE_PERMISSIONS"></a>
+                    <span class="name">
+                        <span ><b>ROLE_PERMISSIONS</b></span>
+                        <a href="#ROLE_PERMISSIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;UserRole, Permission[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  [UserRole.ADMIN]: [
+    Permission.VIEW_DASHBOARD,
+    Permission.VIEW_RECORDS,
+    Permission.CREATE_RECORDS,
+    Permission.EDIT_RECORDS,
+    Permission.DELETE_RECORDS,
+    Permission.VIEW_REPORTS,
+    Permission.EXPORT_REPORTS,
+    Permission.MANAGE_USERS,
+    Permission.ACCESS_HELP,
+    Permission.ACCESS_PROFILE
+  ],
+  [UserRole.USER]: [
+    Permission.VIEW_RECORDS,
+    Permission.CREATE_RECORDS,
+    Permission.EDIT_RECORDS,
+    Permission.ACCESS_HELP,
+    Permission.ACCESS_PROFILE
+  ]
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Matriz canónica de asignación de permisos por rol (Role-to-Permissions Mapping).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.routes.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routes"></a>
+                    <span class="name">
+                        <span ><b>routes</b></span>
+                        <a href="#routes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/router/Routes" target="_blank" >Routes</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    path: &#x27;auth&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/auth/auth.routes&#x27;).then(m &#x3D;&gt; m.AUTH_ROUTES)&quot;
+  },
+  {
+    path: &#x27;dashboard&#x27;,
+    canMatch: [authMatchGuard, roleMatchGuard],
+    canActivate: [authGuard, roleGuard],
+    data: { requiredRole: &#x27;ADMIN&#x27; },
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/dashboard/pages/dashboard/dashboard.page&#x27;).then(\n\
+        m &#x3D;&gt; m.DashboardPage\n\
+      )&quot;,
+    title: &#x27;Dashboard Analítico | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;records&#x27;,
+    canMatch: [authMatchGuard],
+    canActivate: [authGuard],
+    canDeactivate: [unsavedChangesGuard],
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/records/pages/record-list/record-list.page&#x27;).then(\n\
+        m &#x3D;&gt; m.RecordListPage\n\
+      )&quot;,
+    title: &#x27;Gestión de Registros | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;reports&#x27;,
+    canMatch: [authMatchGuard, roleMatchGuard],
+    canActivate: [authGuard, roleGuard],
+    data: { requiredRole: &#x27;ADMIN&#x27; },
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/reports/pages/report-viewer/report-viewer.page&#x27;).then(\n\
+        m &#x3D;&gt; m.ReportViewerPage\n\
+      )&quot;,
+    title: &#x27;Informes y Exportación | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;help&#x27;,
+    canMatch: [authMatchGuard],
+    canActivate: [authGuard],
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/help/pages/help-center/help-center.page&#x27;).then(\n\
+        m &#x3D;&gt; m.HelpCenterPage\n\
+      )&quot;,
+    title: &#x27;Centro de Ayuda | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;profile&#x27;,
+    canMatch: [authMatchGuard],
+    canActivate: [authGuard],
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/profile/pages/profile/profile.page&#x27;).then(\n\
+        m &#x3D;&gt; m.ProfilePage\n\
+      )&quot;,
+    title: &#x27;Mi Perfil | Enterprise Analytics&#x27;
+  },
+  {
+    path: &#x27;&#x27;,
+    redirectTo: &#x27;auth/login&#x27;,
+    pathMatch: &#x27;full&#x27;
+  },
+  {
+    path: &#x27;**&#x27;,
+    redirectTo: &#x27;auth/login&#x27;
+  }
+]</code>
+                    </td>
+                </tr>
+
 
         </tbody>
     </table>
@@ -2977,7 +3226,7 @@ Obtiene el sub-estado completo de autenticación.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Token key para almacenamiento local.</p>
+                    <div class="io-description"><p>Claves de almacenamiento para tokens y sesión en localStorage.</p>
 </div>
                 </td>
             </tr>

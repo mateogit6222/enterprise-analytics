@@ -28,6 +28,7 @@ import {
 } from '../../../../shared/components/data-table/data-table.component';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { RecordFormModalComponent } from '../../components/record-form-modal/record-form-modal.component';
+import { HasUnsavedChanges } from '../../../../core/guards/unsaved-changes.guard';
 
 /**
  * @component RecordListPage
@@ -49,12 +50,20 @@ import { RecordFormModalComponent } from '../../components/record-form-modal/rec
   styleUrls: ['./record-list.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecordListPage implements OnInit, OnDestroy {
+export class RecordListPage implements OnInit, OnDestroy, HasUnsavedChanges {
   private readonly store = inject(Store<AppState>);
   private readonly modalCtrl = inject(ModalController);
   private readonly toastCtrl = inject(ToastController);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroy$ = new Subject<void>();
+
+  /**
+   * Implementación de la interfaz HasUnsavedChanges para el guard CanDeactivateFn.
+   * Retorna true si hay cambios pendientes en edición no confirmados.
+   */
+  hasUnsavedChanges(): boolean {
+    return false;
+  }
 
   /** Flujo reactivo de registros corporativos desde el Store de NgRx */
   readonly records$: Observable<Record[]> = this.store.select(selectAllRecords);

@@ -33,6 +33,12 @@
                 </div>
               </div>
             </div>
+            <!-- Indicador reactivo RBAC mediante directiva estructural *appHasRole -->
+            <div *appHasRole="'ADMIN'" class="px-3 pt-2 pb-1">
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle text-xs w-100 py-1 text-center font-monospace">
+                🛡️ Modo Administrador Activado
+              </span>
+            </div>
           }
         </ion-header>
 
